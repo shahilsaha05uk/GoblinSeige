@@ -22,4 +22,5 @@ class TOWERDEFENCEGAME_API IInteractableInterface
 
 public:
 
+
 };

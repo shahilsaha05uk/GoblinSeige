@@ -5,6 +5,8 @@
 #include "Components/BoxComponent.h"
 #include "Components/DecalComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "TowerDefenceGame/HelperMethods.h"
 #include "TowerDefenceGame/UIClasses/widgets/BuildingUI.h"
 
 ABaseBuilding::ABaseBuilding(const FObjectInitializer& ObjectInitializer)
@@ -23,16 +25,56 @@ ABaseBuilding::ABaseBuilding(const FObjectInitializer& ObjectInitializer)
 	WidgetComp->SetDrawSize(FVector2d(150,20));
 	WidgetComp->SetWidgetSpace(EWidgetSpace::Screen);
 	WidgetComp->SetWidgetClass(UBuildingUI::StaticClass());
-	
-	OnBuildingSpawnSignature.AddDynamic(this, &ABaseBuilding::OnBuildingSpawn);
+}
+
+void ABaseBuilding::BeginPlay()
+{
+	Super::BeginPlay();
+
+	bCanPlace = false;
+	UpdateBuildingState(NO_STATE);
+	WidgetComp->SetVisibility(false);
+}
+
+
+void ABaseBuilding::MoveBuilding_Implementation()
+{
+	if(bInPlacementMode)
+	{
+		bool bHit;
+		FHitResult hit;
+		UHelperMethods::GetMouseTrace(UGameplayStatics::GetPlayerController(GetWorld(), 0), BuildingMovementTraceChannel, bHit, hit);
+
+		/*
+		FVector mousePos;
+		bool bMouseOnNavMesh;
+		UHelperMethods::GetMouseLocation(UGameplayStatics::GetPlayerController(GetWorld(), 0), mousePos);
+		UHelperMethods::IsPointerOnNavMesh(GetWorld(), 100.0f, mousePos, bMouseOnNavMesh);
+		*/
+		
+
+		if(bHit)
+		{
+			FVector snappedPos;
+			UHelperMethods::CalculateSnappedPosition(hit.Location, 200.0f, snappedPos);
+			SetActorLocation(snappedPos);
+		}
+	}
+	else
+	{
+		OnSpawnTimeHandler.Invalidate();
+	}
 }
 
 void ABaseBuilding::Init_Implementation()
 {
-	
+	bCanPlace = true;
+	UpdateBuildingState(PLACING);
+	WidgetComp->SetVisibility(false);
+	GetWorld()->GetTimerManager().SetTimer(OnSpawnTimeHandler, this, &ABaseBuilding::MoveBuilding, 0.001f, true);
 }
 
-void ABaseBuilding::UpdateBuildingMaterial_Implementation(EPlacementMaterial MatToAdd)
+void ABaseBuilding::ChangeBuildingMaterial_Implementation(EPlacementMaterial MatToAdd)
 {
 	switch (MatToAdd)
 	{
@@ -64,26 +106,29 @@ void ABaseBuilding::UpdateBuildingState_Implementation(EBuildingState State)
 		MatToAdd = NO_MATERIAL;
 		bInPlacementMode = false;
 		bIsSelected = false;
+		//bIsPlaced = false;
 		break;
 	case PLACING:
 		MatToAdd = VALID_MATERIAL;
 		bInPlacementMode = true;
+		bIsPlaced = false;
 		break;
 	case PLACED:
 		MatToAdd = NO_MATERIAL;
 		bInPlacementMode = false;
+		bIsPlaced = true;
 		break;
 	case DESTROYED:
 		break;
 	case SELECTED:
 		MatToAdd = SELECTED_MATERIAL;
 		bIsSelected = true;
-		//WidgetComp->SetVisibility(true);
+		WidgetComp->SetVisibility(true);
 		break;
 	case DESELECTED:
 		MatToAdd = NO_MATERIAL;
 		bIsSelected = false;
-		//WidgetComp->SetVisibility(false);
+		WidgetComp->SetVisibility(false);
 		break;
 	default:
 		MatToAdd = NO_MATERIAL;
@@ -96,10 +141,29 @@ void ABaseBuilding::UpdateBuildingState_Implementation(EBuildingState State)
 	
 	DecalComp->SetVisibility(visibility);
 
-	UpdateBuildingMaterial(MatToAdd);
+	ChangeBuildingMaterial(MatToAdd);
 }
 
-void ABaseBuilding::OnBuildingSpawn_Implementation()
+void ABaseBuilding::Build_Implementation()
 {
-	
+	if(bCanPlace) UpdateBuildingState(PLACED);
 }
+
+ABaseBuilding* ABaseBuilding::OnSelect_Implementation(AActor* NewBuilding)
+{
+	if (!NewBuilding) return nullptr;
+
+	ABaseBuilding* building = Cast<ABaseBuilding>(NewBuilding);
+	if (building && building->bIsPlaced)
+	{
+		building->UpdateBuildingState(SELECTED);
+	}
+
+	return building;
+}
+
+void ABaseBuilding::Deselect_Implementation()
+{
+	UpdateBuildingState(DESELECTED);
+}
+

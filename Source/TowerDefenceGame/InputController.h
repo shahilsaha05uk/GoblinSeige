@@ -25,7 +25,7 @@ public:
 	AInputController();
 	
 	virtual void BeginPlay() override;
-	
+
 	virtual void SetupInputComponent() override;
 
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
@@ -42,4 +42,8 @@ public:
 	void EnableLook(const FInputActionValue& InputActionValue);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void DisableLook(const FInputActionValue& InputActionValue);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void LeftMouseActions();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void Zoom(const FInputActionValue& InputActionValue);
 };

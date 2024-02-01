@@ -19,18 +19,29 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	UPlayerHUD* pHud;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
+	FTimerHandle OnSpawnTimeHandler;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
+	ABaseBuilding* tempBuilding;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
+	ABaseBuilding* selectBuilding;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
+	TEnumAsByte<ETraceTypeQuery> BuildingMovementTraceChannel;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
+	TEnumAsByte<ETraceTypeQuery> BuildingTraceChannel;
 
 	virtual void Move_Implementation(const FInputActionValue& InputActionValue) override;
 	virtual void Look_Implementation(const FInputActionValue& InputActionValue) override;
 	virtual void EnableLook_Implementation() override;
 	virtual void DisableLook_Implementation() override;
-
-	UFUNCTION(BlueprintPure, BlueprintCallable)
-	FVector CalculateSnappedPosition(FVector HitLocation, float SnapInterval);
+	virtual void LeftMouseActions_Implementation() override;
+	virtual void Zoom_Implementation(float Value) override;
 
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnBuildingSpawn(class ABaseBuilding* NewBuilding);
-	
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void Build();
 };
