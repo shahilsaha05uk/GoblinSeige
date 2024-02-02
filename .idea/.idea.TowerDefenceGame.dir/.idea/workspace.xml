@@ -7,20 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="546145ce-a35d-4c96-b62c-06b7b52ad4c7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/GoblinAnim.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations/GoblinAnim.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/Demo.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Demo.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_01.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_02.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_02.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_03.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_03.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_04.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_04.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_05.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_05.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper.uasset" afterDir="false" />
-    </list>
+    <list default="true" id="546145ce-a35d-4c96-b62c-06b7b52ad4c7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -297,7 +284,7 @@
       <workItem from="1706099807922" duration="29259000" />
       <workItem from="1706371843123" duration="17748000" />
       <workItem from="1706790072947" duration="17205000" />
-      <workItem from="1706877424373" duration="908000" />
+      <workItem from="1706877424373" duration="1645000" />
     </task>
     <servers />
   </component>
