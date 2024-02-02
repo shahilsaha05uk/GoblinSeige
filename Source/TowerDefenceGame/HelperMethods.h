@@ -1,0 +1,31 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "HelperMethods.generated.h"
+
+/**
+ * 
+ */
+UCLASS()
+class TOWERDEFENCEGAME_API UHelperMethods : public UBlueprintFunctionLibrary
+{
+	GENERATED_BODY()
+
+public:
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	static void GetMouseLocation(APlayerController* Controller, FVector &MouseLocation);
+
+	
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	static void GetMouseTrace(APlayerController* Controller ,ETraceTypeQuery TraceQuery, bool &Value, FHitResult &hit);
+	
+	UFUNCTION(BlueprintPure, BlueprintCallable)
+	static void CalculateSnappedPosition(FVector HitLocation, float SnapInterval, FVector &SnappedPosition);
+
+	UFUNCTION(BlueprintPure, BlueprintCallable)
+	static void IsPointerOnNavMesh(UWorld* world, float Tolerance, const FVector& Point, bool& Value);
+
+};

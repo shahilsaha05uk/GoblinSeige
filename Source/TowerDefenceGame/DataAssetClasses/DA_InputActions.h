@@ -24,4 +24,10 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UInputAction* IA_SpEnableLook;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UInputAction* IA_LeftMouseActions;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UInputAction* IA_Zoom;
 };

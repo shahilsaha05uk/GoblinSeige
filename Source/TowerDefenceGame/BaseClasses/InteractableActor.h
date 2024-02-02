@@ -35,5 +35,4 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void Init();
 	
-
 };

@@ -32,4 +32,11 @@ public:
 	void EnableLook();
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void DisableLook();
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void LeftMouseActions();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void Zoom(float Value);
+
+	
 };

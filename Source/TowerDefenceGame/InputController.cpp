@@ -32,8 +32,11 @@ void AInputController::SetupInputComponent()
 
 		EnhancedInputComponent->BindAction(DA_Inputs->IA_SpEnableLook, ETriggerEvent::Triggered, this, &AInputController::EnableLook);
 		EnhancedInputComponent->BindAction(DA_Inputs->IA_SpEnableLook, ETriggerEvent::Completed, this, &AInputController::DisableLook);
+		
+		EnhancedInputComponent->BindAction(DA_Inputs->IA_LeftMouseActions, ETriggerEvent::Completed, this, &AInputController::LeftMouseActions);
 
-
+		EnhancedInputComponent->BindAction(DA_Inputs->IA_Zoom, ETriggerEvent::Triggered, this, &AInputController::Zoom);
+		
 	}
 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
@@ -42,6 +45,28 @@ void AInputController::SetupInputComponent()
 
 		UE_LOG(LogTemp, Warning, TEXT("BeginPlay"));
 	}
+}
+
+void AInputController::Zoom_Implementation(const FInputActionValue& InputActionValue)
+{
+	APawn* pawn = GetPawn();
+	
+	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UPlayerInputInterface::StaticClass()))
+	{
+		float Value = InputActionValue.Get<float>();
+		IPlayerInputInterface::Execute_Zoom(pawn, Value);
+	}
+}
+
+void AInputController::LeftMouseActions_Implementation()
+{
+	APawn* pawn = GetPawn();
+	
+	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UPlayerInputInterface::StaticClass()))
+	{
+		IPlayerInputInterface::Execute_LeftMouseActions(pawn);
+	}
+
 }
 
 void AInputController::OnBuyOptionClicked_Implementation(UDA_BuildingAsset* BuildingAsset)
