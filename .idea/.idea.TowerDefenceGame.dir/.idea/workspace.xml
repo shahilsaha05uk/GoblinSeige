@@ -8,50 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="546145ce-a35d-4c96-b62c-06b7b52ad4c7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/BuildingInterface.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/BuildingInterface.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/BS_1D_Move.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/ZombieAnim.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/Zombie_Idle.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/running_crawl.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/zombie_attack.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/zombie_attack_Montage.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/zombie_biting.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/zombie_biting__2_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/zombie_crawl.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/zombie_death.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/zombie_dying.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/zombie_neck_bite.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/zombie_run.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/zombie_scream.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/zombie_walk.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BB_Zombie.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BT_Zombie.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/Services/SS_CheckForValidCastle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/Services/SS_CheckForValidCastle.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/Tasks/TT_Attack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/Tasks/TT_Attack.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/Tasks/TT_MoveForward.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/Tasks/TT_MoveForward.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/BP_BaseBuilding.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/BP_BaseBuilding.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/BP_Building.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/BP_EnemySpawnPoint.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/BP_EnemySpawnPoint.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/BP_GameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/BP_GameMode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/BP_Player.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/BP_SpecPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/BP_SpecPlayer.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/BP_ZombieCharacter.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/BP_ZombieController.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/Castle.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/ZombieCharacter.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Inputs/DA_Inputs.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Inputs/DA_Inputs.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Inputs/IA_PlaceBuilding.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Inputs/SpectatorInputMapping.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Inputs/SpectatorInputMapping.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Animations/GoblinAnim.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations/GoblinAnim.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/Demo.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Demo.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/BP_Turret.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/BP_Turret.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/BP_Turret_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/BP_Turret_01.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/BP_Turret_02.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/BP_Turret_02.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/BP_Turret_03.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/BP_Turret_03.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/BP_Turret_04.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/BP_Turret_04.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/BP_Turret_05.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/BP_Turret_05.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_01.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_02.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_02.uasset" afterDir="false" />
@@ -59,24 +20,6 @@
       <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_04.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_04.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_05.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Projectiles/BP_Turret_Projectile_05.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_01.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_02.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_02.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_03.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_03.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_04.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_04.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_05.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_05.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/widgets/W_BuildingUI.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/widgets/W_BuildingUI.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/InteractableActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/InteractableActor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/DataAssetClasses/DA_InputActions.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/DataAssetClasses/DA_InputActions.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/InputController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InputController.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/InputController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InputController.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/InteractableInterface.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/InteractableInterface.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/PlayerInputInterface.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/PlayerInputInterface.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SpecPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SpecPlayer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SpecPlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SpecPlayer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TowerDefenceGame.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/TowerDefenceGame.uproject" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -354,6 +297,7 @@
       <workItem from="1706099807922" duration="29259000" />
       <workItem from="1706371843123" duration="17748000" />
       <workItem from="1706790072947" duration="17205000" />
+      <workItem from="1706877424373" duration="908000" />
     </task>
     <servers />
   </component>
