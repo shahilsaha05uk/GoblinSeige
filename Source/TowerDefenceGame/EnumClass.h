@@ -45,6 +45,15 @@ enum EPlacementMaterial
 	SELECTED_MATERIAL
 };
 
+UENUM(BlueprintType)
+enum EControllerAllocation
+{
+	NO_CONTROLLER,
+	AVAILABLE_CONTROLLER,
+	ALLOCATED_CONTROLLER
+};
+
+
 
 UCLASS()
 class TOWERDEFENCEGAME_API UEnumClass : public UBlueprintFunctionLibrary
