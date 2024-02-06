@@ -11,13 +11,17 @@ void AEnemyManager::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SpawnEnemyControllers();
+	SpawnEnemyControllers(1);
 }
 
 void AEnemyManager::OnRequestEnemy()
 {
 	int TotalEnemies, TotalEnemiesPerSpawnPoints;
 	GetRandomEnemyCounts(TotalEnemies, TotalEnemiesPerSpawnPoints);
+
+	// if the enemy count is more than the controller count, spawn more controllers
+	if(TotalEnemies > TotalControllersAvailable) SpawnEnemyControllers(TotalEnemies - TotalControllersAvailable + 1);
+
 	
 	for (auto s : SpawnPoints)
 	{
@@ -25,6 +29,8 @@ void AEnemyManager::OnRequestEnemy()
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Spawning Enemy"));
 			AllocateController(s);
+
+			TotalControllersAvailable++;
 		}
 	}
 }
@@ -39,6 +45,8 @@ void AEnemyManager::AllocateController(AEnemySpawnPoint* sb)
 
 	auto id = outItem->GetID();
 	AllocatedController.Add(id, outItem);
+
+	TotalControllersAvailable--;
 }
 
 void AEnemyManager::FreeController(AEnemyController* ControllerToFree)
@@ -48,12 +56,14 @@ void AEnemyManager::FreeController(AEnemyController* ControllerToFree)
 	{
 		AvailableController.Enqueue(ControllerToFree);
 		AllocatedController.Remove(id);
+
+		TotalControllersAvailable++;
 	}
 }
 
-void AEnemyManager::SpawnEnemyControllers()
+void AEnemyManager::SpawnEnemyControllers(int Count)
 {
-	for (int i= 0; i < 100; i++)
+	for (int i= 0; i < Count; i++)
 	{
 		AEnemyController* NewController = GetWorld()->SpawnActor<AEnemyController>(EnemyControllerClass);
 		NewController->OnSpawn(this);

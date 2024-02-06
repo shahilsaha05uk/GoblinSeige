@@ -17,6 +17,8 @@ class TOWERDEFENCEGAME_API AEnemyManager : public AActor
 
 private:
 
+	int TotalControllersAvailable;
+	
 	TQueue<AEnemyController*> AvailableController;
 	TMap<uint32, AEnemyController*> AllocatedController;
 
@@ -46,7 +48,7 @@ public:
 	void OnRequestEnemy();
 	
 	UFUNCTION(BlueprintCallable)
-	void SpawnEnemyControllers();
+	void SpawnEnemyControllers(int Count);
 	
 	UFUNCTION(BlueprintPure, BlueprintCallable)
 	void GetRandomEnemyCounts(int &TotalEnemies, int &TotalEnemiesPerSpawnPoints);
