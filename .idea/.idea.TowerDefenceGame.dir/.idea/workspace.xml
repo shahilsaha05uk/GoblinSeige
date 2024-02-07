@@ -8,19 +8,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="546145ce-a35d-4c96-b62c-06b7b52ad4c7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ignore" beforeDir="false" afterPath="$PROJECT_DIR$/.ignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vsconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.vsconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/BP_GameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/BP_GameMode.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Base_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Base_01.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_01.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_02.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_02.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_03.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_03.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_04.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_04.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_05.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_05.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Blueprints/BP_Turret.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Blueprints/BP_Turret.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_01.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_02.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_02.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_03.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_03.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_04.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_04.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_05.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_05.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/Demo.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Demo.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/EnumClass.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/EnumClass.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/TowerDefenceGameGameModeBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/TowerDefenceGameGameModeBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/TowerDefenceGameGameModeBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/TowerDefenceGameGameModeBase.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Base_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Base_01.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_01.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_02.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_02.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_03.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_03.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_04.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_04.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_05.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Animations/AnimBP/ABP_Turret_Upper_05.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/BP_Turret.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/BP_Turret.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_01.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_02.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_02.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_03.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_03.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_04.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_04.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_05.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Turrets_Pack_01/Blueprints/Upper/BP_Turret_Upper_05.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,6 +286,7 @@
       <workItem from="1707224456200" duration="291000" />
       <workItem from="1707224780990" duration="4619000" />
       <workItem from="1707262116138" duration="8000" />
+      <workItem from="1707268317008" duration="36000" />
     </task>
     <servers />
   </component>
