@@ -5,6 +5,7 @@
 
 #include "Kismet/GameplayStatics.h"
 #include "TowerDefenceGame/TowerDefenceGameGameModeBase.h"
+#include "TowerDefenceGame/ManagerClasses/WaveManager.h"
 
 void UPlayerHUD::NativeConstruct()
 {
@@ -14,7 +15,7 @@ void UPlayerHUD::NativeConstruct()
 
 	if(gameMode)
 	{
-		gameMode->OnWaveStartSignature.AddDynamic(this, &UPlayerHUD::OnWaveStart);
+		if(class AWaveManager* waveManager = gameMode->GetWaveManager()) waveManager->OnWaveStartSignature.AddDynamic(this, &UPlayerHUD::OnWaveStart);
 	}
 }
 

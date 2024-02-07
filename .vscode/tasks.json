@@ -1,0 +1,707 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "TowerDefenceGame Win64 Debug Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"Win64",
+				"Debug",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame Win64 Debug Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"Win64",
+				"Debug",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"TowerDefenceGame Win64 Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame Win64 Debug Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"TowerDefenceGame",
+				"Win64",
+				"Debug",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame Win64 DebugGame Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"Win64",
+				"DebugGame",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame Win64 DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"Win64",
+				"DebugGame",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"TowerDefenceGame Win64 DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame Win64 DebugGame Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"TowerDefenceGame",
+				"Win64",
+				"DebugGame",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame Win64 Development Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"Win64",
+				"Development",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame Win64 Development Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"Win64",
+				"Development",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"TowerDefenceGame Win64 Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame Win64 Development Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"TowerDefenceGame",
+				"Win64",
+				"Development",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame Win64 Test Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"Win64",
+				"Test",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame Win64 Test Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"Win64",
+				"Test",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"TowerDefenceGame Win64 Test Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame Win64 Test Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"TowerDefenceGame",
+				"Win64",
+				"Test",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame Win64 Shipping Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"Win64",
+				"Shipping",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame Win64 Shipping Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"Win64",
+				"Shipping",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"TowerDefenceGame Win64 Shipping Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame Win64 Shipping Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"TowerDefenceGame",
+				"Win64",
+				"Shipping",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame IOS Debug Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"IOS",
+				"Debug",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame IOS Debug Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"IOS",
+				"Debug",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"TowerDefenceGame IOS Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame IOS Debug Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"TowerDefenceGame",
+				"IOS",
+				"Debug",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame IOS DebugGame Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"IOS",
+				"DebugGame",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame IOS DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"IOS",
+				"DebugGame",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"TowerDefenceGame IOS DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame IOS DebugGame Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"TowerDefenceGame",
+				"IOS",
+				"DebugGame",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame IOS Development Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"IOS",
+				"Development",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame IOS Development Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"IOS",
+				"Development",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"TowerDefenceGame IOS Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame IOS Development Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"TowerDefenceGame",
+				"IOS",
+				"Development",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame IOS Test Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"IOS",
+				"Test",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame IOS Test Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"IOS",
+				"Test",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"TowerDefenceGame IOS Test Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame IOS Test Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"TowerDefenceGame",
+				"IOS",
+				"Test",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame IOS Shipping Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"IOS",
+				"Shipping",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame IOS Shipping Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGame",
+				"IOS",
+				"Shipping",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"TowerDefenceGame IOS Shipping Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGame IOS Shipping Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"TowerDefenceGame",
+				"IOS",
+				"Shipping",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGameEditor Win64 Debug Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGameEditor",
+				"Win64",
+				"Debug",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGameEditor Win64 Debug Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGameEditor",
+				"Win64",
+				"Debug",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"TowerDefenceGameEditor Win64 Debug Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGameEditor Win64 Debug Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"TowerDefenceGameEditor",
+				"Win64",
+				"Debug",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGameEditor Win64 DebugGame Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGameEditor",
+				"Win64",
+				"DebugGame",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGameEditor Win64 DebugGame Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGameEditor",
+				"Win64",
+				"DebugGame",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"TowerDefenceGameEditor Win64 DebugGame Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGameEditor Win64 DebugGame Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"TowerDefenceGameEditor",
+				"Win64",
+				"DebugGame",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGameEditor Win64 Development Build",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGameEditor",
+				"Win64",
+				"Development",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGameEditor Win64 Development Rebuild",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Build.bat",
+			"args": [
+				"TowerDefenceGameEditor",
+				"Win64",
+				"Development",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"dependsOn": [
+				"TowerDefenceGameEditor Win64 Development Clean"
+			],
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		},
+		{
+			"label": "TowerDefenceGameEditor Win64 Development Clean",
+			"group": "build",
+			"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+			"args": [
+				"TowerDefenceGameEditor",
+				"Win64",
+				"Development",
+				"D:\\YEAR 4 PROJECTS\\TowerDefenceGame\\TowerDefenceGame.uproject",
+				"-waitmutex"
+			],
+			"problemMatcher": "$msCompile",
+			"type": "shell",
+			"options": {
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.2"
+			}
+		}
+	]
+}
