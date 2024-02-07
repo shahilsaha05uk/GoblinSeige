@@ -53,7 +53,12 @@ enum EControllerAllocation
 	ALLOCATED_CONTROLLER
 };
 
-
+UENUM(BlueprintType)
+enum EManagerType
+{
+	ENEMY_MANAGER,
+	WAVE_MANAGER
+};
 
 UCLASS()
 class TOWERDEFENCEGAME_API UEnumClass : public UBlueprintFunctionLibrary
