@@ -7,9 +7,9 @@
 #include "UIClasses/PlayerHUD.h"
 #include "SpecPlayer.generated.h"
 
-/**
- * 
- */
+
+
+
 UCLASS()
 class TOWERDEFENCEGAME_API ASpecPlayer : public APawn, public IPlayerInputInterface
 {
@@ -17,8 +17,14 @@ class TOWERDEFENCEGAME_API ASpecPlayer : public APawn, public IPlayerInputInterf
 
 public:
 
+	ASpecPlayer();
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	UPlayerHUD* pHud;
+	/*
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	class UCurrencyComponent* CurrencyComponent;
+	*/
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	FTimerHandle OnSpawnTimeHandler;

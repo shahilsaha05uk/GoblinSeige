@@ -4,9 +4,15 @@
 #include "SpecPlayer.h"
 
 #include "HelperMethods.h"
+//#include "ActorComponentClasses/CurrencyComponent.h"
 #include "BaseClasses/BaseBuilding.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
+
+ASpecPlayer::ASpecPlayer()
+{
+	//CurrencyComponent = CreateDefaultSubobject<UCurrencyComponent>(TEXT("CurrencyComponent"));
+}
 
 void ASpecPlayer::Move_Implementation(const FInputActionValue& InputActionValue)
 {
