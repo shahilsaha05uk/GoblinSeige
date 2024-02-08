@@ -12,11 +12,15 @@ void UPlayerHUD::NativeConstruct()
 	Super::NativeConstruct();
 	
 	gameMode = Cast<ATowerDefenceGameGameModeBase>(GetWorld()->GetAuthGameMode());
+}
 
-	if(gameMode)
-	{
-		if(class AWaveManager* waveManager = gameMode->GetWaveManager()) waveManager->OnWaveStartSignature.AddDynamic(this, &UPlayerHUD::OnWaveStart);
-	}
+void UPlayerHUD::UpdateWave_Implementation(int WaveNumber)
+{
+	
+}
+
+void UPlayerHUD::UpdateMoney_Implementation(int CurrentBalance)
+{
 }
 
 void UPlayerHUD::OnWaveStart_Implementation()

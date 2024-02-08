@@ -3,12 +3,30 @@
 
 #include "WaveManager.h"
 
+#include "Kismet/GameplayStatics.h"
 #include "TowerDefenceGame/EnumClass.h"
+#include "TowerDefenceGame/TowerDefenceGameGameModeBase.h"
 
-// Sets default values
-AWaveManager::AWaveManager()
+
+
+void AWaveManager::Init_Implementation(ATowerDefenceGameGameModeBase* gameMode)
 {
+	mCurrentWave = mInitialWave;
+	mGameMode = gameMode;
+}
 
+void AWaveManager::StartWave_Implementation()
+{
+	mGameMode->GetEnemyManager()->PrepareForWave(mCurrentWave);
+}
+
+void AWaveManager::EndWave_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("DECLARE WAVE END!!!"));
+
+	UpdateWave();
+
+	mGameMode->OnWaveCompleteSignature.Broadcast(mCurrentWave);
 }
 
 int AWaveManager::GetWave(ELevel level)
@@ -23,7 +41,9 @@ int AWaveManager::GetWave(ELevel level)
 
 void AWaveManager::UpdateWave()
 {
+	if(mCurrentWave >= mFinalWave) return;
 	mCurrentWave++;
 }
+
 
 

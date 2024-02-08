@@ -5,14 +5,30 @@
 
 #include "HelperMethods.h"
 //#include "ActorComponentClasses/CurrencyComponent.h"
+#include "ActorComponentClasses/CurrencyComponent.h"
 #include "BaseClasses/BaseBuilding.h"
+#include "DataAssetClasses/DA_BuildingAsset.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 ASpecPlayer::ASpecPlayer()
 {
-	//CurrencyComponent = CreateDefaultSubobject<UCurrencyComponent>(TEXT("CurrencyComponent"));
+	CurrencyComponent = CreateDefaultSubobject<UCurrencyComponent>(TEXT("CurrencyComponent"));
 }
+
+void ASpecPlayer::PossessedBy(AController* NewController)	// Called before BeginPlay
+{
+	Super::PossessedBy(NewController);
+
+	ControllerRef = Cast<AInputController>(NewController);
+}
+void ASpecPlayer::BeginPlay()
+{
+	Super::BeginPlay();
+
+	UE_LOG(LogTemp, Warning, TEXT("Begin Play!! "))
+}
+
 
 void ASpecPlayer::Move_Implementation(const FInputActionValue& InputActionValue)
 {
@@ -79,6 +95,11 @@ void ASpecPlayer::Zoom_Implementation(float Value)
 	
 }
 
+void ASpecPlayer::RequestCurrencyUpdate_Implementation(int CurrentBalance)
+{
+	ControllerRef->UpdateCurrency(CurrentBalance);
+}
+
 void ASpecPlayer::OnBuildingSpawn_Implementation(ABaseBuilding* NewBuilding)
 {
 	tempBuilding = NewBuilding;
@@ -87,8 +108,12 @@ void ASpecPlayer::OnBuildingSpawn_Implementation(ABaseBuilding* NewBuilding)
 
 void ASpecPlayer::Build_Implementation()
 {
-	if(tempBuilding) tempBuilding->Build();
-
-	tempBuilding = nullptr;
+	if(tempBuilding)
+	{
+		CurrencyComponent->SubtractMoney(tempBuilding->BuildingAsset->BuildingCost);
+		tempBuilding->OnBuildingBuildSignature.Broadcast(CurrencyComponent->GetCurrentBalance());
+	
+		tempBuilding = nullptr;
+	}
 }
 

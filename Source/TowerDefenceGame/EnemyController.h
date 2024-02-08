@@ -7,9 +7,6 @@
 #include "EnemySpawnPoint.h"
 #include "EnemyController.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class TOWERDEFENCEGAME_API AEnemyController : public AAIController
 {
@@ -17,25 +14,24 @@ class TOWERDEFENCEGAME_API AEnemyController : public AAIController
 
 private:
 
-	uint32 UniqueID;
+	AEnemyManager* mEnemyManager;
 
-	
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	UBehaviorTree* BehaviorTreeRef;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	class ABaseEnemy* EnemyRef;
 
 	virtual void OnPossess(APawn* InPawn) override;
 
-	UFUNCTION()
-	uint32 GetID() {return UniqueID;}
-	
 	UFUNCTION(BlueprintCallable)
 	void OnSpawn(class AEnemyManager* Manager);
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SpawnPawn(AEnemySpawnPoint* SpawnBox);
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnPawnSpawnRequest(AEnemySpawnPoint* SpawnBox);
 
-	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnDead();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnControllerDestroy();
 };

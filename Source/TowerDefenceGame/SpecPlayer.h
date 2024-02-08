@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "InterfaceClasses/PlayerInputInterface.h"
+#include "InterfaceClasses/PlayerInterface.h"
 #include "UIClasses/PlayerHUD.h"
 #include "SpecPlayer.generated.h"
 
@@ -11,20 +12,22 @@
 
 
 UCLASS()
-class TOWERDEFENCEGAME_API ASpecPlayer : public APawn, public IPlayerInputInterface
+class TOWERDEFENCEGAME_API ASpecPlayer : public APawn, public IPlayerInputInterface, public IPlayerInterface
 {
 	GENERATED_BODY()
 
 public:
 
 	ASpecPlayer();
+
+	virtual void BeginPlay() override;
+
+	virtual void PossessedBy(AController* NewController) override;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	UPlayerHUD* pHud;
-	/*
+	AInputController* ControllerRef;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	class UCurrencyComponent* CurrencyComponent;
-	*/
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	FTimerHandle OnSpawnTimeHandler;
@@ -43,6 +46,8 @@ public:
 	virtual void DisableLook_Implementation() override;
 	virtual void LeftMouseActions_Implementation() override;
 	virtual void Zoom_Implementation(float Value) override;
+
+	virtual void RequestCurrencyUpdate_Implementation(int CurrentBalance) override;
 
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)

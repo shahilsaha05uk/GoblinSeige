@@ -7,6 +7,9 @@
 #include "TowerDefenceGame/InterfaceClasses/EnemyInterface.h"
 #include "BaseEnemy.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPawnDeadSignature);
+
+
 UCLASS()
 class TOWERDEFENCEGAME_API ABaseEnemy : public ACharacter, public IEnemyInterface
 {
@@ -29,6 +32,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Actor Properties")
 	class UHealthBarWidget* mHealthWidget;
 
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnPawnDeadSignature OnPawnDeadSignature;
+	
 	virtual void BeginPlay() override;
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)

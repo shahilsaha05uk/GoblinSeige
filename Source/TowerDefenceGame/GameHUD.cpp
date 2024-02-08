@@ -21,7 +21,14 @@ void AGameHUD::UpdateInstanceMap(EWidgetType Type, UBaseWidget* NewWidget)
 
 UBaseWidget* AGameHUD::WidgetInitialiser_Implementation(EWidgetType Type, AInputController* ControllerRef)
 {
-	return nullptr;
+	if(!mWidgetClassMap.Contains(Type)) return nullptr;
+	if(mWidgetInstanceMap.Contains(Type)) return mWidgetInstanceMap[Type];
+	
+	TSubclassOf<UBaseWidget> WidgetClass = mWidgetClassMap[Type];
+	UBaseWidget* NewWidget = CreateWidget<UBaseWidget>(GetWorld(), WidgetClass);
+	UpdateInstanceMap(Type, NewWidget);
+
+	return NewWidget;
 }
 
 UBaseWidget* AGameHUD::Blueprint_GetWidget(EWidgetType Type)

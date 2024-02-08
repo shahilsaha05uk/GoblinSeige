@@ -23,4 +23,8 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnWaveStart();
 	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void UpdateMoney(int CurrentBalance);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void UpdateWave(int WaveNumber);
 };
