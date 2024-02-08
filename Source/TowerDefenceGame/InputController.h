@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "EnhancedInputSubsystemInterface.h"
+#include "TowerDefenceGameGameModeBase.h"
 #include "DataAssetClasses/DA_InputActions.h"
 #include "GameFramework/PlayerController.h"
 #include "InputController.generated.h"
@@ -19,14 +20,34 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	UDA_InputActions* DA_Inputs;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	class ASpecPlayer* SpecPawn;
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	const UInputMappingContext* InputMappingContext;
 
-	AInputController();
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	class AGameHUD* GameHUD;
 	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	class UPlayerHUD* PlayerHUD;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	ATowerDefenceGameGameModeBase* GameMode;
+
+
+	AInputController();
+
 	virtual void BeginPlay() override;
 
 	virtual void SetupInputComponent() override;
+
+	virtual void OnPossess(APawn* InPawn) override;
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void UpdateCurrency(int CurrentBalance);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnWaveComplete(int WaveNumber);
 
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
 	FOnBuyMenuOptionClickSignature OnBuyMenuOptionClickSignature;
@@ -46,4 +67,9 @@ public:
 	void LeftMouseActions();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Zoom(const FInputActionValue& InputActionValue);
+
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnBuildingBuilt(int CurrentBalance);
+
 };

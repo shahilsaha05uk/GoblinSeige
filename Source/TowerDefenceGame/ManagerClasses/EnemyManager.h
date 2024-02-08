@@ -5,9 +5,13 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "TowerDefenceGame/EnemyController.h"
+#include "HAL/CriticalSection.h"
 #include "EnemyManager.generated.h"
 
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEnemySpawnRequestSignature, class AEnemySpawnPoint*, SpawnPoint);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnControllerDestroySignature);
+
 
 
 UCLASS()
@@ -16,16 +20,18 @@ class TOWERDEFENCEGAME_API AEnemyManager : public AActor
 	GENERATED_BODY()
 
 private:
+	int TotalEnemiesDead;
 
-	int TotalControllersAvailable;
+	FCriticalSection Mutex;
 	
-	TQueue<AEnemyController*> AvailableController;
-	TMap<uint32, AEnemyController*> AllocatedController;
+	TQueue<AEnemyController*> FreeControllers;
+	UPROPERTY()
+	TArray<AEnemyController*> AllocatedControllers;
 
 	UFUNCTION()
-	void AllocateController(AEnemySpawnPoint* sb);
+	AEnemyController* GetFreeController();
 	UFUNCTION()
-	void FreeController(AEnemyController* ControllerToFree);
+	void AssignController(AEnemySpawnPoint* sb);
 
 protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
@@ -34,6 +40,9 @@ protected:
 	TArray<AEnemySpawnPoint*> SpawnPoints;
 
 public:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private", meta = (ExposeOnSpawn = true))
+	class ATowerDefenceGameGameModeBase* mGameMode;
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Wave Settings")
 	int EnemyMinRange;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Wave Settings")
@@ -41,15 +50,29 @@ public:
 	
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnEnemySpawnRequestSignature OnEnemySpawnRequest;
-	
-	virtual void BeginPlay() override;
+
+	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "Private")
+	FOnControllerDestroySignature OnControllerDestroySignature;
+
+	UFUNCTION()
+	void FreeController();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void Init(ATowerDefenceGameGameModeBase* gameMode);
+
 
 	UFUNCTION(BlueprintCallable)
-	void OnRequestEnemy();
+	void SpawnEnemies(int TotalEnemiesPerSpawnPoints);
 	
 	UFUNCTION(BlueprintCallable)
-	void SpawnEnemyControllers(int Count);
+	void SpawnControllers(int Count);
 	
 	UFUNCTION(BlueprintPure, BlueprintCallable)
-	void GetRandomEnemyCounts(int &TotalEnemies, int &TotalEnemiesPerSpawnPoints);
+	int GetRandomEnemyCounts(int Wave);
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnGameOver();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void PrepareForWave(int Wave);
 };

@@ -3,6 +3,7 @@
 
 #include "EnemyController.h"
 
+#include "BaseClasses/BaseEnemy.h"
 #include "ManagerClasses/EnemyManager.h"
 
 void AEnemyController::OnPossess(APawn* InPawn)
@@ -13,17 +14,32 @@ void AEnemyController::OnPossess(APawn* InPawn)
 
 void AEnemyController::OnSpawn(AEnemyManager* Manager)
 {
-	Manager->OnEnemySpawnRequest.AddDynamic(this, &AEnemyController::OnPawnSpawnRequest);
+	mEnemyManager = Manager;
+	Manager->OnEnemySpawnRequest.AddDynamic(this, &AEnemyController::SpawnPawn);
+	Manager->OnControllerDestroySignature.AddDynamic(this, &AEnemyController::OnControllerDestroy);
+}
 
-	UniqueID = GetUniqueID();
+void AEnemyController::OnDead_Implementation()
+{
+	UnPossess();
+
+	mEnemyManager->FreeController();
+	//OnControllerFreeSignature.Broadcast(UniqueID);
+}
+
+void AEnemyController::OnControllerDestroy_Implementation()
+{
+	if(APawn* p = GetPawn())
+	{
+		p->Destroy();
+		UnPossess();
+	}
+	Destroy();
 }
 
 void AEnemyController::SpawnPawn_Implementation(AEnemySpawnPoint* SpawnBox)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Spawning Enemies"));
-}
+	EnemyRef->OnPawnDeadSignature.AddDynamic(this, &AEnemyController::OnDead);
 
-void AEnemyController::OnPawnSpawnRequest_Implementation(AEnemySpawnPoint* SpawnBox)
-{
-	
+	Possess(EnemyRef);
 }

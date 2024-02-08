@@ -3,76 +3,100 @@
 
 #include "EnemyManager.h"
 
-#include "Kismet/GameplayStatics.h"
+#include "WaveManager.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "TowerDefenceGame/TowerDefenceGameGameModeBase.h"
 
 
-void AEnemyManager::BeginPlay()
+void AEnemyManager::Init_Implementation(ATowerDefenceGameGameModeBase* gameMode)
 {
-	Super::BeginPlay();
+	SpawnControllers(100);
 
-	SpawnEnemyControllers(1);
+	mGameMode = Cast<ATowerDefenceGameGameModeBase>(GetWorld()->GetAuthGameMode());
+	mGameMode->OnGameOverSignature.AddDynamic(this, &AEnemyManager::OnGameOver);
 }
 
-void AEnemyManager::OnRequestEnemy()
+void AEnemyManager::PrepareForWave_Implementation(int Wave)
 {
-	int TotalEnemies, TotalEnemiesPerSpawnPoints;
-	GetRandomEnemyCounts(TotalEnemies, TotalEnemiesPerSpawnPoints);
+	int NumberOfEnemiesToSpawn = GetRandomEnemyCounts(Wave);
 
-	// if the enemy count is more than the controller count, spawn more controllers
-	if(TotalEnemies > TotalControllersAvailable) SpawnEnemyControllers(TotalEnemies - TotalControllersAvailable + 1);
+	SpawnEnemies(NumberOfEnemiesToSpawn);
+}
 
+AEnemyController* AEnemyManager::GetFreeController()
+{
+	AEnemyController* outC;
+	return (FreeControllers.Dequeue(outC))? outC : nullptr;
+}
+
+void AEnemyManager::AssignController(AEnemySpawnPoint* sb)
+{
+	FScopeLock Lock(&Mutex);
 	
-	for (auto s : SpawnPoints)
+	if(FreeControllers.IsEmpty()) return;
+
+	AEnemyController* freeController = GetFreeController();
+	if(freeController!= nullptr) freeController->SpawnPawn(sb);
+	else return;
+	
+	AllocatedControllers.Add(freeController);
+}
+
+void AEnemyManager::FreeController()
+{
+	TotalEnemiesDead++;
+	UE_LOG(LogTemp, Warning, TEXT("Total Enemies Dead: %d"), TotalEnemiesDead);
+
+	if(TotalEnemiesDead == AllocatedControllers.Num())
 	{
-		for (int i = 0; i< TotalEnemiesPerSpawnPoints; i++)
+		UE_LOG(LogTemp, Warning, TEXT("Freeing the Controllers..."));
+
+		for (auto C : AllocatedControllers)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Spawning Enemy"));
-			AllocateController(s);
-
-			TotalControllersAvailable++;
+			FreeControllers.Enqueue(C);
 		}
+
+		AllocatedControllers.Empty(0);
+
+		TotalEnemiesDead = 0;
+		mGameMode->GetWaveManager()->EndWave();
 	}
 }
 
-void AEnemyManager::AllocateController(AEnemySpawnPoint* sb)
+int AEnemyManager::GetRandomEnemyCounts(int Wave)
 {
-	if(AvailableController.IsEmpty()) return;
-
-	AEnemyController* outItem;
-	AvailableController.Dequeue(outItem);
-	outItem->SpawnPawn(sb);
-
-	auto id = outItem->GetID();
-	AllocatedController.Add(id, outItem);
-
-	TotalControllersAvailable--;
+	return UKismetMathLibrary::RandomIntegerInRange(Wave, (Wave + 5));
 }
 
-void AEnemyManager::FreeController(AEnemyController* ControllerToFree)
-{
-	auto id = ControllerToFree->GetID();
-	if (AllocatedController.Contains(id))
-	{
-		AvailableController.Enqueue(ControllerToFree);
-		AllocatedController.Remove(id);
-
-		TotalControllersAvailable++;
-	}
-}
-
-void AEnemyManager::SpawnEnemyControllers(int Count)
+void AEnemyManager::SpawnControllers(int Count)
 {
 	for (int i= 0; i < Count; i++)
 	{
 		AEnemyController* NewController = GetWorld()->SpawnActor<AEnemyController>(EnemyControllerClass);
 		NewController->OnSpawn(this);
-		AvailableController.Enqueue(NewController);
+		
+		FreeControllers.Enqueue(NewController);
 	}
 }
 
-void AEnemyManager::GetRandomEnemyCounts(int& TotalEnemies, int& TotalEnemiesPerSpawnPoints)
+void AEnemyManager::SpawnEnemies(int TotalEnemiesPerSpawnPoints)
 {
-	TotalEnemies = UKismetMathLibrary::RandomIntegerInRange(EnemyMinRange, EnemyMaxRange);
-	TotalEnemiesPerSpawnPoints = TotalEnemies / SpawnPoints.Num();
+	for (auto s : SpawnPoints)
+	{
+		for (int i = 0; i< TotalEnemiesPerSpawnPoints; i++)
+		{
+			AssignController(s);
+		}
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("Total Controller Assigned: %d"), AllocatedControllers.Num());
 }
+
+void AEnemyManager::OnGameOver_Implementation()
+{
+	OnControllerDestroySignature.Broadcast();
+
+	if(!FreeControllers.IsEmpty()) FreeControllers.Empty();
+	if(!AllocatedControllers.IsEmpty()) AllocatedControllers.Empty();
+}
+

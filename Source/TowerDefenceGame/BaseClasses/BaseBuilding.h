@@ -8,6 +8,8 @@
 #include "TowerDefenceGame/InterfaceClasses/BuildingInterface.h"
 #include "BaseBuilding.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingBuildSignature, int, AmmountToDeduct);
+
 UCLASS()
 class TOWERDEFENCEGAME_API ABaseBuilding : public AActor, public IBuildingInterface
 {
@@ -23,6 +25,9 @@ public:
 	class UDecalComponent* DecalComp;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
 	class UWidgetComponent* WidgetComp;
+	
+	UPROPERTY(meta = (ExposeOnSpawn),EditAnywhere, BlueprintReadWrite, Category = "Private")
+	class UDA_BuildingAsset* BuildingAsset;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private")
 	UMaterialInterface* ValidMaterial;
@@ -48,7 +53,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Public")
 	TEnumAsByte<EBuildingState> BuildingState;
 
-	ABaseBuilding(const FObjectInitializer& ObjectInitializer);
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnBuildingBuildSignature OnBuildingBuildSignature;
+
+	ABaseBuilding();
 
 	virtual void BeginPlay() override;
 	
@@ -68,4 +76,7 @@ public:
 	
 	virtual ABaseBuilding* OnSelect_Implementation(AActor* NewBuilding) override;
 	virtual void Deselect_Implementation() override;
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnBuildingBuilt(int AmmountToDeduct);
 };

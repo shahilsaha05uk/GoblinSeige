@@ -9,7 +9,7 @@
 #include "TowerDefenceGame/HelperMethods.h"
 #include "TowerDefenceGame/UIClasses/widgets/BuildingUI.h"
 
-ABaseBuilding::ABaseBuilding(const FObjectInitializer& ObjectInitializer)
+ABaseBuilding::ABaseBuilding()
 {
 	RootComp = CreateDefaultSubobject<USceneComponent>("DefaultSceneComponent");
 	RootComponent = RootComp;
@@ -45,14 +45,6 @@ void ABaseBuilding::MoveBuilding_Implementation()
 		FHitResult hit;
 		UHelperMethods::GetMouseTrace(UGameplayStatics::GetPlayerController(GetWorld(), 0), BuildingMovementTraceChannel, bHit, hit);
 
-		/*
-		FVector mousePos;
-		bool bMouseOnNavMesh;
-		UHelperMethods::GetMouseLocation(UGameplayStatics::GetPlayerController(GetWorld(), 0), mousePos);
-		UHelperMethods::IsPointerOnNavMesh(GetWorld(), 100.0f, mousePos, bMouseOnNavMesh);
-		*/
-		
-
 		if(bHit)
 		{
 			FVector snappedPos;
@@ -68,6 +60,7 @@ void ABaseBuilding::MoveBuilding_Implementation()
 
 void ABaseBuilding::Init_Implementation()
 {
+	OnBuildingBuildSignature.AddDynamic(this, &ABaseBuilding::OnBuildingBuilt);
 	bCanPlace = true;
 	UpdateBuildingState(PLACING);
 	WidgetComp->SetVisibility(false);
@@ -165,5 +158,12 @@ ABaseBuilding* ABaseBuilding::OnSelect_Implementation(AActor* NewBuilding)
 void ABaseBuilding::Deselect_Implementation()
 {
 	UpdateBuildingState(DESELECTED);
+}
+
+void ABaseBuilding::OnBuildingBuilt_Implementation(int AmmountToDeduct)
+{
+	Build();
+
+	OnBuildingBuildSignature.RemoveAll(this);
 }
 
