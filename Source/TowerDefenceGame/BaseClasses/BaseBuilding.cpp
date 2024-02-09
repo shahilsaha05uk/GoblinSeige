@@ -4,27 +4,40 @@
 #include "BaseBuilding.h"
 #include "Components/BoxComponent.h"
 #include "Components/DecalComponent.h"
+#include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "TowerDefenceGame/HelperMethods.h"
 #include "TowerDefenceGame/UIClasses/widgets/BuildingUI.h"
 
+
+
 ABaseBuilding::ABaseBuilding()
 {
+	mAttackRadius = 1000.0f;
+	
 	RootComp = CreateDefaultSubobject<USceneComponent>("DefaultSceneComponent");
 	RootComponent = RootComp;
 	
 	BoxComp = CreateDefaultSubobject<UBoxComponent>("CollisionComp");
 	BoxComp->SetupAttachment(RootComponent);
+	BoxComp->OnComponentBeginOverlap.AddDynamic(this, &ABaseBuilding::OnBuildingBeginOverlap);
+	BoxComp->OnComponentBeginOverlap.AddDynamic(this, &ABaseBuilding::OnBuildingEndOverlap);
 	
-	DecalComp = CreateDefaultSubobject<UDecalComponent>("DecalComponent");
-	DecalComp->SetupAttachment(BoxComp);
+	PlacementDecalComp = CreateDefaultSubobject<UDecalComponent>("Placement Decal");
+	PlacementDecalComp->SetupAttachment(BoxComp);
+	
+	RangeDecalComp = CreateDefaultSubobject<UDecalComponent>("Range Decal");
+	RangeDecalComp->SetupAttachment(RootComp);
 
 	WidgetComp = CreateDefaultSubobject<UWidgetComponent>("WidgetComponent");
 	WidgetComp->SetupAttachment(BoxComp);
 	WidgetComp->SetDrawSize(FVector2d(150,20));
 	WidgetComp->SetWidgetSpace(EWidgetSpace::Screen);
 	WidgetComp->SetWidgetClass(UBuildingUI::StaticClass());
+
+	RangeCollisionComp = CreateDefaultSubobject<USphereComponent>("RangeCollisionComponent");
+	RangeCollisionComp->SetupAttachment(RootComp);
 }
 
 void ABaseBuilding::BeginPlay()
@@ -36,7 +49,25 @@ void ABaseBuilding::BeginPlay()
 	WidgetComp->SetVisibility(false);
 }
 
+void ABaseBuilding::OnBuildingBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if(bInPlacementMode)
+	{
+		ChangeBuildingMaterial(INVALID_MATERIAL);
+		bCanPlace = false;
+	}
+}
 
+void ABaseBuilding::OnBuildingEndOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if(bInPlacementMode)
+	{
+		ChangeBuildingMaterial(VALID_MATERIAL);
+		bCanPlace = true;
+	}
+}
 void ABaseBuilding::MoveBuilding_Implementation()
 {
 	if(bInPlacementMode)
@@ -72,16 +103,16 @@ void ABaseBuilding::ChangeBuildingMaterial_Implementation(EPlacementMaterial Mat
 	switch (MatToAdd)
 	{
 	case NO_MATERIAL:
-		DecalComp->SetDecalMaterial(nullptr);
+		PlacementDecalComp->SetDecalMaterial(nullptr);
 		break;
 	case VALID_MATERIAL:
-		DecalComp->SetDecalMaterial(ValidMaterial);
+		PlacementDecalComp->SetDecalMaterial(ValidMaterial);
 		break;
 	case INVALID_MATERIAL:
-		DecalComp->SetDecalMaterial(InvalidMaterial);
+		PlacementDecalComp->SetDecalMaterial(InvalidMaterial);
 		break;
 	case SELECTED_MATERIAL:
-		DecalComp->SetDecalMaterial(SelectMaterial);
+		PlacementDecalComp->SetDecalMaterial(SelectMaterial);
 		break;
 	}
 
@@ -132,7 +163,7 @@ void ABaseBuilding::UpdateBuildingState_Implementation(EBuildingState State)
 
 	visibility = bInPlacementMode || bIsSelected;
 	
-	DecalComp->SetVisibility(visibility);
+	if(PlacementDecalComp) PlacementDecalComp->SetVisibility(visibility);
 
 	ChangeBuildingMaterial(MatToAdd);
 }
