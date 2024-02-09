@@ -22,6 +22,9 @@ public:
 
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Gold Settings")
+	class ATowerDefenceGameGameModeBase* mGameMode;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Gold Settings")
 	class UGoldLootBar* GoldLootBar;
 	
 	virtual void BeginPlay() override;

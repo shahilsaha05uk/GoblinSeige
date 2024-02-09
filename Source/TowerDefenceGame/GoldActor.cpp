@@ -3,6 +3,7 @@
 
 #include "GoldActor.h"
 
+#include "TowerDefenceGameGameModeBase.h"
 #include "Components/WidgetComponent.h"
 #include "UIClasses/GoldLootBar.h"
 
@@ -10,10 +11,18 @@ void AGoldActor::BeginPlay()
 {
 	Super::BeginPlay();
 	WidgetComp->SetVisibility(true);
-	//GoldLootBar = Cast<UGoldLootBar>(GoldLootBarComponent->GetWidget());
+	GoldLootBar = Cast<UGoldLootBar>(WidgetComp->GetWidget());
+
+	mCurrentGold = mTotalGold;
+
+	mGameMode = Cast<ATowerDefenceGameGameModeBase>(GetWorld()->GetAuthGameMode());
 }
 
 void AGoldActor::LootGold_Implementation()
 {
+	mCurrentGold--;
+
 	if(GoldLootBar != nullptr) GoldLootBar->LootGold(mCurrentGold, mTotalGold);
+	
+	if(mGameMode && mCurrentGold <= 0) mGameMode->OnGameOverSignature.Broadcast();
 }
