@@ -4,6 +4,7 @@
 #include "BuildingUI.h"
 
 #include "Components/Button.h"
+#include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 
 
 void UBuildingUI::NativeOnInitialized()
@@ -15,8 +16,24 @@ void UBuildingUI::NativeOnInitialized()
 	if(btnDestroy) btnDestroy->OnClicked.AddDynamic(this, &UBuildingUI::OnDestroy);
 }
 
+void UBuildingUI::InitialiseWidget_Implementation(ABaseBuilding* ParentBuilding)
+{
+	mParentBuilding = ParentBuilding;
+
+	if(mParentBuilding)
+	{
+		mParentBuilding->OnBuildingFullyUpgradedSignature.AddDynamic(this, &UBuildingUI::OnFullyUpgraded);
+	}
+}
+
+void UBuildingUI::OnFullyUpgraded_Implementation()
+{
+	btnUpgrade->SetIsEnabled(false);
+}
+
 void UBuildingUI::OnUpgrade_Implementation()
 {
+	OnUpgradeSignature.Broadcast();
 }
 
 void UBuildingUI::OnMove_Implementation()

@@ -8,8 +8,8 @@
 #include "Components/WidgetComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "TowerDefenceGame/HelperMethods.h"
+#include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "TowerDefenceGame/UIClasses/widgets/BuildingUI.h"
-
 
 
 ABaseBuilding::ABaseBuilding()
@@ -21,9 +21,7 @@ ABaseBuilding::ABaseBuilding()
 	
 	BoxComp = CreateDefaultSubobject<UBoxComponent>("CollisionComp");
 	BoxComp->SetupAttachment(RootComponent);
-	BoxComp->OnComponentBeginOverlap.AddDynamic(this, &ABaseBuilding::OnBuildingBeginOverlap);
-	BoxComp->OnComponentBeginOverlap.AddDynamic(this, &ABaseBuilding::OnBuildingEndOverlap);
-	
+
 	PlacementDecalComp = CreateDefaultSubobject<UDecalComponent>("Placement Decal");
 	PlacementDecalComp->SetupAttachment(BoxComp);
 	
@@ -43,31 +41,39 @@ ABaseBuilding::ABaseBuilding()
 void ABaseBuilding::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	bCanPlace = false;
 	UpdateBuildingState(NO_STATE);
-	WidgetComp->SetVisibility(false);
-}
 
-void ABaseBuilding::OnBuildingBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
-	if(bInPlacementMode)
+	if(WidgetComp)
 	{
-		ChangeBuildingMaterial(INVALID_MATERIAL);
-		bCanPlace = false;
+		WidgetComp->SetVisibility(false);
+
+		buildingUI = Cast<UBuildingUI>(WidgetComp->GetWidget());
+
+		if(buildingUI)
+		{
+			buildingUI->InitialiseWidget(this);
+			buildingUI->OnUpgradeSignature.AddDynamic(this, &ABaseBuilding::Upgrade);
+			//Upgrade();
+		}
 	}
 }
 
-void ABaseBuilding::OnBuildingEndOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+bool ABaseBuilding::isFullyUpgraded()
 {
-	if(bInPlacementMode)
-	{
-		ChangeBuildingMaterial(VALID_MATERIAL);
-		bCanPlace = true;
-	}
+	return (BuildingAsset->BuildingUpgrade == nullptr);
 }
+
+void ABaseBuilding::Upgrade_Implementation()
+{
+	UpgradeAsset = BuildingAsset->BuildingUpgrade;
+
+	if(isFullyUpgraded()) OnBuildingFullyUpgradedSignature.Broadcast();
+}
+
+
+
 void ABaseBuilding::MoveBuilding_Implementation()
 {
 	if(bInPlacementMode)
@@ -181,6 +187,7 @@ ABaseBuilding* ABaseBuilding::OnSelect_Implementation(AActor* NewBuilding)
 	if (building && building->bIsPlaced)
 	{
 		building->UpdateBuildingState(SELECTED);
+		WidgetComp->SetVisibility(true);
 	}
 
 	return building;
@@ -189,6 +196,8 @@ ABaseBuilding* ABaseBuilding::OnSelect_Implementation(AActor* NewBuilding)
 void ABaseBuilding::Deselect_Implementation()
 {
 	UpdateBuildingState(DESELECTED);
+	WidgetComp->SetVisibility(false);
+
 }
 
 void ABaseBuilding::OnBuildingBuilt_Implementation(int AmmountToDeduct)

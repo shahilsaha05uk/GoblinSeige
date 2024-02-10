@@ -6,9 +6,11 @@
 #include "GameFramework/Actor.h"
 #include "TowerDefenceGame/EnumClass.h"
 #include "TowerDefenceGame/InterfaceClasses/BuildingInterface.h"
+#include "TowerDefenceGame/UIClasses/widgets/BuildingUI.h"
 #include "BaseBuilding.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingBuildSignature, int, AmmountToDeduct);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnBuildingFullyUpgradedSignature);
 
 UCLASS()
 class TOWERDEFENCEGAME_API ABaseBuilding : public AActor, public IBuildingInterface
@@ -40,8 +42,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private")
 	UMaterialInterface* SelectMaterial;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Upgrade Properties")
+	class UDA_UpgradeAsset* UpgradeAsset;
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	TEnumAsByte<ETraceTypeQuery> BuildingMovementTraceChannel;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	UBuildingUI* buildingUI;
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	FTimerHandle OnSpawnTimeHandler;
 
@@ -61,19 +70,20 @@ public:
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnBuildingBuildSignature OnBuildingBuildSignature;
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnBuildingFullyUpgradedSignature OnBuildingFullyUpgradedSignature;
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnBuildingBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep,
-	                            const FHitResult& SweepResult);
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnBuildingEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	ABaseBuilding();
 
 	virtual void BeginPlay() override;
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Init();
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void Upgrade();
+	UFUNCTION(BlueprintCallable)
+	bool isFullyUpgraded();
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void UpdateBuildingState(EBuildingState State);

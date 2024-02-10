@@ -36,8 +36,6 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	ABaseBuilding* selectBuilding;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
-	TEnumAsByte<ETraceTypeQuery> BuildingMovementTraceChannel;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	TEnumAsByte<ETraceTypeQuery> BuildingTraceChannel;
 
 	virtual void Move_Implementation(const FInputActionValue& InputActionValue) override;
