@@ -28,6 +28,9 @@ public:
 	UTexture2D* BuildingImage;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Building Asset Properties")
+	UDA_UpgradeAsset* BuildingUpgrade;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Building Asset Properties")
 	TSubclassOf<ABaseBuilding> BuildingClass;
 
 };

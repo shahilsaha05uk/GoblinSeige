@@ -21,8 +21,15 @@ public:
 	int UpgradeID;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FString UpgradeName;
-	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	TSubclassOf<UBaseSkillComponent> SkillClass;
+	UMaterialInterface* UpgradeMaterial;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float AttackRange;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float AttackDamage;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float AttackSpeed;
 	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Next Skill")
+	UDA_UpgradeAsset* NextUpgrade;
 };

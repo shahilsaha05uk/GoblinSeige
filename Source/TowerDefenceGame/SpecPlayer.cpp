@@ -64,6 +64,8 @@ void ASpecPlayer::LeftMouseActions_Implementation()
 		{
 			AActor* hitActor = hit.GetActor();
 
+			UE_LOG(LogTemp, Warning, TEXT("Actor Name: %s"), *hitActor->GetName());
+
 			// Check if the hit actor implements the building interface
 			if (UKismetSystemLibrary::DoesImplementInterface(hitActor, UBuildingInterface::StaticClass()))
 			{
