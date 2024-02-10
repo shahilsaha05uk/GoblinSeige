@@ -14,13 +14,13 @@
 
 ABaseBuilding::ABaseBuilding()
 {
-	mAttackRadius = 1000.0f;
-	
 	RootComp = CreateDefaultSubobject<USceneComponent>("DefaultSceneComponent");
 	RootComponent = RootComp;
 	
 	BoxComp = CreateDefaultSubobject<UBoxComponent>("CollisionComp");
 	BoxComp->SetupAttachment(RootComponent);
+	BoxComp->OnComponentBeginOverlap.AddDynamic(this, &ABaseBuilding::OnBuildingBeginOverlap);
+	BoxComp->OnComponentEndOverlap.AddDynamic(this, &ABaseBuilding::OnBuildingEndOverlap);
 
 	PlacementDecalComp = CreateDefaultSubobject<UDecalComponent>("Placement Decal");
 	PlacementDecalComp->SetupAttachment(BoxComp);
@@ -58,6 +58,23 @@ void ABaseBuilding::BeginPlay()
 			//Upgrade();
 		}
 	}
+}
+
+void ABaseBuilding::OnBuildingBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	bCanPlace = false;
+	ChangeBuildingMaterial(INVALID_MATERIAL);
+}
+
+void ABaseBuilding::OnBuildingEndOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	bCanPlace = true;
+
+	UE_LOG(LogTemp, Warning, TEXT("Other Actor: %s"), *OtherActor->GetName());
+	ChangeBuildingMaterial(VALID_MATERIAL);
+	
 }
 
 bool ABaseBuilding::isFullyUpgraded()

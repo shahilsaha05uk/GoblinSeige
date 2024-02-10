@@ -36,14 +36,14 @@ protected:
 public:
 	ATurret();
 
-
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void IncreaseRange();
+	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnRangeBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnRangeEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void LookTowardsTarget();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void FindTarget();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -54,8 +54,4 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Fire();
-
-	
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	float CalculateAimingTime();
 };
