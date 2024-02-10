@@ -54,9 +54,6 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	FTimerHandle OnSpawnTimeHandler;
 
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Public")
-	float mAttackRadius;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Public")
 	bool bInPlacementMode;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Public")
@@ -76,6 +73,13 @@ public:
 	ABaseBuilding();
 
 	virtual void BeginPlay() override;
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnBuildingBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep,
+	                            const FHitResult& SweepResult);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnBuildingEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Init();

@@ -3,6 +3,7 @@
 
 #include "Turret.h"
 
+#include "Components/DecalComponent.h"
 #include "Components/SphereComponent.h"
 #include "InterfaceClasses/EnemyInterface.h"
 #include "Kismet/GameplayStatics.h"
@@ -11,14 +12,19 @@
 // Sets default values
 ATurret::ATurret()
 {
-	Super::ABaseBuilding();
-
 	RangeCollisionComp->OnComponentBeginOverlap.AddDynamic(this, &ATurret::OnRangeBeginOverlap);
 	RangeCollisionComp->OnComponentEndOverlap.AddDynamic(this, &ATurret::OnRangeEndOverlap);
 }
 
+void ATurret::IncreaseRange_Implementation()
+{
+	RangeCollisionComp->SetSphereRadius(AttackRange, true);
+	const float decalSize = AttackRange / 100.f;
+	RangeDecalComp->SetRelativeScale3D(FVector(1.0f, decalSize, decalSize));
+}
+
 void ATurret::OnRangeBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+                                                 UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if(UKismetSystemLibrary::DoesImplementInterface(OtherActor, UEnemyInterface::StaticClass()))
 	{
@@ -54,9 +60,6 @@ void ATurret::OnRangeEndOverlap_Implementation(UPrimitiveComponent* OverlappedCo
 	}
 }
 
-void ATurret::LookTowardsTarget_Implementation()
-{
-}
 
 void ATurret::FindTarget_Implementation()
 {
@@ -68,11 +71,6 @@ void ATurret::OnNoTargetInRange_Implementation()
 
 void ATurret::Fire_Implementation()
 {
-}
-
-float ATurret::CalculateAimingTime()
-{
-	return 0.0f;
 }
 
 void ATurret::IdentifyTarget_Implementation()
