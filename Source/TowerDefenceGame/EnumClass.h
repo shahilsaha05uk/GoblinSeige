@@ -60,6 +60,13 @@ enum EManagerType
 	WAVE_MANAGER
 };
 
+UENUM(BlueprintType)
+enum ESideMenuSwitcher
+{
+	BUY_MENU,
+	BUILDING_SETTINGS
+};
+
 UCLASS()
 class TOWERDEFENCEGAME_API UEnumClass : public UBlueprintFunctionLibrary
 {

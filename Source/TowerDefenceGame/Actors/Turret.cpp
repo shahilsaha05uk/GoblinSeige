@@ -7,6 +7,7 @@
 #include "Components/SphereComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "TowerDefenceGame/DataAssetClasses/DA_UpgradeAsset.h"
 #include "TowerDefenceGame/InterfaceClasses/EnemyInterface.h"
 
 // Sets default values
@@ -15,6 +16,31 @@ ATurret::ATurret()
 	OnTurretActivateSignature.AddDynamic(this, &ATurret::PowerOn);
 	RangeCollisionComp->OnComponentBeginOverlap.AddDynamic(this, &ATurret::OnRangeBeginOverlap);
 	RangeCollisionComp->OnComponentEndOverlap.AddDynamic(this, &ATurret::OnRangeEndOverlap);
+}
+
+void ATurret::Upgrade_Implementation()
+{
+	if(!isUpgradeAvailable()) return;
+	
+	AttackRange = UpgradeAsset->AttackRange;
+	AttackDamage = UpgradeAsset->AttackDamage;
+	AttackSpeed = UpgradeAsset->AttackSpeed;
+
+	IncreaseRange();
+	
+	Super::Upgrade_Implementation();
+}
+
+void ATurret::OnBuildingBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	Super::OnBuildingBeginOverlap_Implementation(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
+}
+
+void ATurret::OnBuildingEndOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	Super::OnBuildingEndOverlap_Implementation(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex);
 }
 
 void ATurret::PowerOn_Implementation()
@@ -34,12 +60,10 @@ void ATurret::OnRangeBeginOverlap_Implementation(UPrimitiveComponent* Overlapped
 {
 	if(UKismetSystemLibrary::DoesImplementInterface(OtherActor, UEnemyInterface::StaticClass()))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Other Actor Begin: %s"), *OtherActor->GetName());
+		//UE_LOG(LogTemp, Warning, TEXT("Other Actor Begin: %s"), *OtherActor->GetName());
 		Targets.AddUnique(OtherActor);
 		ClosestTarget = FindTarget();
 		SetTarget();
-
-		//FindTarget();
 	}
 }
 
@@ -70,7 +94,6 @@ void ATurret::OnRangeEndOverlap_Implementation(UPrimitiveComponent* OverlappedCo
 	}
 }
 
-
 AActor* ATurret::FindTarget_Implementation()
 {
 	return UGameplayStatics::FindNearestActor(GetActorLocation(), Targets, AttackRange);
@@ -89,6 +112,7 @@ void ATurret::Fire_Implementation()
 {
 	
 }
+
 void ATurret::StopFire_Implementation()
 {
 	
@@ -96,9 +120,7 @@ void ATurret::StopFire_Implementation()
 
 void ATurret::SpawnProjectile_Implementation(TSubclassOf<AProjectile> ProjectileClass, FVector Location, FRotator Rotation, AActor* Target)
 {
-	
 }
-
 
 void ATurret::SetTarget_Implementation()
 {

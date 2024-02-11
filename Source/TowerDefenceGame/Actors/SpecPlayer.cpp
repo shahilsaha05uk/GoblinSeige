@@ -10,6 +10,7 @@
 #include "TowerDefenceGame/ActorComponentClasses/CurrencyComponent.h"
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
+#include "TowerDefenceGame/DataAssetClasses/DA_UpgradeAsset.h"
 #include "TowerDefenceGame/InterfaceClasses/BuildingInterface.h"
 
 ASpecPlayer::ASpecPlayer()
@@ -72,11 +73,20 @@ void ASpecPlayer::LeftMouseActions_Implementation()
 				if (selectBuilding && selectBuilding != hitActor)
 				{
 					IBuildingInterface::Execute_Deselect(selectBuilding);
+					
+					ControllerRef->SideWidgetToggler(BUY_MENU);
 				}
 
 				// Select new building
+				//TODO: Revisit this later
 				selectBuilding = Cast<ABaseBuilding>(hitActor);
+				
+				if(selectBuilding->bInPlacementMode) return;
+				
 				IBuildingInterface::Execute_OnSelect(selectBuilding, hitActor);
+
+				bool bIsUpgradeAvailable = selectBuilding->isUpgradeAvailable();
+				ControllerRef->SideWidgetToggler(BUILDING_SETTINGS, bIsUpgradeAvailable);
 			}
 		}
 		else
@@ -86,6 +96,7 @@ void ASpecPlayer::LeftMouseActions_Implementation()
 			{
 				IBuildingInterface::Execute_Deselect(selectBuilding);
 				selectBuilding = nullptr;
+				ControllerRef->SideWidgetToggler(BUY_MENU);
 			}
 		}
 	}
@@ -116,5 +127,30 @@ void ASpecPlayer::Build_Implementation()
 	
 		tempBuilding = nullptr;
 	}
+}
+
+void ASpecPlayer::UpgradeSelectedBuilding_Implementation()
+{
+	if(!selectBuilding) return;
+
+	int MoneyToDeduct = selectBuilding->UpgradeAsset->UpgradeCost;
+	CurrencyComponent->SubtractMoney(MoneyToDeduct);
+	
+	selectBuilding->Upgrade();
+	IBuildingInterface::Execute_Deselect(selectBuilding);
+
+	selectBuilding = nullptr;
+	ControllerRef->SideWidgetToggler(BUY_MENU);
+	
+}
+
+void ASpecPlayer::MoveSelectedBuilding_Implementation()
+{
+	if(!selectBuilding) return;
+
+	IBuildingInterface::Execute_Deselect(selectBuilding);
+
+	selectBuilding = nullptr;
+	ControllerRef->SideWidgetToggler(BUY_MENU);
 }
 

@@ -7,15 +7,21 @@
 #include "TowerDefenceGameGameModeBase.h"
 #include "DataAssetClasses/DA_InputActions.h"
 #include "GameFramework/PlayerController.h"
+#include "InterfaceClasses/ControllerInterface.h"
 #include "InputController.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuyMenuOptionClickSignature, class UDA_BuildingAsset*, BuildingAsset);
 
 UCLASS()
-class TOWERDEFENCEGAME_API AInputController : public APlayerController
+class TOWERDEFENCEGAME_API AInputController : public APlayerController, public IControllerInterface
 {
 	GENERATED_BODY()
 
+private:
+
+	bool bIsOverUI;
+
+	
 public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
@@ -43,6 +49,8 @@ public:
 	virtual void SetupInputComponent() override;
 
 	virtual void OnPossess(APawn* InPawn) override;
+
+	virtual void SetIsOverUI_Implementation(bool b) override { bIsOverUI = b;}
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void UpdateCurrency(int CurrentBalance);
@@ -70,6 +78,15 @@ public:
 
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void SideWidgetToggler(ESideMenuSwitcher menu, bool isUpgradeAvailable  = true);
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnBuildingBuilt(int CurrentBalance);
+
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnUpgradeButtonClick();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnMoveButtonClick();
 
 };

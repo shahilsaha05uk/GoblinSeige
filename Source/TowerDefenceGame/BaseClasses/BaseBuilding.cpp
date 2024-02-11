@@ -9,6 +9,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "TowerDefenceGame/HelperMethods.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
+#include "TowerDefenceGame/DataAssetClasses/DA_UpgradeAsset.h"
 #include "TowerDefenceGame/UIClasses/widgets/BuildingUI.h"
 
 
@@ -28,11 +29,11 @@ ABaseBuilding::ABaseBuilding()
 	RangeDecalComp = CreateDefaultSubobject<UDecalComponent>("Range Decal");
 	RangeDecalComp->SetupAttachment(RootComp);
 
-	WidgetComp = CreateDefaultSubobject<UWidgetComponent>("WidgetComponent");
+	/*WidgetComp = CreateDefaultSubobject<UWidgetComponent>("WidgetComponent");
 	WidgetComp->SetupAttachment(BoxComp);
 	WidgetComp->SetDrawSize(FVector2d(150,20));
 	WidgetComp->SetWidgetSpace(EWidgetSpace::Screen);
-	WidgetComp->SetWidgetClass(UBuildingUI::StaticClass());
+	WidgetComp->SetWidgetClass(UBuildingUI::StaticClass());*/
 
 	RangeCollisionComp = CreateDefaultSubobject<USphereComponent>("RangeCollisionComponent");
 	RangeCollisionComp->SetupAttachment(RootComp);
@@ -45,7 +46,7 @@ void ABaseBuilding::BeginPlay()
 	bCanPlace = false;
 	UpdateBuildingState(NO_STATE);
 
-	if(WidgetComp)
+	/*if(WidgetComp)
 	{
 		WidgetComp->SetVisibility(false);
 
@@ -57,12 +58,13 @@ void ABaseBuilding::BeginPlay()
 			buildingUI->OnUpgradeSignature.AddDynamic(this, &ABaseBuilding::Upgrade);
 			//Upgrade();
 		}
-	}
+	}*/
 }
 
 void ABaseBuilding::OnBuildingBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Building Overlap Starts: %s"), *OtherActor->GetName());
 	bCanPlace = false;
 	ChangeBuildingMaterial(INVALID_MATERIAL);
 }
@@ -72,19 +74,24 @@ void ABaseBuilding::OnBuildingEndOverlap_Implementation(UPrimitiveComponent* Ove
 {
 	bCanPlace = true;
 
-	UE_LOG(LogTemp, Warning, TEXT("Other Actor: %s"), *OtherActor->GetName());
+	UE_LOG(LogTemp, Warning, TEXT("Building Overlap Ends: %s"), *OtherActor->GetName());
 	ChangeBuildingMaterial(VALID_MATERIAL);
 	
 }
 
+bool ABaseBuilding::isUpgradeAvailable_Implementation()
+{
+	return UpgradeAsset != nullptr;
+}
+
 bool ABaseBuilding::isFullyUpgraded()
 {
-	return (BuildingAsset->BuildingUpgrade == nullptr);
+	return (UpgradeAsset == nullptr);
 }
 
 void ABaseBuilding::Upgrade_Implementation()
 {
-	UpgradeAsset = BuildingAsset->BuildingUpgrade;
+	UpgradeAsset = UpgradeAsset->NextUpgrade;
 
 	if(isFullyUpgraded()) OnBuildingFullyUpgradedSignature.Broadcast();
 }
@@ -117,7 +124,7 @@ void ABaseBuilding::Init_Implementation()
 	OnBuildingBuildSignature.AddDynamic(this, &ABaseBuilding::OnBuildingBuilt);
 	bCanPlace = true;
 	UpdateBuildingState(PLACING);
-	WidgetComp->SetVisibility(false);
+	//WidgetComp->SetVisibility(false);
 	GetWorld()->GetTimerManager().SetTimer(OnSpawnTimeHandler, this, &ABaseBuilding::MoveBuilding, 0.001f, true);
 }
 
@@ -170,12 +177,12 @@ void ABaseBuilding::UpdateBuildingState_Implementation(EBuildingState State)
 	case SELECTED:
 		MatToAdd = SELECTED_MATERIAL;
 		bIsSelected = true;
-		WidgetComp->SetVisibility(true);
+		//WidgetComp->SetVisibility(true);
 		break;
 	case DESELECTED:
 		MatToAdd = NO_MATERIAL;
 		bIsSelected = false;
-		WidgetComp->SetVisibility(false);
+		//WidgetComp->SetVisibility(false);
 		break;
 	default:
 		MatToAdd = NO_MATERIAL;
@@ -204,7 +211,7 @@ ABaseBuilding* ABaseBuilding::OnSelect_Implementation(AActor* NewBuilding)
 	if (building && building->bIsPlaced)
 	{
 		building->UpdateBuildingState(SELECTED);
-		WidgetComp->SetVisibility(true);
+		//WidgetComp->SetVisibility(true);
 	}
 
 	return building;
@@ -213,8 +220,7 @@ ABaseBuilding* ABaseBuilding::OnSelect_Implementation(AActor* NewBuilding)
 void ABaseBuilding::Deselect_Implementation()
 {
 	UpdateBuildingState(DESELECTED);
-	WidgetComp->SetVisibility(false);
-
+	//WidgetComp->SetVisibility(false);
 }
 
 void ABaseBuilding::OnBuildingBuilt_Implementation(int AmmountToDeduct)

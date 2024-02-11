@@ -22,6 +22,8 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FString UpgradeName;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int UpgradeCost; 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UMaterialInterface* UpgradeMaterial;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float AttackRange;

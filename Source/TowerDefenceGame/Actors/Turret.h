@@ -44,6 +44,8 @@ public:
 
 	ATurret();
 
+	virtual void Upgrade_Implementation() override;
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void IncreaseRange();
 	
@@ -52,6 +54,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnRangeEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	virtual void OnBuildingBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
+	virtual void OnBuildingEndOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) override;
+	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	AActor* FindTarget();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)

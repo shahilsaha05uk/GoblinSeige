@@ -24,8 +24,11 @@ public:
 	int GetCurrentBalance();
 	
 	UFUNCTION(BlueprintCallable)
-	void AddMoney(int Amount){CurrentBalance += Amount;}
+	void AddMoney(int Amount);
 
 	UFUNCTION(BlueprintCallable)
-	void SubtractMoney(int Amount){CurrentBalance -= Amount;}
+	void SubtractMoney(int Amount);
+
+	UFUNCTION(BlueprintCallable)
+	void RequestHUDUpdate();
 };

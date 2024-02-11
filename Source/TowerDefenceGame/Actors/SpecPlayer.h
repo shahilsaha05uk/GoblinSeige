@@ -46,6 +46,8 @@ public:
 
 	virtual void RequestCurrencyUpdate_Implementation(int CurrentBalance) override;
 
+	virtual void UpgradeSelectedBuilding_Implementation() override;
+	virtual void MoveSelectedBuilding_Implementation() override;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnBuildingSpawn(class ABaseBuilding* NewBuilding);

@@ -20,13 +20,16 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Gold Settings")
 	int mCurrentGold;
 
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
+	class UWidgetComponent* WidgetComp;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Gold Settings")
 	class ATowerDefenceGameGameModeBase* mGameMode;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Gold Settings")
 	class UGoldLootBar* GoldLootBar;
-	
+
+	AGoldActor();
 	virtual void BeginPlay() override;
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
