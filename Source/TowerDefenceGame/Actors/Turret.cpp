@@ -5,15 +5,21 @@
 
 #include "Components/DecalComponent.h"
 #include "Components/SphereComponent.h"
-#include "InterfaceClasses/EnemyInterface.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "TowerDefenceGame/InterfaceClasses/EnemyInterface.h"
 
 // Sets default values
 ATurret::ATurret()
 {
+	OnTurretActivateSignature.AddDynamic(this, &ATurret::PowerOn);
 	RangeCollisionComp->OnComponentBeginOverlap.AddDynamic(this, &ATurret::OnRangeBeginOverlap);
 	RangeCollisionComp->OnComponentEndOverlap.AddDynamic(this, &ATurret::OnRangeEndOverlap);
+}
+
+void ATurret::PowerOn_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Power On"));
 }
 
 void ATurret::IncreaseRange_Implementation()
@@ -28,10 +34,12 @@ void ATurret::OnRangeBeginOverlap_Implementation(UPrimitiveComponent* Overlapped
 {
 	if(UKismetSystemLibrary::DoesImplementInterface(OtherActor, UEnemyInterface::StaticClass()))
 	{
+		UE_LOG(LogTemp, Warning, TEXT("Other Actor Begin: %s"), *OtherActor->GetName());
 		Targets.AddUnique(OtherActor);
-		float distance;
-		ClosestTarget = UGameplayStatics::FindNearestActor(GetActorLocation(), Targets, distance);
-		IdentifyTarget();
+		ClosestTarget = FindTarget();
+		SetTarget();
+
+		//FindTarget();
 	}
 }
 
@@ -40,14 +48,16 @@ void ATurret::OnRangeEndOverlap_Implementation(UPrimitiveComponent* OverlappedCo
 {
 	if(UKismetSystemLibrary::DoesImplementInterface(OtherActor, UEnemyInterface::StaticClass()))
 	{
+		
+		UE_LOG(LogTemp, Warning, TEXT("Other Actor End: %s"), *OtherActor->GetName());
 		if(!Targets.IsEmpty() && Targets.Contains(OtherActor))
 		{
 			Targets.Remove(OtherActor);
 
 			float distance;
 			ClosestTarget = UGameplayStatics::FindNearestActor(GetActorLocation(), Targets, distance);
-			IdentifyTarget();
 
+			SetTarget();
 			FindTarget();
 		}
 		else
@@ -61,21 +71,38 @@ void ATurret::OnRangeEndOverlap_Implementation(UPrimitiveComponent* OverlappedCo
 }
 
 
-void ATurret::FindTarget_Implementation()
+AActor* ATurret::FindTarget_Implementation()
 {
+	return UGameplayStatics::FindNearestActor(GetActorLocation(), Targets, AttackRange);
 }
 
 void ATurret::OnNoTargetInRange_Implementation()
 {
 }
 
-void ATurret::Fire_Implementation()
+void ATurret::StartFire_Implementation()
 {
+	
 }
 
-void ATurret::IdentifyTarget_Implementation()
+void ATurret::Fire_Implementation()
 {
-	if((ClosestTarget == nullptr) || (Targets.Contains(ClosestTarget))) return;
+	
+}
+void ATurret::StopFire_Implementation()
+{
+	
+}
+
+void ATurret::SpawnProjectile_Implementation(TSubclassOf<AProjectile> ProjectileClass, FVector Location, FRotator Rotation, AActor* Target)
+{
+	
+}
+
+
+void ATurret::SetTarget_Implementation()
+{
+	if(Targets.Contains(CurrentTarget)) return;
 
 	CurrentTarget = ClosestTarget;
 }

@@ -3,9 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "InterfaceClasses/PlayerInputInterface.h"
-#include "InterfaceClasses/PlayerInterface.h"
-#include "UIClasses/PlayerHUD.h"
+#include "TowerDefenceGame/InterfaceClasses/PlayerInputInterface.h"
+#include "TowerDefenceGame/InterfaceClasses/PlayerInterface.h"
 #include "SpecPlayer.generated.h"
 
 
@@ -25,7 +24,7 @@ public:
 	virtual void PossessedBy(AController* NewController) override;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	AInputController* ControllerRef;
+	class AInputController* ControllerRef;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	class UCurrencyComponent* CurrencyComponent;
 	

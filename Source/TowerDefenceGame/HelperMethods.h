@@ -26,6 +26,5 @@ public:
 	static void CalculateSnappedPosition(FVector HitLocation, float SnapInterval, FVector &SnappedPosition);
 
 	UFUNCTION(BlueprintPure, BlueprintCallable)
-	static void IsPointerOnNavMesh(UWorld* world, float Tolerance, const FVector& Point, bool& Value);
-
+	static float GetDotProductBetweenComponentWorldLocationAndActorLocation(USceneComponent* Component, AActor* Actor);
 };

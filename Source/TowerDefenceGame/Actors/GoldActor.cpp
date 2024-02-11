@@ -3,9 +3,8 @@
 
 #include "GoldActor.h"
 
-#include "TowerDefenceGameGameModeBase.h"
 #include "Components/WidgetComponent.h"
-#include "UIClasses/GoldLootBar.h"
+#include "TowerDefenceGame/UIClasses/GoldLootBar.h"
 
 void AGoldActor::BeginPlay()
 {

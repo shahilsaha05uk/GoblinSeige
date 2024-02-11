@@ -3,8 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BaseClasses/BaseBuilding.h"
+#include "Components/ArrowComponent.h"
 #include "GameFramework/Actor.h"
+#include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "Turret.generated.h"
 
 UCLASS()
@@ -22,6 +23,8 @@ protected:
 	TArray<AActor*> Targets;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
+	TSubclassOf<class AProjectile> mProjectileClass;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
 	bool bAttacking;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
@@ -30,10 +33,15 @@ protected:
 	float AttackRange;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
 	float AttackSpeed;
-
-
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
+	float LaunchSpeed;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
+	float DamageRadius;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
+	FVector TargetLocation;
 
 public:
+
 	ATurret();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -45,13 +53,22 @@ public:
 	void OnRangeEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void FindTarget();
+	AActor* FindTarget();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void IdentifyTarget();
+	void SetTarget();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnNoTargetInRange();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void PowerOn();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void StartFire();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Fire();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void StopFire();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void SpawnProjectile(TSubclassOf<class AProjectile> ProjectileClass, FVector Location, FRotator Rotation, AActor* Target = nullptr);
 };

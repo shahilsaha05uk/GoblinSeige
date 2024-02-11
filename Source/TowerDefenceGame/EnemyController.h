@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
-#include "EnemySpawnPoint.h"
 #include "EnemyController.generated.h"
 
 UCLASS()
@@ -14,7 +13,7 @@ class TOWERDEFENCEGAME_API AEnemyController : public AAIController
 
 private:
 
-	AEnemyManager* mEnemyManager;
+	class AEnemyManager* mEnemyManager;
 
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
