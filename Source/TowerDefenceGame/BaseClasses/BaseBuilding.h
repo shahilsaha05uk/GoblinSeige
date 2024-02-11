@@ -12,6 +12,7 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingBuildSignature, int, AmmountToDeduct);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnBuildingFullyUpgradedSignature);
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTurretActivateSignature);
 UCLASS()
 class TOWERDEFENCEGAME_API ABaseBuilding : public AActor, public IBuildingInterface
 {
@@ -69,7 +70,8 @@ public:
 	FOnBuildingBuildSignature OnBuildingBuildSignature;
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnBuildingFullyUpgradedSignature OnBuildingFullyUpgradedSignature;
-
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FTurretActivateSignature OnTurretActivateSignature;
 	ABaseBuilding();
 
 	virtual void BeginPlay() override;

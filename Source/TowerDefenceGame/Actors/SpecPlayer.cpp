@@ -3,13 +3,14 @@
 
 #include "SpecPlayer.h"
 
-#include "HelperMethods.h"
-//#include "ActorComponentClasses/CurrencyComponent.h"
-#include "ActorComponentClasses/CurrencyComponent.h"
-#include "BaseClasses/BaseBuilding.h"
-#include "DataAssetClasses/DA_BuildingAsset.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "TowerDefenceGame/HelperMethods.h"
+#include "TowerDefenceGame/InputController.h"
+#include "TowerDefenceGame/ActorComponentClasses/CurrencyComponent.h"
+#include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
+#include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
+#include "TowerDefenceGame/InterfaceClasses/BuildingInterface.h"
 
 ASpecPlayer::ASpecPlayer()
 {
@@ -63,8 +64,6 @@ void ASpecPlayer::LeftMouseActions_Implementation()
 		if (bHit && hit.bBlockingHit)
 		{
 			AActor* hitActor = hit.GetActor();
-
-			UE_LOG(LogTemp, Warning, TEXT("Actor Name: %s"), *hitActor->GetName());
 
 			// Check if the hit actor implements the building interface
 			if (UKismetSystemLibrary::DoesImplementInterface(hitActor, UBuildingInterface::StaticClass()))

@@ -6,9 +6,9 @@
 #include "EnhancedInputSubsystems.h"
 #include "GameHUD.h"
 #include "InputTriggers.h"
-#include "SpecPlayer.h"
 #include "TowerDefenceGameGameModeBase.h"
 #include "ActorComponentClasses/CurrencyComponent.h"
+#include "Actors/SpecPlayer.h"
 #include "DataAssetClasses/DA_BuildingAsset.h"
 #include "InterfaceClasses/PlayerInputInterface.h"
 #include "Kismet/KismetSystemLibrary.h"
@@ -43,7 +43,6 @@ void AInputController::BeginPlay()
 		{
 			const int WaveNumber = GameMode->GetWaveManager()->GetWave(CURRENT_LEVEL);
 			PlayerHUD->UpdateWave(WaveNumber);
-
 		}
 		
 		PlayerHUD->AddToViewport();

@@ -4,6 +4,7 @@
 #include "HelperMethods.h"
 
 #include "NavigationSystem.h"
+#include "Kismet/KismetMathLibrary.h"
 
 void UHelperMethods::GetMouseLocation(APlayerController* Controller, FVector& MouseLocation)
 {
@@ -24,17 +25,8 @@ void UHelperMethods::CalculateSnappedPosition(FVector HitLocation, float SnapInt
 	SnappedPosition.Z = HitLocation.Z; // Assuming Z remains as is, adjust if needed
 }
 
-void UHelperMethods::IsPointerOnNavMesh(UWorld* world, float Tolerance, const FVector& Point, bool& Value)
+float UHelperMethods::GetDotProductBetweenComponentWorldLocationAndActorLocation(USceneComponent* Component, AActor* Actor)
 {
-	/*FVector ProjectedPoint;
-	FNavLocation OutLocation;
-
-	UNavigationSystemV1* NavSys = FNavigationSystem::GetCurrent<UNavigationSystemV1>(world);
-	if (NavSys && NavSys->ProjectPointToNavigation(Point, OutLocation, FVector::ZeroVector))
-	{
-		ProjectedPoint = OutLocation.Location;
-		// If the distance between the point and the projected point is small, it's on the NavMesh
-		Value = FVector::DistSquared(Point, ProjectedPoint) < Tolerance * Tolerance;
-	}
-	Value = false;*/
+	return UKismetMathLibrary::Dot_VectorVector(Component->GetForwardVector(), Actor->GetActorLocation());
 }
+

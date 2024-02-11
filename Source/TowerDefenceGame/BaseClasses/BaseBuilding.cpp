@@ -220,7 +220,7 @@ void ABaseBuilding::Deselect_Implementation()
 void ABaseBuilding::OnBuildingBuilt_Implementation(int AmmountToDeduct)
 {
 	Build();
-
+	OnTurretActivateSignature.Broadcast();
 	OnBuildingBuildSignature.RemoveAll(this);
 }
 

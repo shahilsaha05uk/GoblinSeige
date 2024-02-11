@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BaseClasses/BaseBuilding.h"
+#include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "GoldActor.generated.h"
 
 /**
