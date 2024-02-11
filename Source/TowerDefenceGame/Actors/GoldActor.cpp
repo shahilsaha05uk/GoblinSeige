@@ -6,6 +6,14 @@
 #include "Components/WidgetComponent.h"
 #include "TowerDefenceGame/UIClasses/GoldLootBar.h"
 
+AGoldActor::AGoldActor()
+{
+	WidgetComp = CreateDefaultSubobject<UWidgetComponent>("WidgetComponent");
+	WidgetComp->SetupAttachment(RootComponent);
+	WidgetComp->SetDrawSize(FVector2d(200,40));
+	WidgetComp->SetWidgetSpace(EWidgetSpace::Screen);
+}
+
 void AGoldActor::BeginPlay()
 {
 	Super::BeginPlay();

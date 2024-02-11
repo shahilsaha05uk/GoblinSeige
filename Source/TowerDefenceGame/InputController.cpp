@@ -17,6 +17,8 @@
 
 AInputController::AInputController()
 {
+	bIsOverUI = false;
+	
 	OnBuyMenuOptionClickSignature.AddDynamic(this, &AInputController::OnBuyOptionClicked);
 }
 
@@ -36,16 +38,22 @@ void AInputController::BeginPlay()
 	
 	if(GameHUD)
 	{
-		PlayerHUD = Cast<UPlayerHUD>(GameHUD->WidgetInitialiser(PLAYER_HUD, this));
-		if(PlayerHUD) UpdateCurrency(SpecPawn->CurrencyComponent->GetCurrentBalance());
-
+		int WaveNumber = -1;
 		if(GameMode)
 		{
-			const int WaveNumber = GameMode->GetWaveManager()->GetWave(CURRENT_LEVEL);
+			WaveNumber = GameMode->GetWaveManager()->GetWave(CURRENT_LEVEL);
+		}
+		PlayerHUD = Cast<UPlayerHUD>(GameHUD->WidgetInitialiser(PLAYER_HUD, this));
+
+		if(PlayerHUD)
+		{
+			PlayerHUD->OnUpgradeButtonClickedSignature.AddDynamic(this, &AInputController::OnUpgradeButtonClick);
+			PlayerHUD->OnMoveButtonClickedSignature.AddDynamic(this, &AInputController::OnMoveButtonClick);
+			UpdateCurrency(SpecPawn->CurrencyComponent->GetCurrentBalance());
 			PlayerHUD->UpdateWave(WaveNumber);
+			PlayerHUD->AddToViewport();
 		}
 		
-		PlayerHUD->AddToViewport();
 	}
 }
 
@@ -79,6 +87,13 @@ void AInputController::OnPossess(APawn* InPawn)
 	Super::OnPossess(InPawn);
 }
 
+
+
+void AInputController::SideWidgetToggler_Implementation(ESideMenuSwitcher menu, bool isUpgradeAvailable)
+{
+	PlayerHUD->WidgetToggler(menu, isUpgradeAvailable);
+}
+
 void AInputController::OnWaveComplete_Implementation(int WaveNumber)
 {
 	PlayerHUD->UpdateWave(WaveNumber);
@@ -102,6 +117,8 @@ void AInputController::Zoom_Implementation(const FInputActionValue& InputActionV
 
 void AInputController::LeftMouseActions_Implementation()
 {
+	if(bIsOverUI) return;
+	
 	APawn* pawn = GetPawn();
 	
 	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UPlayerInputInterface::StaticClass()))
@@ -171,3 +188,23 @@ void AInputController::OnBuildingBuilt_Implementation(int CurrentBalance)
 	PlayerHUD->UpdateMoney(CurrentBalance);
 }
 
+
+void AInputController::OnUpgradeButtonClick_Implementation()
+{
+	APawn* pawn = GetPawn();
+
+	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UPlayerInterface::StaticClass()))
+	{
+		IPlayerInterface::Execute_UpgradeSelectedBuilding(pawn);
+	}
+}
+
+void AInputController::OnMoveButtonClick_Implementation()
+{
+	APawn* pawn = GetPawn();
+
+	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UPlayerInterface::StaticClass()))
+	{
+		IPlayerInterface::Execute_MoveSelectedBuilding(pawn);
+	}
+}

@@ -11,12 +11,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Arrow.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Arrow.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Bomb.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Bomb.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Bullet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Bullet.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Enemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Enemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Generator.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Generator.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Lightning.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Lightning.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Missile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Missile.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Tower.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Tower.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Tower_ArrowTower.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Tower_ArrowTower.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Tower_Cannon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Tower_Cannon.uasset" afterDir="false" />
@@ -24,31 +18,31 @@
       <change beforePath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Tower_Flamethrowers.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Tower_Flamethrowers.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Tower_LaunchingPad.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Tower_LaunchingPad.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Tower_MachineGun.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AutomaticWeapons/Blueprints/BP_Tower_MachineGun.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AutomaticWeapons/Meshes/SM_ArrowTower.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AutomaticWeapons/Meshes/SM_ArrowTower.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AutomaticWeapons/Meshes/SM_Fort3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AutomaticWeapons/Meshes/SM_Fort3.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/BP/BP_Building2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/BP_Building2.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_Turret1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_Turret1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/DA_UpgradeTurret2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/BP_Gold2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/BP_Gold2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/ArrowTower_Up/arrowTower_u1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/ArrowTower_Up/arrowTower_u1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/ArrowTower_Up/arrowTower_u2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/ArrowTower_Up/arrowTower_u2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/ArrowTower_Up/arrowTower_u3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/ArrowTower_Up/arrowTower_u3.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/Demo.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Demo.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/testCollision.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/testCollision.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/CurrencyComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/CurrencyComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/CurrencyComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/CurrencyComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/GoldActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/GoldActor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/GoldActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/GoldActor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Turret.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Turret.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Turret.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Turret.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/EnemyController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/EnemyController.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/EnemySpawnPoint.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/EnemySpawnPoint.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/EnemySpawnPoint.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/EnemySpawnPoint.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GoldActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/GoldActor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GoldActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/GoldActor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/HelperMethods.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/HelperMethods.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/HelperMethods.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/HelperMethods.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/DataAssetClasses/DA_UpgradeAsset.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/DataAssetClasses/DA_UpgradeAsset.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/EnumClass.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/EnumClass.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/InputController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InputController.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/InputController.cpp~" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SpecPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SpecPlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Turret.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Turret.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Turret.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Turret.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TowerDefenceGame.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/TowerDefenceGame.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/InputController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InputController.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/PlayerInterface.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/PlayerInterface.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +53,129 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -519,7 +636,7 @@
       <workItem from="1707333492982" duration="28805000" />
       <workItem from="1707396622711" duration="16303000" />
       <workItem from="1707497261392" duration="6280000" />
-      <workItem from="1707507213090" duration="43031000" />
+      <workItem from="1707507213090" duration="54775000" />
     </task>
     <servers />
   </component>

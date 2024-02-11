@@ -29,8 +29,6 @@ public:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
 	class UDecalComponent* RangeDecalComp;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
-	class UWidgetComponent* WidgetComp;
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
 	class USphereComponent* RangeCollisionComp;
 	
 	UPROPERTY(meta = (ExposeOnSpawn),EditAnywhere, BlueprintReadWrite, Category = "Private")
@@ -86,6 +84,8 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Init();
 	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	bool isUpgradeAvailable();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Upgrade();
 	UFUNCTION(BlueprintCallable)

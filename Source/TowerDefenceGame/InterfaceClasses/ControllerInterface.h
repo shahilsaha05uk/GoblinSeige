@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
-#include "PlayerInterface.generated.h"
+#include "ControllerInterface.generated.h"
 
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI)
-class UPlayerInterface : public UInterface
+class UControllerInterface : public UInterface
 {
 	GENERATED_BODY()
 };
@@ -16,7 +16,7 @@ class UPlayerInterface : public UInterface
 /**
  * 
  */
-class TOWERDEFENCEGAME_API IPlayerInterface
+class TOWERDEFENCEGAME_API IControllerInterface
 {
 	GENERATED_BODY()
 
@@ -24,9 +24,5 @@ class TOWERDEFENCEGAME_API IPlayerInterface
 public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void RequestCurrencyUpdate(int CurrentBalance);
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void UpgradeSelectedBuilding();
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void MoveSelectedBuilding();
+	void SetIsOverUI(bool b);
 };
