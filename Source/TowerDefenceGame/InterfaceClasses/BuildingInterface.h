@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TowerDefenceGame/StructClass.h"
 #include "UObject/Interface.h"
 #include "BuildingInterface.generated.h"
 
@@ -24,7 +25,11 @@ class TOWERDEFENCEGAME_API IBuildingInterface
 public:
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	ABaseBuilding* OnSelect(AActor* NewBuilding);
+	class ABaseBuilding* Select(AActor* NewBuilding);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Deselect();
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	FBuildingStats GetBuildingStats();
+
 };

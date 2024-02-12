@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
+#include "TowerDefenceGame/StructClass.h"
 #include "TowerDefenceGame/ActorComponentClasses/BaseSkillComponent.h"
 #include "DA_UpgradeAsset.generated.h"
 
@@ -22,16 +23,13 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FString UpgradeName;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	int UpgradeCost; 
+	int UpgradeCost;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UMaterialInterface* UpgradeMaterial;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float AttackRange;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float AttackDamage;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float AttackSpeed;
-	
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	FBuildingStats BuildingStats;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Next Skill")
 	UDA_UpgradeAsset* NextUpgrade;
 };

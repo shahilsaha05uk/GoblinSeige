@@ -14,6 +14,8 @@ class TOWERDEFENCEGAME_API UCurrencyComponent : public UActorComponent
 
 private:
 
+	UPROPERTY(EditDefaultsOnly)
+	int StartingBalance;
 	UPROPERTY()
 	int CurrentBalance;
 public:	

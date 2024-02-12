@@ -19,6 +19,15 @@ void AGameHUD::UpdateInstanceMap(EWidgetType Type, UBaseWidget* NewWidget)
 	mWidgetInstanceMap.Add(Type, NewWidget);
 }
 
+void AGameHUD::DestroyWidget_Implementation(EWidgetType Type)
+{
+	if(mWidgetInstanceMap.Contains(Type))
+	{
+		mWidgetInstanceMap[Type]->RemoveFromParent();
+		mWidgetInstanceMap.Remove(Type);
+	}
+}
+
 UBaseWidget* AGameHUD::WidgetInitialiser_Implementation(EWidgetType Type, AInputController* ControllerRef)
 {
 	if(!mWidgetClassMap.Contains(Type)) return nullptr;

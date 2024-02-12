@@ -42,6 +42,8 @@ void AInputController::BeginPlay()
 		if(GameMode)
 		{
 			WaveNumber = GameMode->GetWaveManager()->GetWave(CURRENT_LEVEL);
+			GameMode->OnEnemyKilledSignature.AddDynamic(this, &AInputController::OnEnemyKilled);
+			GameMode->OnGameCompleteSignature.AddDynamic(this, &AInputController::OnGameComplete);
 		}
 		PlayerHUD = Cast<UPlayerHUD>(GameHUD->WidgetInitialiser(PLAYER_HUD, this));
 
@@ -87,7 +89,21 @@ void AInputController::OnPossess(APawn* InPawn)
 	Super::OnPossess(InPawn);
 }
 
+void AInputController::OnGameComplete_Implementation()
+{
+	APawn* pawn = GetPawn();
 
+	if(pawn)
+	{
+		UnPossess();
+
+		pawn->Destroy();
+	}
+
+	GameHUD->DestroyWidget(PLAYER_HUD);
+
+	//TODO: Spawn the Game Complete Screen
+}
 
 void AInputController::SideWidgetToggler_Implementation(ESideMenuSwitcher menu, bool isUpgradeAvailable)
 {
@@ -125,7 +141,6 @@ void AInputController::LeftMouseActions_Implementation()
 	{
 		IPlayerInputInterface::Execute_LeftMouseActions(pawn);
 	}
-
 }
 
 void AInputController::OnBuyOptionClicked_Implementation(UDA_BuildingAsset* BuildingAsset)
@@ -134,10 +149,7 @@ void AInputController::OnBuyOptionClicked_Implementation(UDA_BuildingAsset* Buil
 	
 	ABaseBuilding* BaseBuilding = GetWorld()->SpawnActor<ABaseBuilding>(BuildingAsset->BuildingClass, spawnParams);
 
-	BaseBuilding->BuildingAsset = BuildingAsset;
-	BaseBuilding->OnBuildingBuildSignature.AddDynamic(this, &AInputController::OnBuildingBuilt);
-
-	SpecPawn->OnBuildingSpawn(BaseBuilding);
+	SpecPawn->SpawnBuilding(BaseBuilding, BuildingAsset);
 }
 
 void AInputController::Move_Implementation(const FInputActionValue& InputActionValue)
@@ -182,12 +194,17 @@ void AInputController::DisableLook_Implementation(const FInputActionValue& Input
 	}
 }
 
-
-void AInputController::OnBuildingBuilt_Implementation(int CurrentBalance)
+void AInputController::OnEnemyKilled_Implementation()
 {
-	PlayerHUD->UpdateMoney(CurrentBalance);
-}
+	APawn* pawn = GetPawn();
 
+	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UPlayerInterface::StaticClass()))
+	{
+		IPlayerInterface::Execute_AddMoneyToAccount(pawn, 100);
+
+		PlayerHUD->UpdateMoney(SpecPawn->CurrencyComponent->GetCurrentBalance());
+	}
+}
 
 void AInputController::OnUpgradeButtonClick_Implementation()
 {

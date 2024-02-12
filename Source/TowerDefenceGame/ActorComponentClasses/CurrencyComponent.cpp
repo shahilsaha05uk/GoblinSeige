@@ -11,7 +11,7 @@ void UCurrencyComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CurrentBalance = 500000;
+	CurrentBalance = StartingBalance;
 	RequestHUDUpdate();
 
 }

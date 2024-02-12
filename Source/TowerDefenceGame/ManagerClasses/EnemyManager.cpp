@@ -45,6 +45,7 @@ void AEnemyManager::AssignController(AEnemySpawnPoint* sb)
 void AEnemyManager::FreeController()
 {
 	TotalEnemiesDead++;
+	mGameMode->OnEnemyKilledSignature.Broadcast();
 	UE_LOG(LogTemp, Warning, TEXT("Total Enemies Dead: %d"), TotalEnemiesDead);
 
 	if(TotalEnemiesDead == AllocatedControllers.Num())

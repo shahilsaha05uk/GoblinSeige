@@ -8,6 +8,8 @@
 #include "TowerDefenceGameGameModeBase.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGameOverSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGameCompleteSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEnemyKilledSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWaveCompleteSignature, int, waveNumber);
 
 UCLASS()
@@ -21,6 +23,12 @@ private:
 
 public:
 
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnGameCompleteSignature OnGameCompleteSignature;
+	
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnEnemyKilledSignature OnEnemyKilledSignature;
+	
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnGameOverSignature OnGameOverSignature;
 
