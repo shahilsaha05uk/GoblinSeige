@@ -29,4 +29,8 @@ public:
 	void UpgradeSelectedBuilding();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void MoveSelectedBuilding();
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void AddMoneyToAccount(int Value);
+
 };

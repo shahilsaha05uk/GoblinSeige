@@ -7,6 +7,7 @@
 #include "Components/SphereComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_UpgradeAsset.h"
 #include "TowerDefenceGame/InterfaceClasses/EnemyInterface.h"
 
@@ -18,27 +19,56 @@ ATurret::ATurret()
 	RangeCollisionComp->OnComponentEndOverlap.AddDynamic(this, &ATurret::OnRangeEndOverlap);
 }
 
+void ATurret::Init_Implementation(UDA_BuildingAsset* asset)
+{
+	Super::Init_Implementation(asset);
+}
+
+void ATurret::OnSelect_Implementation()
+{
+	RangeDecalComp->SetVisibility(true);
+}
+
+void ATurret::OnDeselect_Implementation()
+{
+	RangeDecalComp->SetVisibility(false);
+}
+
+void ATurret::PostBuild_Implementation()
+{
+	Super::PostBuild_Implementation();
+
+	UpdateBuildingStats(BuildingAsset->BuildingStats);
+
+	RangeDecalComp->SetVisibility(false);
+
+}
+
 void ATurret::Upgrade_Implementation()
 {
 	if(!isUpgradeAvailable()) return;
-	
-	AttackRange = UpgradeAsset->AttackRange;
-	AttackDamage = UpgradeAsset->AttackDamage;
-	AttackSpeed = UpgradeAsset->AttackSpeed;
 
-	IncreaseRange();
+	UpdateBuildingStats(UpgradeAsset->BuildingStats);
 	
 	Super::Upgrade_Implementation();
 }
 
-void ATurret::OnBuildingBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void ATurret::UpdateBuildingStats_Implementation(FBuildingStats stats)
+{
+	AttackRange = stats.AttackRange;
+	AttackDamage = stats.AttackDamage;
+	AttackSpeed = stats.AttackSpeed;
+	
+
+	IncreaseRange();
+}
+
+void ATurret::OnBuildingBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	Super::OnBuildingBeginOverlap_Implementation(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
 }
 
-void ATurret::OnBuildingEndOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void ATurret::OnBuildingEndOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	Super::OnBuildingEndOverlap_Implementation(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex);
 }
@@ -55,8 +85,7 @@ void ATurret::IncreaseRange_Implementation()
 	RangeDecalComp->SetRelativeScale3D(FVector(1.0f, decalSize, decalSize));
 }
 
-void ATurret::OnRangeBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-                                                 UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void ATurret::OnRangeBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if(UKismetSystemLibrary::DoesImplementInterface(OtherActor, UEnemyInterface::StaticClass()))
 	{
@@ -67,8 +96,7 @@ void ATurret::OnRangeBeginOverlap_Implementation(UPrimitiveComponent* Overlapped
 	}
 }
 
-void ATurret::OnRangeEndOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void ATurret::OnRangeEndOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	if(UKismetSystemLibrary::DoesImplementInterface(OtherActor, UEnemyInterface::StaticClass()))
 	{

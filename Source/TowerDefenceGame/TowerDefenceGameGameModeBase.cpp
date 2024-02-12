@@ -25,6 +25,7 @@ void ATowerDefenceGameGameModeBase::OnWaveComplete_Implementation(int WaveNumber
 		UE_LOG(LogTemp, Warning, TEXT("Game Complete!!"));
 
 		//TODO: Game is Complete!!
+		OnGameCompleteSignature.Broadcast();
 	}
 }
 

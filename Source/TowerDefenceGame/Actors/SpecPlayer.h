@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TowerDefenceGame/ActorComponentClasses/CurrencyComponent.h"
+#include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "TowerDefenceGame/InterfaceClasses/PlayerInputInterface.h"
 #include "TowerDefenceGame/InterfaceClasses/PlayerInterface.h"
 #include "SpecPlayer.generated.h"
@@ -49,8 +51,11 @@ public:
 	virtual void UpgradeSelectedBuilding_Implementation() override;
 	virtual void MoveSelectedBuilding_Implementation() override;
 
+	virtual void AddMoneyToAccount_Implementation(int Value) override {CurrencyComponent->AddMoney(Value);}
+	
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnBuildingSpawn(class ABaseBuilding* NewBuilding);
+	void SpawnBuilding(class ABaseBuilding* NewBuilding, UDA_BuildingAsset* BuildingAsset);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Build();

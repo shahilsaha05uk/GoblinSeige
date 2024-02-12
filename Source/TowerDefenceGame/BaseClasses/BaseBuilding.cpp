@@ -29,40 +29,36 @@ ABaseBuilding::ABaseBuilding()
 	RangeDecalComp = CreateDefaultSubobject<UDecalComponent>("Range Decal");
 	RangeDecalComp->SetupAttachment(RootComp);
 
-	/*WidgetComp = CreateDefaultSubobject<UWidgetComponent>("WidgetComponent");
-	WidgetComp->SetupAttachment(BoxComp);
-	WidgetComp->SetDrawSize(FVector2d(150,20));
-	WidgetComp->SetWidgetSpace(EWidgetSpace::Screen);
-	WidgetComp->SetWidgetClass(UBuildingUI::StaticClass());*/
-
 	RangeCollisionComp = CreateDefaultSubobject<USphereComponent>("RangeCollisionComponent");
 	RangeCollisionComp->SetupAttachment(RootComp);
 }
 
+
 void ABaseBuilding::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	bCanPlace = false;
 	UpdateBuildingState(NO_STATE);
 
-	/*if(WidgetComp)
-	{
-		WidgetComp->SetVisibility(false);
+}
 
-		buildingUI = Cast<UBuildingUI>(WidgetComp->GetWidget());
+void ABaseBuilding::Init_Implementation(UDA_BuildingAsset* asset)
+{
+	this->BuildingAsset = asset;
+	UpgradeAsset = BuildingAsset->UpgradeAsset;
+	
+	//OnBuildingPostBuildSignature.AddDynamic(this, &ABaseBuilding::OnBuildingPostBuilt);
+	bCanPlace = true;
+	UpdateBuildingState(PLACING);
 
-		if(buildingUI)
-		{
-			buildingUI->InitialiseWidget(this);
-			buildingUI->OnUpgradeSignature.AddDynamic(this, &ABaseBuilding::Upgrade);
-			//Upgrade();
-		}
-	}*/
+	IncreaseRange();
+	
+	GetWorld()->GetTimerManager().SetTimer(OnSpawnTimeHandler, this, &ABaseBuilding::MoveBuilding, 0.001f, true);
 }
 
 void ABaseBuilding::OnBuildingBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+                                                          UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Building Overlap Starts: %s"), *OtherActor->GetName());
 	bCanPlace = false;
@@ -89,14 +85,17 @@ bool ABaseBuilding::isFullyUpgraded()
 	return (UpgradeAsset == nullptr);
 }
 
+void ABaseBuilding::IncreaseRange_Implementation()
+{
+	
+}
+
 void ABaseBuilding::Upgrade_Implementation()
 {
 	UpgradeAsset = UpgradeAsset->NextUpgrade;
 
 	if(isFullyUpgraded()) OnBuildingFullyUpgradedSignature.Broadcast();
 }
-
-
 
 void ABaseBuilding::MoveBuilding_Implementation()
 {
@@ -117,15 +116,6 @@ void ABaseBuilding::MoveBuilding_Implementation()
 	{
 		OnSpawnTimeHandler.Invalidate();
 	}
-}
-
-void ABaseBuilding::Init_Implementation()
-{
-	OnBuildingBuildSignature.AddDynamic(this, &ABaseBuilding::OnBuildingBuilt);
-	bCanPlace = true;
-	UpdateBuildingState(PLACING);
-	//WidgetComp->SetVisibility(false);
-	GetWorld()->GetTimerManager().SetTimer(OnSpawnTimeHandler, this, &ABaseBuilding::MoveBuilding, 0.001f, true);
 }
 
 void ABaseBuilding::ChangeBuildingMaterial_Implementation(EPlacementMaterial MatToAdd)
@@ -198,12 +188,7 @@ void ABaseBuilding::UpdateBuildingState_Implementation(EBuildingState State)
 	ChangeBuildingMaterial(MatToAdd);
 }
 
-void ABaseBuilding::Build_Implementation()
-{
-	if(bCanPlace) UpdateBuildingState(PLACED);
-}
-
-ABaseBuilding* ABaseBuilding::OnSelect_Implementation(AActor* NewBuilding)
+ABaseBuilding* ABaseBuilding::Select_Implementation(AActor* NewBuilding)
 {
 	if (!NewBuilding) return nullptr;
 
@@ -214,19 +199,40 @@ ABaseBuilding* ABaseBuilding::OnSelect_Implementation(AActor* NewBuilding)
 		//WidgetComp->SetVisibility(true);
 	}
 
+	OnSelect();
 	return building;
 }
 
 void ABaseBuilding::Deselect_Implementation()
 {
 	UpdateBuildingState(DESELECTED);
-	//WidgetComp->SetVisibility(false);
+
+	OnDeselect();
 }
 
-void ABaseBuilding::OnBuildingBuilt_Implementation(int AmmountToDeduct)
+void ABaseBuilding::OnSelect_Implementation()
 {
-	Build();
-	OnTurretActivateSignature.Broadcast();
-	OnBuildingBuildSignature.RemoveAll(this);
 }
 
+void ABaseBuilding::OnDeselect_Implementation()
+{
+	
+}
+
+void ABaseBuilding::UpdateBuildingStats_Implementation(FBuildingStats stats)
+{
+}
+
+void ABaseBuilding::Build_Implementation()
+{
+	if(bCanPlace) UpdateBuildingState(PLACED);
+
+	OnTurretActivateSignature.Broadcast();
+
+	PostBuild();
+}
+
+void ABaseBuilding::PostBuild_Implementation()
+{
+	
+}

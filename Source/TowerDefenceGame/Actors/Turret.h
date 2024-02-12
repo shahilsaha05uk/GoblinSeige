@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ArrowComponent.h"
 #include "GameFramework/Actor.h"
+#include "TowerDefenceGame/StructClass.h"
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "Turret.generated.h"
 
@@ -27,6 +28,8 @@ protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
 	bool bAttacking;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	FBuildingStats AttackDetails;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
 	float AttackDamage;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
@@ -46,9 +49,18 @@ public:
 
 	virtual void Upgrade_Implementation() override;
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void IncreaseRange();
-	
+	virtual void Init_Implementation(UDA_BuildingAsset* asset) override;
+
+	virtual void OnSelect_Implementation() override;
+	virtual void OnDeselect_Implementation() override;
+
+	virtual void IncreaseRange_Implementation() override;
+
+	virtual void PostBuild_Implementation() override;
+
+	virtual void UpdateBuildingStats_Implementation(FBuildingStats stats) override;
+	virtual FBuildingStats GetBuildingStats_Implementation() override { return AttackDetails; }
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnRangeBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)

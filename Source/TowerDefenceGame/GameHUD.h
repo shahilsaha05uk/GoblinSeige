@@ -33,6 +33,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	UBaseWidget* WidgetInitialiser(EWidgetType Type, AInputController* ControllerRef);
 	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void DestroyWidget(EWidgetType Type);
+	
 	template <typename T>
 	T* GetWidget(EWidgetType Type, bool bCasted = false);
 

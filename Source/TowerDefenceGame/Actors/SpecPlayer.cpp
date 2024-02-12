@@ -83,10 +83,10 @@ void ASpecPlayer::LeftMouseActions_Implementation()
 				
 				if(selectBuilding->bInPlacementMode) return;
 				
-				IBuildingInterface::Execute_OnSelect(selectBuilding, hitActor);
+				IBuildingInterface::Execute_Select(selectBuilding, hitActor);
 
-				bool bIsUpgradeAvailable = selectBuilding->isUpgradeAvailable();
-				ControllerRef->SideWidgetToggler(BUILDING_SETTINGS, bIsUpgradeAvailable);
+				bool bShouldEnableUpgradeButton = ((selectBuilding->isUpgradeAvailable()) && (CurrencyComponent->GetCurrentBalance() >= selectBuilding->UpgradeAsset->UpgradeCost));
+				ControllerRef->SideWidgetToggler(BUILDING_SETTINGS, bShouldEnableUpgradeButton);
 			}
 		}
 		else
@@ -112,19 +112,23 @@ void ASpecPlayer::RequestCurrencyUpdate_Implementation(int CurrentBalance)
 	ControllerRef->UpdateCurrency(CurrentBalance);
 }
 
-void ASpecPlayer::OnBuildingSpawn_Implementation(ABaseBuilding* NewBuilding)
+void ASpecPlayer::SpawnBuilding_Implementation(ABaseBuilding* NewBuilding, UDA_BuildingAsset* BuildingAsset)
 {
 	tempBuilding = NewBuilding;
-	tempBuilding->Init();
+
+	tempBuilding->Init(BuildingAsset);
 }
 
 void ASpecPlayer::Build_Implementation()
 {
 	if(tempBuilding)
 	{
+		tempBuilding->Build();
+		
 		CurrencyComponent->SubtractMoney(tempBuilding->BuildingAsset->BuildingCost);
-		tempBuilding->OnBuildingBuildSignature.Broadcast(CurrencyComponent->GetCurrentBalance());
-	
+
+		ControllerRef->UpdateCurrency(CurrencyComponent->GetCurrentBalance());
+
 		tempBuilding = nullptr;
 	}
 }
@@ -153,4 +157,5 @@ void ASpecPlayer::MoveSelectedBuilding_Implementation()
 	selectBuilding = nullptr;
 	ControllerRef->SideWidgetToggler(BUY_MENU);
 }
+
 

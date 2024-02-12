@@ -81,12 +81,14 @@ public:
 	void SideWidgetToggler(ESideMenuSwitcher menu, bool isUpgradeAvailable  = true);
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnBuildingBuilt(int CurrentBalance);
-
-
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnUpgradeButtonClick();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnMoveButtonClick();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnEnemyKilled();
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnGameComplete();
 
 };
