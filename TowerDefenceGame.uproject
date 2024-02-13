@@ -23,10 +23,5 @@
 				"Editor"
 			]
 		},
-		{
-			"Name": "CollisionsDebug",
-			"Enabled": true,
-			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/bb1fd716c3194ee3b48fc1ce8431fe2f"
-		}
 	]
 }
