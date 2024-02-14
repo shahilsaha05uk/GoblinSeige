@@ -3,3 +3,7 @@
 
 #include "BaseWidget.h"
 
+void UBaseWidget::CloseWidget_Implementation()
+{
+	
+}

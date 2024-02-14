@@ -7,18 +7,22 @@
 #include "InputController.h"
 #include "BaseClasses/BaseWidget.h"
 #include "GameFramework/HUD.h"
+#include "InterfaceClasses/HUDInterface.h"
 #include "GameHUD.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TOWERDEFENCEGAME_API AGameHUD : public AHUD
+class TOWERDEFENCEGAME_API AGameHUD : public AHUD, public IHUDInterface
 {
 	GENERATED_BODY()
 
 private:
 	TMap<EWidgetType, UBaseWidget*> mWidgetInstanceMap;
+
+	UFUNCTION(BlueprintCallable)
+	void UpdateInstanceMap(EWidgetType Type, UBaseWidget* NewWidget);
 
 public:
 
@@ -27,14 +31,8 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Widget Privates")
 	TMap<TEnumAsByte<EWidgetType>, TSubclassOf<UBaseWidget>> mWidgetClassMap;
 	
-	UFUNCTION(BlueprintCallable)
-	void UpdateInstanceMap(EWidgetType Type, UBaseWidget* NewWidget);
-	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	UBaseWidget* WidgetInitialiser(EWidgetType Type, AInputController* ControllerRef);
-	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void DestroyWidget(EWidgetType Type);
+	virtual UBaseWidget* WidgetInitialiser_Implementation(EWidgetType Type, AInputController* ControllerRef);
+	virtual void DestroyWidget_Implementation(EWidgetType Type);
 	
 	template <typename T>
 	T* GetWidget(EWidgetType Type, bool bCasted = false);
