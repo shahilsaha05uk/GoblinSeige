@@ -10,6 +10,7 @@
 #include "ActorComponentClasses/CurrencyComponent.h"
 #include "Actors/SpecPlayer.h"
 #include "DataAssetClasses/DA_BuildingAsset.h"
+#include "InterfaceClasses/HUDInterface.h"
 #include "InterfaceClasses/PlayerInputInterface.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "ManagerClasses/WaveManager.h"
@@ -36,7 +37,7 @@ void AInputController::BeginPlay()
 		GameMode->OnWaveCompleteSignature.AddDynamic(this, &AInputController::OnWaveComplete);
 	}
 	
-	if(GameHUD)
+	if(GameHUD && UKismetSystemLibrary::DoesImplementInterface(GameHUD, UHUDInterface::StaticClass()))
 	{
 		int WaveNumber = -1;
 		if(GameMode)
@@ -45,7 +46,7 @@ void AInputController::BeginPlay()
 			GameMode->OnEnemyKilledSignature.AddDynamic(this, &AInputController::OnEnemyKilled);
 			GameMode->OnGameCompleteSignature.AddDynamic(this, &AInputController::OnGameComplete);
 		}
-		PlayerHUD = Cast<UPlayerHUD>(GameHUD->WidgetInitialiser(PLAYER_HUD, this));
+		PlayerHUD = Cast<UPlayerHUD>(IHUDInterface::Execute_WidgetInitialiser(GameHUD, PLAYER_HUD, this));
 
 		if(PlayerHUD)
 		{
@@ -100,7 +101,7 @@ void AInputController::OnGameComplete_Implementation()
 		pawn->Destroy();
 	}
 
-	GameHUD->DestroyWidget(PLAYER_HUD);
+	IHUDInterface::Execute_DestroyWidget(GameHUD, PLAYER_HUD);
 
 	//TODO: Spawn the Game Complete Screen
 }

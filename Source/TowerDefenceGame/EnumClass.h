@@ -10,10 +10,20 @@
 UENUM(BlueprintType)
 enum EWidgetType
 {
+	NO_WIDGET,
 	PLAYER_HUD,
 	MAIN_MENU,
 	SETTINGS,
+	INSTRUCTION,
 	PAUSE_MENU,
+	
+};
+UENUM(BlueprintType)
+enum ELevelToTravel
+{
+	NoLevelToTravel,
+	GameLevel,
+	MainMenuLevel
 	
 };
 UENUM(BlueprintType)

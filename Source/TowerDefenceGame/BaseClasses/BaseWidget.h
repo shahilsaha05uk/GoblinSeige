@@ -19,4 +19,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn), Category = "Private")
 	AInputController* Controller;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void CloseWidget();
 };
