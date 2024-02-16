@@ -14,8 +14,6 @@ void UPlayerHUD::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	HUDClassRef->OnCursorHovered.AddDynamic(this, &ThisClass::OnCursorHovered);
-	
 	btnUpgrade->OnClicked.AddDynamic(this, &UPlayerHUD::OnUpgradeButtonClick);
 	btnMove->OnClicked.AddDynamic(this, &UPlayerHUD::OnMoveButtonClick);
 

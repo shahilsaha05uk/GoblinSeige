@@ -10,12 +10,9 @@
 #include "InterfaceClasses/HUDInterface.h"
 #include "GameHUD.generated.h"
 
-<<<<<<< Updated upstream
 DECLARE_DYNAMIC_DELEGATE_RetVal(bool, FOnUIHoveredSignature);
-
-=======
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCursorHoveredSignature);
->>>>>>> Stashed changes
+
 UCLASS()
 class TOWERDEFENCEGAME_API AGameHUD : public AHUD, public IHUDInterface
 {
@@ -33,7 +30,6 @@ public:
 	
 	virtual void BeginPlay() override;
 
-<<<<<<< Updated upstream
 	UPROPERTY()
 	FOnUIHoveredSignature OnUIHoveredSignature;
 
@@ -42,11 +38,9 @@ public:
 
 	virtual bool isCursorHovering_Implementation() override;
 	
-=======
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnCursorHoveredSignature OnCursorHovered;
 
->>>>>>> Stashed changes
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Widget Privates")
 	TMap<TEnumAsByte<EWidgetType>, TSubclassOf<UBaseWidget>> mWidgetClassMap;
 	

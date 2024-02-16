@@ -18,11 +18,8 @@ class TOWERDEFENCEGAME_API UBaseWidget : public UUserWidget
 public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn), Category = "Private")
-<<<<<<< Updated upstream
 	class AGameHUD* HudRef;
-=======
-	AGameHUD* HUDClassRef;
->>>>>>> Stashed changes
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn), Category = "Private")
 	AInputController* Controller;
 
