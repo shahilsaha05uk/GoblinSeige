@@ -8,12 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e7763e5-9dad-44e7-9cef-d89b5e8a74c4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Platforms/HoloLens/Config/HoloLensEngine.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseWidget.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GameHUD.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/GameHUD.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TowerDefenceGame.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/TowerDefenceGame.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BT_Goblin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BT_Goblin.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/Tasks/TT_MoveForward.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/Tasks/TT_MoveForward.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/tests/FinalVersions/eqs_findlocation.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/tests/FinalVersions/eqs_findlocation.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +111,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1708119247903</updated>
-      <workItem from="1708119249117" duration="539000" />
+      <workItem from="1708119249117" duration="1363000" />
     </task>
     <servers />
   </component>
