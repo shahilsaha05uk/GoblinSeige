@@ -29,4 +29,6 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void DestroyWidget(EWidgetType Type);
 	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	bool isCursorHovering();
 };

@@ -50,6 +50,8 @@ void ASpecPlayer::DisableLook_Implementation()
 
 void ASpecPlayer::LeftMouseActions_Implementation()
 {
+	
+	
 	if(tempBuilding && tempBuilding->bCanPlace)
 	{
 		Build();

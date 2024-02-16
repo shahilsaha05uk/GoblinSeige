@@ -3,11 +3,21 @@
 
 #include "GameHUD.h"
 
+AGameHUD::AGameHUD()
+{
+	
+}
+
 
 void AGameHUD::BeginPlay()
 {
 	Super::BeginPlay();
 
+}
+
+bool AGameHUD::OnUIHovered_Implementation()
+{
+	return OnUIHoveredSignature.Execute();
 }
 
 void AGameHUD::UpdateInstanceMap(EWidgetType Type, UBaseWidget* NewWidget)
@@ -26,6 +36,11 @@ void AGameHUD::DestroyWidget_Implementation(EWidgetType Type)
 		mWidgetInstanceMap[Type]->RemoveFromParent();
 		mWidgetInstanceMap.Remove(Type);
 	}
+}
+
+bool AGameHUD::isCursorHovering_Implementation()
+{
+	return OnUIHovered();
 }
 
 UBaseWidget* AGameHUD::WidgetInitialiser_Implementation(EWidgetType Type, AInputController* ControllerRef)

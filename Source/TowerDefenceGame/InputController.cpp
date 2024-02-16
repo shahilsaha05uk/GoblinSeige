@@ -18,8 +18,6 @@
 
 AInputController::AInputController()
 {
-	bIsOverUI = false;
-	
 	OnBuyMenuOptionClickSignature.AddDynamic(this, &AInputController::OnBuyOptionClicked);
 }
 
@@ -134,6 +132,10 @@ void AInputController::Zoom_Implementation(const FInputActionValue& InputActionV
 
 void AInputController::LeftMouseActions_Implementation()
 {
+	bool bIsOverUI = IHUDInterface::Execute_isCursorHovering(GameHUD);
+	const FString s = (bIsOverUI)? "True" : "False";
+	UE_LOG(LogTemp, Warning, TEXT("Is over UI: %s"), *s);
+	
 	if(bIsOverUI) return;
 	
 	APawn* pawn = GetPawn();

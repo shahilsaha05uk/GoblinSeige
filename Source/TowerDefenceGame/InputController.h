@@ -19,9 +19,6 @@ class TOWERDEFENCEGAME_API AInputController : public APlayerController, public I
 
 private:
 
-	bool bIsOverUI;
-
-	
 public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
@@ -50,8 +47,6 @@ public:
 
 	virtual void OnPossess(APawn* InPawn) override;
 
-	virtual void SetIsOverUI_Implementation(bool b) override { bIsOverUI = b;}
-	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void UpdateCurrency(int CurrentBalance);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)

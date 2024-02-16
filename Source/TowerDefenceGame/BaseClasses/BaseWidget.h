@@ -18,8 +18,20 @@ class TOWERDEFENCEGAME_API UBaseWidget : public UUserWidget
 public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn), Category = "Private")
+	class AGameHUD* HudRef;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn), Category = "Private")
 	AInputController* Controller;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bIsInsideUI;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bClickedOnUI;
+	
+	virtual void NativeConstruct() override;
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	bool OnUIHovered();
+	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void CloseWidget();
 };
