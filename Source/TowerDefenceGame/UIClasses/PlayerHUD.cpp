@@ -6,6 +6,7 @@
 #include "Components/Border.h"
 #include "Components/Button.h"
 #include "Kismet/GameplayStatics.h"
+#include "TowerDefenceGame/GameHUD.h"
 #include "TowerDefenceGame/TowerDefenceGameGameModeBase.h"
 #include "TowerDefenceGame/ManagerClasses/WaveManager.h"
 
@@ -13,6 +14,8 @@ void UPlayerHUD::NativeConstruct()
 {
 	Super::NativeConstruct();
 
+	HUDClassRef->OnCursorHovered.AddDynamic(this, &ThisClass::OnCursorHovered);
+	
 	btnUpgrade->OnClicked.AddDynamic(this, &UPlayerHUD::OnUpgradeButtonClick);
 	btnMove->OnClicked.AddDynamic(this, &UPlayerHUD::OnMoveButtonClick);
 
