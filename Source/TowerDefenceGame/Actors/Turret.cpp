@@ -14,7 +14,7 @@
 // Sets default values
 ATurret::ATurret()
 {
-	OnTurretActivateSignature.AddDynamic(this, &ATurret::PowerOn);
+	//OnTurretActivateSignature.AddDynamic(this, &ATurret::PowerOn);
 	RangeCollisionComp->OnComponentBeginOverlap.AddDynamic(this, &ATurret::OnRangeBeginOverlap);
 	RangeCollisionComp->OnComponentEndOverlap.AddDynamic(this, &ATurret::OnRangeEndOverlap);
 }
@@ -41,6 +41,8 @@ void ATurret::PostBuild_Implementation()
 	UpdateBuildingStats(BuildingAsset->BuildingStats);
 
 	RangeDecalComp->SetVisibility(false);
+
+	PowerOn();
 
 }
 
@@ -73,9 +75,9 @@ void ATurret::OnBuildingEndOverlap_Implementation(UPrimitiveComponent* Overlappe
 	Super::OnBuildingEndOverlap_Implementation(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex);
 }
 
-void ATurret::PowerOn_Implementation()
+void ATurret::LookAtTarget_Implementation()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Power On"));
+	
 }
 
 void ATurret::IncreaseRange_Implementation()
@@ -93,6 +95,7 @@ void ATurret::OnRangeBeginOverlap_Implementation(UPrimitiveComponent* Overlapped
 		Targets.AddUnique(OtherActor);
 		ClosestTarget = FindTarget();
 		SetTarget();
+		
 	}
 }
 
@@ -106,29 +109,59 @@ void ATurret::OnRangeEndOverlap_Implementation(UPrimitiveComponent* OverlappedCo
 		{
 			Targets.Remove(OtherActor);
 
-			float distance;
-			ClosestTarget = UGameplayStatics::FindNearestActor(GetActorLocation(), Targets, distance);
+			ClosestTarget = FindTarget();
 
 			SetTarget();
-			FindTarget();
 		}
 		else
 		{
 			CurrentTarget = nullptr;
 			ClosestTarget = nullptr;
 
-			OnNoTargetInRange();
+			//OnNoTargetInRange();
 		}
 	}
 }
 
 AActor* ATurret::FindTarget_Implementation()
 {
-	return UGameplayStatics::FindNearestActor(GetActorLocation(), Targets, AttackRange);
+	AActor* foundTarget = UGameplayStatics::FindNearestActor(GetActorLocation(), Targets, AttackRange);
+	if(foundTarget) OnFoundTarget(foundTarget);
+	return foundTarget;
 }
 
-void ATurret::OnNoTargetInRange_Implementation()
+void ATurret::OnFoundTarget_Implementation(AActor* FoundTarget)
 {
+	if(Targets.IsEmpty()) PowerOff();
+	else PowerOn();
+
+	if(CurrentTarget == nullptr || CurrentTarget != FoundTarget)
+		CurrentTarget = FoundTarget;
+}
+
+
+void ATurret::PowerOn_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Power On"));
+	if(bIsPowerOn) return;
+	
+	if(ShouldTurnOnFiring)
+		GetWorldTimerManager().SetTimer(FireTimerHandler, this, &ThisClass::Fire, AttackSpeed, FireShouldLoop, 0.0f);
+
+	if(bHasRotator)
+		GetWorldTimerManager().SetTimer(TurningTimeHandler, this, &ThisClass::LookAtTarget, RotationTimeInterval, RotatorShouldLoop, 0.0f);
+}
+
+void ATurret::PowerOff_Implementation()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Power Off"));
+	if(!bIsPowerOn) return;
+
+	bAttacking = false;
+
+	GetWorldTimerManager().ClearTimer(FireTimerHandler);
+	GetWorldTimerManager().ClearTimer(TurningTimeHandler);
+
 }
 
 void ATurret::StartFire_Implementation()

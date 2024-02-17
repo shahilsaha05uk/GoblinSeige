@@ -42,6 +42,24 @@ protected:
 	float DamageRadius;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
 	FVector TargetLocation;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
+	float RotationTimeInterval;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
+	bool bHasRotator;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
+	bool FireShouldLoop;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
+	bool bIsPowerOn;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
+	bool RotatorShouldLoop;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Handlers")
+	bool ShouldTurnOnFiring;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Handlers")
+	FTimerHandle TurningTimeHandler;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Handlers")
+	FTimerHandle FireTimerHandler;
 
 public:
 
@@ -70,12 +88,14 @@ public:
 	virtual void OnBuildingEndOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) override;
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnFoundTarget(AActor* FoundTarget);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	AActor* FindTarget();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SetTarget();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnNoTargetInRange();
+	void PowerOff();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PowerOn();
@@ -88,4 +108,6 @@ public:
 	void StopFire();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SpawnProjectile(TSubclassOf<class AProjectile> ProjectileClass, FVector Location, FRotator Rotation, AActor* Target = nullptr);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void LookAtTarget();
 };

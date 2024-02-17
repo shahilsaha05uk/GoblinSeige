@@ -227,7 +227,7 @@ void ABaseBuilding::Build_Implementation()
 {
 	if(bCanPlace) UpdateBuildingState(PLACED);
 
-	OnTurretActivateSignature.Broadcast();
+	//OnTurretActivateSignature.Broadcast();
 
 	PostBuild();
 }
