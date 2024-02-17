@@ -11,9 +11,6 @@
 // Sets default values
 ABaseEnemy::ABaseEnemy()
 {
-	mRangeComponent = CreateDefaultSubobject<USphereComponent>("Range Comp");
-	mRangeComponent->SetupAttachment(RootComponent);
-	
 	mHealthComponent = CreateDefaultSubobject<UHealthComponent>("Health Comp");
 
 	mHealthBarWidgetComponent = CreateDefaultSubobject<UWidgetComponent>("Health Bar Comp");
