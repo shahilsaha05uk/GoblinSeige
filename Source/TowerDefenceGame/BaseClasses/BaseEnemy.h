@@ -20,8 +20,6 @@ public:
 	ABaseEnemy();
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private Component")
-	class USphereComponent* mRangeComponent;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private Component")
 	class UWidgetComponent* mHealthBarWidgetComponent;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private Component")
 	class UHealthComponent* mHealthComponent;
