@@ -48,7 +48,6 @@ void ABaseBuilding::Init_Implementation(UDA_BuildingAsset* asset)
 	this->BuildingAsset = asset;
 	UpgradeAsset = BuildingAsset->UpgradeAsset;
 	
-	//OnBuildingPostBuildSignature.AddDynamic(this, &ABaseBuilding::OnBuildingPostBuilt);
 	bCanPlace = true;
 	UpdateBuildingState(PLACING);
 
@@ -63,11 +62,17 @@ void ABaseBuilding::OnBuildingBeginOverlap_Implementation(UPrimitiveComponent* O
 	UE_LOG(LogTemp, Warning, TEXT("Building Overlap Starts: %s"), *OtherActor->GetName());
 	bCanPlace = false;
 	ChangeBuildingMaterial(INVALID_MATERIAL);
+
+	OverlappingActors.Add(OtherActor);
 }
 
 void ABaseBuilding::OnBuildingEndOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
+	if(OverlappingActors.Contains(OtherActor)) OverlappingActors.Remove(OtherActor);
+
+	if(!OverlappingActors.IsEmpty()) return;
+	
 	bCanPlace = true;
 
 	UE_LOG(LogTemp, Warning, TEXT("Building Overlap Ends: %s"), *OtherActor->GetName());
@@ -107,6 +112,7 @@ void ABaseBuilding::MoveBuilding_Implementation()
 
 		if(bHit)
 		{
+			UE_LOG(LogTemp, Warning, TEXT("Hit Actor Name: %s"), *hit.GetActor()->GetName());
 			FVector snappedPos;
 			UHelperMethods::CalculateSnappedPosition(hit.Location, 200.0f, snappedPos);
 			SetActorLocation(snappedPos);
@@ -147,34 +153,40 @@ void ABaseBuilding::UpdateBuildingState_Implementation(EBuildingState State)
 	switch (BuildingState)
 	{
 	case NO_STATE:
+		
 		MatToAdd = NO_MATERIAL;
 		bInPlacementMode = false;
 		bIsSelected = false;
-		//bIsPlaced = false;
 		break;
+		
 	case PLACING:
 		MatToAdd = VALID_MATERIAL;
 		bInPlacementMode = true;
 		bIsPlaced = false;
 		break;
+		
 	case PLACED:
+		
 		MatToAdd = NO_MATERIAL;
 		bInPlacementMode = false;
 		bIsPlaced = true;
 		break;
+		
 	case DESTROYED:
 		break;
 	case SELECTED:
+		
 		MatToAdd = SELECTED_MATERIAL;
 		bIsSelected = true;
-		//WidgetComp->SetVisibility(true);
 		break;
 	case DESELECTED:
+		
 		MatToAdd = NO_MATERIAL;
 		bIsSelected = false;
-		//WidgetComp->SetVisibility(false);
 		break;
+		
 	default:
+		
 		MatToAdd = NO_MATERIAL;
 		bInPlacementMode = false;
 		bIsSelected = false;

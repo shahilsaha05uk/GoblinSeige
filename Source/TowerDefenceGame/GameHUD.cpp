@@ -60,16 +60,6 @@ UBaseWidget* AGameHUD::Blueprint_GetWidget(EWidgetType Type)
 	return GetWidget<UBaseWidget>(Type);
 }
 
-template <typename T>
-T* AGameHUD::GetWidget(EWidgetType Type, bool bCasted)
-{
-	if(!mWidgetInstanceMap.Contains(Type))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("No instance available of this widget type"));
-		return nullptr;
-	}
 
-	return (bCasted)? Cast<T>(mWidgetInstanceMap[Type]) : mWidgetInstanceMap[Type];
-}
 
 

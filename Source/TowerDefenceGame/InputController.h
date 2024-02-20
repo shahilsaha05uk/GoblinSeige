@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -8,7 +6,9 @@
 #include "DataAssetClasses/DA_InputActions.h"
 #include "GameFramework/PlayerController.h"
 #include "InterfaceClasses/ControllerInterface.h"
+#include "UIClasses/PlayerHUD.h"
 #include "InputController.generated.h"
+
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuyMenuOptionClickSignature, class UDA_BuildingAsset*, BuildingAsset);
 
@@ -47,8 +47,13 @@ public:
 
 	virtual void OnPossess(APawn* InPawn) override;
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void UpdateCurrency(int CurrentBalance);
+	template <typename T>
+	void HUDUpdater(EHudValue ValueToUpdate, T Value)
+	{
+		PlayerHUD->Updater(ValueToUpdate, Value);
+	};
+
+	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnWaveComplete(int WaveNumber);
 
@@ -85,5 +90,5 @@ public:
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnGameComplete();
-
 };
+

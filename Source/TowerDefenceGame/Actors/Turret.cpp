@@ -109,7 +109,6 @@ void ATurret::OnRangeEndOverlap_Implementation(UPrimitiveComponent* OverlappedCo
 	if(UKismetSystemLibrary::DoesImplementInterface(OtherActor, UEnemyInterface::StaticClass()))
 	{
 		
-		UE_LOG(LogTemp, Warning, TEXT("Other Actor End: %s"), *OtherActor->GetName());
 		if(!Targets.IsEmpty() && Targets.Contains(OtherActor))
 		{
 			Targets.Remove(OtherActor);
@@ -145,7 +144,6 @@ void ATurret::PowerOn_Implementation()
 {
 	if(bIsPowerOn) return;
 	
-	UE_LOG(LogTemp, Warning, TEXT("Power On"));
 	if(ShouldTurnOnFiring)
 		GetWorldTimerManager().SetTimer(FireTimerHandler, this, &ThisClass::Fire, AttackSpeed, FireShouldLoop, 0.0f);
 
@@ -159,7 +157,6 @@ void ATurret::PowerOff_Implementation()
 {
 	if(!bIsPowerOn) return;
 
-	UE_LOG(LogTemp, Warning, TEXT("Power Off"));
 	bAttacking = false;
 
 	GetWorldTimerManager().ClearTimer(FireTimerHandler);

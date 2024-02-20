@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "TowerDefenceGame/InputController.h"
 #include "BaseWidget.generated.h"
 
 /**
@@ -21,7 +20,7 @@ public:
 	class AGameHUD* HudRef;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn), Category = "Private")
-	AInputController* Controller;
+	class AInputController* Controller;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool bIsInsideUI;
@@ -30,6 +29,8 @@ public:
 	
 	virtual void NativeConstruct() override;
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnReturnToMainMenu();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	bool OnUIHovered();
 	
