@@ -74,6 +74,7 @@ void AInputController::SetupInputComponent()
 
 		EnhancedInputComponent->BindAction(DA_Inputs->IA_Zoom, ETriggerEvent::Triggered, this, &AInputController::Zoom);
 		
+		EnhancedInputComponent->BindAction(DA_Inputs->IA_Pause, ETriggerEvent::Completed, this, &AInputController::PauseGame);
 	}
 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
@@ -85,6 +86,11 @@ void AInputController::SetupInputComponent()
 void AInputController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
+}
+
+void AInputController::PauseGame_Implementation()
+{
+	
 }
 
 void AInputController::OnGameComplete_Implementation()
@@ -128,9 +134,6 @@ void AInputController::Zoom_Implementation(const FInputActionValue& InputActionV
 void AInputController::LeftMouseActions_Implementation()
 {
 	bool bIsOverUI = IHUDInterface::Execute_isCursorHovering(GameHUD);
-	const FString s = (bIsOverUI)? "True" : "False";
-	UE_LOG(LogTemp, Warning, TEXT("Is over UI: %s"), *s);
-	
 	if(bIsOverUI) return;
 	
 	APawn* pawn = GetPawn();

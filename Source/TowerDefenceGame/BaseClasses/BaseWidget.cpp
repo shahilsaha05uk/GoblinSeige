@@ -3,6 +3,7 @@
 
 #include "BaseWidget.h"
 
+#include "Kismet/GameplayStatics.h"
 #include "TowerDefenceGame/GameHUD.h"
 
 void UBaseWidget::NativeConstruct()
@@ -10,6 +11,16 @@ void UBaseWidget::NativeConstruct()
 	Super::NativeConstruct();
 
 	if(HudRef) HudRef->OnUIHoveredSignature.BindUFunction(this, FName("OnUIHovered"));
+}
+
+void UBaseWidget::OnReturnToMainMenu_Implementation()
+{
+}
+
+void UBaseWidget::OnQuitGame_Implementation()
+{
+	TEnumAsByte<EQuitPreference::Type> prefs = {};
+	UKismetSystemLibrary::QuitGame(GetWorld(), GetOwningPlayer(), prefs, false);
 }
 
 

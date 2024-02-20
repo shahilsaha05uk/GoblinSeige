@@ -30,4 +30,8 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UInputAction* IA_Zoom;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UInputAction* IA_Pause;
+	
 };
