@@ -45,6 +45,7 @@ public:
 	
 	virtual UBaseWidget* WidgetInitialiser_Implementation(EWidgetType Type, AInputController* ControllerRef);
 	virtual void DestroyWidget_Implementation(EWidgetType Type);
+	virtual void HideWidget_Implementation(EWidgetType WidgetToHide) override;
 	
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (DisplayName = "GetWidget"))
 	UBaseWidget* Blueprint_GetWidget(EWidgetType Type);

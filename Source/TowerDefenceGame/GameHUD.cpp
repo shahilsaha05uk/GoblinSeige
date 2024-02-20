@@ -38,6 +38,12 @@ void AGameHUD::DestroyWidget_Implementation(EWidgetType Type)
 	}
 }
 
+void AGameHUD::HideWidget_Implementation(EWidgetType WidgetToHide)
+{
+	if(mWidgetInstanceMap.Contains(WidgetToHide))
+		mWidgetInstanceMap[WidgetToHide]->SetVisibility(ESlateVisibility::Hidden);
+}
+
 bool AGameHUD::isCursorHovering_Implementation()
 {
 	return OnUIHovered();

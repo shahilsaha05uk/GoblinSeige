@@ -17,9 +17,11 @@ class TOWERDEFENCEGAME_API AInputController : public APlayerController, public I
 {
 	GENERATED_BODY()
 
-private:
 
 public:
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsPaused;
+
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	UDA_InputActions* DA_Inputs;
@@ -76,6 +78,8 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Zoom(const FInputActionValue& InputActionValue);
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void PauseGame();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SideWidgetToggler(ESideMenuSwitcher menu, bool isUpgradeAvailable  = true);

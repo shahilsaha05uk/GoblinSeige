@@ -32,6 +32,8 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnReturnToMainMenu();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnQuitGame();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	bool OnUIHovered();
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)

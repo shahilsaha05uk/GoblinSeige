@@ -31,4 +31,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	bool isCursorHovering();
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void HideWidget(EWidgetType WidgetToHide);
 };
