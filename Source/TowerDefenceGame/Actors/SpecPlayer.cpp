@@ -111,7 +111,7 @@ void ASpecPlayer::Zoom_Implementation(float Value)
 
 void ASpecPlayer::RequestCurrencyUpdate_Implementation(int CurrentBalance)
 {
-	ControllerRef->UpdateCurrency(CurrentBalance);
+	ControllerRef->HUDUpdater(MONEY_VALUE, CurrentBalance);
 }
 
 void ASpecPlayer::SpawnBuilding_Implementation(ABaseBuilding* NewBuilding, UDA_BuildingAsset* BuildingAsset)
@@ -128,8 +128,7 @@ void ASpecPlayer::Build_Implementation()
 		tempBuilding->Build();
 		
 		CurrencyComponent->SubtractMoney(tempBuilding->BuildingAsset->BuildingCost);
-
-		ControllerRef->UpdateCurrency(CurrencyComponent->GetCurrentBalance());
+		ControllerRef->HUDUpdater(MONEY_VALUE, CurrencyComponent->GetCurrentBalance());
 
 		tempBuilding = nullptr;
 	}

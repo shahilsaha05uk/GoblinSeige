@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "EnumClass.h"
-#include "InputController.h"
 #include "BaseClasses/BaseWidget.h"
 #include "GameFramework/HUD.h"
 #include "InterfaceClasses/HUDInterface.h"
@@ -47,11 +46,23 @@ public:
 	virtual UBaseWidget* WidgetInitialiser_Implementation(EWidgetType Type, AInputController* ControllerRef);
 	virtual void DestroyWidget_Implementation(EWidgetType Type);
 	
-	template <typename T>
-	T* GetWidget(EWidgetType Type, bool bCasted = false);
-
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (DisplayName = "GetWidget"))
 	UBaseWidget* Blueprint_GetWidget(EWidgetType Type);
+
+	// template methods
+	template <typename T>
+	T* GetWidget(EWidgetType Type, bool bCasted = false)
+	{
+		if(!mWidgetInstanceMap.Contains(Type))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("No instance available of this widget type"));
+			return nullptr;
+		}
+
+		return (bCasted)? Cast<T>(mWidgetInstanceMap[Type]) : mWidgetInstanceMap[Type];
+	};
+
 	
+
 };
 

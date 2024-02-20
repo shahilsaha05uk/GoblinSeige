@@ -6,6 +6,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "GameHUD.h"
 #include "InputTriggers.h"
+#include "UIClasses/PlayerHUD.h"
 #include "TowerDefenceGameGameModeBase.h"
 #include "ActorComponentClasses/CurrencyComponent.h"
 #include "Actors/SpecPlayer.h"
@@ -14,7 +15,6 @@
 #include "InterfaceClasses/PlayerInputInterface.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "ManagerClasses/WaveManager.h"
-#include "UIClasses/PlayerHUD.h"
 
 AInputController::AInputController()
 {
@@ -30,28 +30,27 @@ void AInputController::BeginPlay()
 	GameHUD = Cast<AGameHUD>(GetHUD());
 	GameMode = Cast<ATowerDefenceGameGameModeBase>(GetWorld()->GetAuthGameMode());
 
+	int WaveNumber = -1;
+
 	if(GameMode)
 	{
+		WaveNumber = GameMode->GetWaveManager()->GetWave(CURRENT_LEVEL);
+
 		GameMode->OnWaveCompleteSignature.AddDynamic(this, &AInputController::OnWaveComplete);
+		GameMode->OnEnemyKilledSignature.AddDynamic(this, &AInputController::OnEnemyKilled);
+		GameMode->OnGameCompleteSignature.AddDynamic(this, &AInputController::OnGameComplete);
 	}
 	
 	if(GameHUD && UKismetSystemLibrary::DoesImplementInterface(GameHUD, UHUDInterface::StaticClass()))
 	{
-		int WaveNumber = -1;
-		if(GameMode)
-		{
-			WaveNumber = GameMode->GetWaveManager()->GetWave(CURRENT_LEVEL);
-			GameMode->OnEnemyKilledSignature.AddDynamic(this, &AInputController::OnEnemyKilled);
-			GameMode->OnGameCompleteSignature.AddDynamic(this, &AInputController::OnGameComplete);
-		}
 		PlayerHUD = Cast<UPlayerHUD>(IHUDInterface::Execute_WidgetInitialiser(GameHUD, PLAYER_HUD, this));
 
 		if(PlayerHUD)
 		{
 			PlayerHUD->OnUpgradeButtonClickedSignature.AddDynamic(this, &AInputController::OnUpgradeButtonClick);
 			PlayerHUD->OnMoveButtonClickedSignature.AddDynamic(this, &AInputController::OnMoveButtonClick);
-			UpdateCurrency(SpecPawn->CurrencyComponent->GetCurrentBalance());
-			PlayerHUD->UpdateWave(WaveNumber);
+			HUDUpdater(MONEY_VALUE, SpecPawn->CurrencyComponent->GetCurrentBalance());
+			HUDUpdater(WAVE_VALUE, WaveNumber);
 			PlayerHUD->AddToViewport();
 		}
 		
@@ -111,13 +110,9 @@ void AInputController::SideWidgetToggler_Implementation(ESideMenuSwitcher menu, 
 
 void AInputController::OnWaveComplete_Implementation(int WaveNumber)
 {
-	PlayerHUD->UpdateWave(WaveNumber);
+	HUDUpdater(WAVE_VALUE, WaveNumber);
 }
 
-void AInputController::UpdateCurrency_Implementation(int CurrentBalance)
-{
-	PlayerHUD->UpdateMoney(CurrentBalance);
-}
 
 void AInputController::Zoom_Implementation(const FInputActionValue& InputActionValue)
 {
@@ -204,8 +199,8 @@ void AInputController::OnEnemyKilled_Implementation()
 	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UPlayerInterface::StaticClass()))
 	{
 		IPlayerInterface::Execute_AddMoneyToAccount(pawn, 100);
-
-		PlayerHUD->UpdateMoney(SpecPawn->CurrencyComponent->GetCurrentBalance());
+		
+		HUDUpdater(MONEY_VALUE, IPlayerInterface::Execute_GetCurrentBalance(pawn));
 	}
 }
 

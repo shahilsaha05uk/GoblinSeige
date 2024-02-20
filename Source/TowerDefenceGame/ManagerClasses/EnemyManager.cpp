@@ -66,7 +66,7 @@ void AEnemyManager::FreeController()
 
 int AEnemyManager::GetRandomEnemyCounts(int Wave)
 {
-	return UKismetMathLibrary::RandomIntegerInRange(Wave, (Wave + 5));
+	return UKismetMathLibrary::RandomIntegerInRange(Wave, (Wave + 2));
 }
 
 void AEnemyManager::SpawnControllers(int Count)

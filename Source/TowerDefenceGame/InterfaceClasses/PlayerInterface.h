@@ -32,5 +32,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void AddMoneyToAccount(int Value);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	int GetCurrentBalance();
 
 };

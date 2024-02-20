@@ -17,8 +17,10 @@ class TOWERDEFENCEGAME_API ABaseBuilding : public AActor, public IBuildingInterf
 {
 	GENERATED_BODY()
 
-private:
-	
+protected:
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TArray<AActor*> OverlappingActors;
 	
 public:
 

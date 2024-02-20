@@ -3,12 +3,11 @@
 
 #include "PlayerHUD.h"
 
-#include "Components/Border.h"
 #include "Components/Button.h"
-#include "Kismet/GameplayStatics.h"
 #include "TowerDefenceGame/GameHUD.h"
 #include "TowerDefenceGame/TowerDefenceGameGameModeBase.h"
-#include "TowerDefenceGame/ManagerClasses/WaveManager.h"
+
+using namespace std;
 
 void UPlayerHUD::NativeConstruct()
 {
@@ -19,6 +18,35 @@ void UPlayerHUD::NativeConstruct()
 
 	
 	gameMode = Cast<ATowerDefenceGameGameModeBase>(GetWorld()->GetAuthGameMode());
+
+	if(gameMode)
+	{
+		gameMode->OnWaveCompleteSignature.AddDynamic(this, &ThisClass::OnWaveComplete);
+	}
+}
+
+void UPlayerHUD::UpdateIntValues(EHudValue ValueType, int Value)
+{
+	switch (ValueType)
+	{
+	case MONEY_VALUE:
+		UpdateMoney(Value);
+		break;
+	case WAVE_VALUE:
+		UpdateWave(Value);
+		break;
+	default: ;
+	}
+}
+
+void UPlayerHUD::UpdateFloatValues(EHudValue ValueType, float Value)
+{
+	
+}
+
+
+void UPlayerHUD::OnWaveComplete_Implementation(int WaveNumber)
+{
 }
 
 void UPlayerHUD::OnBuildingSettingsMenuOpen_Implementation()

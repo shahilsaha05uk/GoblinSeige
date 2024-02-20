@@ -46,12 +46,13 @@ public:
 	virtual void LeftMouseActions_Implementation() override;
 	virtual void Zoom_Implementation(float Value) override;
 
-	virtual void RequestCurrencyUpdate_Implementation(int CurrentBalance) override;
 
 	virtual void UpgradeSelectedBuilding_Implementation() override;
 	virtual void MoveSelectedBuilding_Implementation() override;
 
 	virtual void AddMoneyToAccount_Implementation(int Value) override {CurrencyComponent->AddMoney(Value);}
+	virtual void RequestCurrencyUpdate_Implementation(int CurrentBalance) override;
+	virtual int GetCurrentBalance_Implementation() override {return CurrencyComponent->GetCurrentBalance(); }
 	
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)

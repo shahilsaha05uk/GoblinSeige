@@ -6,6 +6,13 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "EnumClass.generated.h"
 
+UENUM(BlueprintType)
+enum EHudValue
+{
+	MONEY_VALUE,
+	WAVE_VALUE,
+	UPGRADE_BUTTON_ENABLE
+};
 
 UENUM(BlueprintType)
 enum EWidgetType
@@ -16,6 +23,7 @@ enum EWidgetType
 	SETTINGS,
 	INSTRUCTION,
 	PAUSE_MENU,
+	GAMECOMPLETE_MENU
 	
 };
 UENUM(BlueprintType)
