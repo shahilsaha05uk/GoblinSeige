@@ -28,11 +28,15 @@ void ATurret::Init_Implementation(UDA_BuildingAsset* asset)
 void ATurret::OnSelect_Implementation()
 {
 	RangeDecalComp->SetVisibility(true);
+
+	Super::OnSelect_Implementation();
 }
 
 void ATurret::OnDeselect_Implementation()
 {
 	RangeDecalComp->SetVisibility(false);
+
+	Super::OnDeselect_Implementation();
 }
 
 void ATurret::PostBuild_Implementation()
@@ -166,10 +170,6 @@ void ATurret::PowerOff_Implementation()
 
 }
 
-void ATurret::StartFire_Implementation()
-{
-	
-}
 
 void ATurret::Fire_Implementation()
 {

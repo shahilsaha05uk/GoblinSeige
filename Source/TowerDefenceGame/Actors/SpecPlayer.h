@@ -24,7 +24,7 @@ public:
 	virtual void BeginPlay() override;
 
 	virtual void PossessedBy(AController* NewController) override;
-	
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	class AInputController* ControllerRef;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
@@ -34,8 +34,12 @@ public:
 	FTimerHandle OnSpawnTimeHandler;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	ABaseBuilding* tempBuilding;
+	/*
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	ABaseBuilding* selectBuilding;
+	*/
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
+	AActor* selectedActor;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	TEnumAsByte<ETraceTypeQuery> BuildingTraceChannel;
 
@@ -60,4 +64,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Build();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnBuildingSelected(ABaseBuilding* Building);
+
 };

@@ -109,7 +109,7 @@ void AInputController::OnGameComplete_Implementation()
 	//TODO: Spawn the Game Complete Screen
 }
 
-void AInputController::SideWidgetToggler_Implementation(ESideMenuSwitcher menu, bool isUpgradeAvailable)
+void AInputController::SideWidgetToggler_Implementation(ESideMenuSwitcher menu, ABaseBuilding* BuildingRef, bool isUpgradeAvailable)
 {
 	PlayerHUD->WidgetToggler(menu, isUpgradeAvailable);
 }

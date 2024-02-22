@@ -82,7 +82,7 @@ public:
 	void PauseGame();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void SideWidgetToggler(ESideMenuSwitcher menu, bool isUpgradeAvailable  = true);
+	void SideWidgetToggler(ESideMenuSwitcher menu, class ABaseBuilding* BuildingRef, bool isUpgradeAvailable  = true);
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnUpgradeButtonClick();
