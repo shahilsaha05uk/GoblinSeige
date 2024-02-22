@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "StructClass.h"
 #include "HelperMethods.generated.h"
 
 /**
@@ -27,4 +28,7 @@ public:
 
 	UFUNCTION(BlueprintPure, BlueprintCallable)
 	static float GetDotProductBetweenComponentWorldLocationAndActorLocation(USceneComponent* Component, AActor* Actor);
+
+	UFUNCTION(BlueprintPure, BlueprintCallable)
+	static FString GetDescription(FBuildingStats stats);
 };
