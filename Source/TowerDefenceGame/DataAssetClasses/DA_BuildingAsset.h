@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
-#include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
+#include "TowerDefenceGame/StructClass.h"
 #include "DA_BuildingAsset.generated.h"
 
 
@@ -28,11 +28,11 @@ public:
 	UTexture2D* BuildingImage;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Building Asset Properties")
-	UDA_UpgradeAsset* UpgradeAsset;
+	class UDA_UpgradeAsset* UpgradeAsset;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	FBuildingStats BuildingStats;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Building Asset Properties")
-	TSubclassOf<ABaseBuilding> BuildingClass;
+	TSubclassOf<class ABaseBuilding> BuildingClass;
 };

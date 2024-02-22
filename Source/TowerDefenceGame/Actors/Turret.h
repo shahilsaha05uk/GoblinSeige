@@ -63,8 +63,6 @@ public:
 
 	ATurret();
 
-	virtual void Upgrade_Implementation() override;
-
 	virtual void Init_Implementation(UDA_BuildingAsset* asset) override;
 
 	virtual void OnSelect_Implementation() override;

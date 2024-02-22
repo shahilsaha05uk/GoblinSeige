@@ -26,13 +26,13 @@ class TOWERDEFENCEGAME_API IBuildingInterface
 public:
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void Select();
-	/*
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	class ABaseBuilding* Select(AActor* NewBuilding);
-	*/
+	void Select(int OwnerCurrentBalance);
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Deselect();
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void Move();
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	EBuildingState GetCurrentBuildingState();

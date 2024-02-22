@@ -50,13 +50,11 @@ void ASpecPlayer::DisableLook_Implementation()
 
 void ASpecPlayer::LeftMouseActions_Implementation()
 {
-	
-	
 	if(tempBuilding && tempBuilding->bCanPlace)
 	{
 		Build();
 	}
-	else
+	else if(!tempBuilding)
 	{
 		APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 		bool bHit;
@@ -81,37 +79,8 @@ void ASpecPlayer::LeftMouseActions_Implementation()
 			// Select the new hit actor
 			if(UKismetSystemLibrary::DoesImplementInterface(hitActor, UBuildingInterface::StaticClass()))
 			{
-				IBuildingInterface::Execute_Select(hitActor);
+				IBuildingInterface::Execute_Select(hitActor, Execute_GetCurrentBalance(this));
 				selectedActor = hitActor;
-			}
-			
-			
-
-			// Check if the hit actor implements the building interface
-			if (UKismetSystemLibrary::DoesImplementInterface(hitActor, UBuildingInterface::StaticClass()))
-			{
-				// Deselect previously selected building if any
-				/*if (selectBuilding && selectBuilding != hitActor)
-				{
-					IBuildingInterface::Execute_Deselect(selectBuilding);
-					
-					ControllerRef->SideWidgetToggler(BUY_MENU);
-				}*/
-
-				// Select new building
-				//TODO: Revisit this later
-				//selectBuilding = Cast<ABaseBuilding>(hitActor);
-				
-				//if(selectBuilding->bInPlacementMode) return;
-
-				/*
-				if(IBuildingInterface::Execute_GetCurrentBuildingState(hitActor) == EBuildingState::PLACING) return;
-				
-				IBuildingInterface::Execute_Select(selectBuilding, hitActor);
-
-				bool bShouldEnableUpgradeButton = ((selectBuilding->isUpgradeAvailable()) && (CurrencyComponent->GetCurrentBalance() >= selectBuilding->UpgradeAsset->UpgradeCost));
-				ControllerRef->SideWidgetToggler(BUILDING_SETTINGS, bShouldEnableUpgradeButton);
-			*/
 			}
 		}
 		else
@@ -121,7 +90,7 @@ void ASpecPlayer::LeftMouseActions_Implementation()
 			{
 				IBuildingInterface::Execute_Deselect(selectedActor);
 				selectedActor = nullptr;
-				ControllerRef->SideWidgetToggler(BUY_MENU, nullptr);
+				ControllerRef->SideWidgetToggler();
 			}
 		}
 	}
@@ -151,26 +120,26 @@ void ASpecPlayer::Build_Implementation()
 	{
 		tempBuilding->Build();
 		
-		CurrencyComponent->SubtractMoney(tempBuilding->BuildingAsset->BuildingCost);
+		CurrencyComponent->SubtractMoney(tempBuilding->BuildingCost);
 		ControllerRef->HUDUpdater(MONEY_VALUE, CurrencyComponent->GetCurrentBalance());
 
 		tempBuilding = nullptr;
 	}
 }
 
-void ASpecPlayer::UpgradeSelectedBuilding_Implementation()
+void ASpecPlayer::UpgradeSelectedBuilding_Implementation(ABaseBuilding* BuildingToUpgrade, int UpgradeCost)
 {
-	/*if(!selectActor) return;
-
-	int MoneyToDeduct = selectActor->UpgradeAsset->UpgradeCost;
-	CurrencyComponent->SubtractMoney(MoneyToDeduct);
+	if(!BuildingToUpgrade) return;
 	
-	selectActor->Upgrade();
-	IBuildingInterface::Execute_Deselect(selectActor);
-
-	selectActor = nullptr;
-	ControllerRef->SideWidgetToggler(BUY_MENU);*/
+	CurrencyComponent->SubtractMoney(UpgradeCost);
 	
+	BuildingToUpgrade->Upgrade();
+	
+	if(IBuildingInterface::Execute_GetCurrentBuildingState(BuildingToUpgrade) == SELECTED)	IBuildingInterface::Execute_Deselect(BuildingToUpgrade);
+
+	ControllerRef->SideWidgetToggler();
+
+	selectedActor = nullptr;
 }
 
 void ASpecPlayer::MoveSelectedBuilding_Implementation()
@@ -180,13 +149,10 @@ void ASpecPlayer::MoveSelectedBuilding_Implementation()
 	IBuildingInterface::Execute_Deselect(selectedActor);
 
 	selectedActor = nullptr;
-	ControllerRef->SideWidgetToggler(BUY_MENU, nullptr);
+	ControllerRef->SideWidgetToggler();
 }
 
 void ASpecPlayer::OnBuildingSelected_Implementation(ABaseBuilding* Building)
 {
-	//TODO: Implement this later
-
-	UE_LOG(LogTemp, Warning, TEXT("On Building Selected"));
-	ControllerRef->SideWidgetToggler(BUILDING_SETTINGS, Building);
+	ControllerRef->SideWidgetToggler(Building);
 }

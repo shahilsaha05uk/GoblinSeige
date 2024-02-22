@@ -51,7 +51,7 @@ public:
 	virtual void Zoom_Implementation(float Value) override;
 
 
-	virtual void UpgradeSelectedBuilding_Implementation() override;
+	virtual void UpgradeSelectedBuilding_Implementation(ABaseBuilding* BuildingToUpgrade, int UpgradeCost) override;
 	virtual void MoveSelectedBuilding_Implementation() override;
 
 	virtual void AddMoneyToAccount_Implementation(int Value) override {CurrencyComponent->AddMoney(Value);}

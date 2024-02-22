@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
-#include "TowerDefenceGame/StructClass.h"
+#include "../StructClass.h"
 #include "DA_UpgradeAsset.generated.h"
 
 /**
