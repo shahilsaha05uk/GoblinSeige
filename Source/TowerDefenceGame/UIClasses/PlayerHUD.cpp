@@ -6,6 +6,7 @@
 #include "Components/Button.h"
 #include "TowerDefenceGame/GameHUD.h"
 #include "TowerDefenceGame/TowerDefenceGameGameModeBase.h"
+#include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 
 using namespace std;
 
@@ -23,6 +24,10 @@ void UPlayerHUD::NativeConstruct()
 	{
 		gameMode->OnWaveCompleteSignature.AddDynamic(this, &ThisClass::OnWaveComplete);
 	}
+}
+
+void UPlayerHUD::OpenBuildingSettingsUI_Implementation(ABaseBuilding* Building)
+{
 }
 
 void UPlayerHUD::UpdateIntValues(EHudValue ValueType, int Value)
@@ -49,10 +54,6 @@ void UPlayerHUD::OnWaveComplete_Implementation(int WaveNumber)
 {
 }
 
-void UPlayerHUD::OnBuildingSettingsMenuOpen_Implementation()
-{
-}
-
 void UPlayerHUD::OnMoveButtonClick_Implementation()
 {
 	OnMoveButtonClickedSignature.Broadcast();
@@ -60,10 +61,10 @@ void UPlayerHUD::OnMoveButtonClick_Implementation()
 
 void UPlayerHUD::OnUpgradeButtonClick_Implementation()
 {
-	OnUpgradeButtonClickedSignature.Broadcast();
+	if(BuildingRef)	OnUpgradeButtonClickedSignature.Broadcast(BuildingRef, BuildingRef->GetUpgradeCost());
 }
 
-void UPlayerHUD::WidgetToggler_Implementation(ESideMenuSwitcher menu, bool isUpgradeAvailable)
+void UPlayerHUD::WidgetToggler_Implementation(ABaseBuilding* Building)
 {
 	
 }

@@ -43,26 +43,10 @@ void ATurret::PostBuild_Implementation()
 {
 	Super::PostBuild_Implementation();
 
-	UpdateBuildingStats(BuildingAsset->BuildingStats);
-
 	RangeDecalComp->SetVisibility(false);
-
-	TArray<AActor*> sphereTraceActorsToIgnore;
-
-	sphereTraceActorsToIgnore.Add(this);
-	
 	PowerOn();
-
 }
 
-void ATurret::Upgrade_Implementation()
-{
-	if(!isUpgradeAvailable()) return;
-
-	UpdateBuildingStats(UpgradeAsset->BuildingStats);
-	
-	Super::Upgrade_Implementation();
-}
 
 void ATurret::UpdateBuildingStats_Implementation(FBuildingStats stats)
 {

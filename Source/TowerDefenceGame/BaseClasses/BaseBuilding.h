@@ -22,9 +22,23 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<AActor*> OverlappingActors;
-	
+
+
+	UPROPERTY()
+	bool bCanUpgrade;
+
 public:
 
+	UPROPERTY(meta = (ExposeOnSpawn), EditAnywhere, BlueprintReadWrite, Category = "Private")
+	FBuildingDetails BuildingDetails;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private")
+	int BuildingCost;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private")
+	TEnumAsByte<EBuildingState> BuildingState;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	TEnumAsByte<ETraceTypeQuery> BuildingMovementTraceChannel;
+	
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
 	class USceneComponent* RootComp;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
@@ -39,11 +53,6 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	FTimerHandle OnSpawnTimeHandler;
 
-	UPROPERTY(meta = (ExposeOnSpawn), EditAnywhere, BlueprintReadWrite, Category = "Private | Modification")
-	class UDA_BuildingAsset* BuildingAsset;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Modification")
-	class UDA_UpgradeAsset* UpgradeAsset;
-	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private | Modification")
 	UMaterialInterface* ValidMaterial;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private | Modification")
@@ -59,10 +68,6 @@ public:
 	bool bCanPlace;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private | Modification")
 	bool bIsSelected;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private | Modification")
-	TEnumAsByte<EBuildingState> BuildingState;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Modification")
-	TEnumAsByte<ETraceTypeQuery> BuildingMovementTraceChannel;
 	
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnBuildingFullyUpgradedSignature OnBuildingFullyUpgradedSignature;
@@ -101,11 +106,9 @@ public:
 #pragma region Upgrading the Building
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	bool isUpgradeAvailable();
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Upgrade();
 	UFUNCTION(BlueprintCallable)
-	bool isFullyUpgraded();
+	bool CanUpgrade() { return bCanUpgrade; }
 
 #pragma endregion
 
@@ -115,25 +118,30 @@ public:
 	void IncreaseRange();
 	
 	//virtual ABaseBuilding* Select_Implementation(AActor* NewBuilding) override;
-	virtual void Select_Implementation() override;
+	virtual void Select_Implementation(int OwnerCurrentBalance) override;
 	virtual void Deselect_Implementation() override;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnSelect();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnDeselect();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnMove();
+	virtual void Move_Implementation() override;
+
+	
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void MoveBuilding();
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void UpdateBuildingStats(FBuildingStats stats);
-
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Build();
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PostBuild();
-	#pragma endregion
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	int GetUpgradeCost();
+#pragma endregion
 
 };

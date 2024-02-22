@@ -10,6 +10,7 @@
 #include "TowerDefenceGameGameModeBase.h"
 #include "ActorComponentClasses/CurrencyComponent.h"
 #include "Actors/SpecPlayer.h"
+#include "BaseClasses/BaseBuilding.h"
 #include "DataAssetClasses/DA_BuildingAsset.h"
 #include "InterfaceClasses/HUDInterface.h"
 #include "InterfaceClasses/PlayerInputInterface.h"
@@ -109,9 +110,9 @@ void AInputController::OnGameComplete_Implementation()
 	//TODO: Spawn the Game Complete Screen
 }
 
-void AInputController::SideWidgetToggler_Implementation(ESideMenuSwitcher menu, ABaseBuilding* BuildingRef, bool isUpgradeAvailable)
+void AInputController::SideWidgetToggler_Implementation(ABaseBuilding* BuildingRef)
 {
-	PlayerHUD->WidgetToggler(menu, isUpgradeAvailable);
+	PlayerHUD->WidgetToggler(BuildingRef);
 }
 
 void AInputController::OnWaveComplete_Implementation(int WaveNumber)
@@ -207,13 +208,13 @@ void AInputController::OnEnemyKilled_Implementation()
 	}
 }
 
-void AInputController::OnUpgradeButtonClick_Implementation()
+void AInputController::OnUpgradeButtonClick_Implementation(ABaseBuilding* BuildingToUpgrade, int UpgradeCost)
 {
 	APawn* pawn = GetPawn();
 
 	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UPlayerInterface::StaticClass()))
 	{
-		IPlayerInterface::Execute_UpgradeSelectedBuilding(pawn);
+		IPlayerInterface::Execute_UpgradeSelectedBuilding(pawn, BuildingToUpgrade, UpgradeCost);
 	}
 }
 

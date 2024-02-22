@@ -45,10 +45,11 @@ void ABaseBuilding::BeginPlay()
 
 void ABaseBuilding::Init_Implementation(UDA_BuildingAsset* asset)
 {
-	this->BuildingAsset = asset;
-	UpgradeAsset = BuildingAsset->UpgradeAsset;
-	
+	BuildingDetails = FBuildingDetails(asset);
+	BuildingCost = asset->BuildingCost;
+
 	bCanPlace = true;
+
 	UpdateBuildingState(PLACING);
 
 	IncreaseRange();
@@ -80,15 +81,6 @@ void ABaseBuilding::OnBuildingEndOverlap_Implementation(UPrimitiveComponent* Ove
 	
 }
 
-bool ABaseBuilding::isUpgradeAvailable_Implementation()
-{
-	return UpgradeAsset != nullptr;
-}
-
-bool ABaseBuilding::isFullyUpgraded()
-{
-	return (UpgradeAsset == nullptr);
-}
 
 void ABaseBuilding::IncreaseRange_Implementation()
 {
@@ -97,9 +89,9 @@ void ABaseBuilding::IncreaseRange_Implementation()
 
 void ABaseBuilding::Upgrade_Implementation()
 {
-	UpgradeAsset = UpgradeAsset->NextUpgrade;
+	BuildingDetails.Upgrade();
 
-	if(isFullyUpgraded()) OnBuildingFullyUpgradedSignature.Broadcast();
+	OnBuildingFullyUpgradedSignature.Broadcast();
 }
 
 void ABaseBuilding::MoveBuilding_Implementation()
@@ -200,25 +192,14 @@ void ABaseBuilding::UpdateBuildingState_Implementation(EBuildingState State)
 	ChangeBuildingMaterial(MatToAdd);
 }
 
-/*
-ABaseBuilding* ABaseBuilding::Select_Implementation(AActor* NewBuilding)
+void ABaseBuilding::Select_Implementation(int OwnerCurrentBalance)
 {
-	if (!NewBuilding) return nullptr;
-
-	ABaseBuilding* building = Cast<ABaseBuilding>(NewBuilding);
-	if (building && building->bIsPlaced)
+	UDA_UpgradeAsset* up = BuildingDetails.UpgradeAsset;
+	if(up)
 	{
-		building->UpdateBuildingState(SELECTED);
-		//WidgetComp->SetVisibility(true);
+		bCanUpgrade = OwnerCurrentBalance >= up->UpgradeCost;
 	}
-
-	OnSelect();
-	return building;
-}
-
-*/
-void ABaseBuilding::Select_Implementation()
-{
+	
 	OnSelect();
 }
 
@@ -229,34 +210,31 @@ void ABaseBuilding::Deselect_Implementation()
 	OnDeselect();
 }
 
+int ABaseBuilding::GetUpgradeCost_Implementation()
+{
+	return BuildingDetails.UpgradeAsset->UpgradeCost;
+}
+
 void ABaseBuilding::OnSelect_Implementation()
 {
 	UpdateBuildingState(SELECTED);
 	OnBuildingSelectedSignature.Broadcast(this);
 }
 
-/*
-void ABaseBuilding::OnSelect_Implementation()
-{
-}
 
-*/
 void ABaseBuilding::OnDeselect_Implementation()
 {
 	UpdateBuildingState(DESELECTED);
 }
 
-void ABaseBuilding::UpdateBuildingStats_Implementation(FBuildingStats stats)
-{
-}
-
 void ABaseBuilding::Build_Implementation()
 {
-	if(bCanPlace) UpdateBuildingState(PLACED);
-
-	//OnTurretActivateSignature.Broadcast();
-
-	PostBuild();
+	if(bCanPlace)
+	{
+		UpdateBuildingState(PLACED);
+	
+		PostBuild();
+	}
 }
 
 void ABaseBuilding::PostBuild_Implementation()

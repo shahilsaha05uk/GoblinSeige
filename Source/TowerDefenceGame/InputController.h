@@ -82,10 +82,10 @@ public:
 	void PauseGame();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void SideWidgetToggler(ESideMenuSwitcher menu, class ABaseBuilding* BuildingRef, bool isUpgradeAvailable  = true);
+	void SideWidgetToggler(class ABaseBuilding* BuildingRef = nullptr);
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnUpgradeButtonClick();
+	void OnUpgradeButtonClick(ABaseBuilding* BuildingToUpgrade, int UpgradeCost);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnMoveButtonClick();
 

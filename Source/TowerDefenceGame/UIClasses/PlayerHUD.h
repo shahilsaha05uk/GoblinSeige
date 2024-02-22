@@ -7,7 +7,7 @@
 #include "../EnumClass.h"
 #include "PlayerHUD.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FUpgradeButtonClickedSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FUpgradeButtonClickedSignature, class ABaseBuilding*, BuildingToUpgrade, int, UpgradeCost);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMoveButtonClickedSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCurrentBalanceUpdatedSignature, int, CurrentBalance);
 
@@ -32,6 +32,9 @@ protected:
 	
 
 public:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	ABaseBuilding* BuildingRef;
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
 	FString NextUpgradeStats;
 
@@ -74,7 +77,7 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnWaveComplete(int WaveNumber);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void WidgetToggler(ESideMenuSwitcher menu, bool isUpgradeAvailable);
+	void WidgetToggler(class ABaseBuilding* Building);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnWaveStart();
 	
@@ -84,7 +87,7 @@ public:
 	void OnMoveButtonClick();
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnBuildingSettingsMenuOpen();
+	void OpenBuildingSettingsUI(ABaseBuilding* Building);
 
 
 };

@@ -26,7 +26,7 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void RequestCurrencyUpdate(int CurrentBalance);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void UpgradeSelectedBuilding();
+	void UpgradeSelectedBuilding(ABaseBuilding* BuildingToUpgrade, int UpgradeCost);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void MoveSelectedBuilding();
 	
