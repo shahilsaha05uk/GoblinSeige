@@ -97,8 +97,6 @@ public:
 	void PowerOn();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void StartFire();
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Fire();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void StopFire();

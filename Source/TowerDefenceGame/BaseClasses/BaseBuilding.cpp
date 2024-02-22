@@ -200,6 +200,7 @@ void ABaseBuilding::UpdateBuildingState_Implementation(EBuildingState State)
 	ChangeBuildingMaterial(MatToAdd);
 }
 
+/*
 ABaseBuilding* ABaseBuilding::Select_Implementation(AActor* NewBuilding)
 {
 	if (!NewBuilding) return nullptr;
@@ -215,6 +216,12 @@ ABaseBuilding* ABaseBuilding::Select_Implementation(AActor* NewBuilding)
 	return building;
 }
 
+*/
+void ABaseBuilding::Select_Implementation()
+{
+	OnSelect();
+}
+
 void ABaseBuilding::Deselect_Implementation()
 {
 	UpdateBuildingState(DESELECTED);
@@ -224,11 +231,19 @@ void ABaseBuilding::Deselect_Implementation()
 
 void ABaseBuilding::OnSelect_Implementation()
 {
+	UpdateBuildingState(SELECTED);
+	OnBuildingSelectedSignature.Broadcast(this);
 }
 
+/*
+void ABaseBuilding::OnSelect_Implementation()
+{
+}
+
+*/
 void ABaseBuilding::OnDeselect_Implementation()
 {
-	
+	UpdateBuildingState(DESELECTED);
 }
 
 void ABaseBuilding::UpdateBuildingStats_Implementation(FBuildingStats stats)

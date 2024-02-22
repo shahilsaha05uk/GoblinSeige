@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "TowerDefenceGame/StructClass.h"
+#include "TowerDefenceGame/EnumClass.h"
 #include "UObject/Interface.h"
 #include "BuildingInterface.generated.h"
 
@@ -25,9 +26,16 @@ class TOWERDEFENCEGAME_API IBuildingInterface
 public:
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void Select();
+	/*
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	class ABaseBuilding* Select(AActor* NewBuilding);
+	*/
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Deselect();
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	EBuildingState GetCurrentBuildingState();
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	FBuildingStats GetBuildingStats();

@@ -9,6 +9,7 @@
 #include "TowerDefenceGame/UIClasses/widgets/BuildingUI.h"
 #include "BaseBuilding.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingSelectedSignature, ABaseBuilding*, Building);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnBuildingFullyUpgradedSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTurretActivateSignature);
 
@@ -69,6 +70,9 @@ public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FTurretActivateSignature OnTurretActivateSignature;
 
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnBuildingSelectedSignature OnBuildingSelectedSignature;
+	
 	ABaseBuilding();
 	
 	virtual void BeginPlay() override;
@@ -82,6 +86,8 @@ public:
 	void Init(UDA_BuildingAsset* asset);
 	
 	virtual FBuildingStats GetBuildingStats_Implementation() override {return FBuildingStats();}
+
+	virtual EBuildingState GetCurrentBuildingState_Implementation() override {return BuildingState;}
 	
 #pragma region Building STATE
 
@@ -108,8 +114,8 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void IncreaseRange();
 	
-	virtual ABaseBuilding* Select_Implementation(AActor* NewBuilding) override;
-
+	//virtual ABaseBuilding* Select_Implementation(AActor* NewBuilding) override;
+	virtual void Select_Implementation() override;
 	virtual void Deselect_Implementation() override;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
