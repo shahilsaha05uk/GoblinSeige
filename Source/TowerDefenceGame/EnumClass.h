@@ -85,6 +85,12 @@ enum ESideMenuSwitcher
 	BUILDING_SETTINGS
 };
 
+UENUM(BlueprintType)
+enum EButtonState
+{
+	BUTTON_ENABLED, BUTTON_DISABLED, BUTTON_HOVERED, BUTTON_UNHOVERED
+};
+
 UCLASS()
 class TOWERDEFENCEGAME_API UEnumClass : public UBlueprintFunctionLibrary
 {

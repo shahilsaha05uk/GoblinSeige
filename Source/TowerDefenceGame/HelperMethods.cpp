@@ -30,3 +30,13 @@ float UHelperMethods::GetDotProductBetweenComponentWorldLocationAndActorLocation
 	return UKismetMathLibrary::Dot_VectorVector(Component->GetForwardVector(), Actor->GetActorLocation());
 }
 
+FString UHelperMethods::GetDescription(FBuildingStats stats)
+{
+	return FString::Printf(TEXT("Attack Damage: %.1f,\n"
+									"Attack Range: %.1f, \n"
+									"Attack Speed: %.1f, \n"),
+									stats.AttackDamage,
+									stats.AttackRange,
+									stats.AttackSpeed);
+}
+

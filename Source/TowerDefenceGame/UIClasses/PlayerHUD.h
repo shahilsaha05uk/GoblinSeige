@@ -7,8 +7,9 @@
 #include "../EnumClass.h"
 #include "PlayerHUD.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FUpgradeButtonClicked);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMoveButtonClicked);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FUpgradeButtonClickedSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMoveButtonClickedSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCurrentBalanceUpdatedSignature, int, CurrentBalance);
 
 
 
@@ -31,10 +32,14 @@ protected:
 	
 
 public:
-	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
+	FString NextUpgradeStats;
+
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UBorder* root;
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	class UMultiLineEditableTextBox* txtDescription;
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UButton* btnUpgrade;
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
@@ -44,9 +49,12 @@ public:
 	class UOverlay* ol_Prompter;
 	
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FUpgradeButtonClicked OnUpgradeButtonClickedSignature;
+	FUpgradeButtonClickedSignature OnUpgradeButtonClickedSignature;
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FMoveButtonClicked OnMoveButtonClickedSignature;
+	FMoveButtonClickedSignature OnMoveButtonClickedSignature;
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnCurrentBalanceUpdatedSignature OnCurrentBalanceUpdated;
+	
 	
 	UPROPERTY(BlueprintReadWrite)
 	TSubclassOf<UBaseWidget> PrompterWidgetClass;
@@ -77,6 +85,7 @@ public:
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnBuildingSettingsMenuOpen();
+
 
 };
 

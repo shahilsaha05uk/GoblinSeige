@@ -9,18 +9,133 @@
   <component name="ChangeListManager">
     <list default="true" id="9e7763e5-9dad-44e7-9cef-d89b5e8a74c4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/BP_Controller.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/BP_Controller.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/BP_HUD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/BP_HUD.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Inputs/DA_Inputs.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Inputs/DA_Inputs.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Inputs/SpectatorInputMapping.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Inputs/SpectatorInputMapping.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseWidget.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseWidget.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/DataAssetClasses/DA_InputActions.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/DataAssetClasses/DA_InputActions.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GameHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/GameHUD.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GameHUD.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/GameHUD.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/InputController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InputController.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/InputController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InputController.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/HUDInterface.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/HUDInterface.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/BP_Player2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/BP_Player2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_ArrowTower.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_ArrowTower.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_Cannon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_Cannon.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_ElectricTower.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_ElectricTower.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_FlameThrower.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_FlameThrower.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_Launchpad.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_Launchpad.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_Machinegun.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_Machinegun.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/TestGame.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/TestGame.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/NewMaterial.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/NewMaterial.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Maps/Demo_Map.umap" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Maps/Overview.umap" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Materials/DemoLevel/M_DemoLevel_Ground.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Materials/MasterMaterials/M_Foliage.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Materials/MasterMaterials/M_SimpleProp.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Materials/MasterMaterials/M_Treasure.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Materials/Props/MI_Barrel.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Materials/Props/MI_Cannon.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Materials/Props/MI_CoinPile.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Materials/Props/MI_Coins.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Materials/Props/MI_Disc.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Materials/Props/MI_HangingLeaves.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Materials/Props/MI_Jar.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Materials/Props/MI_LargeBowl.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Materials/Props/MI_RelicJar.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Materials/Props/MI_Torch.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Materials/Props/MI_WoodenBox.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/DemoLevel/SM_Showcase.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Barrel.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Barrel_Broken1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Barrel_Broken2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Barrel_Broken3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Barrel_Broken4.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Bottle.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Cannon.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Coin_1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Coin_2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Coin_3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Coin_4.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Coin_Set_1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Coin_Set_2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Coin_Set_3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Disc.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Goblet.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Jar1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Jar2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Jar3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Jar4.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Large_Bowl.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Relic_Jar.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Torch.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Treasure_Pile_1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Treasure_Pile_2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Treasure_Pile_3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_Treasure_Set_1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_WoodenBox1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_WoodenBox_Broken1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_WoodenBox_Broken2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/SM_WoodenBox_Broken3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/WithFoliage/SM_Barrel_Broken1_Fol.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/WithFoliage/SM_Barrel_Broken2_Fol.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/WithFoliage/SM_Barrel_Broken3_Fol.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/WithFoliage/SM_Barrel_Broken4_Fol.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/WithFoliage/SM_Cannon_Fol.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/WithFoliage/SM_WoodenBox_Broken1_Fol.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/WithFoliage/SM_WoodenBox_Broken2_Fol.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Models/Props/WithFoliage/SM_WoodenBox_Broken3_Fol.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/DemoLevel/T_DemoLevel_HDR.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/DemoLevel/T_Floor_M.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Barrel_BC.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Barrel_M.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Barrel_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Cannon_BC.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Cannon_M.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Cannon_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Coin_Pile_BC.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Coin_Pile_M.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Coin_Pile_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Coins_BC.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Coins_M.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Coins_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Disc_BC.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Disc_M.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Disc_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Fol_HangingLeaves_BC.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Fol_HangingLeaves_M.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Fol_HangingLeaves_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Jar_BC.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Jar_M.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Jar_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Large_Bowl_BC.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Large_Bowl_M.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Large_Bowl_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Relic_Jar_BC.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Relic_Jar_M.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Relic_Jar_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Torch_BC.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Torch_M.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_Torch_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_WoodenBox_BC.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_WoodenBox_M.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/RuinsTreasureProps/Textures/Props/T_WoodenBox_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/widgets/W_BuyButton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/widgets/W_BuyButton.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/mapMaskingMat.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/mapMaskingMat_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/mapMaskingMat_Inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RD.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RD.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderBlueprint.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderBlueprint.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderGameControl.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderGameControl.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderLC.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderLC.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderLink.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderLink.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderLogging.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderLogging.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderShaderInfo.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderShaderInfo.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/UnrealEditor-RD.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/UnrealEditor-RD.exp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/UnrealEditor-RiderBlueprint.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/UnrealEditor-RiderBlueprint.exp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/UnrealEditor-RiderGameControl.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/UnrealEditor-RiderGameControl.exp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/UnrealEditor-RiderLC.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/UnrealEditor-RiderLC.exp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/UnrealEditor-RiderLink.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/UnrealEditor-RiderLink.exp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/UnrealEditor-RiderLogging.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/UnrealEditor-RiderLogging.exp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.exp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/EnumClass.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/EnumClass.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/HelperMethods.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/HelperMethods.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/HelperMethods.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/HelperMethods.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/BuyButton.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/BuyButton.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/BuyButton.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/BuyButton.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TowerDefenceGame.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/TowerDefenceGame.uproject" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +146,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -244,6 +361,8 @@
       <workItem from="1708136639302" duration="9616000" />
       <workItem from="1708431095560" duration="13141000" />
       <workItem from="1708453798289" duration="1948000" />
+      <workItem from="1708544282747" duration="2754000" />
+      <workItem from="1708549769065" duration="9926000" />
     </task>
     <servers />
   </component>
