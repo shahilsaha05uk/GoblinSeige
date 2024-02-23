@@ -32,11 +32,21 @@ float UHelperMethods::GetDotProductBetweenComponentWorldLocationAndActorLocation
 
 FString UHelperMethods::GetDescription(FBuildingStats stats)
 {
-	return FString::Printf(TEXT("Attack Damage: %.1f,\n"
-									"Attack Range: %.1f, \n"
-									"Attack Speed: %.1f, \n"),
+	return FString::Printf(TEXT("Damage: %.1f\n"
+									"Range: %.1f\n"
+									"Speed: %.1f\n"),
 									stats.AttackDamage,
 									stats.AttackRange,
 									stats.AttackSpeed);
+}
+
+FString UHelperMethods::GetUpgradeDescription(FBuildingStats CurrentStats, FBuildingStats UpgradeStats)
+{
+	return FString::Printf(TEXT("Damage: %.1f + %.1f\n"
+								"Range: %.1f + %.1f\n"
+								"Speed: %.1f + %.1f\n"),
+								CurrentStats.AttackDamage, UpgradeStats.AttackDamage,
+								CurrentStats.AttackRange, UpgradeStats.AttackRange,
+								CurrentStats.AttackSpeed, UpgradeStats.AttackSpeed);
 }
 

@@ -16,13 +16,22 @@ ABaseEnemy::ABaseEnemy()
 	mHealthBarWidgetComponent = CreateDefaultSubobject<UWidgetComponent>("Health Bar Comp");
 	mHealthBarWidgetComponent->SetupAttachment(RootComponent);
 	mHealthBarWidgetComponent->SetDrawSize(WidgetDrawSize);
-
 }
 
 void ABaseEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 	Init();
+}
+
+void ABaseEnemy::IA_EnemyMove_Implementation(FVector TargetLocation)
+{
+	
+}
+
+void ABaseEnemy::IA_EnemyAttack_Implementation()
+{
+	
 }
 
 void ABaseEnemy::Init_Implementation()

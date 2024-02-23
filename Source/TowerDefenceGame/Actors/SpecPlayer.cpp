@@ -9,8 +9,6 @@
 #include "TowerDefenceGame/InputController.h"
 #include "TowerDefenceGame/ActorComponentClasses/CurrencyComponent.h"
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
-#include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
-#include "TowerDefenceGame/DataAssetClasses/DA_UpgradeAsset.h"
 #include "TowerDefenceGame/InterfaceClasses/BuildingInterface.h"
 
 ASpecPlayer::ASpecPlayer()
@@ -24,20 +22,34 @@ void ASpecPlayer::PossessedBy(AController* NewController)	// Called before Begin
 
 	ControllerRef = Cast<AInputController>(NewController);
 }
+
 void ASpecPlayer::BeginPlay()
 {
 	Super::BeginPlay();
-
-	UE_LOG(LogTemp, Warning, TEXT("Begin Play!! "))
 }
 
+#pragma region Input
 
 void ASpecPlayer::Move_Implementation(const FInputActionValue& InputActionValue)
 {
+	FVector vec = InputActionValue.Get<FVector>();
+
+	FRotator cachedRot = GetControlRotation();
+	
+	FRotator fwdRot = cachedRot; fwdRot.Roll = fwdRot.Pitch = 0;
+	FRotator rhtRot = cachedRot; rhtRot.Pitch = 0;
+	
+	FVector fwdVec = fwdRot.Vector();
+	FVector rhtVec = FRotationMatrix(rhtRot).GetScaledAxis(EAxis::Y);
+
+	AddMovementInput(fwdVec, vec.X);
+	AddMovementInput(rhtVec, vec.Y);
 }
 
 void ASpecPlayer::Look_Implementation(const FInputActionValue& InputActionValue)
 {
+	float yaw = InputActionValue.Get<FVector>().X;
+	AddControllerYawInput(yaw);
 }
 
 void ASpecPlayer::EnableLook_Implementation()
@@ -101,14 +113,21 @@ void ASpecPlayer::Zoom_Implementation(float Value)
 	
 }
 
+#pragma endregion
+
+#pragma region Player Interface Methods
+
 void ASpecPlayer::RequestCurrencyUpdate_Implementation(int CurrentBalance)
 {
 	ControllerRef->HUDUpdater(MONEY_VALUE, CurrentBalance);
 }
 
+#pragma endregion
+
 void ASpecPlayer::SpawnBuilding_Implementation(ABaseBuilding* NewBuilding, UDA_BuildingAsset* BuildingAsset)
 {
 	tempBuilding = NewBuilding;
+
 	tempBuilding->OnBuildingSelectedSignature.AddDynamic(this, &ThisClass::OnBuildingSelected);
 
 	tempBuilding->Init(BuildingAsset);
@@ -121,8 +140,7 @@ void ASpecPlayer::Build_Implementation()
 		tempBuilding->Build();
 		
 		CurrencyComponent->SubtractMoney(tempBuilding->BuildingCost);
-		ControllerRef->HUDUpdater(MONEY_VALUE, CurrencyComponent->GetCurrentBalance());
-
+		Execute_RequestCurrencyUpdate(this, CurrencyComponent->GetCurrentBalance());
 		tempBuilding = nullptr;
 	}
 }
@@ -135,8 +153,10 @@ void ASpecPlayer::UpgradeSelectedBuilding_Implementation(ABaseBuilding* Building
 	
 	BuildingToUpgrade->Upgrade();
 	
-	if(IBuildingInterface::Execute_GetCurrentBuildingState(BuildingToUpgrade) == SELECTED)	IBuildingInterface::Execute_Deselect(BuildingToUpgrade);
+	if(IBuildingInterface::Execute_GetCurrentBuildingState(BuildingToUpgrade) == SELECTED)
+		IBuildingInterface::Execute_Deselect(BuildingToUpgrade);
 
+	Execute_RequestCurrencyUpdate(this, CurrencyComponent->GetCurrentBalance());
 	ControllerRef->SideWidgetToggler();
 
 	selectedActor = nullptr;

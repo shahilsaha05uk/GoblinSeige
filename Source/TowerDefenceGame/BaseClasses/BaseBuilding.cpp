@@ -49,12 +49,10 @@ void ABaseBuilding::Init_Implementation(UDA_BuildingAsset* asset)
 	BuildingCost = asset->BuildingCost;
 
 	bCanPlace = true;
-
-	UpdateBuildingState(PLACING);
-
-	IncreaseRange();
 	
-	GetWorld()->GetTimerManager().SetTimer(OnSpawnTimeHandler, this, &ABaseBuilding::MoveBuilding, 0.001f, true);
+	IncreaseRange();
+
+	Execute_Move(this);
 }
 
 void ABaseBuilding::OnBuildingBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -90,6 +88,8 @@ void ABaseBuilding::IncreaseRange_Implementation()
 void ABaseBuilding::Upgrade_Implementation()
 {
 	BuildingDetails.Upgrade();
+
+	UpdateDescription();
 
 	OnBuildingFullyUpgradedSignature.Broadcast();
 }
@@ -210,9 +210,14 @@ void ABaseBuilding::Deselect_Implementation()
 	OnDeselect();
 }
 
+void ABaseBuilding::Move_Implementation()
+{
+	OnMove();
+}
+
 int ABaseBuilding::GetUpgradeCost_Implementation()
 {
-	return BuildingDetails.UpgradeAsset->UpgradeCost;
+	return (BuildingDetails.UpgradeAsset)? BuildingDetails.UpgradeAsset->UpgradeCost : -1;
 }
 
 void ABaseBuilding::OnSelect_Implementation()
@@ -221,10 +226,15 @@ void ABaseBuilding::OnSelect_Implementation()
 	OnBuildingSelectedSignature.Broadcast(this);
 }
 
-
 void ABaseBuilding::OnDeselect_Implementation()
 {
 	UpdateBuildingState(DESELECTED);
+}
+
+void ABaseBuilding::OnMove_Implementation()
+{
+	UpdateBuildingState(PLACING);
+	GetWorld()->GetTimerManager().SetTimer(OnSpawnTimeHandler, this, &ABaseBuilding::MoveBuilding, 0.001f, true);
 }
 
 void ABaseBuilding::Build_Implementation()
@@ -239,5 +249,14 @@ void ABaseBuilding::Build_Implementation()
 
 void ABaseBuilding::PostBuild_Implementation()
 {
-	
+	UpdateDescription();
 }
+
+void ABaseBuilding::UpdateDescription()
+{
+	BuildingDescription = UHelperMethods::GetDescription(BuildingDetails.BuildingStats);
+
+	if(BuildingDetails.UpgradeAsset)
+		BuildingUpgradeDescription = UHelperMethods::GetUpgradeDescription(BuildingDetails.BuildingStats, BuildingDetails.UpgradeAsset->BuildingStats);
+}
+

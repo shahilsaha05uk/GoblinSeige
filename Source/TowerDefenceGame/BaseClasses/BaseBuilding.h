@@ -23,7 +23,13 @@ protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<AActor*> OverlappingActors;
 
+	UFUNCTION()
+	void UpdateDescription();
 
+	UPROPERTY()
+	FString BuildingDescription;
+	UPROPERTY()
+	FString BuildingUpgradeDescription;
 	UPROPERTY()
 	bool bCanUpgrade;
 
@@ -107,7 +113,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Upgrade();
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool CanUpgrade() { return bCanUpgrade; }
 
 #pragma endregion
@@ -117,9 +123,9 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void IncreaseRange();
 	
-	//virtual ABaseBuilding* Select_Implementation(AActor* NewBuilding) override;
 	virtual void Select_Implementation(int OwnerCurrentBalance) override;
 	virtual void Deselect_Implementation() override;
+	virtual void Move_Implementation() override;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnSelect();
@@ -128,8 +134,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnMove();
-	virtual void Move_Implementation() override;
-
 	
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -142,6 +146,11 @@ public:
 	void PostBuild();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	int GetUpgradeCost();
-#pragma endregion
+	
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	FString GetBuildingDescription() {return BuildingDescription;}
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	FString GetBuildingUpgradeDescription() {return BuildingUpgradeDescription;}
+	#pragma endregion
 
 };

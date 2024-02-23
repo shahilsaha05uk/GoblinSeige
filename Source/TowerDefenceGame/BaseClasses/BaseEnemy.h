@@ -37,4 +37,9 @@ public:
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void Init();
+
+
+	virtual void IA_EnemyMove_Implementation(FVector TargetLocation) override;
+	virtual void IA_EnemyAttack_Implementation() override;
+	virtual bool isDead_Implementation() override { return false; }
 };

@@ -20,22 +20,16 @@ ATurret::ATurret()
 	RangeCollisionComp->OnComponentEndOverlap.AddDynamic(this, &ATurret::OnRangeEndOverlap);
 }
 
-void ATurret::Init_Implementation(UDA_BuildingAsset* asset)
-{
-	Super::Init_Implementation(asset);
-}
 
 void ATurret::OnSelect_Implementation()
 {
 	RangeDecalComp->SetVisibility(true);
-
 	Super::OnSelect_Implementation();
 }
 
 void ATurret::OnDeselect_Implementation()
 {
 	RangeDecalComp->SetVisibility(false);
-
 	Super::OnDeselect_Implementation();
 }
 
@@ -47,29 +41,6 @@ void ATurret::PostBuild_Implementation()
 	PowerOn();
 }
 
-
-void ATurret::UpdateBuildingStats_Implementation(FBuildingStats stats)
-{
-	AttackRange = stats.AttackRange;
-	AttackDamage = stats.AttackDamage;
-	AttackSpeed = stats.AttackSpeed;
-	
-
-	IncreaseRange();
-}
-
-void ATurret::OnBuildingBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
-	Super::OnBuildingBeginOverlap_Implementation(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
-}
-
-void ATurret::OnBuildingEndOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
-	Super::OnBuildingEndOverlap_Implementation(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex);
-}
-
-
-
 void ATurret::LookAtTarget_Implementation()
 {
 	
@@ -77,8 +48,10 @@ void ATurret::LookAtTarget_Implementation()
 
 void ATurret::IncreaseRange_Implementation()
 {
-	RangeCollisionComp->SetSphereRadius(AttackRange, true);
-	const float decalSize = AttackRange / 100.f;
+	const float attackRange = BuildingDetails.BuildingStats.AttackRange;
+	const float decalSize = attackRange / 100.f;
+
+	RangeCollisionComp->SetSphereRadius(attackRange, true);
 	RangeDecalComp->SetRelativeScale3D(FVector(1.0f, decalSize, decalSize));
 }
 
@@ -115,8 +88,8 @@ AActor* ATurret::FindTarget_Implementation()
 {
 	CurrentTarget = nullptr;
 	Targets.Shrink();
-
-	AActor* foundTarget = UGameplayStatics::FindNearestActor(GetActorLocation(), Targets, AttackRange);
+	float attackRange = BuildingDetails.BuildingStats.AttackRange;
+	AActor* foundTarget = UGameplayStatics::FindNearestActor(GetActorLocation(), Targets, attackRange);
 	if(foundTarget) OnFoundTarget(foundTarget);
 	return foundTarget;
 }
@@ -127,13 +100,15 @@ void ATurret::OnFoundTarget_Implementation(AActor* FoundTarget)
 	else PowerOn();
 }
 
-
 void ATurret::PowerOn_Implementation()
 {
 	if(bIsPowerOn) return;
 	
 	if(ShouldTurnOnFiring)
-		GetWorldTimerManager().SetTimer(FireTimerHandler, this, &ThisClass::Fire, AttackSpeed, FireShouldLoop, 0.0f);
+	{
+		const float attackSpeed = BuildingDetails.BuildingStats.AttackSpeed;
+		GetWorldTimerManager().SetTimer(FireTimerHandler, this, &ThisClass::Fire, attackSpeed, FireShouldLoop, 0.0f);
+	}
 
 	if(bHasRotator)
 		GetWorldTimerManager().SetTimer(TurningTimeHandler, this, &ThisClass::LookAtTarget, RotationTimeInterval, RotatorShouldLoop, 0.0f);

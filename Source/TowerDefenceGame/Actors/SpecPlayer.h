@@ -34,10 +34,7 @@ public:
 	FTimerHandle OnSpawnTimeHandler;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	ABaseBuilding* tempBuilding;
-	/*
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
-	ABaseBuilding* selectBuilding;
-	*/
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	AActor* selectedActor;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
@@ -49,8 +46,7 @@ public:
 	virtual void DisableLook_Implementation() override;
 	virtual void LeftMouseActions_Implementation() override;
 	virtual void Zoom_Implementation(float Value) override;
-
-
+	
 	virtual void UpgradeSelectedBuilding_Implementation(ABaseBuilding* BuildingToUpgrade, int UpgradeCost) override;
 	virtual void MoveSelectedBuilding_Implementation() override;
 
@@ -58,7 +54,6 @@ public:
 	virtual void RequestCurrencyUpdate_Implementation(int CurrentBalance) override;
 	virtual int GetCurrentBalance_Implementation() override {return CurrencyComponent->GetCurrentBalance(); }
 	
-
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SpawnBuilding(class ABaseBuilding* NewBuilding, UDA_BuildingAsset* BuildingAsset);
 
@@ -67,5 +62,4 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnBuildingSelected(ABaseBuilding* Building);
-
 };

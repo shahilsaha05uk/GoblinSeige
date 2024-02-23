@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "TowerDefenceGame/EnumClass.h"
 #include "TowerDefenceGame/BaseClasses/BaseWidget.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "BuyButton.generated.h"
@@ -16,9 +17,6 @@ class TOWERDEFENCEGAME_API UBuyButton : public UBaseWidget
 {
 	GENERATED_BODY()
 
-private:
-
-	
 public:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Properties")
 	class UBorder* ButtonBorder;
@@ -36,17 +34,17 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
 	FString BuildingDescription;
 	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties", meta = (ExposeOnSpawn = true))
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
 	class UPlayerHUD* PlayerHUDRef;
 
-	UPROPERTY(BlueprintReadWrite, meta = (ExposeOnSpawn = true))
+	UPROPERTY(BlueprintReadWrite)
 	class UMultiLineEditableTextBox* txtDescription;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties", meta = (ExposeOnSpawn = true))
-	UDA_BuildingAsset* BuildingAsset;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
+	UDA_BuildingAsset* mBuildingAsset;
 
-	
-	virtual void NativeConstruct() override;
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void Init(class UPlayerHUD* PlayerHUD, class UMultiLineEditableTextBox* descriptionWidget, class UDA_BuildingAsset* BuildingAsset);
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnButtonHovered();
@@ -59,7 +57,7 @@ public:
 	void OnCurrentBalanceUpdated(int CurrentBalance);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
-	bool IsCurrentBalanceLessThanTheBuildingCost(int CurrentBalance) {return (CurrentBalance > BuildingAsset->BuildingCost);}
+	bool IsCurrentBalanceLessThanTheBuildingCost(int CurrentBalance) {return (CurrentBalance > mBuildingAsset->BuildingCost);}
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void UpdateButtonState(EButtonState State);
