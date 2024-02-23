@@ -2,6 +2,8 @@
 
 
 #include "BaseBuilding.h"
+
+#include "Components/AudioComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/DecalComponent.h"
 #include "Components/SphereComponent.h"
@@ -41,6 +43,11 @@ void ABaseBuilding::BeginPlay()
 	bCanPlace = false;
 	UpdateBuildingState(NO_STATE);
 
+}
+
+void ABaseBuilding::PlaySound_Implementation()
+{
+	UGameplayStatics::PlaySoundAtLocation(GetWorld(), ProjectileSound, GetActorLocation(), GetActorRotation(), 1, 1, 0, nullptr, nullptr, this, nullptr);
 }
 
 void ABaseBuilding::Init_Implementation(UDA_BuildingAsset* asset)
