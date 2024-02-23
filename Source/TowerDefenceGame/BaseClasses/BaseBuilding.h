@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "TowerDefenceGame/EnumClass.h"
 #include "TowerDefenceGame/InterfaceClasses/BuildingInterface.h"
+#include "TowerDefenceGame/InterfaceClasses/SoundInterface.h"
 #include "TowerDefenceGame/UIClasses/widgets/BuildingUI.h"
 #include "BaseBuilding.generated.h"
 
@@ -14,7 +15,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnBuildingFullyUpgradedSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTurretActivateSignature);
 
 UCLASS()
-class TOWERDEFENCEGAME_API ABaseBuilding : public AActor, public IBuildingInterface
+class TOWERDEFENCEGAME_API ABaseBuilding : public AActor, public IBuildingInterface, public ISoundInterface
 {
 	GENERATED_BODY()
 
@@ -56,6 +57,8 @@ public:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
 	class USphereComponent* RangeCollisionComp;
 	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	class USoundBase* ProjectileSound;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	FTimerHandle OnSpawnTimeHandler;
 
@@ -99,6 +102,8 @@ public:
 	virtual FBuildingStats GetBuildingStats_Implementation() override {return FBuildingStats();}
 
 	virtual EBuildingState GetCurrentBuildingState_Implementation() override {return BuildingState;}
+
+	virtual void PlaySound_Implementation() override;
 	
 #pragma region Building STATE
 

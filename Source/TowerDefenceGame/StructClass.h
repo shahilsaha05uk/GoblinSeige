@@ -23,9 +23,9 @@ public:
 		FBuildingStats s;
 		s.AttackDamage = AttackDamage + otherStats.AttackDamage;
 		s.AttackRange = AttackRange + otherStats.AttackRange;
-		s.AttackSpeed = AttackSpeed + otherStats.AttackSpeed;
-		s.ProjectileLaunchSpeed = ProjectileLaunchSpeed + otherStats.ProjectileLaunchSpeed;
-		s.DamageRadius = DamageRadius + otherStats.DamageRadius;
+		s.AttackSpeed = otherStats.AttackSpeed;
+		s.ProjectileLaunchSpeed = otherStats.ProjectileLaunchSpeed;
+		s.DamageRadius = otherStats.DamageRadius;
 
 		return s;
 	}

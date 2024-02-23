@@ -1,11 +1,11 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "g:\\final year projects\\towerdefense\\towerdefencegame\\plugins\\developer\\riderlink\\source\\ridershaderinfo\\ridershaderinfo.cpp",
+        "Source": "d:\\year 4 projects\\towerdefencegame\\plugins\\developer\\riderlink\\source\\ridershaderinfo\\ridershaderinfo.cpp",
         "ProvidedModule": "",
         "Includes": [
-            "g:\\final year projects\\towerdefense\\towerdefencegame\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\ridershaderinfo\\definitions.h",
-            "g:\\final year projects\\towerdefense\\towerdefencegame\\plugins\\developer\\riderlink\\source\\ridershaderinfo\\ridershaderinfo.h",
+            "d:\\year 4 projects\\towerdefencegame\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\ridershaderinfo\\definitions.h",
+            "d:\\year 4 projects\\towerdefencegame\\plugins\\developer\\riderlink\\source\\ridershaderinfo\\ridershaderinfo.h",
             "c:\\program files\\epic games\\ue_5.2\\engine\\source\\runtime\\core\\public\\modules\\moduleinterface.h",
             "c:\\program files\\epic games\\ue_5.2\\engine\\source\\runtime\\core\\public\\coretypes.h",
             "c:\\program files\\epic games\\ue_5.2\\engine\\source\\runtime\\core\\public\\hal\\platform.h",
