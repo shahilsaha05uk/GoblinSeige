@@ -31,4 +31,7 @@ public:
 
 	UFUNCTION(BlueprintPure, BlueprintCallable)
 	static FString GetDescription(FBuildingStats stats);
+
+	UFUNCTION(BlueprintPure, BlueprintCallable)
+	static FString GetUpgradeDescription(FBuildingStats CurrentStats, FBuildingStats UpgradeStats);
 };

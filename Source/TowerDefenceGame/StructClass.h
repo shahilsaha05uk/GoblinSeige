@@ -14,7 +14,7 @@ struct FBuildingStats
 
 public:
 
-	FBuildingStats(): AttackDamage(0), AttackRange(0), AttackSpeed(0), LaunchSpeed(0), DamageRadius(0)
+	FBuildingStats(): AttackDamage(0), AttackRange(0), AttackSpeed(0), ProjectileLaunchSpeed(0), DamageRadius(0)
 	{
 	}
 
@@ -24,7 +24,7 @@ public:
 		s.AttackDamage = AttackDamage + otherStats.AttackDamage;
 		s.AttackRange = AttackRange + otherStats.AttackRange;
 		s.AttackSpeed = AttackSpeed + otherStats.AttackSpeed;
-		s.LaunchSpeed = LaunchSpeed + otherStats.LaunchSpeed;
+		s.ProjectileLaunchSpeed = ProjectileLaunchSpeed + otherStats.ProjectileLaunchSpeed;
 		s.DamageRadius = DamageRadius + otherStats.DamageRadius;
 
 		return s;
@@ -37,7 +37,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
 	float AttackSpeed;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
-	float LaunchSpeed;
+	float ProjectileLaunchSpeed;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
 	float DamageRadius;
 	
@@ -63,20 +63,7 @@ public:
 	int BuildingCost;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
 	FBuildingStats BuildingStats;
-
-
-	/*FBuildingDetails(): UpgradeAsset(nullptr), BuildingCost(0), BuildingName("Default Building")
-	{
-	}
 	
-	FBuildingDetails(class UDA_BuildingAsset* BuildingAsset)
-	{
-		BuildingName = BuildingAsset->BuildingName;
-		UpgradeAsset = BuildingAsset->UpgradeAsset;
-		BuildingCost = BuildingAsset->BuildingCost;
-		BuildingStats = BuildingAsset->BuildingStats;
-	}*/
-
 	FBuildingDetails(class UDA_BuildingAsset* BuildingAsset);
 	FBuildingDetails();
 	void Upgrade()

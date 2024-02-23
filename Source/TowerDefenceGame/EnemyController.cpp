@@ -5,6 +5,7 @@
 
 #include "BaseClasses/BaseEnemy.h"
 #include "ManagerClasses/EnemyManager.h"
+#include "Navigation/PathFollowingComponent.h"
 
 void AEnemyController::OnPossess(APawn* InPawn)
 {
@@ -19,12 +20,26 @@ void AEnemyController::OnSpawn(AEnemyManager* Manager)
 	Manager->OnControllerDestroySignature.AddDynamic(this, &AEnemyController::OnControllerDestroy);
 }
 
+void AEnemyController::EnemyMove_Implementation(FVector TargetLocation)
+{
+	
+}
+
+void AEnemyController::EnemyAttack_Implementation()
+{
+	
+}
+
+bool AEnemyController::EnemyHasAValidPath_Implementation()
+{
+	return GetPathFollowingComponent()->HasValidPath();
+}
+
 void AEnemyController::OnDead_Implementation()
 {
 	UnPossess();
 
 	mEnemyManager->FreeController();
-	//OnControllerFreeSignature.Broadcast(UniqueID);
 }
 
 void AEnemyController::OnControllerDestroy_Implementation()

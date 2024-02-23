@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "InterfaceClasses/EnemyControllerInterface.h"
 #include "EnemyController.generated.h"
 
 UCLASS()
-class TOWERDEFENCEGAME_API AEnemyController : public AAIController
+class TOWERDEFENCEGAME_API AEnemyController : public AAIController, public IEnemyControllerInterface
 {
 	GENERATED_BODY()
 
@@ -33,4 +34,10 @@ public:
 	void OnDead();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnControllerDestroy();
+
+	virtual void EnemyMove_Implementation(FVector TargetLocation) override;
+	virtual void EnemyAttack_Implementation() override;
+	
+	virtual bool EnemyHasAValidPath_Implementation() override;
+
 };

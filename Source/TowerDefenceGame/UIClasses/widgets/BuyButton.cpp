@@ -9,10 +9,15 @@
 #include "TowerDefenceGame/HelperMethods.h"
 #include "TowerDefenceGame/InputController.h"
 
-void UBuyButton::NativeConstruct()
-{
-	Super::NativeConstruct();
 
+
+void UBuyButton::Init_Implementation(UPlayerHUD* PlayerHUD, UMultiLineEditableTextBox* descriptionWidget, class UDA_BuildingAsset* BuildingAsset)
+{
+	PlayerHUDRef = PlayerHUD;
+	txtDescription = descriptionWidget;
+	mBuildingAsset = BuildingAsset;
+
+	
 	BuyButton->OnClicked.AddDynamic(this, &UBuyButton::OnBuyButtonClicked);
 	BuyButton->OnHovered.AddDynamic(this, &ThisClass::OnButtonHovered);
 	BuyButton->OnUnhovered.AddDynamic(this, &ThisClass::OnButtonUnhovered);
@@ -21,18 +26,18 @@ void UBuyButton::NativeConstruct()
 	{
 		PlayerHUDRef->OnCurrentBalanceUpdated.AddDynamic(this, &ThisClass::OnCurrentBalanceUpdated);
 	}
-	if (BuildingAsset)
+	if (mBuildingAsset)
 	{
 		defaultStyle = BuyButton->GetStyle();
 		defaultStyle.Normal.DrawAs = ESlateBrushDrawType::Image;
-		defaultStyle.Normal.SetResourceObject(BuildingAsset->BuildingImage);
+		defaultStyle.Normal.SetResourceObject(mBuildingAsset->BuildingImage);
 		defaultStyle.Hovered.DrawAs = ESlateBrushDrawType::Image;
-		defaultStyle.Hovered.SetResourceObject(BuildingAsset->BuildingImage);
+		defaultStyle.Hovered.SetResourceObject(mBuildingAsset->BuildingImage);
 		defaultStyle.Disabled.DrawAs = ESlateBrushDrawType::Image;
-		defaultStyle.Disabled.SetResourceObject(BuildingAsset->BuildingImage);
+		defaultStyle.Disabled.SetResourceObject(mBuildingAsset->BuildingImage);
 	}
 
-	BuildingDescription = "Stats: \n" + UHelperMethods::GetDescription(BuildingAsset->BuildingStats);
+	BuildingDescription = "Stats: \n" + UHelperMethods::GetDescription(mBuildingAsset->BuildingStats);
 
 	BuyButton->SetStyle(defaultStyle);
 
@@ -69,5 +74,5 @@ void UBuyButton::OnCurrentBalanceUpdated_Implementation(int CurrentBalance)
 
 void UBuyButton::OnBuyButtonClicked_Implementation()
 {
-	Controller->OnBuyMenuOptionClickSignature.Broadcast(BuildingAsset);
+	Controller->OnBuyMenuOptionClickSignature.Broadcast(mBuildingAsset);
 }
