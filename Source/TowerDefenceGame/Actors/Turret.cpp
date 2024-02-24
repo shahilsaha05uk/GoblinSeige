@@ -132,7 +132,7 @@ void ATurret::PowerOff_Implementation()
 
 void ATurret::Fire_Implementation()
 {
-
+	Execute_PlaySound(this);
 }
 
 void ATurret::StopFire_Implementation()
