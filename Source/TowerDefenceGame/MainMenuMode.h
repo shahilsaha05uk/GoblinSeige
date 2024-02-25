@@ -21,24 +21,17 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Sound")
 	TMap<TEnumAsByte<ESoundValue>, FSoundStruct> mSoundMap;
-	
-	virtual void UpdateSoundMixVolume_Implementation(ESoundValue SoundValue, float Volume) override;
-	
+
+
 	virtual void BeginPlay() override;
-
-	virtual TMap<TEnumAsByte<ESoundValue>, FSoundStruct> GetSoundMap_Implementation() override { return mSoundMap; }
-	virtual TMap<TEnumAsByte<ESoundValue>, float> ReadSoundSettingsFromFile_Implementation() override;
-	virtual void WriteSoundSettingsToFile_Implementation() override;
-
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Init();
 
-private:
+	virtual TMap<TEnumAsByte<ESoundValue>, FSoundStruct> GetSoundMap_Implementation() override { return mSoundMap; }
+	virtual TMap<TEnumAsByte<ESoundValue>, float> ReadSoundSettingsFromFile_Implementation() override;
 
-	UFUNCTION()
-	TMap<TEnumAsByte<ESoundValue>, float> ReadSoundSettings();
+	virtual void UpdateSoundMixVolume_Implementation(ESoundValue SoundValue, float Volume) override;
 
-	UFUNCTION()
-	void WriteSoundSettings();
+	virtual void WriteSoundSettingsToFile_Implementation() override;
 
 };

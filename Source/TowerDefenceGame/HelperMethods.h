@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "EnumClass.h"
 #include "StructClass.h"
 #include "HelperMethods.generated.h"
 
@@ -19,6 +20,8 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	static void GetMouseLocation(APlayerController* Controller, FVector &MouseLocation);
 
+	
+	static TEnumAsByte<EGraphicsValue> GetGraphicsValueFromString(const FString& Value);
 	
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	static void GetMouseTrace(APlayerController* Controller ,ETraceTypeQuery TraceQuery, bool &Value, FHitResult &hit);

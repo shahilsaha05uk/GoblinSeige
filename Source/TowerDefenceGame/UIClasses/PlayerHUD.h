@@ -24,6 +24,9 @@ private:
 
 	void UpdateStringValues(EHudValue ValueType, FString Value);
 
+	void GetStringForBuilding(ABaseBuilding* Building, FLinearColor &colorToAdd, FString &txtToAdd);
+
+
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	TArray<class UDA_BuildingAsset*> BuildingAssetArray;

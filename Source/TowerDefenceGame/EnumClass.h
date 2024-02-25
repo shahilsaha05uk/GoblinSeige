@@ -15,9 +15,9 @@ enum EHudValue
 };
 
 UENUM(BlueprintType)
-enum ESavedValue
+enum ESettingsToSave
 {
-	SOUND_SETTINGS
+	SOUND_SETTINGS,
 };
 
 UENUM(BlueprintType)
@@ -26,6 +26,13 @@ enum ESoundValue
 	NO_SOUND_VALUE,
 	GAME_SOUND_VALUE,
 	MENU_SOUND_VALUE,
+};
+
+UENUM(BlueprintType)
+enum EGraphicsValue
+{
+	FULLSCREEN,
+	WINDOWED,
 };
 
 UENUM(BlueprintType)

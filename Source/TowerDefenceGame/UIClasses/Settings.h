@@ -16,11 +16,23 @@ class TOWERDEFENCEGAME_API USettings : public UBaseWidget
 {
 	GENERATED_BODY()
 
+
 private:
 	
-	
+	FString ResolutionValue;
+	EGraphicsValue CurrentGraphics;
+
 public:
 
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	class UComboBoxString* cmb_Resolution;
+
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	class UButton* btnResolutionApply;
+	
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	class UButton* btnSoundSettingsApply;
+	
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class USlider* sdr_MenuVolume;
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
@@ -31,6 +43,8 @@ public:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UTextBlock* txt_GameVolume;
 	
+	UPROPERTY(EditDefaultsOnly)
+	TArray<TEnumAsByte<EGraphicsValue>> GraphicsValues;
 	
 	virtual void NativeConstruct() override;
 
@@ -45,11 +59,19 @@ public:
 	void UpdateSoundMixVolume(ESoundValue SoundValue, float Volume);
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void SaveSettings();
-	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnMenuVolumeChanged(float Value);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnGameVolumeChanged(float Value);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void SaveSettingsToFile(ESettingsToSave SettingsToSave);
 	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnSoundSettingsApply();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ApplyResolution();
+	
+	UFUNCTION(BlueprintCallable)
+	void OnResolutionChanged(FString SelectedItem, ESelectInfo::Type SelectionType);
 };

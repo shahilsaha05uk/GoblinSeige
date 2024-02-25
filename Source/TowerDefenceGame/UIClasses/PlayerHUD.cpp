@@ -47,30 +47,57 @@ void UPlayerHUD::PopulateBuildingButtons_Implementation(class UBuyButton* Button
 void UPlayerHUD::OpenBuildingSettingsUI_Implementation(ABaseBuilding* Building)
 {
 	BuildingRef = Building;
+	FString txtToDisplay;
+	FLinearColor colorToAdd;
 
-	bool canUpgrade = BuildingRef->CanUpgrade();
-	
-	btnUpgrade->SetIsEnabled(canUpgrade);
+	GetStringForBuilding(BuildingRef, colorToAdd, txtToDisplay);
 
 	Updater(BUILDING_NAME_VALUE, BuildingRef->BuildingDetails.BuildingName);
 
-	const FSlateColor colorToAdd = canUpgrade ? FSlateColor(FLinearColor(0, 1, 0, 1)) : FSlateColor(FLinearColor(1, 0, 0, 1));
-
 	FTextBlockStyle style = txtDescriptionUpgradeMenu->WidgetStyle.TextStyle;
 	style.SetColorAndOpacity(colorToAdd);
+
+	const FString UpgradeDescription = BuildingRef->GetBuildingUpgradeDescription() + txtToDisplay;
 	
 	txtDescriptionUpgradeMenu->SetTextStyle(style);
-
-	const int MoneyToAcquire = BuildingRef->GetUpgradeCost() - mCurrentBalance;
 	
-	const FString UpgradeDescription = canUpgrade ? 
-		BuildingRef->GetBuildingUpgradeDescription() : 
-		(BuildingRef->GetBuildingUpgradeDescription() + FString::Printf(TEXT("\nYou still require £ %d to upgrade this building"), MoneyToAcquire));
-
 	txtDescriptionUpgradeMenu->SetText(FText::FromString(UpgradeDescription));
 	
 	wsMenuSwitcher->SetActiveWidget(vbBuildingSettings);
 }
+
+void UPlayerHUD::GetStringForBuilding(ABaseBuilding* Building, FLinearColor& colorToAdd, FString& txtToAdd)
+{
+	bool isUpgradeAvailable = Building->isUpgradeAvailable();
+	bool hasEnoughMoney = (mCurrentBalance >= Building->GetUpgradeCost());
+
+	FLinearColor red = FLinearColor(1, 0, 0, 1);
+	FLinearColor green = FLinearColor(0, 1, 0, 1);
+
+	if(!isUpgradeAvailable)
+	{
+		txtToAdd = "This Building is fully upgraded";
+		btnUpgrade->SetIsEnabled(false);
+		colorToAdd = red;
+	}
+	else
+	{
+		if(hasEnoughMoney)
+		{
+			txtToAdd = "You can upgrade this building";
+			btnUpgrade->SetIsEnabled(true);
+			colorToAdd = green;
+		}
+		else
+		{
+			const int MoneyToAcquire = BuildingRef->GetUpgradeCost() - mCurrentBalance;
+			txtToAdd = FString::Printf(TEXT("\nYou require £ %d to upgrade this building"), MoneyToAcquire);
+			btnUpgrade->SetIsEnabled(false);
+			colorToAdd = red;
+		}
+	}
+}
+
 
 void UPlayerHUD::WidgetToggler_Implementation(ABaseBuilding* Building)
 {

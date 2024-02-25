@@ -11,6 +11,20 @@ void UHelperMethods::GetMouseLocation(APlayerController* Controller, FVector& Mo
 	Controller->GetMousePosition(MouseLocation.X, MouseLocation.Y);
 }
 
+TEnumAsByte<EGraphicsValue> UHelperMethods::GetGraphicsValueFromString(const FString& Value)
+{
+	if (Value.Equals("FULLSCREEN", ESearchCase::IgnoreCase))
+	{
+		return EGraphicsValue::FULLSCREEN;
+	}
+	else if (Value.Equals("WINDOWED", ESearchCase::IgnoreCase))
+	{
+		return EGraphicsValue::WINDOWED;
+	}
+	return {};
+
+}
+
 void UHelperMethods::GetMouseTrace(APlayerController* Controller, ETraceTypeQuery TraceQuery, bool& Value,
                                    FHitResult& hit)
 {
