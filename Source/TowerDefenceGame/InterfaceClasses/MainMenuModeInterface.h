@@ -27,7 +27,6 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void UpdateSoundMixVolume(ESoundValue SoundValue, float Volume);
 
-	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	TMap<TEnumAsByte<ESoundValue>, FSoundStruct> GetSoundMap();
 	
@@ -36,4 +35,5 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void WriteSoundSettingsToFile();
+	
 };

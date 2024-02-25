@@ -3,12 +3,17 @@
 
 #include "Settings.h"
 
+#include "Components/Button.h"
+#include "Components/ComboBox.h"
+#include "Components/ComboBoxString.h"
 #include "Components/Slider.h"
 #include "Components/TextBlock.h"
 #include "GameFramework/GameMode.h"
 #include "GameFramework/GameModeBase.h"
+#include "GameFramework/GameUserSettings.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundClass.h"
+#include "TowerDefenceGame/HelperMethods.h"
 #include "TowerDefenceGame/InterfaceClasses/MainMenuModeInterface.h"
 
 void USettings::NativeConstruct()
@@ -18,32 +23,34 @@ void USettings::NativeConstruct()
 	Init();
 }
 
-void USettings::UpdateSoundMixVolume_Implementation(ESoundValue SoundValue, float Volume)
+void USettings::SaveSettingsToFile_Implementation(ESettingsToSave SettingsToSave)
 {
 	const UWorld* World = GetWorld();
 	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(World);
-	if(UKismetSystemLibrary::DoesImplementInterface(UGameplayStatics::GetGameMode(World), UMainMenuModeInterface::StaticClass()))
+
+	bool bDoesImplementInterface = UKismetSystemLibrary::DoesImplementInterface(GameMode, UMainMenuModeInterface::StaticClass());
+
+	if(!bDoesImplementInterface) return;
+	switch (SettingsToSave)
 	{
-		IMainMenuModeInterface::Execute_UpdateSoundMixVolume(GameMode, SoundValue, Volume);
+	case SOUND_SETTINGS:
+		IMainMenuModeInterface::Execute_WriteSoundSettingsToFile(GameMode);
+		break;
 	}
-	
 }
 
-void USettings::SaveSettings_Implementation()
-{
-	const UWorld* World = GetWorld();
-	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(World);
-	if(UKismetSystemLibrary::DoesImplementInterface(UGameplayStatics::GetGameMode(World), UMainMenuModeInterface::StaticClass()))
-	{
-		IMainMenuModeInterface::Execute_WriteSoundSettingsToFile(GameMode);
-	}
-}
 
 void USettings::Init_Implementation()
 {
 	// Slider Binder
 	sdr_GameVolume->OnValueChanged.AddDynamic(this, &USettings::OnGameVolumeChanged);
 	sdr_MenuVolume->OnValueChanged.AddDynamic(this, &USettings::OnMenuVolumeChanged);
+
+	btnSoundSettingsApply->OnClicked.AddDynamic(this, &USettings::OnSoundSettingsApply);
+
+	btnResolutionApply->OnClicked.AddDynamic(this, &USettings::ApplyResolution);
+	cmb_Resolution->OnSelectionChanged.AddDynamic(this, &USettings::OnResolutionChanged);
+
 	
 	//Check if the file exists
 	TMap<TEnumAsByte<ESoundValue>, FSoundStruct> mSoundMap;
@@ -63,18 +70,40 @@ void USettings::Init_Implementation()
 			ManageSoundSlider(e.Key, value);
 		}
 	}
+	
+	// Initialise the Resolution Array:
+	for (auto r : GraphicsValues)
+	{
+		cmb_Resolution->AddOption(UEnum::GetValueAsString(r));
+	}
 }
 
-void USettings::OnMenuVolumeChanged_Implementation(float Value)
+void USettings::ApplyResolution_Implementation()
 {
-	ManageSoundSlider(MENU_SOUND_VALUE, Value);
-	UpdateSoundMixVolume(MENU_SOUND_VALUE, Value);
+	EGraphicsValue graphicsEnumVal = UHelperMethods::GetGraphicsValueFromString(ResolutionValue);
+	UGameUserSettings* UserSettings = UGameUserSettings::GetGameUserSettings();
+
+	switch (graphicsEnumVal) {
+	case FULLSCREEN:
+		UserSettings->SetFullscreenMode(EWindowMode::WindowedFullscreen);
+		break;
+	case WINDOWED:
+		UserSettings->SetFullscreenMode(EWindowMode::Windowed);
+		break;
+	}
+
+	UserSettings->ApplyResolutionSettings(false);
+
 }
 
-void USettings::OnGameVolumeChanged_Implementation(float Value)
+void USettings::UpdateSoundMixVolume_Implementation(ESoundValue SoundValue, float Volume)
 {
-	ManageSoundSlider(GAME_SOUND_VALUE, Value);
-	UpdateSoundMixVolume(GAME_SOUND_VALUE, Value);
+	const UWorld* World = GetWorld();
+	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(World);
+	if(UKismetSystemLibrary::DoesImplementInterface(UGameplayStatics::GetGameMode(World), UMainMenuModeInterface::StaticClass()))
+	{
+		IMainMenuModeInterface::Execute_UpdateSoundMixVolume(GameMode, SoundValue, Volume);
+	}
 }
 
 void USettings::ManageSoundSlider_Implementation(ESoundValue SoundValue, float Volume)
@@ -94,4 +123,27 @@ void USettings::ManageSoundSlider_Implementation(ESoundValue SoundValue, float V
 	default:
 		break;
 	}
+}
+
+// Widget Binded Methods
+void USettings::OnMenuVolumeChanged_Implementation(float Value)
+{
+	ManageSoundSlider(MENU_SOUND_VALUE, Value);
+	UpdateSoundMixVolume(MENU_SOUND_VALUE, Value);
+}
+
+void USettings::OnGameVolumeChanged_Implementation(float Value)
+{
+	ManageSoundSlider(GAME_SOUND_VALUE, Value);
+	UpdateSoundMixVolume(GAME_SOUND_VALUE, Value);
+}
+
+void USettings::OnSoundSettingsApply_Implementation()
+{
+	SaveSettingsToFile(SOUND_SETTINGS);
+}
+
+void USettings::OnResolutionChanged(FString SelectedItem, ESelectInfo::Type SelectionType)
+{
+	ResolutionValue = SelectedItem;
 }

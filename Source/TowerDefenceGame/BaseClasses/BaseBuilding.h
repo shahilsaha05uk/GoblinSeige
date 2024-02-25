@@ -120,7 +120,10 @@ public:
 	void Upgrade();
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool CanUpgrade() { return bCanUpgrade; }
-
+	
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	bool isUpgradeAvailable() {return BuildingDetails.UpgradeAsset != nullptr;}
+	
 #pragma endregion
 
 #pragma region Building Modification

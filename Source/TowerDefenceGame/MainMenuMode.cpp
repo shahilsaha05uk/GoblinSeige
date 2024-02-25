@@ -3,15 +3,9 @@
 
 #include "MainMenuMode.h"
 
+#include "HelperMethods.h"
+#include "GameFramework/GameUserSettings.h"
 #include "Sound/SoundClass.h"
-
-void AMainMenuMode::UpdateSoundMixVolume_Implementation(ESoundValue SoundValue, float Volume)
-{
-	if(mSoundMap.Contains(SoundValue))
-	{
-		mSoundMap[SoundValue].SoundClassRef->Properties.Volume = Volume;
-	}
-}
 
 void AMainMenuMode::BeginPlay()
 {
@@ -22,8 +16,8 @@ void AMainMenuMode::BeginPlay()
 void AMainMenuMode::Init_Implementation()
 {
 	bool bSuccess = false;
-	const TMap<TEnumAsByte<ESoundValue>, float> SoundSettings = ReadSoundSettings();
-
+	const TMap<TEnumAsByte<ESoundValue>, float> SoundSettings = Execute_ReadSoundSettingsFromFile(this);
+	
 	if(!SoundSettings.IsEmpty())
 	{
 		for (auto e : mSoundMap)
@@ -31,19 +25,40 @@ void AMainMenuMode::Init_Implementation()
 			e.Value.SoundClassRef->Properties.Volume = SoundSettings[e.Key];
 		}
 	}
+
+	//Apply Resolution Settings
+
 }
 
-TMap<TEnumAsByte<ESoundValue>, float> AMainMenuMode::ReadSoundSettingsFromFile_Implementation()
-{
-	return ReadSoundSettings();
-}
+#pragma region Writing to file
 
 void AMainMenuMode::WriteSoundSettingsToFile_Implementation()
 {
-	WriteSoundSettings();
-}
+	TSharedPtr<FJsonObject> RootObject = MakeShareable(new FJsonObject);
 
-TMap<TEnumAsByte<ESoundValue>, float> AMainMenuMode::ReadSoundSettings()
+	for (auto e : mSoundMap)
+	{
+		FString keyString = UEnum::GetValueAsString(e.Key);
+
+		TSharedPtr<FJsonObject> SettingsObject = MakeShareable(new FJsonObject);
+		SettingsObject->SetNumberField(TEXT("Value"), e.Value.SoundClassRef->Properties.Volume);
+		UE_LOG(LogTemp, Warning, TEXT("%f"), e.Value.SoundClassRef->Properties.Volume);
+
+		RootObject->SetObjectField(keyString, SettingsObject);
+	}
+
+	FString outputString;
+	TSharedRef<TJsonWriter<>> writer = TJsonWriterFactory<>::Create(&outputString);
+	FJsonSerializer::Serialize(RootObject.ToSharedRef(), writer);
+
+	const FString SavePath = FPaths::ProjectSavedDir() + TEXT("SoundSettings.json");
+	FFileHelper::SaveStringToFile(outputString, *SavePath);
+}
+#pragma endregion
+
+#pragma region Read from file
+
+TMap<TEnumAsByte<ESoundValue>, float> AMainMenuMode::ReadSoundSettingsFromFile_Implementation()
 {
 	TMap<TEnumAsByte<ESoundValue>, float> LoadedSettingsMap;
 	FString LoadPath = FPaths::ProjectSavedDir() + TEXT("SoundSettings.json");
@@ -85,25 +100,13 @@ TMap<TEnumAsByte<ESoundValue>, float> AMainMenuMode::ReadSoundSettings()
 	return TMap<TEnumAsByte<ESoundValue>, float>();
 }
 
-void AMainMenuMode::WriteSoundSettings()
+#pragma endregion
+
+
+void AMainMenuMode::UpdateSoundMixVolume_Implementation(ESoundValue SoundValue, float Volume)
 {
-	TSharedPtr<FJsonObject> RootObject = MakeShareable(new FJsonObject);
-
-	for (auto e : mSoundMap)
+	if(mSoundMap.Contains(SoundValue))
 	{
-		FString keyString = UEnum::GetValueAsString(e.Key);
-
-		TSharedPtr<FJsonObject> SettingsObject = MakeShareable(new FJsonObject);
-		SettingsObject->SetNumberField(TEXT("Value"), e.Value.SoundClassRef->Properties.Volume);
-		UE_LOG(LogTemp, Warning, TEXT("%f"), e.Value.SoundClassRef->Properties.Volume);
-
-		RootObject->SetObjectField(keyString, SettingsObject);
+		mSoundMap[SoundValue].SoundClassRef->Properties.Volume = Volume;
 	}
-
-	FString outputString;
-	TSharedRef<TJsonWriter<>> writer = TJsonWriterFactory<>::Create(&outputString);
-	FJsonSerializer::Serialize(RootObject.ToSharedRef(), writer);
-
-	const FString SavePath = FPaths::ProjectSavedDir() + TEXT("SoundSettings.json");
-	FFileHelper::SaveStringToFile(outputString, *SavePath);
 }
