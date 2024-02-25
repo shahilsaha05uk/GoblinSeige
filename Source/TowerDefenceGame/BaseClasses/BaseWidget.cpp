@@ -31,6 +31,6 @@ bool UBaseWidget::OnUIHovered_Implementation()
 
 void UBaseWidget::CloseWidget_Implementation()
 {
-	
+	if(HudRef) IHUDInterface::Execute_DestroyWidget(HudRef, WidgetType);
 }
 

@@ -60,7 +60,7 @@ void AEnemyManager::FreeController()
 		AllocatedControllers.Empty(0);
 
 		TotalEnemiesDead = 0;
-		mGameMode->GetWaveManager()->EndWave();
+		IGameModeInterface::Execute_GetWaveManager(mGameMode)->EndWave();
 	}
 }
 

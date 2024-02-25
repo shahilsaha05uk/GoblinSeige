@@ -6,6 +6,7 @@
 #include "DataAssetClasses/DA_InputActions.h"
 #include "GameFramework/PlayerController.h"
 #include "InterfaceClasses/ControllerInterface.h"
+#include "InterfaceClasses/SoundInterface.h"
 #include "UIClasses/PlayerHUD.h"
 #include "InputController.generated.h"
 
@@ -13,7 +14,7 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuyMenuOptionClickSignature, class UDA_BuildingAsset*, BuildingAsset);
 
 UCLASS()
-class TOWERDEFENCEGAME_API AInputController : public APlayerController, public IControllerInterface
+class TOWERDEFENCEGAME_API AInputController : public APlayerController, public IControllerInterface, public ISoundInterface
 {
 	GENERATED_BODY()
 
@@ -23,6 +24,10 @@ public:
 	bool bIsPaused;
 
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Controller Components")
+	class UAudioComponent* LevelAudioComp;
+
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	UDA_InputActions* DA_Inputs;
 
@@ -55,9 +60,11 @@ public:
 		PlayerHUD->Updater(ValueToUpdate, Value);
 	};
 
+	virtual void PlaySound_Implementation() override;
+	virtual void StopSound_Implementation() override;
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnWaveComplete(int WaveNumber);
+	void ManageAudio(bool hasWaveStarted);
 
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
 	FOnBuyMenuOptionClickSignature OnBuyMenuOptionClickSignature;
@@ -94,5 +101,13 @@ public:
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnGameComplete();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnWaveStart();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnWaveComplete(int WaveNumber);
+
+
 };
 

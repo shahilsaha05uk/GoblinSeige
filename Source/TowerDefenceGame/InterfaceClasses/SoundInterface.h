@@ -25,4 +25,6 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PlaySound();
 	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void StopSound();
 };

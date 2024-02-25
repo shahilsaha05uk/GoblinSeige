@@ -82,7 +82,7 @@ void UPlayerHUD::OnWaveStart_Implementation()
 {
 	if(gameMode)
 	{
-		gameMode->GetWaveManager()->StartWave();
+		IGameModeInterface::Execute_GetWaveManager(gameMode)->StartWave();
 
 		btnWaveStart->SetIsEnabled(false);
 	}
