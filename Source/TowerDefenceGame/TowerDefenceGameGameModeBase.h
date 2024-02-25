@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "EnumClass.h"
 #include "GameFramework/GameModeBase.h"
+#include "InterfaceClasses/GameModeInterface.h"
 #include "TowerDefenceGameGameModeBase.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGameOverSignature);
@@ -13,7 +14,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEnemyKilledSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWaveCompleteSignature, int, waveNumber);
 
 UCLASS()
-class TOWERDEFENCEGAME_API ATowerDefenceGameGameModeBase : public AGameModeBase
+class TOWERDEFENCEGAME_API ATowerDefenceGameGameModeBase : public AGameModeBase, public IGameModeInterface
 {
 	GENERATED_BODY()
 
@@ -45,12 +46,10 @@ public:
 	ATowerDefenceGameGameModeBase();
 	
 	virtual void PostLogin(APlayerController* NewPlayer) override;
-
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	class AWaveManager* GetWaveManager(){return mWaveManager; }
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	class AEnemyManager* GetEnemyManager() { return mEnemyManager; }
 	
+	virtual AWaveManager* GetWaveManager_Implementation() override {return mWaveManager;}
+	virtual AEnemyManager* GetEnemyManager_Implementation() override {return mEnemyManager; }
+
 protected:
 
 	UPROPERTY(BlueprintReadWrite, Category = "Managers")

@@ -15,6 +15,20 @@ enum EHudValue
 };
 
 UENUM(BlueprintType)
+enum ESavedValue
+{
+	SOUND_SETTINGS
+};
+
+UENUM(BlueprintType)
+enum ESoundValue
+{
+	NO_SOUND_VALUE,
+	GAME_SOUND_VALUE,
+	MENU_SOUND_VALUE,
+};
+
+UENUM(BlueprintType)
 enum EWidgetType
 {
 	NO_WIDGET,
@@ -24,7 +38,6 @@ enum EWidgetType
 	INSTRUCTION,
 	PAUSE_MENU,
 	GAMECOMPLETE_MENU
-	
 };
 UENUM(BlueprintType)
 enum ELevelToTravel

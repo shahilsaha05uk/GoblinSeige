@@ -43,6 +43,18 @@ public:
 	
 };
 
+USTRUCT(Blueprintable, BlueprintType)
+struct FSoundStruct
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Sound Properties")
+	USoundMix* SoundMixRef;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Sound Properties")
+	USoundClass* SoundClassRef;
+};
 
 USTRUCT(Blueprintable, BlueprintType)
 struct FBuildingDetails
@@ -72,16 +84,20 @@ public:
 	}
 };
 
+// Save Game Structs
 
+USTRUCT(Blueprintable, BlueprintType)
+struct FSoundSave
+{
+	GENERATED_BODY()
 
+public:
 
-
-
-
-
-
-
-
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Sound Saves")
+	float GameVolume;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Sound Saves")
+	float MenuVolume;
+};
 
 
 UCLASS()

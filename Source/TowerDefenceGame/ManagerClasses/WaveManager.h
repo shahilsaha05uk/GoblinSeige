@@ -9,6 +9,7 @@
 #include "WaveManager.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWaveUpdateSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWaveStartSignature);
 
 UCLASS()
 class TOWERDEFENCEGAME_API AWaveManager : public AActor
@@ -26,6 +27,8 @@ private:
 public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Wave Properties")
 	FOnWaveUpdateSignature OnWaveUpdateSignature;
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Wave Properties")
+	FOnWaveStartSignature OnWaveStartSignature;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private", meta = (ExposeOnSpawn = true))
 	class ATowerDefenceGameGameModeBase* mGameMode;

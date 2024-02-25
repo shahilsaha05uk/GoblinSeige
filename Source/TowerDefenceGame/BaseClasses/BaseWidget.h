@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "TowerDefenceGame/EnumClass.h"
 #include "BaseWidget.generated.h"
 
 /**
@@ -21,7 +22,10 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn), Category = "Private")
 	class AInputController* Controller;
-
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn), Category = "Private")
+	TEnumAsByte<EWidgetType> WidgetType;
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool bIsInsideUI;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)

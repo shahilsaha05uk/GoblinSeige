@@ -11,6 +11,7 @@
 #include "ActorComponentClasses/CurrencyComponent.h"
 #include "Actors/SpecPlayer.h"
 #include "BaseClasses/BaseBuilding.h"
+#include "Components/AudioComponent.h"
 #include "DataAssetClasses/DA_BuildingAsset.h"
 #include "InterfaceClasses/HUDInterface.h"
 #include "InterfaceClasses/PlayerInputInterface.h"
@@ -20,6 +21,9 @@
 AInputController::AInputController()
 {
 	OnBuyMenuOptionClickSignature.AddDynamic(this, &AInputController::OnBuyOptionClicked);
+
+	LevelAudioComp = CreateDefaultSubobject<UAudioComponent>(TEXT("AudioComp"));
+	LevelAudioComp->SetupAttachment(RootComponent);
 }
 
 void AInputController::BeginPlay()
@@ -35,8 +39,11 @@ void AInputController::BeginPlay()
 
 	if(GameMode)
 	{
-		WaveNumber = GameMode->GetWaveManager()->GetWave(CURRENT_LEVEL);
+		AWaveManager* WaveManager = IGameModeInterface::Execute_GetWaveManager(GameMode);
+		WaveManager->OnWaveStartSignature.AddDynamic(this, &AInputController::OnWaveStart);
+		WaveNumber = WaveManager->GetWave(CURRENT_LEVEL);
 
+		
 		GameMode->OnWaveCompleteSignature.AddDynamic(this, &AInputController::OnWaveComplete);
 		GameMode->OnEnemyKilledSignature.AddDynamic(this, &AInputController::OnEnemyKilled);
 		GameMode->OnGameCompleteSignature.AddDynamic(this, &AInputController::OnGameComplete);
@@ -89,6 +96,40 @@ void AInputController::OnPossess(APawn* InPawn)
 	Super::OnPossess(InPawn);
 }
 
+#pragma region Audio Methods
+
+void AInputController::ManageAudio_Implementation(bool hasWaveStarted)
+{
+	// 1 if the wave has started else 0
+	const int soundToPlay = hasWaveStarted ? 1 : 0;
+
+	LevelAudioComp->SetIntParameter(FName("SoundToPlay"), soundToPlay);
+}
+
+void AInputController::PlaySound_Implementation()
+{
+	ManageAudio(false);
+	//LevelAudioComp->Play();
+}
+
+void AInputController::StopSound_Implementation()
+{
+	LevelAudioComp->Stop();
+}
+
+#pragma endregion
+
+void AInputController::OnWaveStart_Implementation()
+{
+	ManageAudio(true);
+}
+
+void AInputController::OnWaveComplete_Implementation(int WaveNumber)
+{
+	HUDUpdater(WAVE_VALUE, WaveNumber);
+	ManageAudio(false);
+}
+
 void AInputController::PauseGame_Implementation()
 {
 	
@@ -108,16 +149,12 @@ void AInputController::OnGameComplete_Implementation()
 	IHUDInterface::Execute_DestroyWidget(GameHUD, PLAYER_HUD);
 
 	//TODO: Spawn the Game Complete Screen
+	ManageAudio(false);
 }
 
 void AInputController::SideWidgetToggler_Implementation(ABaseBuilding* BuildingRef)
 {
 	PlayerHUD->WidgetToggler(BuildingRef);
-}
-
-void AInputController::OnWaveComplete_Implementation(int WaveNumber)
-{
-	HUDUpdater(WAVE_VALUE, WaveNumber);
 }
 
 

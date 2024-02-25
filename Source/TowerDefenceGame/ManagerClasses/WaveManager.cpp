@@ -17,7 +17,8 @@ void AWaveManager::Init_Implementation(ATowerDefenceGameGameModeBase* gameMode)
 
 void AWaveManager::StartWave_Implementation()
 {
-	mGameMode->GetEnemyManager()->PrepareForWave(mCurrentWave);
+	OnWaveStartSignature.Broadcast();
+	IGameModeInterface::Execute_GetEnemyManager(mGameMode)->PrepareForWave(mCurrentWave);
 }
 
 void AWaveManager::EndWave_Implementation()
@@ -44,6 +45,3 @@ void AWaveManager::UpdateWave()
 	if(mCurrentWave >= mFinalWave) return;
 	mCurrentWave++;
 }
-
-
-

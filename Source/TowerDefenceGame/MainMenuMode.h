@@ -1,0 +1,44 @@
+﻿// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "EnumClass.h"
+#include "StructClass.h"
+#include "GameFramework/GameModeBase.h"
+#include "InterfaceClasses/MainMenuModeInterface.h"
+#include "MainMenuMode.generated.h"
+
+/**
+ * 
+ */
+UCLASS()
+class TOWERDEFENCEGAME_API AMainMenuMode : public AGameModeBase, public IMainMenuModeInterface
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Sound")
+	TMap<TEnumAsByte<ESoundValue>, FSoundStruct> mSoundMap;
+	
+	virtual void UpdateSoundMixVolume_Implementation(ESoundValue SoundValue, float Volume) override;
+	
+	virtual void BeginPlay() override;
+
+	virtual TMap<TEnumAsByte<ESoundValue>, FSoundStruct> GetSoundMap_Implementation() override { return mSoundMap; }
+	virtual TMap<TEnumAsByte<ESoundValue>, float> ReadSoundSettingsFromFile_Implementation() override;
+	virtual void WriteSoundSettingsToFile_Implementation() override;
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void Init();
+
+private:
+
+	UFUNCTION()
+	TMap<TEnumAsByte<ESoundValue>, float> ReadSoundSettings();
+
+	UFUNCTION()
+	void WriteSoundSettings();
+
+};
