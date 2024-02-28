@@ -55,12 +55,12 @@ enum ELevelToTravel
 	
 };
 UENUM(BlueprintType)
-enum ELevel
+enum EWave
 {
-	NO_LEVEL,
-	INITIAL_LEVEL,
-	CURRENT_LEVEL,
-	FINAL_LEVEL
+	NO_WAVE,
+	INITIAL_WAVE,
+	CURRENT_WAVE,
+	FINAL_WAVE
 };
 
 UENUM(BlueprintType)

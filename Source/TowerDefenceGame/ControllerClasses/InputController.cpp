@@ -4,19 +4,17 @@
 #include "InputController.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "GameHUD.h"
 #include "InputTriggers.h"
-#include "UIClasses/PlayerHUD.h"
-#include "TowerDefenceGameGameModeBase.h"
-#include "ActorComponentClasses/CurrencyComponent.h"
-#include "Actors/SpecPlayer.h"
-#include "BaseClasses/BaseBuilding.h"
 #include "Components/AudioComponent.h"
-#include "DataAssetClasses/DA_BuildingAsset.h"
-#include "InterfaceClasses/HUDInterface.h"
-#include "InterfaceClasses/PlayerInputInterface.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "ManagerClasses/WaveManager.h"
+#include "Sound/SoundCue.h"
+#include "TowerDefenceGame/Actors/SpecPlayer.h"
+#include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
+#include "TowerDefenceGame/BaseClasses/GameHUD.h"
+#include "TowerDefenceGame/DataAssetClasses/DA_InputActions.h"
+#include "TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h"
+#include "TowerDefenceGame/ManagerClasses/WaveManager.h"
+#include "TowerDefenceGame/UIClasses/GameComplete.h"
 
 AInputController::AInputController()
 {
@@ -41,12 +39,12 @@ void AInputController::BeginPlay()
 	{
 		AWaveManager* WaveManager = IGameModeInterface::Execute_GetWaveManager(GameMode);
 		WaveManager->OnWaveStartSignature.AddDynamic(this, &AInputController::OnWaveStart);
-		WaveNumber = WaveManager->GetWave(CURRENT_LEVEL);
-
+		WaveNumber = WaveManager->GetWave(CURRENT_WAVE);
 		
 		GameMode->OnWaveCompleteSignature.AddDynamic(this, &AInputController::OnWaveComplete);
 		GameMode->OnEnemyKilledSignature.AddDynamic(this, &AInputController::OnEnemyKilled);
 		GameMode->OnGameCompleteSignature.AddDynamic(this, &AInputController::OnGameComplete);
+		GameMode->OnGameOverSignature.AddDynamic(this, &AInputController::OnGameOver);
 	}
 	
 	if(GameHUD && UKismetSystemLibrary::DoesImplementInterface(GameHUD, UHUDInterface::StaticClass()))
@@ -57,7 +55,7 @@ void AInputController::BeginPlay()
 		{
 			PlayerHUD->OnUpgradeButtonClickedSignature.AddDynamic(this, &AInputController::OnUpgradeButtonClick);
 			PlayerHUD->OnMoveButtonClickedSignature.AddDynamic(this, &AInputController::OnMoveButtonClick);
-			HUDUpdater(MONEY_VALUE, SpecPawn->CurrencyComponent->GetCurrentBalance());
+			HUDUpdater(MONEY_VALUE, SpecPawn->CurrencyComponent->GetStartingBalance());
 			HUDUpdater(WAVE_VALUE, WaveNumber);
 			PlayerHUD->AddToViewport();
 		}
@@ -96,20 +94,41 @@ void AInputController::OnPossess(APawn* InPawn)
 	Super::OnPossess(InPawn);
 }
 
+int AInputController::GetPlayerStartingBalance()
+{
+	return SpecPawn->CurrencyComponent->GetStartingBalance();
+}
+
+void AInputController::OnEnemyKilled_Implementation()
+{
+	APawn* pawn = GetPawn();
+
+	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UPlayerInterface::StaticClass()))
+	{
+		IPlayerInterface::Execute_AddMoneyToAccount(pawn, 100);
+		
+		HUDUpdater(MONEY_VALUE, IPlayerInterface::Execute_GetCurrentBalance(pawn));
+	}
+}
+
 #pragma region Audio Methods
 
 void AInputController::ManageAudio_Implementation(bool hasWaveStarted)
 {
-	// 1 if the wave has started else 0
-	const int soundToPlay = hasWaveStarted ? 1 : 0;
+	USoundCue* SoundCue = (hasWaveStarted)? WaveCue : BackgroundCue;
+	
+	LevelAudioComp->FadeOut(2.0f, 0.0f);
 
-	LevelAudioComp->SetIntParameter(FName("SoundToPlay"), soundToPlay);
+	UKismetSystemLibrary::Delay(GetWorld(), 1.0f, FLatentActionInfo());
+
+	LevelAudioComp->SetSound(SoundCue);
+
+	LevelAudioComp->FadeIn(2.0f, 1.0f);
 }
 
 void AInputController::PlaySound_Implementation()
 {
 	ManageAudio(false);
-	//LevelAudioComp->Play();
 }
 
 void AInputController::StopSound_Implementation()
@@ -118,6 +137,8 @@ void AInputController::StopSound_Implementation()
 }
 
 #pragma endregion
+
+#pragma region Wave
 
 void AInputController::OnWaveStart_Implementation()
 {
@@ -130,12 +151,17 @@ void AInputController::OnWaveComplete_Implementation(int WaveNumber)
 	ManageAudio(false);
 }
 
-void AInputController::PauseGame_Implementation()
+void AInputController::OnGameComplete_Implementation()
 {
-	
+	RequestGameCompleteUI(true);
 }
 
-void AInputController::OnGameComplete_Implementation()
+void AInputController::OnGameOver_Implementation()
+{
+	RequestGameCompleteUI(false);
+}
+
+void AInputController::RequestGameCompleteUI_Implementation(bool hasWon)
 {
 	APawn* pawn = GetPawn();
 
@@ -147,16 +173,16 @@ void AInputController::OnGameComplete_Implementation()
 	}
 
 	IHUDInterface::Execute_DestroyWidget(GameHUD, PLAYER_HUD);
-
-	//TODO: Spawn the Game Complete Screen
-	ManageAudio(false);
+	
+	UBaseWidget* GameCompleteUI = IHUDInterface::Execute_WidgetInitialiser(GameHUD, GAMECOMPLETE_MENU, this);
+	Cast<UGameComplete>(GameCompleteUI)->bWonGame = hasWon;
+	GameCompleteUI->AddToViewport();
+	LevelAudioComp->Stop();
 }
 
-void AInputController::SideWidgetToggler_Implementation(ABaseBuilding* BuildingRef)
-{
-	PlayerHUD->WidgetToggler(BuildingRef);
-}
+#pragma endregion
 
+#pragma region Control Methods
 
 void AInputController::Zoom_Implementation(const FInputActionValue& InputActionValue)
 {
@@ -233,18 +259,6 @@ void AInputController::DisableLook_Implementation(const FInputActionValue& Input
 	}
 }
 
-void AInputController::OnEnemyKilled_Implementation()
-{
-	APawn* pawn = GetPawn();
-
-	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UPlayerInterface::StaticClass()))
-	{
-		IPlayerInterface::Execute_AddMoneyToAccount(pawn, 100);
-		
-		HUDUpdater(MONEY_VALUE, IPlayerInterface::Execute_GetCurrentBalance(pawn));
-	}
-}
-
 void AInputController::OnUpgradeButtonClick_Implementation(ABaseBuilding* BuildingToUpgrade, int UpgradeCost)
 {
 	APawn* pawn = GetPawn();
@@ -264,3 +278,15 @@ void AInputController::OnMoveButtonClick_Implementation()
 		IPlayerInterface::Execute_MoveSelectedBuilding(pawn);
 	}
 }
+
+void AInputController::PauseGame_Implementation()
+{
+	
+}
+
+void AInputController::SideWidgetToggler_Implementation(ABaseBuilding* BuildingRef)
+{
+	PlayerHUD->WidgetToggler(BuildingRef);
+}
+
+#pragma endregion

@@ -2,15 +2,15 @@
 
 #include "CoreMinimal.h"
 #include "EnhancedInputSubsystemInterface.h"
-#include "TowerDefenceGameGameModeBase.h"
-#include "DataAssetClasses/DA_InputActions.h"
 #include "GameFramework/PlayerController.h"
-#include "InterfaceClasses/ControllerInterface.h"
-#include "InterfaceClasses/SoundInterface.h"
-#include "UIClasses/PlayerHUD.h"
+#include "TowerDefenceGame/InterfaceClasses/ControllerInterface.h"
+#include "TowerDefenceGame/InterfaceClasses/SoundInterface.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
+#include "TowerDefenceGame/UIClasses/PlayerHUD.h"
 #include "InputController.generated.h"
 
 
+class UDA_InputActions;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuyMenuOptionClickSignature, class UDA_BuildingAsset*, BuildingAsset);
 
 UCLASS()
@@ -24,10 +24,6 @@ public:
 	bool bIsPaused;
 
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Controller Components")
-	class UAudioComponent* LevelAudioComp;
-
-	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	UDA_InputActions* DA_Inputs;
 
@@ -40,10 +36,18 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	class AGameHUD* GameHUD;
 	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Controller Components")
+	class UAudioComponent* LevelAudioComp;
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	class UPlayerHUD* PlayerHUD;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	ATowerDefenceGameGameModeBase* GameMode;
+	class ATowerDefenceGameGameModeBase* GameMode;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Sounds")
+	class USoundCue* WaveCue;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Sounds")
+	class USoundCue* BackgroundCue;
 
 
 	AInputController();
@@ -64,14 +68,14 @@ public:
 	virtual void StopSound_Implementation() override;
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void RequestGameCompleteUI(bool hasWon);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ManageAudio(bool hasWaveStarted);
 
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
 	FOnBuyMenuOptionClickSignature OnBuyMenuOptionClickSignature;
-	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnBuyOptionClicked(UDA_BuildingAsset* BuildingAsset);
-	
+
+	// Controller Input Methods
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Move(const FInputActionValue& InputActionValue);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -84,13 +88,18 @@ public:
 	void LeftMouseActions();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Zoom(const FInputActionValue& InputActionValue);
-
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PauseGame();
 
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	int GetPlayerStartingBalance();
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SideWidgetToggler(class ABaseBuilding* BuildingRef = nullptr);
-	
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnBuyOptionClicked(UDA_BuildingAsset* BuildingAsset);
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnUpgradeButtonClick(ABaseBuilding* BuildingToUpgrade, int UpgradeCost);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -98,16 +107,18 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnEnemyKilled();
-	
+
+	// Wave Methods
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnGameComplete();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnGameOver();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnWaveStart();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnWaveComplete(int WaveNumber);
-
 
 };
 

@@ -3,8 +3,8 @@
 
 #include "EnemyController.h"
 
-#include "BaseClasses/BaseEnemy.h"
-#include "ManagerClasses/EnemyManager.h"
+#include "TowerDefenceGame/ManagerClasses/EnemyManager.h"
+#include "TowerDefenceGame/BaseClasses/BaseEnemy.h"
 #include "Navigation/PathFollowingComponent.h"
 
 void AEnemyController::OnPossess(APawn* InPawn)
@@ -19,6 +19,7 @@ void AEnemyController::OnSpawn(AEnemyManager* Manager)
 	Manager->OnEnemySpawnRequest.AddDynamic(this, &AEnemyController::SpawnPawn);
 	Manager->OnControllerDestroySignature.AddDynamic(this, &AEnemyController::OnControllerDestroy);
 }
+
 
 void AEnemyController::EnemyMove_Implementation(FVector TargetLocation)
 {

@@ -3,9 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "EnumClass.h"
 #include "GameFramework/GameModeBase.h"
-#include "InterfaceClasses/GameModeInterface.h"
+#include "TowerDefenceGame/InterfaceClasses/GameModeInterface.h"
 #include "TowerDefenceGameGameModeBase.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGameOverSignature);

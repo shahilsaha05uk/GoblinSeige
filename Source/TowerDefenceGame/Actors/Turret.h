@@ -57,6 +57,8 @@ public:
 
 	virtual void PostBuild_Implementation() override;
 
+	virtual void Upgrade_Implementation() override;
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnRangeBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)

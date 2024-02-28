@@ -41,6 +41,7 @@ void ATurret::PostBuild_Implementation()
 	//PowerOn();
 }
 
+
 void ATurret::LookAtTarget_Implementation()
 {
 	
@@ -126,7 +127,6 @@ void ATurret::PowerOff_Implementation()
 	GetWorldTimerManager().ClearTimer(TurningTimeHandler);
 
 	bIsPowerOn = false;
-
 }
 
 
@@ -137,9 +137,17 @@ void ATurret::Fire_Implementation()
 
 void ATurret::StopFire_Implementation()
 {
-	
+	PowerOff();
 }
 
 void ATurret::SpawnProjectile_Implementation(TSubclassOf<AProjectile> ProjectileClass, FVector Location, FRotator Rotation, AActor* Target)
 {
+}
+
+void ATurret::Upgrade_Implementation()
+{
+	Super::Upgrade_Implementation();
+
+	if(bIsPowerOn) PowerOff();
+	PowerOn();
 }

@@ -3,10 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "EnumClass.h"
-#include "StructClass.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
+#include "TowerDefenceGame/SupportClasses/StructClass.h"
 #include "GameFramework/GameModeBase.h"
-#include "InterfaceClasses/MainMenuModeInterface.h"
+#include "TowerDefenceGame/InterfaceClasses/MainMenuModeInterface.h"
 #include "MainMenuMode.generated.h"
 
 /**

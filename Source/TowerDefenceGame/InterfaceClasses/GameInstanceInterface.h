@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TowerDefenceGame/EnumClass.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "UObject/Interface.h"
 #include "GameInstanceInterface.generated.h"
 

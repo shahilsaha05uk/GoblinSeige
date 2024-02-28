@@ -2,9 +2,6 @@
 
 
 #include "MainMenuMode.h"
-
-#include "HelperMethods.h"
-#include "GameFramework/GameUserSettings.h"
 #include "Sound/SoundClass.h"
 
 void AMainMenuMode::BeginPlay()

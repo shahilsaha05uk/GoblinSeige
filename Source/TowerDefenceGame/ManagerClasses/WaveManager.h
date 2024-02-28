@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "EnemyManager.h"
 #include "GameFramework/Actor.h"
-#include "../EnumClass.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "WaveManager.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWaveUpdateSignature);
@@ -42,7 +42,7 @@ public:
 	void EndWave();
 
 	UFUNCTION(BlueprintCallable)
-	int GetWave(ELevel level);
+	int GetWave(EWave level);
 	
 	UFUNCTION(BlueprintCallable)
 	void UpdateWave();

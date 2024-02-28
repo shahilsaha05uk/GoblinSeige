@@ -1,12 +1,6 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "WaveManager.h"
-
-#include "Kismet/GameplayStatics.h"
-#include "TowerDefenceGame/EnumClass.h"
-#include "TowerDefenceGame/TowerDefenceGameGameModeBase.h"
-
+#include "TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h"
+#include "TowerDefenceGame/InterfaceClasses/GameModeInterface.h"
 
 
 void AWaveManager::Init_Implementation(ATowerDefenceGameGameModeBase* gameMode)
@@ -30,12 +24,12 @@ void AWaveManager::EndWave_Implementation()
 	mGameMode->OnWaveCompleteSignature.Broadcast(mCurrentWave);
 }
 
-int AWaveManager::GetWave(ELevel level)
+int AWaveManager::GetWave(EWave level)
 {
-	switch (level) { case NO_LEVEL: return -1; break;
-	case CURRENT_LEVEL: return mCurrentWave; break;
-	case FINAL_LEVEL: return mFinalWave; break;
-	case INITIAL_LEVEL: return mInitialWave; break;
+	switch (level) { case NO_WAVE: return -1; break;
+	case CURRENT_WAVE: return mCurrentWave; break;
+	case FINAL_WAVE: return mFinalWave; break;
+	case INITIAL_WAVE: return mInitialWave; break;
 	default: return -1;
 	}
 }

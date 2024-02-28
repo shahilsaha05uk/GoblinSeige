@@ -14,32 +14,20 @@ struct FBuildingStats
 
 public:
 
-	FBuildingStats(): AttackDamage(0), AttackRange(0), AttackSpeed(0), ProjectileLaunchSpeed(0), DamageRadius(0)
+	FBuildingStats(): BaseDamage(0), BaseDamageRadius(0), AttackRange(0), AttackSpeed(0), ProjectileLaunchSpeed(0)
 	{
-	}
-
-	FBuildingStats operator+=(const FBuildingStats& otherStats)
-	{
-		FBuildingStats s;
-		s.AttackDamage = AttackDamage + otherStats.AttackDamage;
-		s.AttackRange = AttackRange + otherStats.AttackRange;
-		s.AttackSpeed = otherStats.AttackSpeed;
-		s.ProjectileLaunchSpeed = otherStats.ProjectileLaunchSpeed;
-		s.DamageRadius = otherStats.DamageRadius;
-
-		return s;
 	}
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
-	float AttackDamage;
+	float BaseDamage;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
+	float BaseDamageRadius;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
 	float AttackRange;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
 	float AttackSpeed;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
 	float ProjectileLaunchSpeed;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
-	float DamageRadius;
 	
 };
 
@@ -61,9 +49,6 @@ struct FBuildingDetails
 {
 	GENERATED_BODY()
 
-private:
-	void OnUpgrade();
-	
 public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
@@ -78,10 +63,6 @@ public:
 	
 	FBuildingDetails(class UDA_BuildingAsset* BuildingAsset);
 	FBuildingDetails();
-	void Upgrade()
-	{
-		OnUpgrade();
-	}
 };
 
 // Save Game Structs

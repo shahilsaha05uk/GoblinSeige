@@ -15,8 +15,18 @@ class TOWERDEFENCEGAME_API UGameComplete : public UBaseWidget
 public:
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* txtGameComplete;
+	
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UButton* btnReturnToMainMenu;
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UButton* btnQuit;
-	
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
+	FLinearColor GameCompleteColor;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
+	bool bWonGame;
+
+	virtual void NativeConstruct() override;
 };

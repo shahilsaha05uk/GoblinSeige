@@ -4,7 +4,7 @@
 #include "GoldActor.h"
 
 #include "Components/WidgetComponent.h"
-#include "TowerDefenceGame/TowerDefenceGameGameModeBase.h"
+#include "TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h"
 #include "TowerDefenceGame/UIClasses/GoldLootBar.h"
 
 AGoldActor::AGoldActor()

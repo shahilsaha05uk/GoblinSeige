@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
-#include "InterfaceClasses/EnemyControllerInterface.h"
+#include "TowerDefenceGame/InterfaceClasses/EnemyControllerInterface.h"
 #include "EnemyController.generated.h"
 
 UCLASS()
@@ -21,7 +21,7 @@ public:
 	UBehaviorTree* BehaviorTreeRef;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	class ABaseEnemy* EnemyRef;
-
+	
 	virtual void OnPossess(APawn* InPawn) override;
 
 	UFUNCTION(BlueprintCallable)
