@@ -8,13 +8,12 @@
 #include "Components/ComboBoxString.h"
 #include "Components/Slider.h"
 #include "Components/TextBlock.h"
-#include "GameFramework/GameMode.h"
 #include "GameFramework/GameModeBase.h"
 #include "GameFramework/GameUserSettings.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundClass.h"
-#include "TowerDefenceGame/HelperMethods.h"
 #include "TowerDefenceGame/InterfaceClasses/MainMenuModeInterface.h"
+#include "TowerDefenceGame/SupportClasses/HelperMethods.h"
 
 void USettings::NativeConstruct()
 {
@@ -85,10 +84,11 @@ void USettings::ApplyResolution_Implementation()
 
 	switch (graphicsEnumVal) {
 	case FULLSCREEN:
-		UserSettings->SetFullscreenMode(EWindowMode::WindowedFullscreen);
+		UserSettings->SetFullscreenMode(EWindowMode::Fullscreen);
 		break;
 	case WINDOWED:
 		UserSettings->SetFullscreenMode(EWindowMode::Windowed);
+		UserSettings->SetScreenResolution(FIntPoint(1920, 1080));
 		break;
 	}
 

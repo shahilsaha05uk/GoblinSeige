@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "TowerDefenceGame/EnemyController.h"
+#include "TowerDefenceGame/ControllerClasses/EnemyController.h"
 #include "HAL/CriticalSection.h"
 #include "EnemyManager.generated.h"
 

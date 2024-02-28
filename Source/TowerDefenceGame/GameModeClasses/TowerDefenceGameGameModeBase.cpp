@@ -3,7 +3,8 @@
 
 #include "TowerDefenceGameGameModeBase.h"
 
-#include "ManagerClasses/WaveManager.h"
+#include "TowerDefenceGame/ManagerClasses/WaveManager.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
 
 
 ATowerDefenceGameGameModeBase::ATowerDefenceGameGameModeBase()
@@ -20,7 +21,7 @@ void ATowerDefenceGameGameModeBase::PostLogin(APlayerController* NewPlayer)
 
 void ATowerDefenceGameGameModeBase::OnWaveComplete_Implementation(int WaveNumber)
 {
-	if(mWaveManager->GetWave(CURRENT_LEVEL) >= mWaveManager->GetWave(FINAL_LEVEL))
+	if(mWaveManager->GetWave(CURRENT_WAVE) >= mWaveManager->GetWave(FINAL_WAVE))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Game Complete!!"));
 

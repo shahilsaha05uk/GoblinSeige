@@ -6,9 +6,9 @@
 #include "Components/Border.h"
 #include "Components/Button.h"
 #include "Components/MultiLineEditableTextBox.h"
-#include "TowerDefenceGame/HelperMethods.h"
-#include "TowerDefenceGame/InputController.h"
-
+#include "TowerDefenceGame/SupportClasses/HelperMethods.h"
+#include "TowerDefenceGame/ControllerClasses/InputController.h"
+#include "TowerDefenceGame/UIClasses/PlayerHUD.h"
 
 
 void UBuyButton::Init_Implementation(UPlayerHUD* PlayerHUD, UMultiLineEditableTextBox* descriptionWidget, class UDA_BuildingAsset* BuildingAsset)
@@ -41,7 +41,16 @@ void UBuyButton::Init_Implementation(UPlayerHUD* PlayerHUD, UMultiLineEditableTe
 
 	BuyButton->SetStyle(defaultStyle);
 
-	UpdateButtonState(BUTTON_ENABLED);
+	if(Controller)
+	{
+		const bool ButtonEnableCheck = Controller->GetPlayerStartingBalance() > mBuildingAsset->BuildingCost;
+
+		const EButtonState ButtonState = (ButtonEnableCheck) ? BUTTON_ENABLED : BUTTON_DISABLED;
+
+		BuyButton->SetIsEnabled(ButtonEnableCheck);
+	
+		UpdateButtonState(ButtonState);
+	}
 }
 
 void UBuyButton::UpdateDescription_Implementation(bool bSetToDefault)
@@ -61,15 +70,26 @@ void UBuyButton::UpdateButtonState_Implementation(EButtonState State)
 
 void UBuyButton::OnButtonHovered_Implementation()
 {
+	UpdateButtonState(BUTTON_HOVERED);
+
+	UpdateDescription(!BuyButton->GetIsEnabled());
+
 }
 
 void UBuyButton::OnButtonUnhovered_Implementation()
 {
+	UpdateButtonState(BUTTON_UNHOVERED);
+	UpdateDescription(true);
 }
 
 void UBuyButton::OnCurrentBalanceUpdated_Implementation(int CurrentBalance)
 {
-	BuyButton->SetIsEnabled(IsCurrentBalanceLessThanTheBuildingCost(CurrentBalance));
+	bool ShouldEnable = IsCurrentBalanceLessThanTheBuildingCost(CurrentBalance);
+	const EButtonState ButtonState = (ShouldEnable) ? BUTTON_ENABLED : BUTTON_DISABLED;
+
+	BuyButton->SetIsEnabled(ShouldEnable);
+	
+	UpdateButtonState(ButtonState);
 }
 
 void UBuyButton::OnBuyButtonClicked_Implementation()

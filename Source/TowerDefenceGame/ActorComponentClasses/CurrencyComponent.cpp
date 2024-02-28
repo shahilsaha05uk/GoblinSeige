@@ -12,8 +12,6 @@ void UCurrencyComponent::BeginPlay()
 	Super::BeginPlay();
 
 	CurrentBalance = StartingBalance;
-	RequestHUDUpdate();
-
 }
 
 int UCurrencyComponent::GetCurrentBalance()
@@ -24,23 +22,9 @@ int UCurrencyComponent::GetCurrentBalance()
 void UCurrencyComponent::AddMoney(int Amount)
 {
 	CurrentBalance += Amount;
-
-	RequestHUDUpdate();
 }
 
 void UCurrencyComponent::SubtractMoney(int Amount)
 {
 	CurrentBalance -= Amount;
-
-	RequestHUDUpdate();
-}
-
-void UCurrencyComponent::RequestHUDUpdate()
-{
-	AActor* Owner = GetOwner();
-	if(UKismetSystemLibrary::DoesImplementInterface(Owner, UPlayerInterface::StaticClass()))
-	{
-		IPlayerInterface::Execute_RequestCurrencyUpdate(Owner, CurrentBalance);
-	}
-
 }

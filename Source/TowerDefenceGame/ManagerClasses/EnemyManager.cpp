@@ -5,7 +5,7 @@
 
 #include "WaveManager.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "TowerDefenceGame/TowerDefenceGameGameModeBase.h"
+#include "TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h"
 
 
 void AEnemyManager::Init_Implementation(ATowerDefenceGameGameModeBase* gameMode)

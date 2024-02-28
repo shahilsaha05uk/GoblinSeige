@@ -7,12 +7,11 @@
 #include "Components/BoxComponent.h"
 #include "Components/DecalComponent.h"
 #include "Components/SphereComponent.h"
-#include "Components/WidgetComponent.h"
 #include "Kismet/GameplayStatics.h"
-#include "TowerDefenceGame/HelperMethods.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_UpgradeAsset.h"
-#include "TowerDefenceGame/UIClasses/widgets/BuildingUI.h"
+#include "TowerDefenceGame/SupportClasses/HelperMethods.h"
 
 
 ABaseBuilding::ABaseBuilding()
@@ -94,11 +93,10 @@ void ABaseBuilding::IncreaseRange_Implementation()
 
 void ABaseBuilding::Upgrade_Implementation()
 {
-	BuildingDetails.Upgrade();
-
+	BuildingDetails.BuildingStats = BuildingDetails.UpgradeAsset->BuildingStats;
+	BuildingDetails.UpgradeAsset = BuildingDetails.UpgradeAsset->NextUpgrade;
 	UpdateDescription();
-
-	OnBuildingFullyUpgradedSignature.Broadcast();
+	IncreaseRange();
 }
 
 void ABaseBuilding::MoveBuilding_Implementation()

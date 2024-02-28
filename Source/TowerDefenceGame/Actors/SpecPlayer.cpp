@@ -5,11 +5,11 @@
 
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "TowerDefenceGame/HelperMethods.h"
-#include "TowerDefenceGame/InputController.h"
 #include "TowerDefenceGame/ActorComponentClasses/CurrencyComponent.h"
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
+#include "TowerDefenceGame/ControllerClasses/InputController.h"
 #include "TowerDefenceGame/InterfaceClasses/BuildingInterface.h"
+#include "TowerDefenceGame/SupportClasses/HelperMethods.h"
 
 ASpecPlayer::ASpecPlayer()
 {

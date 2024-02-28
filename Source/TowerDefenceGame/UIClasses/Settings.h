@@ -3,14 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TowerDefenceGame/EnumClass.h"
-#include "TowerDefenceGame/StructClass.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "TowerDefenceGame/BaseClasses/BaseWidget.h"
 #include "Settings.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class TOWERDEFENCEGAME_API USettings : public UBaseWidget
 {

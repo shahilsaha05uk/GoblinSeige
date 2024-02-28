@@ -4,10 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "TowerDefenceGame/EnumClass.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "TowerDefenceGame/InterfaceClasses/BuildingInterface.h"
 #include "TowerDefenceGame/InterfaceClasses/SoundInterface.h"
-#include "TowerDefenceGame/UIClasses/widgets/BuildingUI.h"
 #include "BaseBuilding.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingSelectedSignature, ABaseBuilding*, Building);

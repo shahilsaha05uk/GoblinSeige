@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "TowerDefenceGame/EnumClass.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "BaseWidget.generated.h"
 
 /**

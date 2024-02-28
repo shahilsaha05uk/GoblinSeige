@@ -23,6 +23,8 @@ public:
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable)
+	int GetStartingBalance() {return StartingBalance;}
+	UFUNCTION(BlueprintCallable)
 	int GetCurrentBalance();
 	
 	UFUNCTION(BlueprintCallable)
@@ -30,7 +32,4 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SubtractMoney(int Amount);
-
-	UFUNCTION(BlueprintCallable)
-	void RequestHUDUpdate();
 };

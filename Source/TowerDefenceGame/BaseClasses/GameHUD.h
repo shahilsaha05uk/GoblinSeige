@@ -3,10 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "EnumClass.h"
-#include "BaseClasses/BaseWidget.h"
+#include "BaseWidget.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "GameFramework/HUD.h"
-#include "InterfaceClasses/HUDInterface.h"
+#include "TowerDefenceGame/InterfaceClasses/HUDInterface.h"
 #include "GameHUD.generated.h"
 
 DECLARE_DYNAMIC_DELEGATE_RetVal(bool, FOnUIHoveredSignature);

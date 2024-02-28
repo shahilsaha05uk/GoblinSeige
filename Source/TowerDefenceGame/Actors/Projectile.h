@@ -14,7 +14,7 @@ class TOWERDEFENCEGAME_API AProjectile : public AActor
 public:	
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn), Category = "Private | Projectile Properties")
-	float mDamageValue;
+	float mBaseDamageValue;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn), Category = "Private | Projectile Properties")
 	float mDamageRadius;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn), Category = "Private | Projectile Properties")

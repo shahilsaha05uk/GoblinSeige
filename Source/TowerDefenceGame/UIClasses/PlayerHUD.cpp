@@ -8,9 +8,8 @@
 #include "Components/TextBlock.h"
 #include "Components/VerticalBox.h"
 #include "Components/WidgetSwitcher.h"
-#include "TowerDefenceGame/GameHUD.h"
-#include "TowerDefenceGame/HelperMethods.h"
-#include "TowerDefenceGame/TowerDefenceGameGameModeBase.h"
+#include "TowerDefenceGame/BaseClasses/GameHUD.h"
+#include "TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h"
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "TowerDefenceGame/ManagerClasses/WaveManager.h"
 
@@ -57,11 +56,9 @@ void UPlayerHUD::OpenBuildingSettingsUI_Implementation(ABaseBuilding* Building)
 	FTextBlockStyle style = txtDescriptionUpgradeMenu->WidgetStyle.TextStyle;
 	style.SetColorAndOpacity(colorToAdd);
 
-	const FString UpgradeDescription = BuildingRef->GetBuildingUpgradeDescription() + txtToDisplay;
-	
 	txtDescriptionUpgradeMenu->SetTextStyle(style);
 	
-	txtDescriptionUpgradeMenu->SetText(FText::FromString(UpgradeDescription));
+	txtDescriptionUpgradeMenu->SetText(FText::FromString(txtToDisplay));
 	
 	wsMenuSwitcher->SetActiveWidget(vbBuildingSettings);
 }
@@ -84,20 +81,19 @@ void UPlayerHUD::GetStringForBuilding(ABaseBuilding* Building, FLinearColor& col
 	{
 		if(hasEnoughMoney)
 		{
-			txtToAdd = "You can upgrade this building";
+			txtToAdd = Building->GetBuildingUpgradeDescription() + "You can upgrade this building";
 			btnUpgrade->SetIsEnabled(true);
 			colorToAdd = green;
 		}
 		else
 		{
 			const int MoneyToAcquire = BuildingRef->GetUpgradeCost() - mCurrentBalance;
-			txtToAdd = FString::Printf(TEXT("\nYou require £ %d to upgrade this building"), MoneyToAcquire);
+			txtToAdd = Building->GetBuildingUpgradeDescription() + FString::Printf(TEXT("\nYou require £ %d to upgrade this building"), MoneyToAcquire);
 			btnUpgrade->SetIsEnabled(false);
 			colorToAdd = red;
 		}
 	}
 }
-
 
 void UPlayerHUD::WidgetToggler_Implementation(ABaseBuilding* Building)
 {

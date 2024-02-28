@@ -3,8 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
-#include "TowerDefenceGame/EnumClass.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "TowerDefenceGame/BaseClasses/BaseWidget.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "BuyButton.generated.h"

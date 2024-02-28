@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "TowerDefenceGame/BaseClasses/BaseWidget.h"
-#include "../EnumClass.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "PlayerHUD.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FUpgradeButtonClickedSignature, class ABaseBuilding*, BuildingToUpgrade, int, UpgradeCost);
@@ -28,31 +28,21 @@ private:
 
 
 public:
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	TArray<class UDA_BuildingAsset*> BuildingAssetArray;
-	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	int mCurrentBalance;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	ABaseBuilding* BuildingRef;
-	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
-	FString NextUpgradeStats;
-	
+#pragma region Properties
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UTextBlock* txtWave;
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UTextBlock* txtMoney;
-	
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UTextBlock* txtMoneyUpgradeMenu;
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
+	class UTextBlock* txtBuildingNameUpgradeMenu;
 	
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UMultiLineEditableTextBox* txtDescriptionUpgradeMenu;
-	
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
-	class UTextBlock* txtBuildingNameUpgradeMenu;
+	class UMultiLineEditableTextBox* txtDescription;
 	
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UVerticalBox* vbShop;
@@ -66,9 +56,6 @@ public:
 	class UBorder* root;
 	
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
-	class UMultiLineEditableTextBox* txtDescription;
-	
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UButton* btnWaveStart;
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UButton* btnUpgrade;
@@ -77,6 +64,18 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UOverlay* ol_Prompter;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	TArray<class UDA_BuildingAsset*> BuildingAssetArray;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	int mCurrentBalance;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	ABaseBuilding* BuildingRef;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
+	FString NextUpgradeStats;
 	
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FUpgradeButtonClickedSignature OnUpgradeButtonClickedSignature;
@@ -92,6 +91,8 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	class ATowerDefenceGameGameModeBase* gameMode;
 
+#pragma endregion
+	
 	virtual void NativeConstruct() override;
 
 	template <typename T>

@@ -4,7 +4,7 @@
 #include "BaseWidget.h"
 
 #include "Kismet/GameplayStatics.h"
-#include "TowerDefenceGame/GameHUD.h"
+#include "TowerDefenceGame/BaseClasses/GameHUD.h"
 
 void UBaseWidget::NativeConstruct()
 {
