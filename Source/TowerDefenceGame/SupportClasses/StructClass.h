@@ -78,6 +78,10 @@ public:
 	float GameVolume;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Sound Saves")
 	float MenuVolume;
+
+	FSoundSave(): GameVolume(0), MenuVolume(0)
+	{
+	}
 };
 
 

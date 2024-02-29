@@ -33,6 +33,11 @@ private:
 	UFUNCTION()
 	void AssignController(AEnemySpawnPoint* sb);
 
+	UPROPERTY(EditDefaultsOnly, Category = "Wave Settings")
+	int EnemyMinRange;
+	UPROPERTY(EditDefaultsOnly, Category = "Wave Settings")
+	int EnemyMaxRange;
+	
 protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	TSubclassOf<AEnemyController> EnemyControllerClass;
@@ -43,23 +48,18 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private", meta = (ExposeOnSpawn = true))
 	class ATowerDefenceGameGameModeBase* mGameMode;
 	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Wave Settings")
-	int EnemyMinRange;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Wave Settings")
-	int EnemyMaxRange;
-	
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnEnemySpawnRequestSignature OnEnemySpawnRequest;
 
 	UPROPERTY(BlueprintCallable, BlueprintAssignable, Category = "Private")
 	FOnControllerDestroySignature OnControllerDestroySignature;
 
-	UFUNCTION()
-	void FreeController();
-
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Init(ATowerDefenceGameGameModeBase* gameMode);
 
+
+	UFUNCTION()
+	void FreeController();
 
 	UFUNCTION(BlueprintCallable)
 	void SpawnEnemies(int TotalEnemiesPerSpawnPoints);
