@@ -20,9 +20,7 @@
 			"Name": "Bridge",
 			"Enabled": false,
 			"SupportedTargetPlatforms": [
-				"Win64",
-				"Mac",
-				"Linux"
+				"Win64"
 			]
 		},
 		{
@@ -36,6 +34,10 @@
 		{
 			"Name": "ScriptableToolsEditorMode",
 			"Enabled": true
+		},
+		{
+			"Name": "HoudiniEngine",
+			"Enabled": false
 		}
 	]
 }
