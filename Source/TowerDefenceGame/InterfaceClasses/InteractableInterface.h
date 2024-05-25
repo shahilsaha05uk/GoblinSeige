@@ -22,5 +22,10 @@ class TOWERDEFENCEGAME_API IInteractableInterface
 
 public:
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void Disassociate();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void Interact();
+
 
 };

@@ -8,6 +8,7 @@
 #include "Components/MultiLineEditableTextBox.h"
 #include "TowerDefenceGame/SupportClasses/HelperMethods.h"
 #include "TowerDefenceGame/ControllerClasses/InputController.h"
+#include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 #include "TowerDefenceGame/UIClasses/PlayerHUD.h"
 
 
@@ -41,9 +42,9 @@ void UBuyButton::Init_Implementation(UPlayerHUD* PlayerHUD, UMultiLineEditableTe
 
 	BuyButton->SetStyle(defaultStyle);
 
-	if(Controller)
+	if(auto resourceSubs = GetGameInstance()->GetSubsystem<UResourceSubsystem>())
 	{
-		const bool ButtonEnableCheck = Controller->GetPlayerStartingBalance() > mBuildingAsset->BuildingCost;
+		const bool ButtonEnableCheck = resourceSubs->GetCurrentResources() > mBuildingAsset->BuildingCost;
 
 		const EButtonState ButtonState = (ButtonEnableCheck) ? BUTTON_ENABLED : BUTTON_DISABLED;
 

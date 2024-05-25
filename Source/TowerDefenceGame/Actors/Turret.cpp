@@ -21,16 +21,16 @@ ATurret::ATurret()
 }
 
 
-void ATurret::OnSelect_Implementation()
+void ATurret::OnInteract_Implementation()
 {
 	RangeDecalComp->SetVisibility(true);
-	Super::OnSelect_Implementation();
+	Super::OnInteract_Implementation();
 }
 
-void ATurret::OnDeselect_Implementation()
+void ATurret::OnDisassociate_Implementation()
 {
 	RangeDecalComp->SetVisibility(false);
-	Super::OnDeselect_Implementation();
+	Super::OnDisassociate_Implementation();
 }
 
 void ATurret::PostBuild_Implementation()

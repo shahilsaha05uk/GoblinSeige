@@ -31,6 +31,5 @@ void AGoldActor::LootGold_Implementation()
 	mCurrentGold--;
 
 	if(GoldLootBar != nullptr) GoldLootBar->LootGold(mCurrentGold, mTotalGold);
-	
-	if(mGameMode && mCurrentGold <= 0) mGameMode->OnGameOverSignature.Broadcast();
+	if(mGameMode && mCurrentGold <= 0) mGameMode->OnGameOver.Broadcast();
 }

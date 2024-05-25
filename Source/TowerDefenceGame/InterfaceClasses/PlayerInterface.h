@@ -24,15 +24,8 @@ class TOWERDEFENCEGAME_API IPlayerInterface
 public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void RequestCurrencyUpdate(int CurrentBalance);
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void UpgradeSelectedBuilding(ABaseBuilding* BuildingToUpgrade, int UpgradeCost);
+	void UpgradeSelectedBuilding(int BuildingID);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void MoveSelectedBuilding();
 	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void AddMoneyToAccount(int Value);
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	int GetCurrentBalance();
-
 };

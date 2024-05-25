@@ -4,16 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "TowerDefenceGame/InterfaceClasses/GameModeInterface.h"
 #include "TowerDefenceGameGameModeBase.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGameOverSignature);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGameCompleteSignature);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEnemyKilledSignature);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWaveCompleteSignature, int, waveNumber);
 
 UCLASS()
-class TOWERDEFENCEGAME_API ATowerDefenceGameGameModeBase : public AGameModeBase, public IGameModeInterface
+class TOWERDEFENCEGAME_API ATowerDefenceGameGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 
@@ -21,39 +17,25 @@ private:
 
 	class APlayerController* mPlayerController;
 
+	UPROPERTY(EditDefaultsOnly)
+	int mStartingResources;
+
 public:
 
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnGameCompleteSignature OnGameCompleteSignature;
 	
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnEnemyKilledSignature OnEnemyKilledSignature;
+	FOnGameOverSignature OnGameOver;
 	
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnGameOverSignature OnGameOverSignature;
-
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnWaveCompleteSignature OnWaveCompleteSignature;
+	virtual void BeginPlay() override;
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnWaveStart(int Wave);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnWaveComplete(int WaveNumber);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnGameOver();
-
-
-	ATowerDefenceGameGameModeBase();
+	void GameOver();
 	
 	virtual void PostLogin(APlayerController* NewPlayer) override;
-	
-	virtual AWaveManager* GetWaveManager_Implementation() override {return mWaveManager;}
-	virtual AEnemyManager* GetEnemyManager_Implementation() override {return mEnemyManager; }
-
-protected:
-
-	UPROPERTY(BlueprintReadWrite, Category = "Managers")
-	class AWaveManager* mWaveManager;
-	
-	UPROPERTY(BlueprintReadWrite, Category = "Managers")
-	class AEnemyManager* mEnemyManager;
 };

@@ -19,16 +19,15 @@ class TOWERDEFENCEGAME_API ASpecPlayer : public APawn, public IPlayerInputInterf
 
 public:
 
-	ASpecPlayer();
-
 	virtual void BeginPlay() override;
 
 	virtual void PossessedBy(AController* NewController) override;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	class AInputController* ControllerRef;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	class UCurrencyComponent* CurrencyComponent;
+	int mStartingResources;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	FTimerHandle OnSpawnTimeHandler;
@@ -39,6 +38,9 @@ public:
 	AActor* selectedActor;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	TEnumAsByte<ETraceTypeQuery> BuildingTraceChannel;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
+	TEnumAsByte<ETraceTypeQuery> InteractableTraceChannel;
+	
 
 	virtual void Move_Implementation(const FInputActionValue& InputActionValue) override;
 	virtual void Look_Implementation(const FInputActionValue& InputActionValue) override;
@@ -47,13 +49,9 @@ public:
 	virtual void LeftMouseActions_Implementation() override;
 	virtual void Zoom_Implementation(float Value) override;
 	
-	virtual void UpgradeSelectedBuilding_Implementation(ABaseBuilding* BuildingToUpgrade, int UpgradeCost) override;
+	virtual void UpgradeSelectedBuilding_Implementation(int BuildingID) override;
 	virtual void MoveSelectedBuilding_Implementation() override;
 
-	virtual void AddMoneyToAccount_Implementation(int Value) override {CurrencyComponent->AddMoney(Value);}
-	virtual void RequestCurrencyUpdate_Implementation(int CurrentBalance) override;
-	virtual int GetCurrentBalance_Implementation() override {return CurrencyComponent->GetCurrentBalance(); }
-	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SpawnBuilding(class ABaseBuilding* NewBuilding, UDA_BuildingAsset* BuildingAsset);
 
@@ -62,4 +60,11 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnBuildingSelected(ABaseBuilding* Building);
+
+
+#pragma region Building Methods
+
+	UFUNCTION(BlueprintCallable)
+	void ToggleBuildingSelection(AActor* Building, bool shouldSelect);
+#pragma endregion
 };

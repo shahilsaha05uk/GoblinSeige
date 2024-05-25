@@ -20,16 +20,13 @@ class TOWERDEFENCEGAME_API UPlayerHUD : public UBaseWidget
 
 private:
 
-	void UpdateIntValues(EHudValue ValueType, int Value);
-
-	void UpdateStringValues(EHudValue ValueType, FString Value);
-
-	void GetStringForBuilding(ABaseBuilding* Building, FLinearColor &colorToAdd, FString &txtToAdd);
-
-
+	UPROPERTY()
+	class UWaveSubsystem* mWaveSubsystem;
+	UPROPERTY()
+	class UResourceSubsystem* mResourceSubsystem;
+	
 public:
-
-#pragma region Properties
+#pragma region Components
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UTextBlock* txtWave;
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
@@ -65,6 +62,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UOverlay* ol_Prompter;
 
+#pragma endregion
+	
+#pragma region Properties
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	TArray<class UDA_BuildingAsset*> BuildingAssetArray;
 	
@@ -88,24 +88,14 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	TSubclassOf<UBaseWidget> PrompterWidgetClass;
 	
-	UPROPERTY(BlueprintReadWrite)
-	class ATowerDefenceGameGameModeBase* gameMode;
-
 #pragma endregion
 	
 	virtual void NativeConstruct() override;
 
-	template <typename T>
-	void Updater(EHudValue ValueToUpdate, T Value)
-	{
-		if constexpr(std::is_same_v<T, int>) UpdateIntValues(ValueToUpdate, Value);
-		if constexpr(std::is_same_v<T, FString>) UpdateStringValues(ValueToUpdate, Value);
-
-		PostWidgetUpdate(ValueToUpdate);
-	}
-
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void PostWidgetUpdate(EHudValue ValueType);
+	UFUNCTION(BlueprintCallable)
+	void UpdateMoney();
+	UFUNCTION(BlueprintCallable)
+	void UpdateWave();
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void WidgetToggler(class ABaseBuilding* Building);

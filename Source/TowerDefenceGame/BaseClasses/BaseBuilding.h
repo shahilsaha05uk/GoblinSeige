@@ -5,8 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "TowerDefenceGame/SupportClasses/EnumClass.h"
-#include "TowerDefenceGame/InterfaceClasses/BuildingInterface.h"
+#include "TowerDefenceGame/InterfaceClasses/InteractableInterface.h"
 #include "TowerDefenceGame/InterfaceClasses/SoundInterface.h"
+#include "TowerDefenceGame/SupportClasses/StructClass.h"
 #include "BaseBuilding.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingSelectedSignature, ABaseBuilding*, Building);
@@ -14,7 +15,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnBuildingFullyUpgradedSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTurretActivateSignature);
 
 UCLASS()
-class TOWERDEFENCEGAME_API ABaseBuilding : public AActor, public IBuildingInterface, public ISoundInterface
+class TOWERDEFENCEGAME_API ABaseBuilding : public AActor, public ISoundInterface, public IInteractableInterface
 {
 	GENERATED_BODY()
 
@@ -98,10 +99,6 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Init(UDA_BuildingAsset* asset);
 	
-	virtual FBuildingStats GetBuildingStats_Implementation() override {return FBuildingStats();}
-
-	virtual EBuildingState GetCurrentBuildingState_Implementation() override {return BuildingState;}
-
 	virtual void PlaySound_Implementation() override;
 	
 #pragma region Building STATE
@@ -130,15 +127,10 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void IncreaseRange();
 	
-	virtual void Select_Implementation(int OwnerCurrentBalance) override;
-	virtual void Deselect_Implementation() override;
-	virtual void Move_Implementation() override;
-
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnSelect();
+	void OnInteract();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnDeselect();
-
+	void OnDisassociate();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnMove();
 	
@@ -160,4 +152,10 @@ public:
 	FString GetBuildingUpgradeDescription() {return BuildingUpgradeDescription;}
 	#pragma endregion
 
+
+#pragma region Interactable Interface methods
+
+	virtual void Interact_Implementation() override;
+	virtual void Disassociate_Implementation() override;
+#pragma endregion
 };

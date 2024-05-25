@@ -2,35 +2,57 @@
 
 
 #include "TowerDefenceGameGameModeBase.h"
+#include "TowerDefenceGame/SubsystemClasses/EnemySubsystem.h"
+#include "TowerDefenceGame/SubsystemClasses/GameDecisionSubsytem.h"
+#include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
+#include "TowerDefenceGame/SubsystemClasses/WaveSubsystem.h"
 
-#include "TowerDefenceGame/ManagerClasses/WaveManager.h"
-#include "TowerDefenceGame/SupportClasses/EnumClass.h"
-
-
-ATowerDefenceGameGameModeBase::ATowerDefenceGameGameModeBase()
+void ATowerDefenceGameGameModeBase::BeginPlay()
 {
-	OnWaveCompleteSignature.AddDynamic(this, &ATowerDefenceGameGameModeBase::OnWaveComplete);
-	OnGameOverSignature.AddDynamic(this, &ATowerDefenceGameGameModeBase::OnGameOver);
+	if(auto waveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>())
+	{
+		waveSubsystem->OnWaveStarted.AddDynamic(this, &ThisClass::OnWaveStart);
+		waveSubsystem->OnWaveComplete.AddDynamic(this, &ThisClass::OnWaveComplete);
+	}
+	if(auto gameDecision = GetGameInstance()->GetSubsystem<UGameDecisionSubsytem>())
+	{
+		gameDecision->OnGameDecisionMade.AddDynamic(this, &ThisClass::GameOver);
+	}
+	Super::BeginPlay();
+}
+
+void ATowerDefenceGameGameModeBase::GameOver_Implementation()
+{
+	if(auto enemySubsystem = GetGameInstance()->GetSubsystem<UEnemySubsystem>())
+	{
+		enemySubsystem->FlushEverything();
+	}
 }
 
 void ATowerDefenceGameGameModeBase::PostLogin(APlayerController* NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
+	
+	GetGameInstance()->GetSubsystem<UResourceSubsystem>()->Add(mStartingResources);
+
 	mPlayerController = NewPlayer;
+}
+
+void ATowerDefenceGameGameModeBase::OnWaveStart_Implementation(int Wave)
+{
+	if(auto enemySubsystem = GetGameInstance()->GetSubsystem<UEnemySubsystem>())
+	{
+		enemySubsystem->PrepareForWave(Wave);
+	}
 }
 
 void ATowerDefenceGameGameModeBase::OnWaveComplete_Implementation(int WaveNumber)
 {
-	if(mWaveManager->GetWave(CURRENT_WAVE) >= mWaveManager->GetWave(FINAL_WAVE))
+	if(auto waveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Game Complete!!"));
-
-		//TODO: Game is Complete!!
-		OnGameCompleteSignature.Broadcast();
+		if(WaveNumber >= waveSubsystem->GetFinalWave())
+		{
+			GetGameInstance()->GetSubsystem<UGameDecisionSubsytem>()->Trigger_OnGameDecisionMade();
+		}
 	}
-}
-
-void ATowerDefenceGameGameModeBase::OnGameOver_Implementation()
-{
-	
 }

@@ -9,11 +9,9 @@
 #include "Components/VerticalBox.h"
 #include "Components/WidgetSwitcher.h"
 #include "TowerDefenceGame/BaseClasses/GameHUD.h"
-#include "TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h"
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
-#include "TowerDefenceGame/ManagerClasses/WaveManager.h"
-
-using namespace std;
+#include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
+#include "TowerDefenceGame/SubsystemClasses/WaveSubsystem.h"
 
 void UPlayerHUD::NativeConstruct()
 {
@@ -22,15 +20,31 @@ void UPlayerHUD::NativeConstruct()
 	btnUpgrade->OnClicked.AddDynamic(this, &UPlayerHUD::OnUpgradeButtonClick);
 	btnMove->OnClicked.AddDynamic(this, &UPlayerHUD::OnMoveButtonClick);
 	btnWaveStart->OnClicked.AddDynamic(this, &UPlayerHUD::OnWaveStart);
-	
-	gameMode = Cast<ATowerDefenceGameGameModeBase>(GetWorld()->GetAuthGameMode());
 
-	if(gameMode)
+	mWaveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>();
+	mResourceSubsystem = GetGameInstance()->GetSubsystem<UResourceSubsystem>();
+
+	if(mResourceSubsystem)
 	{
-		gameMode->OnWaveCompleteSignature.AddDynamic(this, &ThisClass::OnWaveComplete);
+		UpdateMoney();
+		UpdateWave();
+	}
+	if(mWaveSubsystem)
+	{
+		mWaveSubsystem->OnWaveComplete.AddDynamic(this, &ThisClass::OnWaveComplete);
 	}
 
 	BuyMenuSetup();
+}
+
+void UPlayerHUD::UpdateMoney()
+{
+	txtMoney->SetText(FText::AsNumber(mResourceSubsystem->GetCurrentResources()));
+}
+
+void UPlayerHUD::UpdateWave()
+{
+	txtWave->SetText(FText::AsNumber(mWaveSubsystem->GetCurrentWave()));
 }
 
 void UPlayerHUD::BuyMenuSetup_Implementation()
@@ -49,10 +63,6 @@ void UPlayerHUD::OpenBuildingSettingsUI_Implementation(ABaseBuilding* Building)
 	FString txtToDisplay;
 	FLinearColor colorToAdd;
 
-	GetStringForBuilding(BuildingRef, colorToAdd, txtToDisplay);
-
-	Updater(BUILDING_NAME_VALUE, BuildingRef->BuildingDetails.BuildingName);
-
 	FTextBlockStyle style = txtDescriptionUpgradeMenu->WidgetStyle.TextStyle;
 	style.SetColorAndOpacity(colorToAdd);
 
@@ -63,38 +73,6 @@ void UPlayerHUD::OpenBuildingSettingsUI_Implementation(ABaseBuilding* Building)
 	wsMenuSwitcher->SetActiveWidget(vbBuildingSettings);
 }
 
-void UPlayerHUD::GetStringForBuilding(ABaseBuilding* Building, FLinearColor& colorToAdd, FString& txtToAdd)
-{
-	bool isUpgradeAvailable = Building->isUpgradeAvailable();
-	bool hasEnoughMoney = (mCurrentBalance >= Building->GetUpgradeCost());
-
-	FLinearColor red = FLinearColor(1, 0, 0, 1);
-	FLinearColor green = FLinearColor(0, 1, 0, 1);
-
-	if(!isUpgradeAvailable)
-	{
-		txtToAdd = "This Building is fully upgraded";
-		btnUpgrade->SetIsEnabled(false);
-		colorToAdd = red;
-	}
-	else
-	{
-		if(hasEnoughMoney)
-		{
-			txtToAdd = Building->GetBuildingUpgradeDescription() + "You can upgrade this building";
-			btnUpgrade->SetIsEnabled(true);
-			colorToAdd = green;
-		}
-		else
-		{
-			const int MoneyToAcquire = BuildingRef->GetUpgradeCost() - mCurrentBalance;
-			txtToAdd = Building->GetBuildingUpgradeDescription() + FString::Printf(TEXT("\nYou require £ %d to upgrade this building"), MoneyToAcquire);
-			btnUpgrade->SetIsEnabled(false);
-			colorToAdd = red;
-		}
-	}
-}
-
 void UPlayerHUD::WidgetToggler_Implementation(ABaseBuilding* Building)
 {
 	if(Building) OpenBuildingSettingsUI(Building);
@@ -103,61 +81,12 @@ void UPlayerHUD::WidgetToggler_Implementation(ABaseBuilding* Building)
 
 void UPlayerHUD::OnWaveStart_Implementation()
 {
-	if(gameMode)
+	if(mWaveSubsystem)
 	{
-		IGameModeInterface::Execute_GetWaveManager(gameMode)->StartWave();
-
+		mWaveSubsystem->StartWave();
 		btnWaveStart->SetIsEnabled(false);
 	}
 }
-
-#pragma region Updaters
-
-void UPlayerHUD::UpdateIntValues(EHudValue ValueType, int Value)
-{
-	switch (ValueType)
-	{
-	case MONEY_VALUE:
-		{
-			mCurrentBalance = Value;
-
-			const FString BalanceAsString = FString::Printf(TEXT("£ %d"), mCurrentBalance);
-		
-			txtMoney->SetText(FText::FromString(BalanceAsString));
-			txtMoneyUpgradeMenu->SetText(FText::FromString(BalanceAsString));
-			break;
-		}
-	case WAVE_VALUE:
-		txtWave->SetText(FText::AsNumber(Value));
-		break;
-	default: ;
-	}
-}
-
-void UPlayerHUD::UpdateStringValues(EHudValue ValueType, FString Value)
-{
-	switch (ValueType) {
-	case BUILDING_NAME_VALUE:
-		
-		txtBuildingNameUpgradeMenu->SetText(FText::FromString(Value));
-		break;
-	}
-}
-
-void UPlayerHUD::PostWidgetUpdate_Implementation(EHudValue ValueType)
-{
-	switch (ValueType) {
-	case MONEY_VALUE:
-		OnCurrentBalanceUpdated.Broadcast(mCurrentBalance);
-		break;
-	case WAVE_VALUE:
-		break;
-	case BUILDING_NAME_VALUE:
-		break;
-	}
-}
-
-#pragma endregion
 
 #pragma region On Events Triggered
 

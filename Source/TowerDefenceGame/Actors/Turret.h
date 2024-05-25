@@ -50,8 +50,8 @@ public:
 
 	ATurret();
 
-	virtual void OnSelect_Implementation() override;
-	virtual void OnDeselect_Implementation() override;
+	virtual void OnInteract_Implementation() override;
+	virtual void OnDisassociate_Implementation() override;
 
 	virtual void IncreaseRange_Implementation() override;
 
