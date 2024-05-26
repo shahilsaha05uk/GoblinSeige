@@ -21,16 +21,16 @@ ATurret::ATurret()
 }
 
 
-void ATurret::OnSelect_Implementation()
+void ATurret::OnInteract_Implementation()
 {
 	RangeDecalComp->SetVisibility(true);
-	Super::OnSelect_Implementation();
+	Super::OnInteract_Implementation();
 }
 
-void ATurret::OnDeselect_Implementation()
+void ATurret::OnDisassociate_Implementation()
 {
 	RangeDecalComp->SetVisibility(false);
-	Super::OnDeselect_Implementation();
+	Super::OnDisassociate_Implementation();
 }
 
 void ATurret::PostBuild_Implementation()
@@ -49,11 +49,13 @@ void ATurret::LookAtTarget_Implementation()
 
 void ATurret::IncreaseRange_Implementation()
 {
+	/*
 	const float attackRange = BuildingDetails.BuildingStats.AttackRange;
 	const float decalSize = attackRange / 100.f;
 
 	RangeCollisionComp->SetSphereRadius(attackRange, true);
 	RangeDecalComp->SetRelativeScale3D(FVector(1.0f, decalSize, decalSize));
+*/
 }
 
 
@@ -88,10 +90,13 @@ void ATurret::OnRangeEndOverlap_Implementation(UPrimitiveComponent* OverlappedCo
 
 AActor* ATurret::FindTarget_Implementation()
 {
+	
 	CurrentTarget = nullptr;
 	Targets.Shrink();
-	float attackRange = BuildingDetails.BuildingStats.AttackRange;
-	AActor* foundTarget = UGameplayStatics::FindNearestActor(GetActorLocation(), Targets, attackRange);
+	//float attackRange = BuildingDetails.BuildingStats.AttackRange;
+	//TODO: This needs to be changed
+	float Distance;
+	AActor* foundTarget = UGameplayStatics::FindNearestActor(GetActorLocation(), Targets, Distance);
 	if(foundTarget) OnFoundTarget(foundTarget);
 	return foundTarget;
 }
@@ -108,7 +113,7 @@ void ATurret::PowerOn_Implementation()
 	
 	if(ShouldTurnOnFiring)
 	{
-		GetWorldTimerManager().SetTimer(FireTimerHandler, this, &ThisClass::Fire,  BuildingDetails.BuildingStats.AttackSpeed, FireShouldLoop, 0.0f);
+		//GetWorldTimerManager().SetTimer(FireTimerHandler, this, &ThisClass::Fire,  BuildingDetails.BuildingStats.AttackSpeed, FireShouldLoop, 0.0f);
 	}
 
 	if(bHasRotator)

@@ -11,7 +11,7 @@
 
 
 class UDA_InputActions;
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuyMenuOptionClickSignature, class UDA_BuildingAsset*, BuildingAsset);
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuyMenuOptionClickSignature, class UDA_BuildingAsset*, BuildingAsset);
 
 UCLASS()
 class TOWERDEFENCEGAME_API AInputController : public APlayerController, public IControllerInterface, public ISoundInterface
@@ -24,6 +24,9 @@ public:
 	bool bIsPaused;
 
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	class UDA_BuildingAsset* DA_UpgradeAsset;
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	UDA_InputActions* DA_Inputs;
 
@@ -56,14 +59,6 @@ public:
 
 	virtual void SetupInputComponent() override;
 
-	virtual void OnPossess(APawn* InPawn) override;
-
-	template <typename T>
-	void HUDUpdater(EHudValue ValueToUpdate, T Value)
-	{
-		PlayerHUD->Updater(ValueToUpdate, Value);
-	};
-
 	virtual void PlaySound_Implementation() override;
 	virtual void StopSound_Implementation() override;
 	
@@ -72,9 +67,12 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ManageAudio(bool hasWaveStarted);
 
+	/*
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
 	FOnBuyMenuOptionClickSignature OnBuyMenuOptionClickSignature;
 
+	*/
+	
 	// Controller Input Methods
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Move(const FInputActionValue& InputActionValue);
@@ -91,20 +89,19 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PauseGame();
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	int GetPlayerStartingBalance();
-
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SideWidgetToggler(class ABaseBuilding* BuildingRef = nullptr);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnBuyOptionClicked(UDA_BuildingAsset* BuildingAsset);
 
+	/*
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnBuyOptionClicked(FString BuildingID);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnUpgradeButtonClick(ABaseBuilding* BuildingToUpgrade, int UpgradeCost);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnMoveButtonClick();
 
+	*/
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnEnemyKilled();
 
@@ -119,6 +116,5 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnWaveComplete(int WaveNumber);
-
 };
 

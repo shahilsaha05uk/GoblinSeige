@@ -16,19 +16,7 @@ class TOWERDEFENCEGAME_API UDA_UpgradeAsset : public UDataAsset
 	GENERATED_BODY()
 
 public:
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	int UpgradeID;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	FString UpgradeName;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	int UpgradeCost;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UMaterialInterface* UpgradeMaterial;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	FBuildingStats BuildingStats;
-
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Next Skill")
-	UDA_UpgradeAsset* NextUpgrade;
+	TMap<int, FUpgradeDetails> UpgradeDetails;
 };

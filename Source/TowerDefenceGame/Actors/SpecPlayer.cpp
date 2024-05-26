@@ -5,22 +5,19 @@
 
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "TowerDefenceGame/ActorComponentClasses/CurrencyComponent.h"
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "TowerDefenceGame/ControllerClasses/InputController.h"
-#include "TowerDefenceGame/InterfaceClasses/BuildingInterface.h"
+#include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
 #include "TowerDefenceGame/SupportClasses/HelperMethods.h"
-
-ASpecPlayer::ASpecPlayer()
-{
-	CurrencyComponent = CreateDefaultSubobject<UCurrencyComponent>(TEXT("CurrencyComponent"));
-}
 
 void ASpecPlayer::PossessedBy(AController* NewController)	// Called before BeginPlay
 {
 	Super::PossessedBy(NewController);
 
 	ControllerRef = Cast<AInputController>(NewController);
+
+	if(const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
+		BuildingSubsystem->OnBuildingBought.AddDynamic(this, &ThisClass::SpawnBuilding);
 }
 
 void ASpecPlayer::BeginPlay()
@@ -71,7 +68,7 @@ void ASpecPlayer::LeftMouseActions_Implementation()
 		APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 		bool bHit;
 		FHitResult hit;
-		UHelperMethods::GetMouseTrace(PC, BuildingTraceChannel, bHit, hit);
+		UHelperMethods::GetMouseTrace(PC, InteractableTraceChannel, bHit, hit);
 
 		// Check if hit anything
 		if (bHit && hit.bBlockingHit)
@@ -82,25 +79,19 @@ void ASpecPlayer::LeftMouseActions_Implementation()
 			if(selectedActor == hitActor) return;
 
 			// Deselect any building if selected
-			if(UKismetSystemLibrary::DoesImplementInterface(selectedActor, UBuildingInterface::StaticClass()))
-			{
-				IBuildingInterface::Execute_Deselect(selectedActor);
-				selectedActor = nullptr;
-			}
-			
+			ToggleBuildingSelection(selectedActor, false);
+			selectedActor = nullptr;
+
 			// Select the new hit actor
-			if(UKismetSystemLibrary::DoesImplementInterface(hitActor, UBuildingInterface::StaticClass()))
-			{
-				IBuildingInterface::Execute_Select(hitActor, Execute_GetCurrentBalance(this));
-				selectedActor = hitActor;
-			}
+			ToggleBuildingSelection(hitActor, false);
+			selectedActor = hitActor;
 		}
 		else
 		{
 			// Deselect currently selected building if it's valid
 			if (selectedActor)
 			{
-				IBuildingInterface::Execute_Deselect(selectedActor);
+				ToggleBuildingSelection(selectedActor, false);
 				selectedActor = nullptr;
 				ControllerRef->SideWidgetToggler();
 			}
@@ -115,22 +106,19 @@ void ASpecPlayer::Zoom_Implementation(float Value)
 
 #pragma endregion
 
-#pragma region Player Interface Methods
 
-void ASpecPlayer::RequestCurrencyUpdate_Implementation(int CurrentBalance)
+void ASpecPlayer::SpawnBuilding_Implementation(const FString& ID)
 {
-	ControllerRef->HUDUpdater(MONEY_VALUE, CurrentBalance);
-}
+	FBuildingBuyDetails BuildingDetails;
+	if(DA_BuildingAsset->FindBuildingDetails(ID, BuildingDetails))
+	{
+		FActorSpawnParameters spawnParams = FActorSpawnParameters();
+		
+		tempBuilding = GetWorld()->SpawnActor<ABaseBuilding>(BuildingDetails.BuildingClass, spawnParams);
 
-#pragma endregion
-
-void ASpecPlayer::SpawnBuilding_Implementation(ABaseBuilding* NewBuilding, UDA_BuildingAsset* BuildingAsset)
-{
-	tempBuilding = NewBuilding;
-
-	tempBuilding->OnBuildingSelectedSignature.AddDynamic(this, &ThisClass::OnBuildingSelected);
-
-	tempBuilding->Init(BuildingAsset);
+		tempBuilding->OnBuildingSelectedSignature.AddDynamic(this, &ThisClass::OnBuildingSelected);
+		tempBuilding->Init(BuildingDetails);
+	}
 }
 
 void ASpecPlayer::Build_Implementation()
@@ -138,36 +126,26 @@ void ASpecPlayer::Build_Implementation()
 	if(tempBuilding)
 	{
 		tempBuilding->Build();
-		
-		CurrencyComponent->SubtractMoney(tempBuilding->BuildingCost);
-		Execute_RequestCurrencyUpdate(this, CurrencyComponent->GetCurrentBalance());
 		tempBuilding = nullptr;
 	}
 }
 
-void ASpecPlayer::UpgradeSelectedBuilding_Implementation(ABaseBuilding* BuildingToUpgrade, int UpgradeCost)
+void ASpecPlayer::UpgradeSelectedBuilding_Implementation(int BuildingID)
 {
+	/*
 	if(!BuildingToUpgrade) return;
-	
-	CurrencyComponent->SubtractMoney(UpgradeCost);
-	
 	BuildingToUpgrade->Upgrade();
-	
-	if(IBuildingInterface::Execute_GetCurrentBuildingState(BuildingToUpgrade) == SELECTED)
-		IBuildingInterface::Execute_Deselect(BuildingToUpgrade);
+	ToggleBuildingSelection(BuildingToUpgrade, false);
+	*/
 
-	Execute_RequestCurrencyUpdate(this, CurrencyComponent->GetCurrentBalance());
 	ControllerRef->SideWidgetToggler();
-
 	selectedActor = nullptr;
 }
 
 void ASpecPlayer::MoveSelectedBuilding_Implementation()
 {
 	if(!selectedActor) return;
-
-	IBuildingInterface::Execute_Deselect(selectedActor);
-
+	ToggleBuildingSelection(selectedActor, false);
 	selectedActor = nullptr;
 	ControllerRef->SideWidgetToggler();
 }
@@ -175,4 +153,14 @@ void ASpecPlayer::MoveSelectedBuilding_Implementation()
 void ASpecPlayer::OnBuildingSelected_Implementation(ABaseBuilding* Building)
 {
 	ControllerRef->SideWidgetToggler(Building);
+}
+
+// Selects/Deselects a building
+void ASpecPlayer::ToggleBuildingSelection(AActor* Building, bool shouldSelect)
+{
+	if(UKismetSystemLibrary::DoesImplementInterface(selectedActor, UInteractableInterface::StaticClass()))
+	{
+		if(shouldSelect) IInteractableInterface::Execute_Interact(Building);
+		else IInteractableInterface::Execute_Disassociate(Building);
+	}
 }

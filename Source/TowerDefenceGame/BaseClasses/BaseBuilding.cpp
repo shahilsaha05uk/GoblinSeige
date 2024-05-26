@@ -11,6 +11,7 @@
 #include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_UpgradeAsset.h"
+#include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 #include "TowerDefenceGame/SupportClasses/HelperMethods.h"
 
 
@@ -49,16 +50,16 @@ void ABaseBuilding::PlaySound_Implementation()
 	UGameplayStatics::PlaySoundAtLocation(GetWorld(), ProjectileSound, GetActorLocation(), GetActorRotation(), 1, 1, 0, nullptr, nullptr, this, nullptr);
 }
 
-void ABaseBuilding::Init_Implementation(UDA_BuildingAsset* asset)
+void ABaseBuilding::Init_Implementation(FBuildingBuyDetails BuildingDetails)
 {
-	BuildingDetails = FBuildingDetails(asset);
-	BuildingCost = asset->BuildingCost;
+	mBuildingDetails = BuildingDetails;
+	BuildingCost = mBuildingDetails.BuildingCost;
 
 	bCanPlace = true;
 	
 	IncreaseRange();
 
-	Execute_Move(this);
+	OnMove();
 }
 
 void ABaseBuilding::OnBuildingBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -93,9 +94,7 @@ void ABaseBuilding::IncreaseRange_Implementation()
 
 void ABaseBuilding::Upgrade_Implementation()
 {
-	BuildingDetails.BuildingStats = BuildingDetails.UpgradeAsset->BuildingStats;
-	BuildingDetails.UpgradeAsset = BuildingDetails.UpgradeAsset->NextUpgrade;
-	UpdateDescription();
+ 	UpdateDescription();
 	IncreaseRange();
 }
 
@@ -197,41 +196,19 @@ void ABaseBuilding::UpdateBuildingState_Implementation(EBuildingState State)
 	ChangeBuildingMaterial(MatToAdd);
 }
 
-void ABaseBuilding::Select_Implementation(int OwnerCurrentBalance)
-{
-	UDA_UpgradeAsset* up = BuildingDetails.UpgradeAsset;
-	if(up)
-	{
-		bCanUpgrade = OwnerCurrentBalance >= up->UpgradeCost;
-	}
-	
-	OnSelect();
-}
-
-void ABaseBuilding::Deselect_Implementation()
-{
-	UpdateBuildingState(DESELECTED);
-
-	OnDeselect();
-}
-
-void ABaseBuilding::Move_Implementation()
-{
-	OnMove();
-}
-
 int ABaseBuilding::GetUpgradeCost_Implementation()
 {
-	return (BuildingDetails.UpgradeAsset)? BuildingDetails.UpgradeAsset->UpgradeCost : -1;
+	return -1;
+	//return (BuildingDetails.UpgradeAsset)? BuildingDetails.UpgradeAsset->UpgradeCost : -1;
 }
 
-void ABaseBuilding::OnSelect_Implementation()
+void ABaseBuilding::OnInteract_Implementation()
 {
 	UpdateBuildingState(SELECTED);
 	OnBuildingSelectedSignature.Broadcast(this);
 }
 
-void ABaseBuilding::OnDeselect_Implementation()
+void ABaseBuilding::OnDisassociate_Implementation()
 {
 	UpdateBuildingState(DESELECTED);
 }
@@ -247,7 +224,10 @@ void ABaseBuilding::Build_Implementation()
 	if(bCanPlace)
 	{
 		UpdateBuildingState(PLACED);
-	
+
+		auto resource = GetGameInstance()->GetSubsystem<UResourceSubsystem>();
+		resource->Deduct(BuildingCost);
+		
 		PostBuild();
 	}
 }
@@ -259,9 +239,31 @@ void ABaseBuilding::PostBuild_Implementation()
 
 void ABaseBuilding::UpdateDescription()
 {
-	BuildingDescription = UHelperMethods::GetDescription(BuildingDetails.BuildingStats);
+	BuildingDescription = UHelperMethods::GetDescription(mBuildingDetails.BuildingStats);
 
+	/*
 	if(BuildingDetails.UpgradeAsset)
 		BuildingUpgradeDescription = UHelperMethods::GetUpgradeDescription(BuildingDetails.BuildingStats, BuildingDetails.UpgradeAsset->BuildingStats);
+*/
+}
+
+void ABaseBuilding::Interact_Implementation()
+{
+	// Update the building stats
+	UDA_UpgradeAsset* up = mBuildingDetails.UpgradeAsset;
+	if(up)
+	{
+		auto currentResources = GetGameInstance()->GetSubsystem<UResourceSubsystem>()->GetCurrentResources();
+		//bCanUpgrade = currentResources >= up->UpgradeCost;
+	}
+	
+	OnInteract();
+}
+
+void ABaseBuilding::Disassociate_Implementation()
+{
+	// Deselecting this building
+	UpdateBuildingState(DESELECTED);
+	OnDisassociate();
 }
 

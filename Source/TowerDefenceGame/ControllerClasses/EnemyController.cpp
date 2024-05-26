@@ -3,23 +3,15 @@
 
 #include "EnemyController.h"
 
-#include "TowerDefenceGame/ManagerClasses/EnemyManager.h"
 #include "TowerDefenceGame/BaseClasses/BaseEnemy.h"
 #include "Navigation/PathFollowingComponent.h"
+#include "TowerDefenceGame/SubsystemClasses/EnemySubsystem.h"
 
 void AEnemyController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
 	RunBehaviorTree(BehaviorTreeRef);
 }
-
-void AEnemyController::OnSpawn(AEnemyManager* Manager)
-{
-	mEnemyManager = Manager;
-	Manager->OnEnemySpawnRequest.AddDynamic(this, &AEnemyController::SpawnPawn);
-	Manager->OnControllerDestroySignature.AddDynamic(this, &AEnemyController::OnControllerDestroy);
-}
-
 
 void AEnemyController::EnemyMove_Implementation(FVector TargetLocation)
 {
@@ -40,7 +32,8 @@ void AEnemyController::OnDead_Implementation()
 {
 	UnPossess();
 
-	mEnemyManager->FreeController();
+	if(auto enemySubs = GetGameInstance()->GetSubsystem<UEnemySubsystem>())
+		enemySubs->FreeController(this);
 }
 
 void AEnemyController::OnControllerDestroy_Implementation()
@@ -55,7 +48,7 @@ void AEnemyController::OnControllerDestroy_Implementation()
 
 void AEnemyController::SpawnPawn_Implementation(AEnemySpawnPoint* SpawnBox)
 {
-	EnemyRef->OnPawnDeadSignature.AddDynamic(this, &AEnemyController::OnDead);
+	//EnemyRef->OnPawnDeadSignature.AddDynamic(this, &AEnemyController::OnDead);
 
 	Possess(EnemyRef);
 }

@@ -13,6 +13,7 @@ class TOWERDEFENCEGAME_API AEnemySpawnPoint : public AActor
 	
 public:
 
+	virtual void BeginPlay() override;
 	UFUNCTION(BlueprintPure, BlueprintCallable, BlueprintNativeEvent)
 	FVector GetRandomPointInsideTheSpawnArea();
 	

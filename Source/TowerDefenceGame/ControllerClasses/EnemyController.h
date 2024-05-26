@@ -24,9 +24,6 @@ public:
 	
 	virtual void OnPossess(APawn* InPawn) override;
 
-	UFUNCTION(BlueprintCallable)
-	void OnSpawn(class AEnemyManager* Manager);
-	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SpawnPawn(AEnemySpawnPoint* SpawnBox);
 

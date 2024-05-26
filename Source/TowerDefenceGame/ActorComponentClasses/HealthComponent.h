@@ -17,13 +17,13 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Actor Properties")
 	float mHealth;
 
-	UHealthComponent();
-
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	float GetHealth(){ return mHealth; }
 	UFUNCTION(BlueprintCallable)
 	void SetHealth(float Value){ mHealth = Value; }
 	
 	UFUNCTION(BlueprintCallable)
-	void OnDamageTaken(float DamageValue) {mHealth-= DamageValue;}
+	void IncreaseHealth(float Value) {mHealth += Value; }
+	UFUNCTION(BlueprintCallable)
+	void DeductHealth(float DamageValue) {mHealth-= DamageValue;}
 };

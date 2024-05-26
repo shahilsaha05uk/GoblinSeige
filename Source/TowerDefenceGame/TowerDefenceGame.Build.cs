@@ -8,7 +8,7 @@ public class TowerDefenceGame : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Json", "JsonUtilities"});
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Json", "JsonUtilities", "Custom_BlueprintSImplifiers"});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "EnhancedInput" });
 

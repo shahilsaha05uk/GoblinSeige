@@ -8,7 +8,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e7763e5-9dad-44e7-9cef-d89b5e8a74c4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/MoneyWidget.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/MoneyWidget.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/WaveWidget.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/WaveWidget.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Stylized_Egypt_Demo1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Stylized_Egypt_Demo1.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/BP_GameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/BP_GameMode.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Base/BP_Controller.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Base/BP_Controller.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Base/BP_Player2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Base/BP_Player2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Base/BP_Tower.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Base/BP_Tower.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/launchpad_u1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/launchpad_u1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Weapons/BP_Tower_Flamethrowers.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Weapons/BP_Tower_Flamethrowers.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/Menu.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Menu.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/widgets/W_BuyButton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/widgets/W_BuyButton.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI_Icons/UI_Icon_39.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI_Icons/UI_Icon_39.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RD.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RD.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderBlueprint.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderBlueprint.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderGameControl.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderGameControl.pdb" afterDir="false" />
@@ -148,7 +165,6 @@
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/UnrealEditor-RD.dll.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/UnrealEditor-RD.dll.response.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/UnrealEditor-RD.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/UnrealEditor-RD.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/UnrealEditor-RD.lib.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/UnrealEditor-RD.lib.response" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/UnrealEditor-RD.lib.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/UnrealEditor-RD.lib.response.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/UnrealEditor-RD.suppressed.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/UnrealEditor-RD.suppressed.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/WireBase.cpp.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/WireBase.cpp.dep.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/WireBase.cpp.obj.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RD/WireBase.cpp.obj.response" afterDir="false" />
@@ -195,12 +211,10 @@
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/Module.RiderBlueprint.cpp.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/Module.RiderBlueprint.cpp.dep.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/Module.RiderBlueprint.cpp.obj.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/Module.RiderBlueprint.cpp.obj.response" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/Module.RiderBlueprint.cpp.obj.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/Module.RiderBlueprint.cpp.obj.response.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/Module.RiderBlueprint.cpp.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/Module.RiderBlueprint.cpp.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/UnrealEditor-RiderBlueprint.dll.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/UnrealEditor-RiderBlueprint.dll.response" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/UnrealEditor-RiderBlueprint.dll.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/UnrealEditor-RiderBlueprint.dll.response.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/UnrealEditor-RiderBlueprint.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/UnrealEditor-RiderBlueprint.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/UnrealEditor-RiderBlueprint.lib.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/UnrealEditor-RiderBlueprint.lib.response" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/UnrealEditor-RiderBlueprint.lib.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/UnrealEditor-RiderBlueprint.lib.response.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/UnrealEditor-RiderBlueprint.suppressed.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderBlueprint/UnrealEditor-RiderBlueprint.suppressed.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/Default.rc2.res.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/Default.rc2.res.response" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/Default.rc2.res.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/Default.rc2.res.response.old" afterDir="false" />
@@ -211,7 +225,6 @@
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/UnrealEditor-RiderGameControl.dll.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/UnrealEditor-RiderGameControl.dll.response.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/UnrealEditor-RiderGameControl.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/UnrealEditor-RiderGameControl.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/UnrealEditor-RiderGameControl.lib.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/UnrealEditor-RiderGameControl.lib.response" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/UnrealEditor-RiderGameControl.lib.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/UnrealEditor-RiderGameControl.lib.response.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/UnrealEditor-RiderGameControl.suppressed.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderGameControl/UnrealEditor-RiderGameControl.suppressed.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/Default.rc2.res.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/Default.rc2.res.response" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/Default.rc2.res.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/Default.rc2.res.response.old" afterDir="false" />
@@ -222,7 +235,6 @@
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/UnrealEditor-RiderLC.dll.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/UnrealEditor-RiderLC.dll.response.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/UnrealEditor-RiderLC.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/UnrealEditor-RiderLC.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/UnrealEditor-RiderLC.lib.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/UnrealEditor-RiderLC.lib.response" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/UnrealEditor-RiderLC.lib.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/UnrealEditor-RiderLC.lib.response.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/UnrealEditor-RiderLC.suppressed.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLC/UnrealEditor-RiderLC.suppressed.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/Default.rc2.res.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/Default.rc2.res.response" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/Default.rc2.res.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/Default.rc2.res.response.old" afterDir="false" />
@@ -230,12 +242,10 @@
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/Module.RiderLink.cpp.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/Module.RiderLink.cpp.dep.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/Module.RiderLink.cpp.obj.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/Module.RiderLink.cpp.obj.response" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/Module.RiderLink.cpp.obj.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/Module.RiderLink.cpp.obj.response.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/Module.RiderLink.cpp.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/Module.RiderLink.cpp.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/UnrealEditor-RiderLink.dll.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/UnrealEditor-RiderLink.dll.response" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/UnrealEditor-RiderLink.dll.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/UnrealEditor-RiderLink.dll.response.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/UnrealEditor-RiderLink.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/UnrealEditor-RiderLink.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/UnrealEditor-RiderLink.lib.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/UnrealEditor-RiderLink.lib.response" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/UnrealEditor-RiderLink.lib.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/UnrealEditor-RiderLink.lib.response.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/UnrealEditor-RiderLink.suppressed.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLink/UnrealEditor-RiderLink.suppressed.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/Default.rc2.res.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/Default.rc2.res.response" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/Default.rc2.res.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/Default.rc2.res.response.old" afterDir="false" />
@@ -243,12 +253,10 @@
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/Module.RiderLogging.cpp.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/Module.RiderLogging.cpp.dep.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/Module.RiderLogging.cpp.obj.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/Module.RiderLogging.cpp.obj.response" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/Module.RiderLogging.cpp.obj.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/Module.RiderLogging.cpp.obj.response.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/Module.RiderLogging.cpp.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/Module.RiderLogging.cpp.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/UnrealEditor-RiderLogging.dll.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/UnrealEditor-RiderLogging.dll.response" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/UnrealEditor-RiderLogging.dll.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/UnrealEditor-RiderLogging.dll.response.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/UnrealEditor-RiderLogging.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/UnrealEditor-RiderLogging.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/UnrealEditor-RiderLogging.lib.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/UnrealEditor-RiderLogging.lib.response" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/UnrealEditor-RiderLogging.lib.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/UnrealEditor-RiderLogging.lib.response.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/UnrealEditor-RiderLogging.suppressed.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderLogging/UnrealEditor-RiderLogging.suppressed.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/Default.rc2.res.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/Default.rc2.res.response" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/Default.rc2.res.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/Default.rc2.res.response.old" afterDir="false" />
@@ -259,9 +267,35 @@
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.dll.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.dll.response.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.lib.response" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.lib.response" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.lib.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.lib.response.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.suppressed.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.suppressed.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/FileSystemMappings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/FileSystemMappings.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/CurrencyComponent.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/CurrencyComponent.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/HealthComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/HealthComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/HealthComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/HealthComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Turret.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Turret.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/InputController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/InputController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/InputController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/InputController.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/DataAssetClasses/DA_UpgradeAsset.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/DataAssetClasses/DA_UpgradeAsset.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/BuildingSubsystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/BuildingSubsystem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/EnemySubsystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/EnemySubsystem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SupportClasses/StructClass.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SupportClasses/StructClass.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SupportClasses/StructClass.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SupportClasses/StructClass.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/TowerDefenceGame.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/TowerDefenceGame.Build.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/BuyButton.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/BuyButton.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/BuyButton.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/BuyButton.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TowerDefenceGame.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/TowerDefenceGame.uproject" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,7 +306,30 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="cidr-memory-view://1" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -307,9 +364,9 @@
   },
   &quot;keyToStringList&quot;: {
     &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\j011375k\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\j011375k\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\j011375k\\AppData\\Local\\Symbols\\src&quot;
+      &quot;C:\\Users\\s015695k\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\s015695k\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\s015695k\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
 }</component>
@@ -321,7 +378,7 @@
         <option name="PLATFORM" value="Win64" />
         <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\Win64\UnrealEditor-Win64-DebugGame.exe" />
         <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\j011375k\Documents\GitHub\GoblinSeige\TowerDefenceGame.uproject&quot;" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\s015695k\Desktop\GoblinSeige\TowerDefenceGame.uproject&quot;" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
@@ -329,7 +386,7 @@
       <configuration_3>
         <option name="CONFIGURATION" value="DebugGame" />
         <option name="PLATFORM" value="Win64" />
-        <option name="EXECUTABLE_PATH" value="C:\Users\j011375k\Documents\GitHub\GoblinSeige\Binaries\Win64\TowerDefenceGame-Win64-DebugGame.exe" />
+        <option name="EXECUTABLE_PATH" value="C:\Users\s015695k\Desktop\GoblinSeige\Binaries\Win64\TowerDefenceGame-Win64-DebugGame.exe" />
         <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
@@ -341,7 +398,7 @@
         <option name="PLATFORM" value="Win64" />
         <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\Win64\UnrealEditor.exe" />
         <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\j011375k\Documents\GitHub\GoblinSeige\TowerDefenceGame.uproject&quot;" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\s015695k\Desktop\GoblinSeige\TowerDefenceGame.uproject&quot;" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
@@ -349,7 +406,7 @@
       <configuration_5>
         <option name="CONFIGURATION" value="Development" />
         <option name="PLATFORM" value="Win64" />
-        <option name="EXECUTABLE_PATH" value="C:\Users\j011375k\Documents\GitHub\GoblinSeige\Binaries\Win64\TowerDefenceGame.exe" />
+        <option name="EXECUTABLE_PATH" value="C:\Users\s015695k\Desktop\GoblinSeige\Binaries\Win64\TowerDefenceGame.exe" />
         <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
@@ -359,7 +416,7 @@
       <configuration_6>
         <option name="CONFIGURATION" value="Shipping" />
         <option name="PLATFORM" value="Win64" />
-        <option name="EXECUTABLE_PATH" value="C:\Users\j011375k\Documents\GitHub\GoblinSeige\Binaries\Win64\TowerDefenceGame-Win64-Shipping.exe" />
+        <option name="EXECUTABLE_PATH" value="C:\Users\s015695k\Desktop\GoblinSeige\Binaries\Win64\TowerDefenceGame-Win64-Shipping.exe" />
         <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
@@ -500,6 +557,10 @@
       <workItem from="1709156657453" duration="9248000" />
       <workItem from="1709225221800" duration="2941000" />
       <workItem from="1716216777591" duration="101000" />
+      <workItem from="1716658786046" duration="11633000" />
+      <workItem from="1716673933693" duration="1233000" />
+      <workItem from="1716676022460" duration="10373000" />
+      <workItem from="1716687932254" duration="2626000" />
     </task>
     <servers />
   </component>
