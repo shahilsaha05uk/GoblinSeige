@@ -3,6 +3,8 @@
 
 #include "GameHUD.h"
 
+#include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
+
 AGameHUD::AGameHUD()
 {
 	
@@ -12,7 +14,7 @@ AGameHUD::AGameHUD()
 void AGameHUD::BeginPlay()
 {
 	Super::BeginPlay();
-
+	GetGameInstance()->GetSubsystem<UGameSubsystem>()->InitialiseHud(this);
 }
 
 bool AGameHUD::OnUIHovered_Implementation()
@@ -42,6 +44,11 @@ void AGameHUD::HideWidget_Implementation(EWidgetType WidgetToHide)
 {
 	if(mWidgetInstanceMap.Contains(WidgetToHide))
 		mWidgetInstanceMap[WidgetToHide]->SetVisibility(ESlateVisibility::Hidden);
+}
+
+UBaseWidget* AGameHUD::GetWidgetReference_Implementation(EWidgetType Type)
+{
+	return (mWidgetInstanceMap.Contains(Type))? mWidgetInstanceMap[Type] : nullptr;
 }
 
 bool AGameHUD::isCursorHovering_Implementation()
