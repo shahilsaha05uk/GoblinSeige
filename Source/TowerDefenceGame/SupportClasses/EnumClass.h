@@ -15,6 +15,12 @@ enum EHudValue
 };
 
 UENUM(BlueprintType)
+enum EInteractableType
+{
+	PLACEMENT, BUILDING
+};
+
+UENUM(BlueprintType)
 enum ESettingsToSave
 {
 	SOUND_SETTINGS,

@@ -2,6 +2,7 @@
 #include "ShopMenu.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
+#include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/WaveSubsystem.h"
 
@@ -17,7 +18,15 @@ void UPlayerHUD::NativeConstruct()
 
 	mWaveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>();
 	mResourceSubsystem = GetGameInstance()->GetSubsystem<UResourceSubsystem>();
-	
+
+
+	if (const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
+	{
+		BuildingSubsystem->OnPlacementActorSelected.AddDynamic(this, &ThisClass::OnPlacementSelected);
+		BuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::OnRequestForBuildingBuy);
+		BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
+	}
+
 	/*if(mWaveSubsystem)
 	{
 		mWaveSubsystem->OnWaveComplete.AddDynamic(this, &ThisClass::OnWaveComplete);
@@ -81,5 +90,33 @@ void UPlayerHUD::OnUpgradeButtonClick_Implementation()
 		OnUpgradeButtonClickedSignature.Broadcast(BuildingRef, BuildingRef->GetUpgradeCost());
 	}
 }*/
+
+#pragma endregion
+
+
+#pragma region Building Methods
+
+
+void UPlayerHUD::OnPlacementSelected_Implementation(APlacementActor* PlacementActor)
+{
+	ToggleShop((PlacementActor!= nullptr));
+}
+
+void UPlayerHUD::OnBuildingDecisionTaken_Implementation(EBuildStatus Status)
+{
+	switch (Status) {
+	case BUILD_CONFIRM:
+		ToggleShop(false);
+		break;
+	case BUILD_ABORT:
+		ToggleShop(true);
+		break;
+	}
+}
+
+void UPlayerHUD::OnRequestForBuildingBuy_Implementation(const FString& BuildingID)
+{
+	ToggleShop(false);
+}
 
 #pragma endregion

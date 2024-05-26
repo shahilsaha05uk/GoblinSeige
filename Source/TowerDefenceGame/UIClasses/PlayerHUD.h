@@ -100,6 +100,20 @@ public:
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnButtonStateUpdate(const FString& String, EButtonState State);
+
+
+#pragma region Building Methods
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnPlacementSelected(APlacementActor* PlacementActor);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnBuildingDecisionTaken(EBuildStatus Status);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnRequestForBuildingBuy(const FString& BuildingID);
+
+
+#pragma endregion
 };
 
 

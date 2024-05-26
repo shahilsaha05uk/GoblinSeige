@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "UObject/Interface.h"
 #include "InteractableInterface.generated.h"
 
@@ -27,5 +28,7 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Interact();
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	EInteractableType GetInteractableType();
 
 };

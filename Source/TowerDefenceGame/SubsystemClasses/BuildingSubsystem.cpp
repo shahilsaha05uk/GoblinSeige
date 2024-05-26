@@ -17,3 +17,13 @@ void UBuildingSubsystem::Trigger_OnBuildDecisionTaken(EBuildStatus Status)
 {
 	OnBuildDecisionTaken.Broadcast(Status);
 }
+
+void UBuildingSubsystem::Trigger_OnPlacementActorSelected(APlacementActor* PlacementActor)
+{
+	OnPlacementActorSelected.Broadcast(PlacementActor);
+}
+
+void UBuildingSubsystem::Trigger_OnBuildOnPlacement()
+{
+	OnBuildOnPlacementActor.Broadcast();
+}
