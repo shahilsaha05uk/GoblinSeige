@@ -65,4 +65,8 @@ public:
 	// Called When the resources get updated
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnResourceUpdated(int CurrentBalance);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnBuildRequest();
+
 };

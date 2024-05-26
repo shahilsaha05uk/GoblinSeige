@@ -6,6 +6,7 @@
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "TowerDefenceGame/InterfaceClasses/PlayerInputInterface.h"
 #include "TowerDefenceGame/InterfaceClasses/PlayerInterface.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "SpecPlayer.generated.h"
 
 
@@ -19,7 +20,8 @@ class TOWERDEFENCEGAME_API ASpecPlayer : public APawn, public IPlayerInputInterf
 private:
 	UPROPERTY(EditDefaultsOnly)
 	class UDA_BuildingAsset* DA_BuildingAsset;
-	
+	UPROPERTY()
+	FString tmpBuildingID;
 	
 public:
 	virtual void PossessedBy(AController* NewController) override;
@@ -61,17 +63,16 @@ public:
 	virtual void MoveSelectedBuilding_Implementation() override;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void SpawnBuilding(const FString& ID);
-
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void Build();
-
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnBuildingSelected(ABaseBuilding* Building);
 
 
 #pragma region Building Methods
-
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void BuildTower(EBuildStatus Status);
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void SpawnDummyBuilding(const FString& ID);
+	
 	UFUNCTION(BlueprintCallable)
 	void ToggleBuildingSelection(AActor* Building, bool shouldSelect);
 #pragma endregion

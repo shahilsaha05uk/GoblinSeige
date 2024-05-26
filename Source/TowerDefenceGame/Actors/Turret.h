@@ -49,9 +49,9 @@ protected:
 public:
 
 	ATurret();
-
-	virtual void OnInteract_Implementation() override;
-	virtual void OnDisassociate_Implementation() override;
+	virtual void Init_Implementation(FBuildingBuyDetails BuildingDetails) override;
+	virtual void Interact_Implementation() override;
+	virtual void Disassociate_Implementation() override;
 
 	virtual void IncreaseRange_Implementation() override;
 

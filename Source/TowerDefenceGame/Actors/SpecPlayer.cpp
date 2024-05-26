@@ -12,6 +12,7 @@
 #include "TowerDefenceGame/ControllerClasses/InputController.h"
 #include "TowerDefenceGame/InterfaceClasses/HUDInterface.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
+#include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 #include "TowerDefenceGame/SupportClasses/HelperMethods.h"
 
 void ASpecPlayer::PossessedBy(AController* NewController)	// Called before BeginPlay
@@ -21,7 +22,10 @@ void ASpecPlayer::PossessedBy(AController* NewController)	// Called before Begin
 	ControllerRef = Cast<AInputController>(NewController);
 
 	if(const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
-		BuildingSubsystem->OnBuildingBought.AddDynamic(this, &ThisClass::SpawnBuilding);
+	{
+		BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::BuildTower);
+		BuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::SpawnDummyBuilding);
+	}
 
 	// gets and stores the player hud from the HUD class
 	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
@@ -145,30 +149,6 @@ void ASpecPlayer::Zoom_Implementation(float Value)
 
 #pragma endregion
 
-
-void ASpecPlayer::SpawnBuilding_Implementation(const FString& ID)
-{
-	FBuildingBuyDetails BuildingDetails;
-	if(DA_BuildingAsset->FindBuildingDetails(ID, BuildingDetails))
-	{
-		FActorSpawnParameters spawnParams = FActorSpawnParameters();
-		
-		tempBuilding = GetWorld()->SpawnActor<ABaseBuilding>(BuildingDetails.BuildingClass, spawnParams);
-
-		tempBuilding->OnBuildingSelectedSignature.AddDynamic(this, &ThisClass::OnBuildingSelected);
-		tempBuilding->Init(BuildingDetails);
-	}
-}
-
-void ASpecPlayer::Build_Implementation()
-{
-	if(tempBuilding)
-	{
-		tempBuilding->Build();
-		tempBuilding = nullptr;
-	}
-}
-
 void ASpecPlayer::UpgradeSelectedBuilding_Implementation(int BuildingID)
 {
 	/*
@@ -193,6 +173,44 @@ void ASpecPlayer::OnBuildingSelected_Implementation(ABaseBuilding* Building)
 
 }
 
+void ASpecPlayer::SpawnDummyBuilding_Implementation(const FString& ID)
+{
+	FBuildingBuyDetails BuildingDetails;
+	if(DA_BuildingAsset->FindBuildingDetails(ID, BuildingDetails))
+	{
+		tmpBuildingID = ID;
+		FActorSpawnParameters spawnParams = FActorSpawnParameters();
+		
+		tempBuilding = GetWorld()->SpawnActor<ABaseBuilding>(BuildingDetails.BuildingClass, mSelectedActor->GetActorLocation(), mSelectedActor->GetActorRotation());
+		tempBuilding->InitDummy();
+	}
+}
+
+void ASpecPlayer::BuildTower_Implementation(EBuildStatus Status)
+{
+	tempBuilding->Destroy();
+
+	if(Status == BUILD_CONFIRM)
+	{
+		FBuildingBuyDetails BuildingDetails;
+		if(DA_BuildingAsset->FindBuildingDetails(tmpBuildingID, BuildingDetails))
+		{
+			FActorSpawnParameters spawnParams = FActorSpawnParameters();
+		
+			tempBuilding = GetWorld()->SpawnActor<ABaseBuilding>(BuildingDetails.BuildingClass, mSelectedActor->GetActorLocation(), mSelectedActor->GetActorRotation());
+			tempBuilding->OnBuildingSelectedSignature.AddDynamic(this, &ThisClass::OnBuildingSelected);
+			tempBuilding->Init(BuildingDetails);
+
+			if(auto const ResourceSubsystem = GetGameInstance()->GetSubsystem<UResourceSubsystem>())
+			{
+				ResourceSubsystem->Deduct(BuildingDetails.BuildingCost);
+			}
+		}
+	}
+
+	tempBuilding = nullptr;
+}
+
 // Selects/Deselects a building
 void ASpecPlayer::ToggleBuildingSelection(AActor* Building, bool shouldSelect)
 {
@@ -202,3 +220,14 @@ void ASpecPlayer::ToggleBuildingSelection(AActor* Building, bool shouldSelect)
 		else IInteractableInterface::Execute_Disassociate(Building);
 	}
 }
+
+/*
+void ASpecPlayer::Build_Implementation()
+{
+	if(tempBuilding)
+	{
+		tempBuilding->Build();
+		tempBuilding = nullptr;
+	}
+}*/
+
