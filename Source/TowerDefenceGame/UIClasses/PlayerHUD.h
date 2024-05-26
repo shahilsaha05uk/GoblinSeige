@@ -29,6 +29,8 @@ public:
 #pragma region Components
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UShopMenu* mShop;
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
+	class UDescriptionBox* mDescriptionBox;
 	/*
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UVerticalBox* vbBuildingSettings;
@@ -95,6 +97,9 @@ public:
 	void OnWaveStart();
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void ToggleShop(bool Value);
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnButtonStateUpdate(const FString& String, EButtonState State);
 };
 
 

@@ -13,15 +13,18 @@ class TOWERDEFENCEGAME_API UShopMenu : public UBaseWidget
 
 private:
 
-	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<UBaseWidget> ButtonClass;
-
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	class UDA_BuildingAsset* mBuildingAsset;
 
+	UPROPERTY(BlueprintReadWrite, meta=  (ExposeOnSpawn))
+	class UPlayerHUD* mHUD;
+	/*
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UMultiLineEditableTextBox* txtDescription;
+	*/
+
+	
 
 	virtual void NativeConstruct() override;
 
@@ -30,6 +33,4 @@ public:
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnButtonStateUpdate(const FString& BuildingID, EButtonState State);
-	UFUNCTION(BlueprintCallable)
-	void UpdateDescription(const FString& Description);
 };

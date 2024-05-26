@@ -24,9 +24,6 @@ protected:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<AActor*> OverlappingActors;
 
-	UFUNCTION()
-	void UpdateDescription();
-
 	UPROPERTY()
 	FString BuildingDescription;
 	UPROPERTY()
@@ -59,8 +56,6 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	class USoundBase* ProjectileSound;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	FTimerHandle OnSpawnTimeHandler;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private | Modification")
 	UMaterialInterface* ValidMaterial;
@@ -97,10 +92,15 @@ public:
 	void OnBuildingEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void InitDummy();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Init(FBuildingBuyDetails BuildingDetails);
 	
 	virtual void PlaySound_Implementation() override;
-	
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnBuildDecisionTaken(EBuildStatus Status);
+
 #pragma region Building STATE
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -114,47 +114,21 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Upgrade();
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	bool CanUpgrade() { return bCanUpgrade; }
-	
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	bool isUpgradeAvailable() {return mBuildingDetails.UpgradeAsset != nullptr;}
-	
+
 #pragma endregion
 
 #pragma region Building Modification
-
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void IncreaseRange();
-	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnInteract();
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnDisassociate();
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnMove();
-	
-	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void MoveBuilding();
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Build();
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PostBuild();
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	int GetUpgradeCost();
-	
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	FString GetBuildingDescription() {return BuildingDescription;}
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	FString GetBuildingUpgradeDescription() {return BuildingUpgradeDescription;}
-	#pragma endregion
-
+#pragma endregion
 
 #pragma region Interactable Interface methods
-
 	virtual void Interact_Implementation() override;
 	virtual void Disassociate_Implementation() override;
 #pragma endregion

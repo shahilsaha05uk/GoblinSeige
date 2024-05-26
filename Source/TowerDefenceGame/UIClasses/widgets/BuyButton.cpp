@@ -24,6 +24,11 @@ void UBuyButton::Init()
 	if(mResourceSubsystem)
 		mResourceSubsystem->OnResourceUpdated.AddDynamic(this, &ThisClass::OnResourceUpdated);
 
+	/*
+	if(const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
+		BuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::OnBuildRequest);
+		*/
+
 	// if the Building asset is valid, this will update the button styles
 	defaultStyle = BuyButton->GetStyle();
 	defaultStyle.Normal.DrawAs = ESlateBrushDrawType::Image;
@@ -61,7 +66,7 @@ void UBuyButton::OnButtonUnhovered_Implementation()
 
 void UBuyButton::OnBuyButtonClicked_Implementation()
 {
-	GetGameInstance()->GetSubsystem<UBuildingSubsystem>()->Trigger_OnBuildingBought(mBuildingDetails.ID);
+	GetGameInstance()->GetSubsystem<UBuildingSubsystem>()->Trigger_OnBuildingRequestedForBuy(mBuildingDetails.ID);
 }
 
 void UBuyButton::UpdateButton_Implementation()
@@ -77,4 +82,9 @@ void UBuyButton::UpdateButton_Implementation()
 void UBuyButton::OnResourceUpdated_Implementation(int CurrentBalance)
 {
 	UpdateButton();
+}
+
+void UBuyButton::OnBuildRequest_Implementation()
+{
+		
 }

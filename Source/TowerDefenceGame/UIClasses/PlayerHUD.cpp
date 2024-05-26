@@ -24,6 +24,10 @@ void UPlayerHUD::NativeConstruct()
 	}*/
 }
 
+void UPlayerHUD::OnButtonStateUpdate_Implementation(const FString& String, EButtonState State)
+{
+}
+
 void UPlayerHUD::ToggleShop_Implementation(bool Value)
 {
 	//TODO: the radial comes up here

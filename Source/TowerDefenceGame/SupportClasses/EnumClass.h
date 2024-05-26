@@ -111,6 +111,12 @@ enum EButtonState
 	BUTTON_ENABLED, BUTTON_DISABLED, BUTTON_HOVERED, BUTTON_UNHOVERED
 };
 
+UENUM(BlueprintType)
+enum EBuildStatus
+{
+	BUILD_CONFIRM, BUILD_ABORT
+};
+
 UCLASS()
 class TOWERDEFENCEGAME_API UEnumClass : public UBlueprintFunctionLibrary
 {

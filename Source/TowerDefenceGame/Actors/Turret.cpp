@@ -20,24 +20,28 @@ ATurret::ATurret()
 	RangeCollisionComp->OnComponentEndOverlap.AddDynamic(this, &ATurret::OnRangeEndOverlap);
 }
 
-
-void ATurret::OnInteract_Implementation()
+void ATurret::Init_Implementation(FBuildingBuyDetails BuildingDetails)
 {
-	RangeDecalComp->SetVisibility(true);
-	Super::OnInteract_Implementation();
+	Super::Init_Implementation(BuildingDetails);
+	IncreaseRange();
 }
 
-void ATurret::OnDisassociate_Implementation()
+void ATurret::Interact_Implementation()
 {
+	Super::Interact_Implementation();
+	RangeDecalComp->SetVisibility(true);
+}
+
+void ATurret::Disassociate_Implementation()
+{
+	Super::Disassociate_Implementation();
 	RangeDecalComp->SetVisibility(false);
-	Super::OnDisassociate_Implementation();
 }
 
 void ATurret::PostBuild_Implementation()
 {
 	Super::PostBuild_Implementation();
 
-	RangeDecalComp->SetVisibility(false);
 	//PowerOn();
 }
 

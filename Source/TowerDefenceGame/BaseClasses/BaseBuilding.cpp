@@ -11,6 +11,7 @@
 #include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_UpgradeAsset.h"
+#include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 #include "TowerDefenceGame/SupportClasses/HelperMethods.h"
 
@@ -50,18 +51,45 @@ void ABaseBuilding::PlaySound_Implementation()
 	UGameplayStatics::PlaySoundAtLocation(GetWorld(), ProjectileSound, GetActorLocation(), GetActorRotation(), 1, 1, 0, nullptr, nullptr, this, nullptr);
 }
 
+void ABaseBuilding::InitDummy_Implementation()
+{
+	if(const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
+	{
+		BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildDecisionTaken);
+	}
+
+	RangeDecalComp->SetVisibility(true);
+}
+
+void ABaseBuilding::OnBuildDecisionTaken_Implementation(EBuildStatus Status)
+{
+	switch (Status) {
+	case BUILD_CONFIRM:
+		{
+			const auto objectClass = TSubclassOf<ABaseBuilding>(GetClass());
+			const FActorSpawnParameters spawnParams = FActorSpawnParameters();
+			GetWorld()->SpawnActor(objectClass, &GetActorTransform(), spawnParams);
+		}
+		break;
+	case BUILD_ABORT:
+		{
+			Destroy();
+		}
+		break;
+	}
+}
+
 void ABaseBuilding::Init_Implementation(FBuildingBuyDetails BuildingDetails)
 {
 	mBuildingDetails = BuildingDetails;
 	BuildingCost = mBuildingDetails.BuildingCost;
 
 	bCanPlace = true;
-	
+	RangeDecalComp->SetVisibility(false);
+
 	IncreaseRange();
 
-	OnMove();
 }
-
 void ABaseBuilding::OnBuildingBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
                                                           UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
@@ -94,30 +122,7 @@ void ABaseBuilding::IncreaseRange_Implementation()
 
 void ABaseBuilding::Upgrade_Implementation()
 {
- 	UpdateDescription();
 	IncreaseRange();
-}
-
-void ABaseBuilding::MoveBuilding_Implementation()
-{
-	if(bInPlacementMode)
-	{
-		bool bHit;
-		FHitResult hit;
-		UHelperMethods::GetMouseTrace(UGameplayStatics::GetPlayerController(GetWorld(), 0), BuildingMovementTraceChannel, bHit, hit);
-
-		if(bHit)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Hit Actor Name: %s"), *hit.GetActor()->GetName());
-			FVector snappedPos;
-			UHelperMethods::CalculateSnappedPosition(hit.Location, 200.0f, snappedPos);
-			SetActorLocation(snappedPos);
-		}
-	}
-	else
-	{
-		OnSpawnTimeHandler.Invalidate();
-	}
 }
 
 void ABaseBuilding::ChangeBuildingMaterial_Implementation(EPlacementMaterial MatToAdd)
@@ -196,74 +201,28 @@ void ABaseBuilding::UpdateBuildingState_Implementation(EBuildingState State)
 	ChangeBuildingMaterial(MatToAdd);
 }
 
-int ABaseBuilding::GetUpgradeCost_Implementation()
-{
-	return -1;
-	//return (BuildingDetails.UpgradeAsset)? BuildingDetails.UpgradeAsset->UpgradeCost : -1;
-}
-
-void ABaseBuilding::OnInteract_Implementation()
-{
-	UpdateBuildingState(SELECTED);
-	OnBuildingSelectedSignature.Broadcast(this);
-}
-
-void ABaseBuilding::OnDisassociate_Implementation()
-{
-	UpdateBuildingState(DESELECTED);
-}
-
-void ABaseBuilding::OnMove_Implementation()
-{
-	UpdateBuildingState(PLACING);
-	GetWorld()->GetTimerManager().SetTimer(OnSpawnTimeHandler, this, &ABaseBuilding::MoveBuilding, 0.001f, true);
-}
 
 void ABaseBuilding::Build_Implementation()
 {
-	if(bCanPlace)
-	{
-		UpdateBuildingState(PLACED);
-
-		auto resource = GetGameInstance()->GetSubsystem<UResourceSubsystem>();
-		resource->Deduct(BuildingCost);
-		
-		PostBuild();
-	}
+	PostBuild();
 }
 
 void ABaseBuilding::PostBuild_Implementation()
 {
-	UpdateDescription();
-}
 
-void ABaseBuilding::UpdateDescription()
-{
-	BuildingDescription = UHelperMethods::GetDescription(mBuildingDetails.BuildingStats);
-
-	/*
-	if(BuildingDetails.UpgradeAsset)
-		BuildingUpgradeDescription = UHelperMethods::GetUpgradeDescription(BuildingDetails.BuildingStats, BuildingDetails.UpgradeAsset->BuildingStats);
-*/
 }
 
 void ABaseBuilding::Interact_Implementation()
 {
-	// Update the building stats
-	UDA_UpgradeAsset* up = mBuildingDetails.UpgradeAsset;
-	if(up)
-	{
-		auto currentResources = GetGameInstance()->GetSubsystem<UResourceSubsystem>()->GetCurrentResources();
-		//bCanUpgrade = currentResources >= up->UpgradeCost;
-	}
-	
-	OnInteract();
+	UpdateBuildingState(SELECTED);
+	OnBuildingSelectedSignature.Broadcast(this);
+	RangeDecalComp->SetVisibility(true);
 }
 
 void ABaseBuilding::Disassociate_Implementation()
 {
 	// Deselecting this building
 	UpdateBuildingState(DESELECTED);
-	OnDisassociate();
+	RangeDecalComp->SetVisibility(false);
 }
 
