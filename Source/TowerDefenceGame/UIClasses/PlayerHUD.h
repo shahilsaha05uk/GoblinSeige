@@ -93,7 +93,8 @@ public:
 	// On Events Triggered methods
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnWaveStart();
-
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ToggleShop(bool Value);
 };
 
 

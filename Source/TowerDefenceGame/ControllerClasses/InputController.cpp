@@ -28,17 +28,12 @@ void AInputController::BeginPlay()
 	Super::BeginPlay();
 	bShowMouseCursor = true;
 	SpecPawn = Cast<ASpecPlayer>(GetPawn());
-	GameHUD = Cast<AGameHUD>(GetHUD());
-	GameMode = Cast<ATowerDefenceGameGameModeBase>(GetWorld()->GetAuthGameMode());
 
-	if(GameHUD && UKismetSystemLibrary::DoesImplementInterface(GameHUD, UHUDInterface::StaticClass()))
+	const auto hud = GetHUD();
+	if(UKismetSystemLibrary::DoesImplementInterface(hud, UHUDInterface::StaticClass()))
 	{
-		PlayerHUD = Cast<UPlayerHUD>(IHUDInterface::Execute_WidgetInitialiser(GameHUD, PLAYER_HUD, this));
-
-		if(PlayerHUD)
-		{
-			PlayerHUD->AddToViewport();
-		}
+		if(UBaseWidget* playerHud = IHUDInterface::Execute_WidgetInitialiser(hud, PLAYER_HUD, this))
+			playerHud->AddToViewport();
 	}
 }
 
@@ -142,11 +137,14 @@ void AInputController::RequestGameCompleteUI_Implementation(bool hasWon)
 		pawn->Destroy();
 	}
 
-	IHUDInterface::Execute_DestroyWidget(GameHUD, PLAYER_HUD);
+	const auto hud = GetHUD();
+	if(UKismetSystemLibrary::DoesImplementInterface(hud, UHUDInterface::StaticClass()))
+	{
+		UBaseWidget* GameCompleteUI = IHUDInterface::Execute_WidgetInitialiser(hud, GAMECOMPLETE_MENU, this);
+		Cast<UGameComplete>(GameCompleteUI)->bWonGame = hasWon;
+		GameCompleteUI->AddToViewport();
+	}
 	
-	UBaseWidget* GameCompleteUI = IHUDInterface::Execute_WidgetInitialiser(GameHUD, GAMECOMPLETE_MENU, this);
-	Cast<UGameComplete>(GameCompleteUI)->bWonGame = hasWon;
-	GameCompleteUI->AddToViewport();
 	LevelAudioComp->Stop();
 }
 
@@ -167,8 +165,11 @@ void AInputController::Zoom_Implementation(const FInputActionValue& InputActionV
 
 void AInputController::LeftMouseActions_Implementation()
 {
-	bool bIsOverUI = IHUDInterface::Execute_isCursorHovering(GameHUD);
-	if(bIsOverUI) return;
+	const auto hud = GetHUD();
+	if(UKismetSystemLibrary::DoesImplementInterface(hud, UHUDInterface::StaticClass()))
+	{
+		if(IHUDInterface::Execute_isCursorHovering(hud)) return;
+	}
 	
 	APawn* pawn = GetPawn();
 	
@@ -177,18 +178,6 @@ void AInputController::LeftMouseActions_Implementation()
 		IPlayerInputInterface::Execute_LeftMouseActions(pawn);
 	}
 }
-
-/*void AInputController::OnBuyOptionClicked_Implementation(FString BuildingID)
-{
-	FBuildingBuyDetails BuildingDetails;
-	if(DA_UpgradeAsset->FindBuildingDetails(BuildingID, BuildingDetails))
-	{
-		SpecPawn->SpawnBuilding(BaseBuilding, BuildingAsset);
-		
-	}
-	
-}*/
-
 void AInputController::Move_Implementation(const FInputActionValue& InputActionValue)
 {
 	APawn* pawn = GetPawn();
@@ -231,36 +220,8 @@ void AInputController::DisableLook_Implementation(const FInputActionValue& Input
 	}
 }
 
-/*
-void AInputController::OnUpgradeButtonClick_Implementation(ABaseBuilding* BuildingToUpgrade, int UpgradeCost)
-{
-	APawn* pawn = GetPawn();
-
-	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UPlayerInterface::StaticClass()))
-	{
-		IPlayerInterface::Execute_UpgradeSelectedBuilding(pawn, BuildingToUpgrade, UpgradeCost);
-	}
-}
-
-void AInputController::OnMoveButtonClick_Implementation()
-{
-	APawn* pawn = GetPawn();
-
-	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UPlayerInterface::StaticClass()))
-	{
-		IPlayerInterface::Execute_MoveSelectedBuilding(pawn);
-	}
-}
-
-*/
 void AInputController::PauseGame_Implementation()
 {
 	
 }
-
-void AInputController::SideWidgetToggler_Implementation(ABaseBuilding* BuildingRef)
-{
-	//PlayerHUD->WidgetToggler(BuildingRef);
-}
-
 #pragma endregion

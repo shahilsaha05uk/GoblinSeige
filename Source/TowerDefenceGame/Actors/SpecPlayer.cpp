@@ -3,10 +3,14 @@
 
 #include "SpecPlayer.h"
 
+#include <TowerDefenceGame/SubsystemClasses/GameSubsystem.h>
+
+#include "GameFramework/HUD.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "TowerDefenceGame/ControllerClasses/InputController.h"
+#include "TowerDefenceGame/InterfaceClasses/HUDInterface.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
 #include "TowerDefenceGame/SupportClasses/HelperMethods.h"
 
@@ -18,11 +22,20 @@ void ASpecPlayer::PossessedBy(AController* NewController)	// Called before Begin
 
 	if(const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
 		BuildingSubsystem->OnBuildingBought.AddDynamic(this, &ThisClass::SpawnBuilding);
+
+	// gets and stores the player hud from the HUD class
+	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
+		GameSubs->OnHudInitialised.AddDynamic(this, &ThisClass::OnHudInitialised);
+
 }
 
-void ASpecPlayer::BeginPlay()
+
+void ASpecPlayer::OnHudInitialised(AHUD* HudRef)
 {
-	Super::BeginPlay();
+	if(UKismetSystemLibrary::DoesImplementInterface(HudRef, UHUDInterface::StaticClass()))
+	{
+		mPlayerHUD = Cast<UPlayerHUD>(IHUDInterface::Execute_GetWidgetReference(HudRef, PLAYER_HUD));
+	}
 }
 
 #pragma region Input
@@ -59,6 +72,31 @@ void ASpecPlayer::DisableLook_Implementation()
 
 void ASpecPlayer::LeftMouseActions_Implementation()
 {
+	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	bool bHit;
+	FHitResult hit;
+	UHelperMethods::GetMouseTrace(PC, InteractableTraceChannel, bHit, hit);
+
+	// Deselect the previous actor
+	if(mSelectedActor)
+	{
+		IInteractableInterface::Execute_Disassociate(mSelectedActor);
+		mPlayerHUD->ToggleShop(false);
+		mSelectedActor = nullptr;
+	}
+	
+	if(bHit)
+	{
+		mSelectedActor = hit.GetActor();
+		if(UKismetSystemLibrary::DoesImplementInterface(mSelectedActor, UInteractableInterface::StaticClass()))
+		{
+			IInteractableInterface::Execute_Interact(mSelectedActor);
+		}
+		
+		mPlayerHUD->ToggleShop(true);
+	}
+	
+	/*
 	if(tempBuilding && tempBuilding->bCanPlace)
 	{
 		Build();
@@ -97,6 +135,7 @@ void ASpecPlayer::LeftMouseActions_Implementation()
 			}
 		}
 	}
+*/
 }
 
 void ASpecPlayer::Zoom_Implementation(float Value)
@@ -138,27 +177,26 @@ void ASpecPlayer::UpgradeSelectedBuilding_Implementation(int BuildingID)
 	ToggleBuildingSelection(BuildingToUpgrade, false);
 	*/
 
-	ControllerRef->SideWidgetToggler();
-	selectedActor = nullptr;
+	mSelectedActor = nullptr;
 }
 
 void ASpecPlayer::MoveSelectedBuilding_Implementation()
 {
-	if(!selectedActor) return;
-	ToggleBuildingSelection(selectedActor, false);
-	selectedActor = nullptr;
-	ControllerRef->SideWidgetToggler();
+	if(!mSelectedActor) return;
+	ToggleBuildingSelection(mSelectedActor, false);
+	mSelectedActor = nullptr;
+
 }
 
 void ASpecPlayer::OnBuildingSelected_Implementation(ABaseBuilding* Building)
 {
-	ControllerRef->SideWidgetToggler(Building);
+
 }
 
 // Selects/Deselects a building
 void ASpecPlayer::ToggleBuildingSelection(AActor* Building, bool shouldSelect)
 {
-	if(UKismetSystemLibrary::DoesImplementInterface(selectedActor, UInteractableInterface::StaticClass()))
+	if(UKismetSystemLibrary::DoesImplementInterface(mSelectedActor, UInteractableInterface::StaticClass()))
 	{
 		if(shouldSelect) IInteractableInterface::Execute_Interact(Building);
 		else IInteractableInterface::Execute_Disassociate(Building);

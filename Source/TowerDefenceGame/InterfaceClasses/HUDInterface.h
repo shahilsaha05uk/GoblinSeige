@@ -33,5 +33,8 @@ public:
 	bool isCursorHovering();
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	UBaseWidget* GetWidgetReference(EWidgetType Type);
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void HideWidget(EWidgetType WidgetToHide);
 };

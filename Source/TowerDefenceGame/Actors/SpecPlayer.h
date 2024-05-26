@@ -22,10 +22,14 @@ private:
 	
 	
 public:
-
-	virtual void BeginPlay() override;
-
 	virtual void PossessedBy(AController* NewController) override;
+
+	UFUNCTION(BlueprintCallable)
+	void OnHudInitialised(AHUD* HudRef);
+	
+
+	UPROPERTY(BlueprintReadOnly)
+	class UPlayerHUD* mPlayerHUD;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	class AInputController* ControllerRef;
@@ -39,7 +43,7 @@ public:
 	ABaseBuilding* tempBuilding;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
-	AActor* selectedActor;
+	AActor* mSelectedActor;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	TEnumAsByte<ETraceTypeQuery> BuildingTraceChannel;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")

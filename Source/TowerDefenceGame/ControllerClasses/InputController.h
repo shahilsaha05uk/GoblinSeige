@@ -36,17 +36,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	const UInputMappingContext* InputMappingContext;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	class AGameHUD* GameHUD;
-	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Controller Components")
 	class UAudioComponent* LevelAudioComp;
 	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	class UPlayerHUD* PlayerHUD;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	class ATowerDefenceGameGameModeBase* GameMode;
-
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Sounds")
 	class USoundCue* WaveCue;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Sounds")
@@ -88,9 +80,6 @@ public:
 	void Zoom(const FInputActionValue& InputActionValue);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PauseGame();
-
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void SideWidgetToggler(class ABaseBuilding* BuildingRef = nullptr);
 
 
 	/*

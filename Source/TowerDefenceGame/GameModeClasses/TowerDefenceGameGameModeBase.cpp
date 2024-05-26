@@ -2,8 +2,8 @@
 
 
 #include "TowerDefenceGameGameModeBase.h"
+#include <TowerDefenceGame/SubsystemClasses/GameSubsystem.h>
 #include "TowerDefenceGame/SubsystemClasses/EnemySubsystem.h"
-#include "TowerDefenceGame/SubsystemClasses/GameDecisionSubsytem.h"
 #include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/WaveSubsystem.h"
 
@@ -14,9 +14,9 @@ void ATowerDefenceGameGameModeBase::BeginPlay()
 		waveSubsystem->OnWaveStarted.AddDynamic(this, &ThisClass::OnWaveStart);
 		waveSubsystem->OnWaveComplete.AddDynamic(this, &ThisClass::OnWaveComplete);
 	}
-	if(const auto gameDecision = GetGameInstance()->GetSubsystem<UGameDecisionSubsytem>())
+	if(const auto gameSubsystem = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 	{
-		gameDecision->OnGameDecisionMade.AddDynamic(this, &ThisClass::GameOver);
+		gameSubsystem->OnGameDecisionMade.AddDynamic(this, &ThisClass::GameOver);
 	}
 	Super::BeginPlay();
 }
@@ -52,7 +52,7 @@ void ATowerDefenceGameGameModeBase::OnWaveComplete_Implementation(int WaveNumber
 	{
 		if(WaveNumber >= waveSubsystem->GetFinalWave())
 		{
-			GetGameInstance()->GetSubsystem<UGameDecisionSubsytem>()->Trigger_OnGameDecisionMade();
+			GetGameInstance()->GetSubsystem<UGameSubsystem>()->Trigger_OnGameDecisionMade();
 		}
 	}
 }

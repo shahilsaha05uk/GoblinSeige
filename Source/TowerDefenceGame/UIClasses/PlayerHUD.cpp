@@ -24,6 +24,12 @@ void UPlayerHUD::NativeConstruct()
 	}*/
 }
 
+void UPlayerHUD::ToggleShop_Implementation(bool Value)
+{
+	//TODO: the radial comes up here
+	UE_LOG(LogTemp, Warning, TEXT("Open the shop"));
+}
+
 
 /*
 
