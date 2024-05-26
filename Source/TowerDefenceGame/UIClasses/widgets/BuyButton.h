@@ -8,15 +8,23 @@
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "BuyButton.generated.h"
 
-/**
- * 
- */
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnButtonStateUpdateSignature, FString, BuildingID, EButtonState, CurrentState);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuyButtonClickSignature, FString, BuildingID);
+
 UCLASS()
-class TOWERDEFENCEGAME_API UBuyButton : public UBaseWidget
+class TOWERDEFENCEGAME_API UBuyButton : public UUserWidget
 {
 	GENERATED_BODY()
 
+private:
+
+	UPROPERTY()
+	class UResourceSubsystem* mResourceSubsystem;
+
 public:
+	UPROPERTY(meta =(ExposeOnSpawn = true), BlueprintReadWrite)
+	FBuildingBuyDetails mBuildingDetails;
+	
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Properties")
 	class UBorder* ButtonBorder;
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Properties")
@@ -30,21 +38,15 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
 	FButtonStyle ButtonStyle;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
-	FString BuildingDescription;
-	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
-	class UPlayerHUD* PlayerHUDRef;
 
-	UPROPERTY(BlueprintReadWrite)
-	class UMultiLineEditableTextBox* txtDescription;
+	// Delegates
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnButtonStateUpdateSignature OnButtonStateUpdate;
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnBuyButtonClickSignature OnBuyButtonClick;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
-	UDA_BuildingAsset* mBuildingAsset;
-
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void Init(class UPlayerHUD* PlayerHUD, class UMultiLineEditableTextBox* descriptionWidget, class UDA_BuildingAsset* BuildingAsset);
-	
+	UFUNCTION(BlueprintCallable)
+	void Init();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnButtonHovered();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -52,15 +54,15 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnBuyButtonClicked();
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnCurrentBalanceUpdated(int CurrentBalance);
-
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	bool IsCurrentBalanceLessThanTheBuildingCost(int CurrentBalance) {return (CurrentBalance > mBuildingAsset->BuildingCost);}
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void UpdateButtonState(EButtonState State);
 
+	// This will update the state of the Button whenever its called
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void UpdateDescription(bool bSetToDefault = true);
+	void UpdateButton();
+
+	// Called When the resources get updated
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnResourceUpdated(int CurrentBalance);
 };

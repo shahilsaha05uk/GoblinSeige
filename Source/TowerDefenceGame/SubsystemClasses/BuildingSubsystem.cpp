@@ -2,3 +2,8 @@
 
 
 #include "BuildingSubsystem.h"
+
+void UBuildingSubsystem::Trigger_OnBuildingBought(const FString& BuildingID)
+{
+	OnBuildingBought.Broadcast(BuildingID);
+}

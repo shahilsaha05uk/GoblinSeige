@@ -9,12 +9,12 @@
 
 void ATowerDefenceGameGameModeBase::BeginPlay()
 {
-	if(auto waveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>())
+	if(const auto waveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>())
 	{
 		waveSubsystem->OnWaveStarted.AddDynamic(this, &ThisClass::OnWaveStart);
 		waveSubsystem->OnWaveComplete.AddDynamic(this, &ThisClass::OnWaveComplete);
 	}
-	if(auto gameDecision = GetGameInstance()->GetSubsystem<UGameDecisionSubsytem>())
+	if(const auto gameDecision = GetGameInstance()->GetSubsystem<UGameDecisionSubsytem>())
 	{
 		gameDecision->OnGameDecisionMade.AddDynamic(this, &ThisClass::GameOver);
 	}
@@ -23,7 +23,7 @@ void ATowerDefenceGameGameModeBase::BeginPlay()
 
 void ATowerDefenceGameGameModeBase::GameOver_Implementation()
 {
-	if(auto enemySubsystem = GetGameInstance()->GetSubsystem<UEnemySubsystem>())
+	if(const auto enemySubsystem = GetGameInstance()->GetSubsystem<UEnemySubsystem>())
 	{
 		enemySubsystem->FlushEverything();
 	}
@@ -40,7 +40,7 @@ void ATowerDefenceGameGameModeBase::PostLogin(APlayerController* NewPlayer)
 
 void ATowerDefenceGameGameModeBase::OnWaveStart_Implementation(int Wave)
 {
-	if(auto enemySubsystem = GetGameInstance()->GetSubsystem<UEnemySubsystem>())
+	if(const auto enemySubsystem = GetGameInstance()->GetSubsystem<UEnemySubsystem>())
 	{
 		enemySubsystem->PrepareForWave(Wave);
 	}
@@ -48,7 +48,7 @@ void ATowerDefenceGameGameModeBase::OnWaveStart_Implementation(int Wave)
 
 void ATowerDefenceGameGameModeBase::OnWaveComplete_Implementation(int WaveNumber)
 {
-	if(auto waveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>())
+	if(const auto waveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>())
 	{
 		if(WaveNumber >= waveSubsystem->GetFinalWave())
 		{

@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TowerDefenceGame/ActorComponentClasses/CurrencyComponent.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "TowerDefenceGame/InterfaceClasses/PlayerInputInterface.h"
 #include "TowerDefenceGame/InterfaceClasses/PlayerInterface.h"
@@ -17,6 +16,11 @@ class TOWERDEFENCEGAME_API ASpecPlayer : public APawn, public IPlayerInputInterf
 {
 	GENERATED_BODY()
 
+private:
+	UPROPERTY(EditDefaultsOnly)
+	class UDA_BuildingAsset* DA_BuildingAsset;
+	
+	
 public:
 
 	virtual void BeginPlay() override;
@@ -53,7 +57,7 @@ public:
 	virtual void MoveSelectedBuilding_Implementation() override;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void SpawnBuilding(class ABaseBuilding* NewBuilding, UDA_BuildingAsset* BuildingAsset);
+	void SpawnBuilding(const FString& ID);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Build();

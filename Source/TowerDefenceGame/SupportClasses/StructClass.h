@@ -32,6 +32,53 @@ public:
 };
 
 USTRUCT(Blueprintable, BlueprintType)
+struct FBuildingBuyDetails
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
+	FString ID;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
+	FString BuildingName;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
+	int BuildingCost;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
+	UTexture2D* BuildingImage;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
+	FBuildingStats BuildingStats;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
+	TSubclassOf<class ABaseBuilding> BuildingClass;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
+	class UDA_UpgradeAsset* UpgradeAsset;
+
+};
+
+USTRUCT(Blueprintable, BlueprintType)
+struct FUpgradeDetails
+{
+	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FString UpgradeID;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FString UpgradeName;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int UpgradeCost;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UMaterialInterface* UpgradeMaterial;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
+	FBuildingStats BuildingStats;
+};
+
+
+USTRUCT(Blueprintable, BlueprintType)
 struct FSoundStruct
 {
 	GENERATED_BODY()
@@ -52,18 +99,22 @@ struct FBuildingDetails
 public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
-	FString BuildingName;
-
+	FString ID;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
-	class UDA_UpgradeAsset* UpgradeAsset;
+	FString BuildingName;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
 	int BuildingCost;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
 	FBuildingStats BuildingStats;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
+	class UDA_UpgradeAsset* UpgradeAsset;
 	
 	FBuildingDetails(class UDA_BuildingAsset* BuildingAsset);
 	FBuildingDetails();
 };
+
+
 
 // Save Game Structs
 
@@ -91,7 +142,4 @@ class TOWERDEFENCEGAME_API UStructClass : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 
 public:
-
-	
-	
 };

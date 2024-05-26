@@ -35,5 +35,4 @@ public:
 		mCurrentResources -= value;
 		OnResourceUpdated.Broadcast(mCurrentResources);
 	}
-	
 };

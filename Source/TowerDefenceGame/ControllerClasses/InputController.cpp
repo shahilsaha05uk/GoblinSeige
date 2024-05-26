@@ -17,7 +17,7 @@
 
 AInputController::AInputController()
 {
-	OnBuyMenuOptionClickSignature.AddDynamic(this, &AInputController::OnBuyOptionClicked);
+	//OnBuyMenuOptionClickSignature.AddDynamic(this, &AInputController::OnBuyOptionClicked);
 
 	LevelAudioComp = CreateDefaultSubobject<UAudioComponent>(TEXT("AudioComp"));
 	LevelAudioComp->SetupAttachment(RootComponent);
@@ -178,14 +178,16 @@ void AInputController::LeftMouseActions_Implementation()
 	}
 }
 
-void AInputController::OnBuyOptionClicked_Implementation(UDA_BuildingAsset* BuildingAsset)
+/*void AInputController::OnBuyOptionClicked_Implementation(FString BuildingID)
 {
-	FActorSpawnParameters spawnParams = FActorSpawnParameters();
+	FBuildingBuyDetails BuildingDetails;
+	if(DA_UpgradeAsset->FindBuildingDetails(BuildingID, BuildingDetails))
+	{
+		SpecPawn->SpawnBuilding(BaseBuilding, BuildingAsset);
+		
+	}
 	
-	ABaseBuilding* BaseBuilding = GetWorld()->SpawnActor<ABaseBuilding>(BuildingAsset->BuildingClass, spawnParams);
-
-	SpecPawn->SpawnBuilding(BaseBuilding, BuildingAsset);
-}
+}*/
 
 void AInputController::Move_Implementation(const FInputActionValue& InputActionValue)
 {
@@ -258,7 +260,7 @@ void AInputController::PauseGame_Implementation()
 
 void AInputController::SideWidgetToggler_Implementation(ABaseBuilding* BuildingRef)
 {
-	PlayerHUD->WidgetToggler(BuildingRef);
+	//PlayerHUD->WidgetToggler(BuildingRef);
 }
 
 #pragma endregion

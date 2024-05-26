@@ -1,0 +1,30 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Audius",
+	"Description": "Music Plug-in utilizing the Audius API to stream music from the Audius network within your game.",
+	"Category": "Audio",
+	"CreatedBy": "Audius",
+	"CreatedByURL": "https://audius.co",
+	"DocsURL": "https://github.com/DigiKrafting/Audius_Unreal_Plugin",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/379d421d179148cca3a09dcd7a9049e0",
+	"SupportURL": "https://github.com/DigiKrafting/Audius_Unreal_Plugin/issues",
+	"EngineVersion": "5.2.0",
+	"CanContainContent": true,
+	"Installed": true,
+	"Modules": [
+		{
+			"Name": "Audius",
+			"Type": "Runtime",
+			"LoadingPhase": "PreLoadingScreen",
+			"PlatformAllowList": [
+				"Win64",
+				"Android",
+				"Linux",
+				"Mac",
+				"IOS"
+			]
+		}
+	]
+}

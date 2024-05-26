@@ -16,23 +16,9 @@ class TOWERDEFENCEGAME_API UDA_BuildingAsset : public UDataAsset
 public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Building Asset Properties")
-	int BuildingID;
+	TMap<FString, FBuildingBuyDetails> BuildingDetails;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Building Asset Properties")
-	FString BuildingName;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Building Asset Properties")
-	int BuildingCost;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Building Asset Properties")
-	UTexture2D* BuildingImage;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Building Asset Properties")
-	class UDA_UpgradeAsset* UpgradeAsset;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	FBuildingStats BuildingStats;
-	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Building Asset Properties")
-	TSubclassOf<class ABaseBuilding> BuildingClass;
+	UFUNCTION(BlueprintCallable)
+	bool FindBuildingDetails(FString ID, FBuildingBuyDetails& Building);
 };

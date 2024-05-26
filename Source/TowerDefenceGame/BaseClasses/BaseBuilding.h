@@ -37,7 +37,7 @@ protected:
 public:
 
 	UPROPERTY(meta = (ExposeOnSpawn), EditAnywhere, BlueprintReadWrite, Category = "Private")
-	FBuildingDetails BuildingDetails;
+	FBuildingBuyDetails mBuildingDetails;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private")
 	int BuildingCost;
@@ -97,7 +97,7 @@ public:
 	void OnBuildingEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void Init(UDA_BuildingAsset* asset);
+	void Init(FBuildingBuyDetails BuildingDetails);
 	
 	virtual void PlaySound_Implementation() override;
 	
@@ -118,7 +118,7 @@ public:
 	bool CanUpgrade() { return bCanUpgrade; }
 	
 	UFUNCTION(BlueprintCallable, BlueprintPure)
-	bool isUpgradeAvailable() {return BuildingDetails.UpgradeAsset != nullptr;}
+	bool isUpgradeAvailable() {return mBuildingDetails.UpgradeAsset != nullptr;}
 	
 #pragma endregion
 

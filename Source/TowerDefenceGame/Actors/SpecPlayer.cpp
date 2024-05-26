@@ -7,6 +7,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "TowerDefenceGame/ControllerClasses/InputController.h"
+#include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
 #include "TowerDefenceGame/SupportClasses/HelperMethods.h"
 
 void ASpecPlayer::PossessedBy(AController* NewController)	// Called before BeginPlay
@@ -14,6 +15,9 @@ void ASpecPlayer::PossessedBy(AController* NewController)	// Called before Begin
 	Super::PossessedBy(NewController);
 
 	ControllerRef = Cast<AInputController>(NewController);
+
+	if(const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
+		BuildingSubsystem->OnBuildingBought.AddDynamic(this, &ThisClass::SpawnBuilding);
 }
 
 void ASpecPlayer::BeginPlay()
@@ -103,13 +107,18 @@ void ASpecPlayer::Zoom_Implementation(float Value)
 #pragma endregion
 
 
-void ASpecPlayer::SpawnBuilding_Implementation(ABaseBuilding* NewBuilding, UDA_BuildingAsset* BuildingAsset)
+void ASpecPlayer::SpawnBuilding_Implementation(const FString& ID)
 {
-	tempBuilding = NewBuilding;
+	FBuildingBuyDetails BuildingDetails;
+	if(DA_BuildingAsset->FindBuildingDetails(ID, BuildingDetails))
+	{
+		FActorSpawnParameters spawnParams = FActorSpawnParameters();
+		
+		tempBuilding = GetWorld()->SpawnActor<ABaseBuilding>(BuildingDetails.BuildingClass, spawnParams);
 
-	tempBuilding->OnBuildingSelectedSignature.AddDynamic(this, &ThisClass::OnBuildingSelected);
-
-	tempBuilding->Init(BuildingAsset);
+		tempBuilding->OnBuildingSelectedSignature.AddDynamic(this, &ThisClass::OnBuildingSelected);
+		tempBuilding->Init(BuildingDetails);
+	}
 }
 
 void ASpecPlayer::Build_Implementation()

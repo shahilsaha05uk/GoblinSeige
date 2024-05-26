@@ -44,7 +44,7 @@ void UEnemySubsystem::FlushEverything()
 
 void UEnemySubsystem::CacheControllers()
 {
-	int CacheControllerCount = TotalEnemiesToSpawnThisRound;
+	const int CacheControllerCount = TotalEnemiesToSpawnThisRound;
 	for (int i = 0; i < CacheControllerCount; i++)
 	{
 		auto EController= GetWorld()->SpawnActor<AEnemyController>(mEnemyControllerClass);
@@ -59,18 +59,19 @@ void UEnemySubsystem::SpawnEnemies()
 
 void UEnemySubsystem::RequestEnemy()
 {
-	auto SpawnPoint = GetRandomEnemySpawnPoint();
-
-	auto Controller = mFreeControllers.Pop(true);	// take out a free controller
-	Controller->SpawnPawn(SpawnPoint);	// spawn the pawn
-	mAllocatedController.Add(Controller);	// add it to the allocated controller
-
-	// Clear and invalidate the timer if the remaining enemies to spawn is 0
-	if(TotalEnemiesToSpawnThisRound-- <= 0)
+	if(TotalEnemiesToSpawnThisRound-- == 0 || mFreeControllers.IsEmpty())
 	{
 		GetWorld()->GetTimerManager().ClearTimer(EnemySpawnTimerHandle);
 		EnemySpawnTimerHandle.Invalidate();
+		return;
 	}
+
+	// Clear and invalidate the timer if the remaining enemies to spawn is 0
+	const auto SpawnPoint = GetRandomEnemySpawnPoint();
+
+	const auto Controller = mFreeControllers.Pop(true);	// take out a free controller
+	Controller->SpawnPawn(SpawnPoint);	// spawn the pawn
+	mAllocatedController.Add(Controller);	// add it to the allocated controller
 }
 
 void UEnemySubsystem::FreeController(AEnemyController* EnemyController)

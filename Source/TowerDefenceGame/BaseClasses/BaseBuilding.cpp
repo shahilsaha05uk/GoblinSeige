@@ -50,10 +50,10 @@ void ABaseBuilding::PlaySound_Implementation()
 	UGameplayStatics::PlaySoundAtLocation(GetWorld(), ProjectileSound, GetActorLocation(), GetActorRotation(), 1, 1, 0, nullptr, nullptr, this, nullptr);
 }
 
-void ABaseBuilding::Init_Implementation(UDA_BuildingAsset* asset)
+void ABaseBuilding::Init_Implementation(FBuildingBuyDetails BuildingDetails)
 {
-	BuildingDetails = FBuildingDetails(asset);
-	BuildingCost = asset->BuildingCost;
+	mBuildingDetails = BuildingDetails;
+	BuildingCost = mBuildingDetails.BuildingCost;
 
 	bCanPlace = true;
 	
@@ -94,13 +94,7 @@ void ABaseBuilding::IncreaseRange_Implementation()
 
 void ABaseBuilding::Upgrade_Implementation()
 {
-	auto resource = GetGameInstance()->GetSubsystem<UResourceSubsystem>();
-	resource->Deduct(BuildingDetails.UpgradeAsset->UpgradeCost);
-	
-	BuildingDetails.BuildingStats = BuildingDetails.UpgradeAsset->BuildingStats;
-	BuildingDetails.UpgradeAsset = BuildingDetails.UpgradeAsset->NextUpgrade;
-
-	UpdateDescription();
+ 	UpdateDescription();
 	IncreaseRange();
 }
 
@@ -204,7 +198,8 @@ void ABaseBuilding::UpdateBuildingState_Implementation(EBuildingState State)
 
 int ABaseBuilding::GetUpgradeCost_Implementation()
 {
-	return (BuildingDetails.UpgradeAsset)? BuildingDetails.UpgradeAsset->UpgradeCost : -1;
+	return -1;
+	//return (BuildingDetails.UpgradeAsset)? BuildingDetails.UpgradeAsset->UpgradeCost : -1;
 }
 
 void ABaseBuilding::OnInteract_Implementation()
@@ -244,20 +239,22 @@ void ABaseBuilding::PostBuild_Implementation()
 
 void ABaseBuilding::UpdateDescription()
 {
-	BuildingDescription = UHelperMethods::GetDescription(BuildingDetails.BuildingStats);
+	BuildingDescription = UHelperMethods::GetDescription(mBuildingDetails.BuildingStats);
 
+	/*
 	if(BuildingDetails.UpgradeAsset)
 		BuildingUpgradeDescription = UHelperMethods::GetUpgradeDescription(BuildingDetails.BuildingStats, BuildingDetails.UpgradeAsset->BuildingStats);
+*/
 }
 
 void ABaseBuilding::Interact_Implementation()
 {
 	// Update the building stats
-	UDA_UpgradeAsset* up = BuildingDetails.UpgradeAsset;
+	UDA_UpgradeAsset* up = mBuildingDetails.UpgradeAsset;
 	if(up)
 	{
 		auto currentResources = GetGameInstance()->GetSubsystem<UResourceSubsystem>()->GetCurrentResources();
-		bCanUpgrade = currentResources >= up->UpgradeCost;
+		//bCanUpgrade = currentResources >= up->UpgradeCost;
 	}
 	
 	OnInteract();
