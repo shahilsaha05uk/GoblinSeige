@@ -8,29 +8,34 @@
 #include "GameFramework/HUD.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
+#include "TowerDefenceGame/ActorComponentClasses/BuildingPlacementHandlerComponent.h"
 #include "TowerDefenceGame/ControllerClasses/InputController.h"
 #include "TowerDefenceGame/InterfaceClasses/HUDInterface.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
-#include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
-#include "TowerDefenceGame/SupportClasses/HelperMethods.h"
+
+ASpecPlayer::ASpecPlayer()
+{
+	mBuildingPlacementHandlerComponent = CreateDefaultSubobject<UBuildingPlacementHandlerComponent>("PlayerInteractionComponent");
+}
 
 void ASpecPlayer::PossessedBy(AController* NewController)	// Called before BeginPlay
 {
 	Super::PossessedBy(NewController);
 
 	ControllerRef = Cast<AInputController>(NewController);
-
-	if(const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
-	{
-		BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::BuildTower);
-		BuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::SpawnDummyBuilding);
-	}
-
 	// gets and stores the player hud from the HUD class
 	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 		GameSubs->OnHudInitialised.AddDynamic(this, &ThisClass::OnHudInitialised);
 
+
+	/*
+	if (const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
+	{
+		BuildingSubsystem->OnPlacementActorSelected.AddDynamic(this, &ThisClass::OnPlacementSelected);
+		BuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::OnRequestForBuildingBuy);
+		BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
+	}
+	*/
 }
 
 
@@ -76,70 +81,7 @@ void ASpecPlayer::DisableLook_Implementation()
 
 void ASpecPlayer::LeftMouseActions_Implementation()
 {
-	APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-	bool bHit;
-	FHitResult hit;
-	UHelperMethods::GetMouseTrace(PC, InteractableTraceChannel, bHit, hit);
-
-	// Deselect the previous actor
-	if(mSelectedActor)
-	{
-		IInteractableInterface::Execute_Disassociate(mSelectedActor);
-		mPlayerHUD->ToggleShop(false);
-		mSelectedActor = nullptr;
-	}
-	
-	if(bHit)
-	{
-		mSelectedActor = hit.GetActor();
-		if(UKismetSystemLibrary::DoesImplementInterface(mSelectedActor, UInteractableInterface::StaticClass()))
-		{
-			IInteractableInterface::Execute_Interact(mSelectedActor);
-		}
-		
-		mPlayerHUD->ToggleShop(true);
-	}
-	
-	/*
-	if(tempBuilding && tempBuilding->bCanPlace)
-	{
-		Build();
-	}
-	else if(!tempBuilding)
-	{
-		APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-		bool bHit;
-		FHitResult hit;
-		UHelperMethods::GetMouseTrace(PC, InteractableTraceChannel, bHit, hit);
-
-		// Check if hit anything
-		if (bHit && hit.bBlockingHit)
-		{
-			AActor* hitActor = hit.GetActor();
-
-			// Check if the hit actor is the same as the currently selected actor
-			if(selectedActor == hitActor) return;
-
-			// Deselect any building if selected
-			ToggleBuildingSelection(selectedActor, false);
-			selectedActor = nullptr;
-
-			// Select the new hit actor
-			ToggleBuildingSelection(hitActor, false);
-			selectedActor = hitActor;
-		}
-		else
-		{
-			// Deselect currently selected building if it's valid
-			if (selectedActor)
-			{
-				ToggleBuildingSelection(selectedActor, false);
-				selectedActor = nullptr;
-				ControllerRef->SideWidgetToggler();
-			}
-		}
-	}
-*/
+	mBuildingPlacementHandlerComponent->HandleInteraction();
 }
 
 void ASpecPlayer::Zoom_Implementation(float Value)
@@ -149,6 +91,8 @@ void ASpecPlayer::Zoom_Implementation(float Value)
 
 #pragma endregion
 
+#pragma region Placement Actor Selection Methods
+
 void ASpecPlayer::UpgradeSelectedBuilding_Implementation(int BuildingID)
 {
 	/*
@@ -156,72 +100,16 @@ void ASpecPlayer::UpgradeSelectedBuilding_Implementation(int BuildingID)
 	BuildingToUpgrade->Upgrade();
 	ToggleBuildingSelection(BuildingToUpgrade, false);
 	*/
-
-	mSelectedActor = nullptr;
 }
 
-void ASpecPlayer::MoveSelectedBuilding_Implementation()
-{
-	if(!mSelectedActor) return;
-	ToggleBuildingSelection(mSelectedActor, false);
-	mSelectedActor = nullptr;
-
-}
-
-void ASpecPlayer::OnBuildingSelected_Implementation(ABaseBuilding* Building)
-{
-
-}
-
-void ASpecPlayer::SpawnDummyBuilding_Implementation(const FString& ID)
-{
-	FBuildingBuyDetails BuildingDetails;
-	if(DA_BuildingAsset->FindBuildingDetails(ID, BuildingDetails))
-	{
-		tmpBuildingID = ID;
-		FActorSpawnParameters spawnParams = FActorSpawnParameters();
-		
-		tempBuilding = GetWorld()->SpawnActor<ABaseBuilding>(BuildingDetails.BuildingClass, mSelectedActor->GetActorLocation(), mSelectedActor->GetActorRotation());
-		tempBuilding->InitDummy();
-	}
-}
-
-void ASpecPlayer::BuildTower_Implementation(EBuildStatus Status)
-{
-	tempBuilding->Destroy();
-
-	if(Status == BUILD_CONFIRM)
-	{
-		FBuildingBuyDetails BuildingDetails;
-		if(DA_BuildingAsset->FindBuildingDetails(tmpBuildingID, BuildingDetails))
-		{
-			FActorSpawnParameters spawnParams = FActorSpawnParameters();
-		
-			tempBuilding = GetWorld()->SpawnActor<ABaseBuilding>(BuildingDetails.BuildingClass, mSelectedActor->GetActorLocation(), mSelectedActor->GetActorRotation());
-			tempBuilding->OnBuildingSelectedSignature.AddDynamic(this, &ThisClass::OnBuildingSelected);
-			tempBuilding->Init(BuildingDetails);
-
-			if(auto const ResourceSubsystem = GetGameInstance()->GetSubsystem<UResourceSubsystem>())
-			{
-				ResourceSubsystem->Deduct(BuildingDetails.BuildingCost);
-			}
-		}
-	}
-
-	tempBuilding = nullptr;
-}
+#pragma endregion
 
 // Selects/Deselects a building
-void ASpecPlayer::ToggleBuildingSelection(AActor* Building, bool shouldSelect)
-{
-	if(UKismetSystemLibrary::DoesImplementInterface(mSelectedActor, UInteractableInterface::StaticClass()))
-	{
-		if(shouldSelect) IInteractableInterface::Execute_Interact(Building);
-		else IInteractableInterface::Execute_Disassociate(Building);
-	}
-}
 
 /*
+void ASpecPlayer::ToggleBuildingSelection(AActor* Building, bool shouldSelect)
+{
+}
 void ASpecPlayer::Build_Implementation()
 {
 	if(tempBuilding)

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "PlacementActor.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "TowerDefenceGame/InterfaceClasses/PlayerInputInterface.h"
 #include "TowerDefenceGame/InterfaceClasses/PlayerInterface.h"
@@ -18,12 +19,14 @@ class TOWERDEFENCEGAME_API ASpecPlayer : public APawn, public IPlayerInputInterf
 	GENERATED_BODY()
 
 private:
-	UPROPERTY(EditDefaultsOnly)
-	class UDA_BuildingAsset* DA_BuildingAsset;
-	UPROPERTY()
-	FString tmpBuildingID;
-	
+
 public:
+
+	ASpecPlayer();
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	class UBuildingPlacementHandlerComponent* mBuildingPlacementHandlerComponent;
+
 	virtual void PossessedBy(AController* NewController) override;
 
 	UFUNCTION(BlueprintCallable)
@@ -42,14 +45,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	FTimerHandle OnSpawnTimeHandler;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
-	ABaseBuilding* tempBuilding;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
-	AActor* mSelectedActor;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	TEnumAsByte<ETraceTypeQuery> BuildingTraceChannel;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
-	TEnumAsByte<ETraceTypeQuery> InteractableTraceChannel;
 	
 
 	virtual void Move_Implementation(const FInputActionValue& InputActionValue) override;
@@ -60,20 +56,6 @@ public:
 	virtual void Zoom_Implementation(float Value) override;
 	
 	virtual void UpgradeSelectedBuilding_Implementation(int BuildingID) override;
-	virtual void MoveSelectedBuilding_Implementation() override;
-
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnBuildingSelected(ABaseBuilding* Building);
 
 
-#pragma region Building Methods
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void BuildTower(EBuildStatus Status);
-	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void SpawnDummyBuilding(const FString& ID);
-	
-	UFUNCTION(BlueprintCallable)
-	void ToggleBuildingSelection(AActor* Building, bool shouldSelect);
-#pragma endregion
 };

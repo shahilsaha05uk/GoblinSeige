@@ -43,6 +43,25 @@
 			"Name": "CompoundOperators",
 			"Enabled": true,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/bb80e96c1a6d4da5aeb896b0aad372b5"
+		},
+		{
+			"Name": "SimpleLog",
+			"Enabled": true,
+			"MarketplaceURL": "https://publish.unrealengine.com/v3/edit-product/ad53b85f109c87b4a8bf580898186114"
+		},
+		{
+			"Name": "BetterDebug",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/fc6e60a69f9d4125aee732a0f9dd86bf",
+			"SupportedTargetPlatforms": [
+				"Win64",
+				"Android"
+			]
+		},
+		{
+			"Name": "Audius",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/379d421d179148cca3a09dcd7a9049e0"
 		}
 	]
 }
