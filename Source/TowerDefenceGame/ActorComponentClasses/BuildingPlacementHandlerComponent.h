@@ -16,21 +16,29 @@ class TOWERDEFENCEGAME_API UBuildingPlacementHandlerComponent : public UActorCom
 	GENERATED_BODY()
 
 private:
+
+	// Temps
 	UPROPERTY()
-	APlacementActor* mSelectedPlacement;
-	UPROPERTY()
-	AActor* mSelectedActor;
+	AActor* mCurrentHitActor;
+
+	// This stores the reference to the Building Asset
 	UPROPERTY(EditDefaultsOnly)
 	UDA_BuildingAsset* DA_BuildingAsset;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Private | Building Properties")
 	TEnumAsByte<ETraceTypeQuery> InteractableTraceChannel;
 
+	UPROPERTY()
+	class UBuildingPlacementSubsystem* mBuildingPlacementSubsystem;
+	UPROPERTY()
+	class UBuildingSubsystem* mBuildingSubsystem;
+	
 public:
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable)
 	void HandleInteraction();
+	/*
 	UFUNCTION(BlueprintCallable)
 	void OnPlacementSelected(APlacementActor* PlacementActor);
 	UFUNCTION(BlueprintCallable)
@@ -47,4 +55,22 @@ private:
 	void CallDisassociate(AActor* Target);
 	UFUNCTION()
 	void CallInteract(AActor* Target);
+
+
+	UFUNCTION(BlueprintCallable)
+	void OnPlacementUpdated(EPlacementState State, APlacementActor* PlacementActor);
+
+private:
+	UFUNCTION()
+	void DeselectLastSelectedActor();
+	UFUNCTION()
+	void DeselectLastPlacement();
+	*/
+
+	UFUNCTION(BlueprintPure, BlueprintCallable)
+	bool GetHit(FHitResult& Hit);
+
+	UFUNCTION(BlueprintCallable)
+	void SpawnDummyBuilding(const FString& BuildingID);
+
 };

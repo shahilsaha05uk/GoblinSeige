@@ -13,6 +13,7 @@
 #include "TowerDefenceGame/BaseClasses/GameHUD.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_InputActions.h"
 #include "TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h"
+#include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
 #include "TowerDefenceGame/UIClasses/GameComplete.h"
 
 AInputController::AInputController()
@@ -26,6 +27,14 @@ AInputController::AInputController()
 void AInputController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if(const auto PlacementSubs = GetGameInstance()->GetSubsystem<UBuildingPlacementSubsystem>())
+	{
+		PlacementSubs->OnPlacementStateUpdate.AddDynamic(this, &ThisClass::OnPlacementUpdated);
+	}
+	
+
+	
 	bShowMouseCursor = true;
 	SpecPawn = Cast<ASpecPlayer>(GetPawn());
 
@@ -102,6 +111,9 @@ void AInputController::StopSound_Implementation()
 	LevelAudioComp->Stop();
 }
 
+void AInputController::OnPlacementUpdated_Implementation(EPlacementState State, APlacementActor* PlacementActor)
+{
+}
 #pragma endregion
 
 #pragma region Wave
@@ -128,12 +140,9 @@ void AInputController::OnGameOver_Implementation()
 
 void AInputController::RequestGameCompleteUI_Implementation(bool hasWon)
 {
-	APawn* pawn = GetPawn();
-
-	if(pawn)
+	if(APawn* pawn = GetPawn())
 	{
 		UnPossess();
-
 		pawn->Destroy();
 	}
 

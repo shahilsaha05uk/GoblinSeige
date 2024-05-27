@@ -4,16 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "TowerDefenceGame/InterfaceClasses/BuildingPlacementInterface.h"
 #include "TowerDefenceGame/InterfaceClasses/InteractableInterface.h"
 #include "TowerDefenceGame/SupportClasses/StructClass.h"
 #include "PlacementActor.generated.h"
 
 UCLASS()
-class TOWERDEFENCEGAME_API APlacementActor : public AActor, public IInteractableInterface
+class TOWERDEFENCEGAME_API APlacementActor : public AActor, public IInteractableInterface, public IBuildingPlacementInterface
 {
 	GENERATED_BODY()
 
 public:
+	UPROPERTY()
+	class UBuildingPlacementSubsystem* mPlacementSubsystem;
 
 	UPROPERTY(EditDefaultsOnly)
 	class UDA_BuildingAsset* DA_BuildingAsset;
@@ -24,7 +27,6 @@ public:
 
 	
 public:
-
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	class UStaticMeshComponent* mStaticMesh;
 
@@ -32,21 +34,31 @@ public:
 
 	virtual void BeginPlay() override;
 	
+	UFUNCTION(BlueprintCallable)
+	void UpdateState(EPlacementState State);
+
+#pragma region Interfaces
+
 	virtual void Interact_Implementation() override;
 	virtual void Disassociate_Implementation() override;
 	virtual EInteractableType GetInteractableType_Implementation() override { return PLACEMENT; }
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void BuildDummy(const FString& BuildingID);
+#pragma endregion
+
+#pragma region Builders
+
+	virtual void BuildDummy_Implementation(const FString& BuildingID) override;
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Build(EBuildStatus Status);
 
-	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnBuildOnPlacement();
-	
+#pragma endregion
+
+#pragma region Togglers
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ToggleVisibility(bool Value);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ToggleMaterial(bool Value);
+
+#pragma endregion
 };

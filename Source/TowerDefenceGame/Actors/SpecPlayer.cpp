@@ -8,9 +8,11 @@
 #include "GameFramework/HUD.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Subsystems/PlacementSubsystem.h"
 #include "TowerDefenceGame/ActorComponentClasses/BuildingPlacementHandlerComponent.h"
 #include "TowerDefenceGame/ControllerClasses/InputController.h"
 #include "TowerDefenceGame/InterfaceClasses/HUDInterface.h"
+#include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
 
 ASpecPlayer::ASpecPlayer()
@@ -28,14 +30,16 @@ void ASpecPlayer::PossessedBy(AController* NewController)	// Called before Begin
 		GameSubs->OnHudInitialised.AddDynamic(this, &ThisClass::OnHudInitialised);
 
 
-	/*
 	if (const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
 	{
-		BuildingSubsystem->OnPlacementActorSelected.AddDynamic(this, &ThisClass::OnPlacementSelected);
-		BuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::OnRequestForBuildingBuy);
-		BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
+		//BuildingSubsystem->OnPlacementActorSelected.AddDynamic(this, &ThisClass::OnPlacementSelected);
+		//BuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::OnRequestForBuildingBuy);
+		//BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
 	}
-	*/
+	if (const auto PlacementSubs = GetGameInstance()->GetSubsystem<UBuildingPlacementSubsystem>())
+	{
+		PlacementSubs->OnPlacementStateUpdate.AddDynamic(this, &ThisClass::OnPlacementStateUpdated);
+	}
 }
 
 
@@ -100,6 +104,11 @@ void ASpecPlayer::UpgradeSelectedBuilding_Implementation(int BuildingID)
 	BuildingToUpgrade->Upgrade();
 	ToggleBuildingSelection(BuildingToUpgrade, false);
 	*/
+}
+
+void ASpecPlayer::OnPlacementStateUpdated(EPlacementState State, APlacementActor* PlacementActor)
+{
+	//switch (State) {  }
 }
 
 #pragma endregion

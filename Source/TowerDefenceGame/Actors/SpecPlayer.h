@@ -57,5 +57,7 @@ public:
 	
 	virtual void UpgradeSelectedBuilding_Implementation(int BuildingID) override;
 
+	UFUNCTION(BlueprintCallable)
+	void OnPlacementStateUpdated(EPlacementState State, APlacementActor* PlacementActor);
 
 };

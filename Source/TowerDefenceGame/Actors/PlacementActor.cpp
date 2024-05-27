@@ -5,6 +5,7 @@
 
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
+#include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 
@@ -19,23 +20,50 @@ void APlacementActor::BeginPlay()
 	Super::BeginPlay();
 
 	if(const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
-	{
-		BuildingSubsystem->OnBuildOnPlacementActor.AddDynamic(this, &ThisClass::OnBuildOnPlacement);
 		BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::Build);
-
-	}
 }
+
+void APlacementActor::UpdateState(EPlacementState State)
+{
+	switch (State) {
+	case EmptyPlacement:
+		ToggleMaterial(false);
+		ToggleVisibility(true);
+		break;
+	case SelectedPlacement:
+		ToggleMaterial(true);
+		break;
+	case DeselectedPlacement:
+		ToggleMaterial(false);
+		break;
+	case OccupiedPlacement:
+		ToggleMaterial(false);
+		ToggleVisibility(false);
+		break;
+	case DecisionPlacement:
+		ToggleMaterial(false);
+		ToggleVisibility(false);
+		break;
+	}
+
+	GetGameInstance()->GetSubsystem<UBuildingPlacementSubsystem>()->Trigger_OnPlacementStateUpdate(State, this);
+}
+
+#pragma region Interfaces
 
 void APlacementActor::Interact_Implementation()
 {
-	GetGameInstance()->GetSubsystem<UBuildingSubsystem>()->Trigger_OnPlacementActorSelected(this);
-	ToggleMaterial(true);
+	UpdateState(SelectedPlacement);
 }
 
 void APlacementActor::Disassociate_Implementation()
 {
-	ToggleMaterial(false);
+	UpdateState(DeselectedPlacement);
 }
+
+#pragma endregion
+
+#pragma region Builders
 
 void APlacementActor::BuildDummy_Implementation(const FString& BuildingID)
 {
@@ -47,14 +75,13 @@ void APlacementActor::BuildDummy_Implementation(const FString& BuildingID)
 		tempBuilding = GetWorld()->SpawnActor<ABaseBuilding>(BuildingDetails.BuildingClass, GetActorLocation(), GetActorRotation());
 		tempBuilding->InitDummy();
 
-		ToggleVisibility(false);
+		UpdateState(DecisionPlacement);
 	}
 }
 
 void APlacementActor::Build_Implementation(EBuildStatus Status)
 {
 	if(!tempBuilding) return;
-	
 	tempBuilding->Destroy();
 
 	if(Status == BUILD_CONFIRM)
@@ -62,26 +89,22 @@ void APlacementActor::Build_Implementation(EBuildStatus Status)
 		FBuildingBuyDetails BuildingDetails;
 		if(DA_BuildingAsset->FindBuildingDetails(tmpBuildingID, BuildingDetails))
 		{
-			FActorSpawnParameters spawnParams = FActorSpawnParameters();
-		
 			tempBuilding = GetWorld()->SpawnActor<ABaseBuilding>(BuildingDetails.BuildingClass, GetActorLocation(), GetActorRotation());
 			tempBuilding->Init(BuildingDetails);
 
-			OnBuildOnPlacement();
+			UpdateState(OccupiedPlacement);
 		}
 	}
 	else
 	{
-		ToggleVisibility(true);
-		ToggleMaterial(false);
+		UpdateState(EmptyPlacement);
 	}
 	tempBuilding = nullptr;
 }
 
-void APlacementActor::OnBuildOnPlacement_Implementation()
-{
-	ToggleVisibility(false);
-}
+#pragma endregion
+
+#pragma region Togglers
 
 void APlacementActor::ToggleVisibility_Implementation(bool Value)
 {
@@ -91,3 +114,5 @@ void APlacementActor::ToggleVisibility_Implementation(bool Value)
 void APlacementActor::ToggleMaterial_Implementation(bool Value)
 {
 }
+
+#pragma endregion

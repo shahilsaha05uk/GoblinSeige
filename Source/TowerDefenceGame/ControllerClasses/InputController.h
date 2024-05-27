@@ -105,5 +105,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnWaveComplete(int WaveNumber);
+
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnPlacementUpdated(EPlacementState State, APlacementActor* PlacementActor);
+
 };
 

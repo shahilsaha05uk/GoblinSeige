@@ -15,6 +15,12 @@ enum EHudValue
 };
 
 UENUM(BlueprintType)
+enum EPlacementState
+{
+	EmptyPlacement, SelectedPlacement, DeselectedPlacement, DecisionPlacement, OccupiedPlacement
+};
+
+UENUM(BlueprintType)
 enum EInteractableType
 {
 	PLACEMENT, BUILDING
