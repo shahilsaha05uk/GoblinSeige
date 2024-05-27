@@ -47,4 +47,6 @@ public:
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ToggleVisibility(bool Value);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ToggleMaterial(bool Value);
 };

@@ -29,11 +29,12 @@ void APlacementActor::BeginPlay()
 void APlacementActor::Interact_Implementation()
 {
 	GetGameInstance()->GetSubsystem<UBuildingSubsystem>()->Trigger_OnPlacementActorSelected(this);
+	ToggleMaterial(true);
 }
 
 void APlacementActor::Disassociate_Implementation()
 {
-	GetGameInstance()->GetSubsystem<UBuildingSubsystem>()->Trigger_OnPlacementActorSelected(nullptr);
+	ToggleMaterial(false);
 }
 
 void APlacementActor::BuildDummy_Implementation(const FString& BuildingID)
@@ -72,6 +73,7 @@ void APlacementActor::Build_Implementation(EBuildStatus Status)
 	else
 	{
 		ToggleVisibility(true);
+		ToggleMaterial(false);
 	}
 	tempBuilding = nullptr;
 }
@@ -86,3 +88,6 @@ void APlacementActor::ToggleVisibility_Implementation(bool Value)
 	mStaticMesh->SetVisibility(Value);
 }
 
+void APlacementActor::ToggleMaterial_Implementation(bool Value)
+{
+}

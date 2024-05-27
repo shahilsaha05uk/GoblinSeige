@@ -35,6 +35,8 @@ public:
 	void OnPlacementSelected(APlacementActor* PlacementActor);
 	UFUNCTION(BlueprintCallable)
 	void SpawnDummyBuilding(const FString& BuildingID);
+	UFUNCTION(BlueprintCallable)
+	void OnBuildingDecisionTaken(EBuildStatus Status);
 
 private:
 	UFUNCTION()
@@ -42,5 +44,7 @@ private:
 	UFUNCTION()
 	void HandlePlacementInteraction(AActor* HitActor);
 	UFUNCTION()
-	void DeselectCurrentActor();
+	void CallDisassociate(AActor* Target);
+	UFUNCTION()
+	void CallInteract(AActor* Target);
 };
