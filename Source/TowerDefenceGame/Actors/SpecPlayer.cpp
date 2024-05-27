@@ -5,7 +5,9 @@
 
 #include <TowerDefenceGame/SubsystemClasses/GameSubsystem.h>
 
+#include "Camera/CameraComponent.h"
 #include "GameFramework/HUD.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Subsystems/PlacementSubsystem.h"
@@ -17,29 +19,45 @@
 
 ASpecPlayer::ASpecPlayer()
 {
+	mSpringArmComp = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
+	mSpringArmComp->SetupAttachment(RootComponent);
+
+	mCameraComp = CreateDefaultSubobject<UCameraComponent>("CameraComp");
+	mCameraComp->SetupAttachment(mSpringArmComp);
+	
 	mBuildingPlacementHandlerComponent = CreateDefaultSubobject<UBuildingPlacementHandlerComponent>("PlayerInteractionComponent");
+	
+	OrbitRadius = 300.0f;
+	OrbitSpeed = 50.0f;
+	CurrentAngle = 0.0f;
+
+	MinPitchAngle = -30.0f;
+	MaxPitchAngle = 89.0f;
 }
+
 
 void ASpecPlayer::PossessedBy(AController* NewController)	// Called before BeginPlay
 {
 	Super::PossessedBy(NewController);
 
 	ControllerRef = Cast<AInputController>(NewController);
-	// gets and stores the player hud from the HUD class
+
+	// Binding to the events inside the subsystems
 	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 		GameSubs->OnHudInitialised.AddDynamic(this, &ThisClass::OnHudInitialised);
 
+	// Orbit setup
+	if(mOrbitActorClass)
+	{
+		mOrbitActor = UGameplayStatics::GetActorOfClass(GetWorld(), mOrbitActorClass);
+	}
+	if(mOrbitActor)
+	{
+		mOrbitCenter = mOrbitActor->GetActorLocation();
+	}
 
-	if (const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
-	{
-		//BuildingSubsystem->OnPlacementActorSelected.AddDynamic(this, &ThisClass::OnPlacementSelected);
-		//BuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::OnRequestForBuildingBuy);
-		//BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
-	}
-	if (const auto PlacementSubs = GetGameInstance()->GetSubsystem<UBuildingPlacementSubsystem>())
-	{
-		PlacementSubs->OnPlacementStateUpdate.AddDynamic(this, &ThisClass::OnPlacementStateUpdated);
-	}
+	CalculateInitialAngles();
+	UpdateCameraPosition();
 }
 
 
@@ -55,24 +73,43 @@ void ASpecPlayer::OnHudInitialised(AHUD* HudRef)
 
 void ASpecPlayer::Move_Implementation(const FInputActionValue& InputActionValue)
 {
-	FVector vec = InputActionValue.Get<FVector>();
+	/*
+	const FVector vec = InputActionValue.Get<FVector>();
 
-	FRotator cachedRot = GetControlRotation();
+	const FRotator cachedRot = GetControlRotation();
 	
 	FRotator fwdRot = cachedRot; fwdRot.Roll = fwdRot.Pitch = 0;
 	FRotator rhtRot = cachedRot; rhtRot.Pitch = 0;
 	
-	FVector fwdVec = fwdRot.Vector();
-	FVector rhtVec = FRotationMatrix(rhtRot).GetScaledAxis(EAxis::Y);
+	const FVector fwdVec = fwdRot.Vector();
+	const FVector rhtVec = FRotationMatrix(rhtRot).GetScaledAxis(EAxis::Y);
 
 	AddMovementInput(fwdVec, vec.X);
 	AddMovementInput(rhtVec, vec.Y);
+*/
 }
 
 void ASpecPlayer::Look_Implementation(const FInputActionValue& InputActionValue)
 {
-	float yaw = InputActionValue.Get<FVector>().X;
-	AddControllerYawInput(yaw);
+	const FVector2D LookInput = InputActionValue.Get<FVector2D>();
+
+	const float Yaw = LookInput.X;
+	const float Pitch = LookInput.Y;
+
+	mCurrentYawAngle += Yaw * OrbitSpeed * GetWorld()->GetDeltaSeconds();
+	if (mCurrentYawAngle >= 360.0f)
+	{
+		mCurrentYawAngle -= 360.0f;
+	}
+	else if (mCurrentYawAngle < 0.0f)
+	{
+		mCurrentYawAngle += 360.0f;
+	}
+	
+	mCurrentPitchAngle += Pitch * OrbitSpeed * GetWorld()->GetDeltaSeconds();
+	mCurrentPitchAngle = FMath::Clamp(mCurrentPitchAngle, MinPitchAngle, MaxPitchAngle);
+
+	UpdateCameraPosition();
 }
 
 void ASpecPlayer::EnableLook_Implementation()
@@ -95,36 +132,25 @@ void ASpecPlayer::Zoom_Implementation(float Value)
 
 #pragma endregion
 
-#pragma region Placement Actor Selection Methods
-
-void ASpecPlayer::UpgradeSelectedBuilding_Implementation(int BuildingID)
+void ASpecPlayer::CalculateInitialAngles()
 {
-	/*
-	if(!BuildingToUpgrade) return;
-	BuildingToUpgrade->Upgrade();
-	ToggleBuildingSelection(BuildingToUpgrade, false);
-	*/
+	FVector Direction = GetActorLocation() - mOrbitCenter;
+	Direction.Normalize();
+
+	mCurrentYawAngle = FMath::Atan2(Direction.Y, Direction.X) * (180.0f / PI);
+	mCurrentPitchAngle = FMath::Asin(Direction.Z) * (180.0f / PI);
+	mCurrentPitchAngle = FMath::Clamp(mCurrentPitchAngle, MinPitchAngle, MaxPitchAngle);
 }
 
-void ASpecPlayer::OnPlacementStateUpdated(EPlacementState State, APlacementActor* PlacementActor)
+void ASpecPlayer::UpdateCameraPosition()
 {
-	//switch (State) {  }
+	const float RadYaw = FMath::DegreesToRadians(mCurrentYawAngle);
+	const float RadPitch = FMath::DegreesToRadians(mCurrentPitchAngle);
+	
+	const FVector NewLocation = mOrbitCenter + FVector(FMath::Cos(RadYaw) * OrbitRadius, FMath::Sin(RadYaw) * OrbitRadius, FMath::Sin(RadPitch) * OrbitRadius);
+	const FRotator NewRotation = (mOrbitCenter - NewLocation).Rotation();
+
+	SetActorLocationAndRotation(NewLocation, NewRotation);
 }
 
-#pragma endregion
-
-// Selects/Deselects a building
-
-/*
-void ASpecPlayer::ToggleBuildingSelection(AActor* Building, bool shouldSelect)
-{
-}
-void ASpecPlayer::Build_Implementation()
-{
-	if(tempBuilding)
-	{
-		tempBuilding->Build();
-		tempBuilding = nullptr;
-	}
-}*/
 
