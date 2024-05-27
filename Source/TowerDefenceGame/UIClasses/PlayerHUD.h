@@ -104,14 +104,13 @@ public:
 
 #pragma region Building Methods
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnPlacementSelected(APlacementActor* PlacementActor);
-
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnBuildingDecisionTaken(EBuildStatus Status);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnRequestForBuildingBuy(const FString& BuildingID);
 
+	UFUNCTION(BlueprintCallable)
+	void OnPlacementStateUpdated(EPlacementState State, class APlacementActor* PlacementActor);
 
 #pragma endregion
 };

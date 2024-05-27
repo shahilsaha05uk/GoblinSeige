@@ -3,8 +3,10 @@
 
 #include "BuildingPlacementHandlerComponent.h"
 
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
+#include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
 #include "TowerDefenceGame/SupportClasses/HelperMethods.h"
 
@@ -14,116 +16,62 @@ void UBuildingPlacementHandlerComponent::BeginPlay()
 
     if (const auto World = GetWorld())
     {
-        if (const auto BuildingSubsystem = World->GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
+        mBuildingPlacementSubsystem = World->GetGameInstance()->GetSubsystem<UBuildingPlacementSubsystem>();
+        mBuildingSubsystem = World->GetGameInstance()->GetSubsystem<UBuildingSubsystem>();
+        
+        if (mBuildingSubsystem)
         {
-            BuildingSubsystem->OnPlacementActorSelected.AddDynamic(this, &ThisClass::OnPlacementSelected);
-            BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
-            BuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::SpawnDummyBuilding);
+            mBuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::SpawnDummyBuilding);
         }
     }
 }
 
 void UBuildingPlacementHandlerComponent::HandleInteraction()
 {
-    if(mSelectedPlacement) return;
+    FHitResult hit;
+    const bool Success = GetHit(hit);
 
-    APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-    bool bHit;
-    FHitResult Hit;
-    UHelperMethods::GetMouseTrace(PC, InteractableTraceChannel, bHit, Hit);
-
-    
-    CallDisassociate(mSelectedActor);
-    mSelectedActor = nullptr;
-
-    
-    if (bHit)
+    if(!Success)    // if no hit was detected
     {
-        mSelectedActor = Hit.GetActor();
-        if (UKismetSystemLibrary::DoesImplementInterface(mSelectedActor, UInteractableInterface::StaticClass()))
+        // deselect the currently hit actor
+        if(mCurrentHitActor && UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UInteractableInterface::StaticClass()))
         {
-            const auto InteractableType = IInteractableInterface::Execute_GetInteractableType(mSelectedActor);
-            if (InteractableType == EInteractableType::BUILDING)
-            {
-                HandleBuildingInteraction(mSelectedActor);
-            }
-            else if (InteractableType == EInteractableType::PLACEMENT)
-            {
-                HandlePlacementInteraction(mSelectedActor);
-            }
+            IInteractableInterface::Execute_Disassociate(mCurrentHitActor);
         }
     }
     else
     {
-        mSelectedPlacement = nullptr;
-        if (const auto World = GetWorld())
+        // deselect the currently hit actor
+        if(mCurrentHitActor && UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UInteractableInterface::StaticClass()))
         {
-            if (const auto BuildingSubsystem = World->GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
-            {
-                BuildingSubsystem->Trigger_OnPlacementActorSelected(nullptr);
-            }
+            IInteractableInterface::Execute_Disassociate(mCurrentHitActor);
+        }
+
+        // set the new hit actor as the current hit actor
+        mCurrentHitActor = hit.GetActor();
+
+        // interact with the new actor
+        if(UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UInteractableInterface::StaticClass()))
+        {
+            IInteractableInterface::Execute_Interact(mCurrentHitActor);
         }
     }
 }
 
-void UBuildingPlacementHandlerComponent::HandleBuildingInteraction(AActor* HitActor)
+bool UBuildingPlacementHandlerComponent::GetHit(FHitResult& Hit)
 {
-    if(!HitActor) return;
-    CallInteract(HitActor);
-}
-
-void UBuildingPlacementHandlerComponent::HandlePlacementInteraction(AActor* HitActor)
-{
-    if(!HitActor) return;
-    CallInteract(HitActor);
-}
-
-void UBuildingPlacementHandlerComponent::OnPlacementSelected(APlacementActor* PlacementActor)
-{
-    mSelectedPlacement = PlacementActor;
+    APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+    if(!PC) return false;
+    
+    bool bHit;
+    UHelperMethods::GetMouseTrace(PC, InteractableTraceChannel, bHit, Hit);
+    return bHit;
 }
 
 void UBuildingPlacementHandlerComponent::SpawnDummyBuilding(const FString& BuildingID)
 {
-    if(mSelectedPlacement)
-        mSelectedPlacement->BuildDummy(BuildingID);
-}
-
-void UBuildingPlacementHandlerComponent::OnBuildingDecisionTaken(EBuildStatus Status)
-{
-    switch (Status) {
-    case BUILD_CONFIRM:
-        mSelectedPlacement = nullptr;
-        break;
-    case BUILD_ABORT:
-        mSelectedPlacement = nullptr;
-        if (const auto World = GetWorld())
-        {
-            if (const auto BuildingSubsystem = World->GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
-            {
-                BuildingSubsystem->Trigger_OnPlacementActorSelected(nullptr);
-            }
-        }
-
-        break;
+    if(UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UBuildingPlacementInterface::StaticClass()))
+    {
+        IBuildingPlacementInterface::Execute_BuildDummy(mCurrentHitActor, BuildingID);
     }
 }
-
-
-// Interface Callers
-void UBuildingPlacementHandlerComponent::CallDisassociate(AActor* Target)
-{
-    if(!Target) return;
-    
-    if (UKismetSystemLibrary::DoesImplementInterface(Target, UInteractableInterface::StaticClass()))
-        IInteractableInterface::Execute_Disassociate(Target);
-}
-
-void UBuildingPlacementHandlerComponent::CallInteract(AActor* Target)
-{
-    if(!Target) return;
-    
-    if (UKismetSystemLibrary::DoesImplementInterface(Target, UInteractableInterface::StaticClass()))
-        IInteractableInterface::Execute_Interact(Target);
-}
-
