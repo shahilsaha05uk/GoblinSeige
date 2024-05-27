@@ -10,11 +10,11 @@ void UGoblinInstance::Init()
 {
 	Super::Init();
 
-	if(auto enemySubs = GetSubsystem<UEnemySubsystem>())
+	if(const auto enemySubs = GetSubsystem<UEnemySubsystem>())
 	{
 		enemySubs->InitSub(mEnemyControllerClass);
 	}
-	if(auto waveSubsystem = GetSubsystem<UWaveSubsystem>())
+	if(const auto waveSubsystem = GetSubsystem<UWaveSubsystem>())
 	{
 		waveSubsystem->Init(mInitialWave, mFinalWave);
 	}

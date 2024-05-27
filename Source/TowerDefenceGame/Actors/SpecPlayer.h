@@ -19,20 +19,53 @@ class TOWERDEFENCEGAME_API ASpecPlayer : public APawn, public IPlayerInputInterf
 	GENERATED_BODY()
 
 private:
+	UPROPERTY()
+	float CurrentAngle;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Orbit")
+	float MinPitchAngle;
+	UPROPERTY(EditDefaultsOnly, Category = "Orbit")
+	float MaxPitchAngle;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Orbit")
+	TSubclassOf<AActor> mOrbitActorClass;
+	UPROPERTY()
+	AActor* mOrbitActor;
+	UPROPERTY()
+	FVector mOrbitCenter;
+	
+	UPROPERTY()
+	float mCurrentYawAngle;
+	float mCurrentPitchAngle;
 
+	UFUNCTION()
+	void CalculateInitialAngles();
+	UFUNCTION()
+	void UpdateCameraPosition();
 public:
 
-	ASpecPlayer();
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Orbit")
+	float OrbitRadius;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Orbit")
+	float OrbitSpeed;
+	
 
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	class UCameraComponent* mCameraComp;
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	class USpringArmComponent* mSpringArmComp;
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	class UBuildingPlacementHandlerComponent* mBuildingPlacementHandlerComponent;
+
+	ASpecPlayer();
 
 	virtual void PossessedBy(AController* NewController) override;
 
 	UFUNCTION(BlueprintCallable)
 	void OnHudInitialised(AHUD* HudRef);
 	
-
 	UPROPERTY(BlueprintReadOnly)
 	class UPlayerHUD* mPlayerHUD;
 
@@ -47,17 +80,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Properties")
 	TEnumAsByte<ETraceTypeQuery> BuildingTraceChannel;
 	
-
 	virtual void Move_Implementation(const FInputActionValue& InputActionValue) override;
 	virtual void Look_Implementation(const FInputActionValue& InputActionValue) override;
 	virtual void EnableLook_Implementation() override;
 	virtual void DisableLook_Implementation() override;
 	virtual void LeftMouseActions_Implementation() override;
 	virtual void Zoom_Implementation(float Value) override;
-	
-	virtual void UpgradeSelectedBuilding_Implementation(int BuildingID) override;
-
-	UFUNCTION(BlueprintCallable)
-	void OnPlacementStateUpdated(EPlacementState State, APlacementActor* PlacementActor);
-
 };
