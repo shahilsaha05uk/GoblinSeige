@@ -19,7 +19,6 @@ public:
 
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsDead;
-
 	
 	// Sets default values for this character's properties
 	ABaseEnemy();
