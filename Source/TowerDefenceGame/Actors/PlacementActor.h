@@ -41,7 +41,6 @@ public:
 
 	virtual void Interact_Implementation() override;
 	virtual void Disassociate_Implementation() override;
-	virtual EInteractableType GetInteractableType_Implementation() override { return PLACEMENT; }
 
 #pragma endregion
 

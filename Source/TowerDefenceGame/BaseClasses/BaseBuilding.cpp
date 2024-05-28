@@ -159,27 +159,6 @@ void ABaseBuilding::UpdateBuildingState_Implementation(EBuildingState State)
 		bInPlacementMode = false;
 		bIsSelected = false;
 		break;
-		
-	case PLACING:
-		MatToAdd = VALID_MATERIAL;
-		bInPlacementMode = true;
-		bIsPlaced = false;
-		break;
-		
-	case PLACED:
-		
-		MatToAdd = NO_MATERIAL;
-		bInPlacementMode = false;
-		bIsPlaced = true;
-		break;
-		
-	case DESTROYED:
-		break;
-	case SELECTED:
-		
-		MatToAdd = SELECTED_MATERIAL;
-		bIsSelected = true;
-		break;
 	case DESELECTED:
 		
 		MatToAdd = NO_MATERIAL;
@@ -214,6 +193,7 @@ void ABaseBuilding::PostBuild_Implementation()
 
 void ABaseBuilding::Interact_Implementation()
 {
+	// Selecting
 	UpdateBuildingState(SELECTED);
 	OnBuildingSelectedSignature.Broadcast(this);
 	RangeDecalComp->SetVisibility(true);

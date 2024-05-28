@@ -21,12 +21,6 @@ enum EPlacementState
 };
 
 UENUM(BlueprintType)
-enum EInteractableType
-{
-	PLACEMENT, BUILDING
-};
-
-UENUM(BlueprintType)
 enum ESettingsToSave
 {
 	SOUND_SETTINGS,
@@ -79,11 +73,8 @@ UENUM(BlueprintType)
 enum EBuildingState
 {
 	NO_STATE,
-	PLACING,
-	PLACED,
 	SELECTED,
 	DESELECTED,
-	DESTROYED
 };
 
 UENUM(BlueprintType)
@@ -101,20 +92,6 @@ enum EControllerAllocation
 	NO_CONTROLLER,
 	AVAILABLE_CONTROLLER,
 	ALLOCATED_CONTROLLER
-};
-
-UENUM(BlueprintType)
-enum EManagerType
-{
-	ENEMY_MANAGER,
-	WAVE_MANAGER
-};
-
-UENUM(BlueprintType)
-enum ESideMenuSwitcher
-{
-	BUY_MENU,
-	BUILDING_SETTINGS
 };
 
 UENUM(BlueprintType)

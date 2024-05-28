@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "TowerDefenceGame/Actors/PlacementActor.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "TowerUI.generated.h"
 
 /**
@@ -27,4 +29,8 @@ public:
 	void OnConfirmPlacement();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnAbortPlacement();
+
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnPlacementStateUpdate(EPlacementState State, APlacementActor* PlacementActor);
 };

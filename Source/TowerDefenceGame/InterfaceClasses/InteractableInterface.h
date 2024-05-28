@@ -27,8 +27,4 @@ public:
 	void Disassociate();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Interact();
-
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	EInteractableType GetInteractableType();
-
 };

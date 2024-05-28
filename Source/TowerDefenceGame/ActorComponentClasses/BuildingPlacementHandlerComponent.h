@@ -36,6 +36,8 @@ private:
 public:
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnBuildDecisionTaken(EBuildStatus Status);
 	UFUNCTION(BlueprintCallable)
 	void HandleInteraction();
 	/*
