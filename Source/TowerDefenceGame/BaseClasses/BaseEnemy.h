@@ -16,6 +16,11 @@ class TOWERDEFENCEGAME_API ABaseEnemy : public ACharacter, public IEnemyInterfac
 	GENERATED_BODY()
 
 public:
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsDead;
+
+	
 	// Sets default values for this character's properties
 	ABaseEnemy();
 
