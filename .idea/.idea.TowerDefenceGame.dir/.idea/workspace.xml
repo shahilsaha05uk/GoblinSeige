@@ -8,19 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e7763e5-9dad-44e7-9cef-d89b5e8a74c4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/ObjectHealthBar.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/ObjectHealthBar.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/GoblinAnim.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations/GoblinAnim.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Animations/GoblinAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Animations/GoblinAttack.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BB_Goblin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BB_Goblin.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BT_Goblin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BT_Goblin.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/Actors/BP_Gold2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Actors/BP_Gold2.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/Base/BP_Controller.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Base/BP_Controller.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/Bt2/BT_Goblin2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/Bt2/BT_Goblin2.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/TestGame.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/TestGame.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/widgets/WBP_GoldLootBar.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/FileSystemMappings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/FileSystemMappings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseEnemy.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseEnemy.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -394,7 +383,7 @@
       <workItem from="1716703467834" duration="10637000" />
       <workItem from="1716718153684" duration="1505000" />
       <workItem from="1716751158839" duration="25181000" />
-      <workItem from="1716828578731" duration="11968000" />
+      <workItem from="1716828578731" duration="12613000" />
     </task>
     <servers />
   </component>
