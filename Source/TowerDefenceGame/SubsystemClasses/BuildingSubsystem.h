@@ -7,9 +7,6 @@
 #include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "BuildingSubsystem.generated.h"
 
-
-
-
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingBoughtSignature, const FString&, BuildingID);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingRequestedForBuySignature, const FString&, BuildingID);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildRequestSignature, EBuildStatus, Status);

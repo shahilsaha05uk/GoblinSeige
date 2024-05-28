@@ -131,6 +131,5 @@ public:
 #pragma region Interactable Interface methods
 	virtual void Interact_Implementation() override;
 	virtual void Disassociate_Implementation() override;
-	virtual EInteractableType GetInteractableType_Implementation() override { return BUILDING; }
 #pragma endregion
 };

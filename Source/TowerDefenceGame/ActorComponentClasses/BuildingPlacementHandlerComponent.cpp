@@ -2,8 +2,6 @@
 
 
 #include "BuildingPlacementHandlerComponent.h"
-
-#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
@@ -21,9 +19,15 @@ void UBuildingPlacementHandlerComponent::BeginPlay()
         
         if (mBuildingSubsystem)
         {
+            mBuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildDecisionTaken);
             mBuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::SpawnDummyBuilding);
         }
     }
+}
+
+void UBuildingPlacementHandlerComponent::OnBuildDecisionTaken_Implementation(EBuildStatus Status)
+{
+    
 }
 
 void UBuildingPlacementHandlerComponent::HandleInteraction()
