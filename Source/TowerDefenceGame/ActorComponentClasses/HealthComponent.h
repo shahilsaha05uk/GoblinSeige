@@ -7,23 +7,38 @@
 #include "HealthComponent.generated.h"
 
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthUpdateSignature, float, CurrentHealth);
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable, BlueprintType )
 class TOWERDEFENCEGAME_API UHealthComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Actor Properties")
+private:
+	UPROPERTY(EditDefaultsOnly)
+	float mStartingHealth;
+	UPROPERTY()
 	float mHealth;
+public:
 
+	UPROPERTY(BlueprintCallable, BlueprintAssignable)
+	FOnHealthUpdateSignature OnHealthUpdated;
+
+	virtual void BeginPlay() override;
+	
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	float GetHealth(){ return mHealth; }
-	UFUNCTION(BlueprintCallable)
-	void SetHealth(float Value){ mHealth = Value; }
 	
 	UFUNCTION(BlueprintCallable)
-	void IncreaseHealth(float Value) {mHealth += Value; }
+	void IncreaseHealth(float Value)
+	{
+		mHealth += Value;
+		OnHealthUpdated.Broadcast(mHealth);
+	}
 	UFUNCTION(BlueprintCallable)
-	void DeductHealth(float DamageValue) {mHealth-= DamageValue;}
+	void DeductHealth(float DamageValue)
+	{
+		mHealth-= DamageValue;
+		OnHealthUpdated.Broadcast(mHealth);
+	}
 };
