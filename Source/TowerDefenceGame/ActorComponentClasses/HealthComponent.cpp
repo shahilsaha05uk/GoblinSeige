@@ -2,3 +2,9 @@
 
 
 #include "HealthComponent.h"
+
+void UHealthComponent::BeginPlay()
+{
+	Super::BeginPlay();
+	IncreaseHealth(mStartingHealth);
+}

@@ -29,8 +29,7 @@ public:
 	void OnConfirmPlacement();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnAbortPlacement();
-
-
+	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnPlacementStateUpdate(EPlacementState State, APlacementActor* PlacementActor);
 };
