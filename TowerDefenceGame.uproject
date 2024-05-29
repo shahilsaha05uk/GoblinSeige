@@ -36,10 +36,6 @@
 			"Enabled": true
 		},
 		{
-			"Name": "HoudiniEngine",
-			"Enabled": false
-		},
-		{
 			"Name": "CompoundOperators",
 			"Enabled": true,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/bb80e96c1a6d4da5aeb896b0aad372b5"
@@ -57,11 +53,6 @@
 				"Win64",
 				"Android"
 			]
-		},
-		{
-			"Name": "Audius",
-			"Enabled": true,
-			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/379d421d179148cca3a09dcd7a9049e0"
 		}
 	]
 }
