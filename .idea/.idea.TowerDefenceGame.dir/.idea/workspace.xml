@@ -8,13 +8,194 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e7763e5-9dad-44e7-9cef-d89b5e8a74c4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Plugins/EnemyWaveSpawnPlugin/Source/EnemyWaveSpawnPlugin/Public/DebugHeader.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Spline.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Spline.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/TargetInterface.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/TargetInterface.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/EnemyManager.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/EnemyManager.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/WaveManager.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/WaveManager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/NewBlueprint.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/NewBlueprint.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Test.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Test.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Meshes/props/SM_egyptian_statue_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Meshes/props/SM_egyptian_statue_01.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_spline.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/BP/AI/Bt2/BP_Enemy2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/Bt2/BP_Enemy2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/Bt2/BP_Goblin1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/Bt2/BP_Goblin1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/Bt2/BP_spline.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/Bt2/BP_spline.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/BP/AI/Bt2/BT_Goblin2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/Bt2/BT_Goblin2.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/BP_OrbitCenter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/BP_OrbitCenter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/Bt2/EnemyController2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/Bt2/EnemyController2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/Bt2/task_Attack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/Bt2/task_Attack.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/Bt2/task_folowTheSpline.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/Bt2/task_folowTheSpline.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Actors/BP_Gold2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Actors/BP_Gold2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/BP_GameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/BP_GameMode.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/BP_Placers.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/BP_Placers.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Base/BP_Player2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Base/BP_Player2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Base/BP_Tower.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_ArrowTower.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_Cannon.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_ElectricTower.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_FlameThrower.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_Launchpad.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Buildings/DA_Machinegun.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/DA_Buildings.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/DataAssets/DA_Buildings.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/ArrowTower_Up/arrowTower_u1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/ArrowTower_Up/arrowTower_u2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/ArrowTower_Up/arrowTower_u3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/CannonTower_Up/cannonTower_u1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/CannonTower_Up/cannonTower_u2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/CannonTower_Up/cannonTower_u3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/ElectricTower_Up/electricTower_u1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/MachineGun_Up/machineGuntower_u1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/MachineGun_Up/machineGuntower_u2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/flametowerTower_u1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/DataAssets/Upgrade/launchpad_u1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Projectiles/BP_Arrow.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Projectiles/BP_Bomb.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Projectiles/BP_Bullet.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Projectiles/BP_Lightning.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Projectiles/BP_Missile.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Weapons/BP_ParentCannon.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Weapons/BP_ParentTower.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Weapons/BP_Tower_ArrowTower.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Weapons/BP_Tower_Cannon.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Weapons/BP_Tower_Electric.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Weapons/BP_Tower_Flamethrowers.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Weapons/BP_Tower_LaunchingPad.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Weapons/BP_Tower_MachineGun.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/BP/bp_DOOR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/bp_DOOR.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Enviro_Int_WorldUV_Mat.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Enviro_Int_WorldUV_Mat.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Enviro_Substance_Alpha_Material.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Enviro_Substance_Alpha_Material.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Enviro_WorldUV_Mat.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Enviro_WorldUV_Mat.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Ground_Tiles_Unwrap.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Ground_Tiles_Unwrap.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Lantern_Large_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Lantern_Large_Inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/M_Flag.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/M_Flag.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/M_Streaks_Decal.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/M_Streaks_Decal.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/BlueTiles_Inst.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/BlueTiles_Inst2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/BlueTiles_Inst2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/BricksTiling_inst2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/BricksTiling_inst2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/CityWalls_COB_Star_inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/CityWalls_COB_Star_inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/CityWalls_Spear_inst3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/CityWalls_Spear_inst3.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/CityWalls_gate_inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/CityWalls_gate_inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/CityWalls_gateframe_inst2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/CityWalls_gateframe_inst2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Door01_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Door01_Inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Door02_Inst2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Door02_Inst2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Door03_Inst3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Door03_Inst3.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Door04_Inst4.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Door04_Inst4.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/GardenLattice_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/GardenLattice_Inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Ground_Sand_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Ground_Sand_Inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/IronRailing_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/IronRailing_Inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/M_Flag_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/M_Flag_Inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/M_Streaks_Decal_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/M_Streaks_Decal_Inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/PalaceWall_inst1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/PalaceWall_inst1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Pattern001_Mat.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Pattern001_Mat.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Pattern04_Mat.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Pattern04_Mat.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/PlanarRockChips_Inst2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/PlanarRockChips_Inst2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/PlanarRockChips_Inst3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/PlanarRockChips_Inst3.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Plaster_Inst_03.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Plaster_Inst_03.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_BrightBlue2_inst3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_BrightBlue2_inst3.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_BrightBlue_inst2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_BrightBlue_inst2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_BrightRed_inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_BrightRed_inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_BrightRed_inst2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_BrightRed_inst2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_Bright_Green_inst2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_Bright_Green_inst2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_DarkRed_inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_DarkRed_inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_Dark_inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_Dark_inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_Orange_inst5.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_Orange_inst5.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_PaleRed_inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_PaleRed_inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_Terracotta_inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_Terracotta_inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_Yellow_inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_Yellow_inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Sandtone_inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Statue_Metal_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/Statue_Metal_Inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/TileEdge_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/TileEdge_Inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/TilePattern07_Mat.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/TilePattern07_Mat.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/TilePattern09b_Variant_Inst1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/TilePattern09b_Variant_Inst1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/WIndowMesh_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Material_instances/WIndowMesh_Inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Paint_Ground.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Paint_Ground.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Textures/Flat_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Textures/Greyscale_Base02.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Textures/Sand_World_Mask.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Textures/Streaks01_D.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Textures/T_Flag_M.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Textures/T_Flag_N.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Textures/T_TilingNoise03.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Textures/T_soft_smoke.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Textures/TilingNoise03.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/TrianglePattern_Inst.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/TrianglePattern_Inst.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Useable_Shader.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Materials/Useable_Shader.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/CorridorGardenDoorFrame1200.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/CorridorGardenDoorFrame1200.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Garden_DoorA_0.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Garden_DoorA_0.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_1200.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_1200.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_1600.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_1600.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_2000.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_2000.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_2000_B.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_2000_B.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_2400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_2400.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_400.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_401.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_401.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_402.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_402.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_403.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_403.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_404.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_404.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_800.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_800.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_801.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_801.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Awning_D.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Awning_D.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Awning_Window.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Awning_Window.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Box_A.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Box_A.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Door1200.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Door1200.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Door_A.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Door_A.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_FountainPool01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_FountainPool01.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Pergola01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Pergola01.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Secret_400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Secret_400.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Secret_400_B.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_Secret_400_B.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_WaterWall_1200.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_WaterWall_1200.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_WaterWall_1600.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_WaterWall_1600.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_WaterWall_800.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/Corridor_Gardens_WaterWall_800.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/GardenWindows_Test.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Corridor_Gardens/GardenWindows_Test.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Garden_Interior_WallShort_200.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Garden_Interior_WallShort_200.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Garden_Interior_WallShort_200_Railing01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Garden_Interior_WallShort_200_Railing01.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Garden_Interior_WallShort_200_Railing02.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Garden_Interior_WallShort_200_Railing02.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Room_Gardens_Cage_400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Room_Gardens_Cage_400.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Room_Gardens_Courtyard_400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Room_Gardens_Courtyard_400.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Room_Gardens_Courtyard_401.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Room_Gardens_Courtyard_401.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Room_Gardens_Courtyard_401_Plants.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Room_Gardens_Courtyard_401_Plants.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Room_Gardens_Courtyard_Balcony.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Room_Gardens_Courtyard_Balcony.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Room_Gardens_Courtyard_Balcony_Plants.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Room_Gardens_Courtyard_Balcony_Plants.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Room_Gardens_WallShort_Balcony.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/City_of_Brass_Enviroment/Meshes/Room_Gardens/Room_Gardens_WallShort_Balcony.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/TestGame.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/TestGame.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Materials/BuildingMaterials/MI_InvalidPlacementDefault.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Materials/BuildingMaterials/MI_InvalidPlacementDefault.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Particles/FX_Lightning.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Particles/FX_Lightning.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_Shop.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_Shop.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/widgets/WBP_HealthBar.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/UI/widgets/WBP_ObjectHealth.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/widgets/WBP_ObjectHealth.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/widgets/W_TowerUI.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/widgets/W_TowerUI.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI_Icons/UI_Icon_126.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI_Icons/UI_Icon_126.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VFX/Environment/NS_Smoke.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Environment/NS_Smoke.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VFX/Materials/M_Fire.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Materials/M_Fire.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VFX/Materials/M_Lightning.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Materials/M_Lightning.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VFX/Materials/M_Lightning_Inside.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Materials/M_Lightning_Inside.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VFX/Materials/M_Shield_VFX2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Materials/M_Shield_VFX2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VFX/Materials/M_Sphere_2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Materials/M_Sphere_2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VFX/Muzzle_Flash/Electric_MuzzleFlash.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Muzzle_Flash/Electric_MuzzleFlash.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VFX/Muzzle_Flash/Flamethrower_MuzzleFlash.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Muzzle_Flash/Flamethrower_MuzzleFlash.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VFX/Muzzle_Flash/Rifle_MuzzleFlash.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Muzzle_Flash/Rifle_MuzzleFlash.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VFX/Tower/NS_Electric.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Tower/NS_Electric.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VFX/Tower/NS_EnergyBall.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VFX/Tower/NS_Fire.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Tower/NS_Fire.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/VFX/Tower/NS_Flamethrower.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Tower/NS_Flamethrower.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Work/Blueprints/BP_GAP_Projectile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Work/Blueprints/BP_GAP_Projectile.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Work/Blueprints/BP_GAP_SpawnVFX.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Work/Blueprints/BP_GAP_SpawnVFX.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Work/Blueprints/BP_Projectile_Fireball.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Work/Blueprints/BP_Projectile_Fireball.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Work/Blueprints/BP_Projectile_Lightning.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Work/Blueprints/BP_Projectile_Lightning.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Work/Maps/VFXGuide_Projectile.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Work/Maps/VFXGuide_Projectile.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Hit_Fireball.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Hit_Fireball.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Hit_Lightning.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Hit_Lightning.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Muzzle_Fireball.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Muzzle_Fireball.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Muzzle_Lightning.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Muzzle_Lightning.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Projectile_FireBall.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Projectile_FireBall.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RD.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RD.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderBlueprint.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderBlueprint.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderGameControl.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderGameControl.pdb" afterDir="false" />
@@ -268,9 +449,38 @@
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.lib.response.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.lib.response.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.suppressed.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/Build/Win64/x64/UnrealEditor/Development/RiderShaderInfo/UnrealEditor-RiderShaderInfo.suppressed.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/FileSystemMappings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/FileSystemMappings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/HealthComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/HealthComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/BuildingPlacementHandlerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/BuildingPlacementHandlerComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/BuildingPlacementHandlerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/BuildingPlacementHandlerComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/HealthComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/HealthComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/PlacementActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/PlacementActor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/PlacementActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/PlacementActor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Projectile.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Projectile.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Projectile.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Projectile.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Turret.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Turret.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseEnemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseEnemy.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseEnemy.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseEnemy.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/EnemyController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/EnemyController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/EnemyController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/EnemyController.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GoblinInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/GoblinInstance.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GoblinInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/GoblinInstance.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/BuildingPlacementInterface.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/BuildingPlacementInterface.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/EnemyInterface.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/EnemyInterface.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/BuildingSubsystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/BuildingSubsystem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/EnemySubsystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/EnemySubsystem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/EnemySubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/EnemySubsystem.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SupportClasses/HelperMethods.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SupportClasses/HelperMethods.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SupportClasses/StructClass.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SupportClasses/StructClass.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/TowerDefenceGame.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/TowerDefenceGame.Build.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/TowerUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/TowerUI.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/TowerUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/TowerUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/ObjectHealthBar.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/ObjectHealthBar.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/TowerDefenceGame.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/TowerDefenceGame.uproject" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -282,140 +492,199 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Plugins/EnemyWaveSpawnPlugin/Source/EnemyWaveSpawnPlugin/EnemyWaveSpawnPlugin.Build.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Plugins/EnemyWaveSpawnPlugin/Source/EnemyWaveSpawnPlugin/Private/AssetActionClasses/QuickAssetAction.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Plugins/EnemyWaveSpawnPlugin/Source/EnemyWaveSpawnPlugin/Public/AssetActionClasses/QuickAssetAction.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="Toolset" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -452,203 +721,157 @@
 }</component>
   <component name="RunManager">
     <configuration name="TowerDefenceGame" type="Uproject" factoryName="rider.uproject">
-      <configuration_1>
+      <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TowerDefenceGame.uproject" />
+      <configuration_2>
         <option name="CONFIGURATION" value="DebugGame Editor" />
         <option name="PLATFORM" value="Win64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TowerDefenceGame.uproject" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
         <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\Win64\UnrealEditor-Win64-DebugGame.exe" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\THUNDER_PC\Desktop\GoblinSeige\TowerDefenceGame.uproject&quot;" />
-        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
         <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\s015695k\Desktop\GoblinSeige\TowerDefenceGame.uproject&quot;" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
-      </configuration_1>
-      <configuration_2>
-        <option name="CONFIGURATION" value="DebugGame" />
-        <option name="PLATFORM" value="Win64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TowerDefenceGame.uproject" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="C:\Users\THUNDER_PC\Desktop\GoblinSeige\Binaries\Win64\TowerDefenceGame-Win64-DebugGame.exe" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
-        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_2>
       <configuration_3>
-        <option name="CONFIGURATION" value="Development Editor" />
+        <option name="CONFIGURATION" value="DebugGame" />
         <option name="PLATFORM" value="Win64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TowerDefenceGame.uproject" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\Win64\UnrealEditor.exe" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\THUNDER_PC\Desktop\GoblinSeige\TowerDefenceGame.uproject&quot;" />
-        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="EXECUTABLE_PATH" value="C:\Users\s015695k\Desktop\GoblinSeige\Binaries\Win64\TowerDefenceGame-Win64-DebugGame.exe" />
         <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_3>
       <configuration_4>
-        <option name="CONFIGURATION" value="Development" />
+        <option name="CONFIGURATION" value="Development Editor" />
         <option name="PLATFORM" value="Win64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TowerDefenceGame.uproject" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="C:\Users\THUNDER_PC\Desktop\GoblinSeige\Binaries\Win64\TowerDefenceGame.exe" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
-        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\Win64\UnrealEditor.exe" />
         <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\s015695k\Desktop\GoblinSeige\TowerDefenceGame.uproject&quot;" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_4>
       <configuration_5>
-        <option name="CONFIGURATION" value="Shipping" />
+        <option name="CONFIGURATION" value="Development" />
         <option name="PLATFORM" value="Win64" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TowerDefenceGame.uproject" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="C:\Users\THUNDER_PC\Desktop\GoblinSeige\Binaries\Win64\TowerDefenceGame-Win64-Shipping.exe" />
+        <option name="EXECUTABLE_PATH" value="C:\Users\s015695k\Desktop\GoblinSeige\Binaries\Win64\TowerDefenceGame.exe" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_5>
       <configuration_6>
-        <option name="CONFIGURATION" value="DebugGame Editor" />
-        <option name="PLATFORM" value="Linux" />
-        <option name="PROJECT_FILE_PATH" value="" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\Linux\UnrealEditor-Linux-DebugGame" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\TowerDefenceGame.uproject&quot;" />
-        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="CONFIGURATION" value="Shipping" />
+        <option name="PLATFORM" value="Win64" />
+        <option name="EXECUTABLE_PATH" value="C:\Users\s015695k\Desktop\GoblinSeige\Binaries\Win64\TowerDefenceGame-Win64-Shipping.exe" />
         <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_6>
       <configuration_7>
         <option name="CONFIGURATION" value="DebugGame Editor" />
-        <option name="PLATFORM" value="LinuxArm64" />
-        <option name="PROJECT_FILE_PATH" value="" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\LinuxArm64\UnrealEditor-LinuxArm64-DebugGame" />
+        <option name="PLATFORM" value="Linux" />
+        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\Linux\UnrealEditor-Linux-DebugGame" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\TowerDefenceGame.uproject&quot;" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_7>
       <configuration_8>
-        <option name="CONFIGURATION" value="DebugGame" />
-        <option name="PLATFORM" value="Linux" />
-        <option name="PROJECT_FILE_PATH" value="" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\Linux\TowerDefenceGame-Linux-DebugGame" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
-        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="CONFIGURATION" value="DebugGame Editor" />
+        <option name="PLATFORM" value="LinuxArm64" />
+        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\LinuxArm64\UnrealEditor-LinuxArm64-DebugGame" />
         <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\TowerDefenceGame.uproject&quot;" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_8>
       <configuration_9>
         <option name="CONFIGURATION" value="DebugGame" />
-        <option name="PLATFORM" value="LinuxArm64" />
-        <option name="PROJECT_FILE_PATH" value="" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\LinuxArm64\TowerDefenceGame-LinuxArm64-DebugGame" />
+        <option name="PLATFORM" value="Linux" />
+        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\Linux\TowerDefenceGame-Linux-DebugGame" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_9>
       <configuration_10>
-        <option name="CONFIGURATION" value="Development Editor" />
-        <option name="PLATFORM" value="Linux" />
-        <option name="PROJECT_FILE_PATH" value="" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\Linux\UnrealEditor" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\TowerDefenceGame.uproject&quot;" />
-        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="CONFIGURATION" value="DebugGame" />
+        <option name="PLATFORM" value="LinuxArm64" />
+        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\LinuxArm64\TowerDefenceGame-LinuxArm64-DebugGame" />
         <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_10>
       <configuration_11>
         <option name="CONFIGURATION" value="Development Editor" />
-        <option name="PLATFORM" value="LinuxArm64" />
-        <option name="PROJECT_FILE_PATH" value="" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\LinuxArm64\UnrealEditor" />
+        <option name="PLATFORM" value="Linux" />
+        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\Linux\UnrealEditor" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\TowerDefenceGame.uproject&quot;" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_11>
       <configuration_12>
-        <option name="CONFIGURATION" value="Development" />
-        <option name="PLATFORM" value="Linux" />
-        <option name="PROJECT_FILE_PATH" value="" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\Linux\TowerDefenceGame" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
-        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="CONFIGURATION" value="Development Editor" />
+        <option name="PLATFORM" value="LinuxArm64" />
+        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\LinuxArm64\UnrealEditor" />
         <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\TowerDefenceGame.uproject&quot;" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_12>
       <configuration_13>
         <option name="CONFIGURATION" value="Development" />
-        <option name="PLATFORM" value="LinuxArm64" />
-        <option name="PROJECT_FILE_PATH" value="" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\LinuxArm64\TowerDefenceGame" />
+        <option name="PLATFORM" value="Linux" />
+        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\Linux\TowerDefenceGame" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_13>
       <configuration_14>
-        <option name="CONFIGURATION" value="Shipping" />
-        <option name="PLATFORM" value="Linux" />
-        <option name="PROJECT_FILE_PATH" value="" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\Linux\TowerDefenceGame-Linux-Shipping" />
+        <option name="CONFIGURATION" value="Development" />
+        <option name="PLATFORM" value="LinuxArm64" />
+        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\LinuxArm64\TowerDefenceGame" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_14>
       <configuration_15>
         <option name="CONFIGURATION" value="Shipping" />
-        <option name="PLATFORM" value="LinuxArm64" />
-        <option name="PROJECT_FILE_PATH" value="" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\LinuxArm64\TowerDefenceGame-LinuxArm64-Shipping" />
+        <option name="PLATFORM" value="Linux" />
+        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\Linux\TowerDefenceGame-Linux-Shipping" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_15>
-      <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TowerDefenceGame.uproject" />
-      <option name="AUTO_SELECT_PRIORITY" value="10010" />
+      <configuration_16>
+        <option name="CONFIGURATION" value="Shipping" />
+        <option name="PLATFORM" value="LinuxArm64" />
+        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\LinuxArm64\TowerDefenceGame-LinuxArm64-Shipping" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="PASS_PARENT_ENVS" value="1" />
+        <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      </configuration_16>
       <method v="2">
         <option name="Build" />
       </method>
@@ -691,6 +914,7 @@
       <workItem from="1716718153684" duration="1505000" />
       <workItem from="1716751158839" duration="25181000" />
       <workItem from="1716828578731" duration="12613000" />
+      <workItem from="1717002811456" duration="48939000" />
     </task>
     <servers />
   </component>
@@ -711,5 +935,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Plugins/EnemyWaveSpawnPlugin/Source/EnemyWaveSpawnPlugin/Private/AssetActionClasses/QuickAssetAction.cpp</url>
+          <line>10</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

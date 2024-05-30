@@ -32,8 +32,8 @@ void AEnemyController::OnDead_Implementation()
 {
 	UnPossess();
 
-	if(auto enemySubs = GetGameInstance()->GetSubsystem<UEnemySubsystem>())
-		enemySubs->FreeController(this);
+	if(const auto enemySubs = GetGameInstance()->GetSubsystem<UEnemySubsystem>())
+		enemySubs->OnEnemyDead.Broadcast(this);
 }
 
 void AEnemyController::OnControllerDestroy_Implementation()

@@ -22,15 +22,19 @@ public:
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnBuildingRequestedForBuySignature OnBuildingRequestedForBuy;
+	/*
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnBuildingBoughtSignature OnBuildingBought;
+	*/
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnBuildRequestSignature OnBuildDecisionTaken;
 
 	UFUNCTION(BlueprintCallable)
 	void Trigger_OnBuildingRequestedForBuy(const FString& BuildingID);
+	/*
 	UFUNCTION(BlueprintCallable)
 	void Trigger_OnBuildingBought(const FString& BuildingID);
+	*/
 	UFUNCTION(BlueprintCallable)
 	void Trigger_OnBuildDecisionTaken(EBuildStatus Status);
 

@@ -21,6 +21,6 @@ class TOWERDEFENCEGAME_API IBuildingPlacementInterface
 public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void BuildDummy(const FString& BuildingID);
+	ABaseBuilding* Build(const FString& BuildingID);
 
 };

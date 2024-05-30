@@ -8,3 +8,28 @@ AProjectile::AProjectile()
 {
 	
 }
+
+void AProjectile::DeactivateProjectile_Implementation()
+{
+}
+
+void AProjectile::ActivateProjectile_Implementation()
+{
+	this->SetHidden(false);
+}
+
+void AProjectile::SpawnMuzzle_Implementation()
+{
+}
+
+void AProjectile::SpawnProjectile_Implementation()
+{
+}
+
+void AProjectile::StopProjectile_Implementation()
+{
+}
+
+void AProjectile::SetProjectileTemplateToEmpty_Implementation()
+{
+}

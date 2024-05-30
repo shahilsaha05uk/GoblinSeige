@@ -25,6 +25,13 @@ public:
 	FOnHealthUpdateSignature OnHealthUpdated;
 
 	virtual void BeginPlay() override;
+
+	UFUNCTION(BlueprintCallable)
+	void SetHealth(float Value)
+	{
+		mHealth = Value;
+		OnHealthUpdated.Broadcast(mHealth);
+	}
 	
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	float GetHealth(){ return mHealth; }

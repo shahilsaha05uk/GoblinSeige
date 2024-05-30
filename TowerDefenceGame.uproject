@@ -28,6 +28,10 @@
 			"Enabled": false
 		},
 		{
+			"Name": "EnemyWaveSpawnPlugin",
+			"Enabled": true
+		},
+		{
 			"Name": "EditorScriptingUtilities",
 			"Enabled": true
 		},

@@ -14,6 +14,11 @@ class TOWERDEFENCEGAME_API APlacementActor : public AActor, public IInteractable
 {
 	GENERATED_BODY()
 
+private:
+	
+	UPROPERTY(EditDefaultsOnly)
+	class TSubclassOf<class ABaseBuilding> BuildingTowerClass;
+
 public:
 	UPROPERTY()
 	class UBuildingPlacementSubsystem* mPlacementSubsystem;
@@ -21,9 +26,9 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	class UDA_BuildingAsset* DA_BuildingAsset;
 	UPROPERTY()
-	FString tmpBuildingID;
+	FString mBuildingID;
 	UPROPERTY()
-	ABaseBuilding* tempBuilding;
+	ABaseBuilding* mOccupiedBuilding;
 
 	
 public:
@@ -32,6 +37,8 @@ public:
 
 	APlacementActor();
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnBuildingDecisionTaken(EBuildStatus Status);
 	virtual void BeginPlay() override;
 	
 	UFUNCTION(BlueprintCallable)
@@ -46,9 +53,7 @@ public:
 
 #pragma region Builders
 
-	virtual void BuildDummy_Implementation(const FString& BuildingID) override;
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void Build(EBuildStatus Status);
+	virtual ABaseBuilding* Build_Implementation(const FString& BuildingID) override;
 
 #pragma endregion
 

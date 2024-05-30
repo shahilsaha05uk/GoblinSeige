@@ -19,21 +19,24 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	int mStartingResources;
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<class AWaveManager> WaveManagerClass;
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<class AEnemyManager> EnemyManagerClass;
+	
 
 public:
 
+	UPROPERTY(BlueprintReadOnly)
+	class AWaveManager* mWaveManager;
+	UPROPERTY(BlueprintReadOnly)
+	class AEnemyManager* mEnemyManager;
 	
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnGameOverSignature OnGameOver;
 	
 	virtual void BeginPlay() override;
 	
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnWaveStart(int Wave);
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnWaveComplete(int WaveNumber);
-
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void GameOver();
 	
