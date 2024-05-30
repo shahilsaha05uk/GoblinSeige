@@ -13,6 +13,8 @@ class TOWERDEFENCEGAME_API AEnemyController : public AAIController, public IEnem
 	GENERATED_BODY()
 
 private:
+	UPROPERTY(EditDefaultsOnly)
+	TMap<int, TSubclassOf<class ABaseEnemy>> mEnemyClassMap;
 
 	class AEnemyManager* mEnemyManager;
 

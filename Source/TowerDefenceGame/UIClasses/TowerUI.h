@@ -8,9 +8,8 @@
 #include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "TowerUI.generated.h"
 
-/**
- * 
- */
+UENUM(BlueprintType)
+enum EDeckType { NoWidget, ConfirmWidget, UpgradeWidget };
 UCLASS()
 class TOWERDEFENCEGAME_API UTowerUI : public UUserWidget
 {
@@ -26,10 +25,10 @@ public:
 	virtual void NativeConstruct() override;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ToggleWidgetSwitcher(EDeckType Type);
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnConfirmPlacement();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnAbortPlacement();
-	
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnPlacementStateUpdate(EPlacementState State, APlacementActor* PlacementActor);
 };

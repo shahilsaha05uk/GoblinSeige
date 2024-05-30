@@ -12,14 +12,18 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingSelectedSignature, ABaseBuilding*, Building);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnBuildingFullyUpgradedSignature);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTurretActivateSignature);
 
 UCLASS()
-class TOWERDEFENCEGAME_API ABaseBuilding : public AActor, public ISoundInterface, public IInteractableInterface
+class TOWERDEFENCEGAME_API ABaseBuilding : public APawn, public IInteractableInterface
 {
 	GENERATED_BODY()
 
 protected:
+	UPROPERTY()
+	FString BuildingID;
+	UPROPERTY()
+	class UDA_UpgradeAsset* UpgradeAsset;
+	
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<AActor*> OverlappingActors;
@@ -30,46 +34,23 @@ protected:
 	FString BuildingUpgradeDescription;
 	UPROPERTY()
 	bool bCanUpgrade;
-
-public:
-
-	UPROPERTY(meta = (ExposeOnSpawn), EditAnywhere, BlueprintReadWrite, Category = "Private")
+	UPROPERTY()
 	FBuildingBuyDetails mBuildingDetails;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private")
-	int BuildingCost;
+
+public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	TSubclassOf<class AProjectile> ProjectileClass;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	FBuildingStats BuildingStats;
+
+	
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+	class UStaticMeshComponent* mStaticMeshSelectedComp;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private")
 	TEnumAsByte<EBuildingState> BuildingState;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	TEnumAsByte<ETraceTypeQuery> BuildingMovementTraceChannel;
 	
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
-	class USceneComponent* RootComp;
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
-	class UBoxComponent* BoxComp;
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
-	class UDecalComponent* PlacementDecalComp;
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
-	class UDecalComponent* RangeDecalComp;
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
-	class USphereComponent* RangeCollisionComp;
-	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	class USoundBase* ProjectileSound;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private | Modification")
-	UMaterialInterface* ValidMaterial;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private | Modification")
-	UMaterialInterface* InvalidMaterial;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private | Modification")
-	UMaterialInterface* SelectMaterial;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private | Modification")
-	bool bInPlacementMode;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private | Modification")
-	bool bIsPlaced;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private | Modification")
-	bool bCanPlace;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private | Modification")
 	bool bIsSelected;
 	
@@ -77,36 +58,22 @@ public:
 	FOnBuildingFullyUpgradedSignature OnBuildingFullyUpgradedSignature;
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FTurretActivateSignature OnTurretActivateSignature;
-
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnBuildingSelectedSignature OnBuildingSelectedSignature;
 	
 	ABaseBuilding();
-	
-	virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnBuildingBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnBuildingEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	virtual void BeginPlay() override;
 	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void InitDummy();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Init(FBuildingBuyDetails BuildingDetails);
 	
-	virtual void PlaySound_Implementation() override;
-
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnBuildDecisionTaken(EBuildStatus Status);
-
 #pragma region Building STATE
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnBuildingDecisionTaken(EBuildStatus Status);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void UpdateBuildingState(EBuildingState State);
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void ChangeBuildingMaterial(EPlacementMaterial MatToAdd);
 
 #pragma endregion
 	
@@ -115,17 +82,6 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Upgrade();
 
-#pragma endregion
-
-#pragma region Building Modification
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void IncreaseRange();
-	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void Build();
-	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void PostBuild();
 #pragma endregion
 
 #pragma region Interactable Interface methods

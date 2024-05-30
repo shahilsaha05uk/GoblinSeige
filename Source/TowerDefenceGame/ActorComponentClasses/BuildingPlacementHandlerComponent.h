@@ -20,6 +20,8 @@ private:
 	// Temps
 	UPROPERTY()
 	AActor* mCurrentHitActor;
+	UPROPERTY()
+	class ABaseBuilding* tempBuilding;
 
 	// This stores the reference to the Building Asset
 	UPROPERTY(EditDefaultsOnly)
@@ -40,39 +42,10 @@ public:
 	void OnBuildDecisionTaken(EBuildStatus Status);
 	UFUNCTION(BlueprintCallable)
 	void HandleInteraction();
-	/*
-	UFUNCTION(BlueprintCallable)
-	void OnPlacementSelected(APlacementActor* PlacementActor);
-	UFUNCTION(BlueprintCallable)
-	void SpawnDummyBuilding(const FString& BuildingID);
-	UFUNCTION(BlueprintCallable)
-	void OnBuildingDecisionTaken(EBuildStatus Status);
-
-private:
-	UFUNCTION()
-	void HandleBuildingInteraction(AActor* HitActor);
-	UFUNCTION()
-	void HandlePlacementInteraction(AActor* HitActor);
-	UFUNCTION()
-	void CallDisassociate(AActor* Target);
-	UFUNCTION()
-	void CallInteract(AActor* Target);
-
-
-	UFUNCTION(BlueprintCallable)
-	void OnPlacementUpdated(EPlacementState State, APlacementActor* PlacementActor);
-
-private:
-	UFUNCTION()
-	void DeselectLastSelectedActor();
-	UFUNCTION()
-	void DeselectLastPlacement();
-	*/
 
 	UFUNCTION(BlueprintPure, BlueprintCallable)
 	bool GetHit(FHitResult& Hit);
 
 	UFUNCTION(BlueprintCallable)
-	void SpawnDummyBuilding(const FString& BuildingID);
-
+	void SpawnBuilding(const FString& BuildingID);
 };

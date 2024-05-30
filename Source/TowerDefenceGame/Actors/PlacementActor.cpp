@@ -2,12 +2,10 @@
 
 
 #include "PlacementActor.h"
-
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
-#include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 
 APlacementActor::APlacementActor()
 {
@@ -20,8 +18,22 @@ void APlacementActor::BeginPlay()
 	Super::BeginPlay();
 
 	if(const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
-		BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::Build);
+		BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
 }
+void APlacementActor::OnBuildingDecisionTaken_Implementation(EBuildStatus Status)
+{
+	if(!mOccupiedBuilding) return;
+	switch (Status) {
+	case BUILD_CONFIRM:
+		UpdateState(OccupiedPlacement);
+		break;
+	case BUILD_ABORT:
+		UpdateState(EmptyPlacement);
+		break;
+	default: ;
+	}
+}
+
 
 void APlacementActor::UpdateState(EPlacementState State)
 {
@@ -45,7 +57,6 @@ void APlacementActor::UpdateState(EPlacementState State)
 		ToggleVisibility(false);
 		break;
 	}
-
 	GetGameInstance()->GetSubsystem<UBuildingPlacementSubsystem>()->Trigger_OnPlacementStateUpdate(State, this);
 }
 
@@ -65,41 +76,19 @@ void APlacementActor::Disassociate_Implementation()
 
 #pragma region Builders
 
-void APlacementActor::BuildDummy_Implementation(const FString& BuildingID)
+ABaseBuilding* APlacementActor::Build_Implementation(const FString& BuildingID)
 {
 	FBuildingBuyDetails BuildingDetails;
 	if (DA_BuildingAsset->FindBuildingDetails(BuildingID, BuildingDetails))
 	{
-		tmpBuildingID = BuildingID;
+		mBuildingID = BuildingID;
 		FActorSpawnParameters SpawnParams;
-		tempBuilding = GetWorld()->SpawnActor<ABaseBuilding>(BuildingDetails.BuildingClass, GetActorLocation(), GetActorRotation());
-		tempBuilding->InitDummy();
+		mOccupiedBuilding = GetWorld()->SpawnActor<ABaseBuilding>(BuildingTowerClass, GetActorLocation(), GetActorRotation());
+		mOccupiedBuilding->Init(BuildingDetails);
 
 		UpdateState(DecisionPlacement);
 	}
-}
-
-void APlacementActor::Build_Implementation(EBuildStatus Status)
-{
-	if(!tempBuilding) return;
-	tempBuilding->Destroy();
-
-	if(Status == BUILD_CONFIRM)
-	{
-		FBuildingBuyDetails BuildingDetails;
-		if(DA_BuildingAsset->FindBuildingDetails(tmpBuildingID, BuildingDetails))
-		{
-			tempBuilding = GetWorld()->SpawnActor<ABaseBuilding>(BuildingDetails.BuildingClass, GetActorLocation(), GetActorRotation());
-			tempBuilding->Init(BuildingDetails);
-
-			UpdateState(OccupiedPlacement);
-		}
-	}
-	else
-	{
-		UpdateState(EmptyPlacement);
-	}
-	tempBuilding = nullptr;
+	return mOccupiedBuilding;
 }
 
 #pragma endregion

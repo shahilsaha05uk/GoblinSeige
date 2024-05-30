@@ -16,17 +16,11 @@ class TOWERDEFENCEGAME_API UGoblinInstance : public UGameInstance, public IGameI
 	GENERATED_BODY()
 
 private:
-	UPROPERTY()
-	int mInitialWave = 1;
-	UPROPERTY(EditDefaultsOnly)
-	int mFinalWave;
-
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<class AEnemyController> mEnemyControllerClass;
 	
 public:
 
-	virtual void Init() override;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Level Map")
 	TMap<TEnumAsByte<ELevelToTravel>, TSoftObjectPtr<UWorld>> LevelMap;
 

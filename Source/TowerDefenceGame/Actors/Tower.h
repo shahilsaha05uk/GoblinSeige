@@ -1,0 +1,69 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/Pawn.h"
+#include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
+#include "Tower.generated.h"
+
+UCLASS()
+class TOWERDEFENCEGAME_API ATower : public ABaseBuilding
+{
+	GENERATED_BODY()
+
+private:
+
+	UPROPERTY(EditDefaultsOnly)
+	int ProjectilePoolCount = 10;
+	UPROPERTY(EditDefaultsOnly)
+	bool bShouldPool;
+	UPROPERTY()
+	int PoolCount;
+	UPROPERTY()
+	int tempPoolCount;
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<AProjectile*> mPooledProjectiles;
+		
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+	class UWidgetComponent* mTowerWidgetComp;
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+	class UStaticMeshComponent* mStaticMeshComp;
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+	class UNiagaraComponent* mNiagaraComp;
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+	class USphereComponent* mRangeColliderComp;
+
+	UPROPERTY(BlueprintReadWrite)
+	class UTowerUI* mTowerUI;
+	
+	ATower();
+
+	virtual void BeginPlay() override;
+	
+	virtual void Init_Implementation(FBuildingBuyDetails BuildingDetails) override;
+	virtual void OnBuildingDecisionTaken_Implementation(EBuildStatus Status) override;
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnEnemyEnteredTheRange(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnEnemyExitedTheRange(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int OtherBodyIndex);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void CallPooledProjectile();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnProjectilePool();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	class AProjectile* SpawnProjectile();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void Fire();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void StopFire();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnProjectileJobComplete(class AProjectile* Projectile);
+	
+	virtual void Interact_Implementation() override;
+	virtual void Disassociate_Implementation() override;
+};

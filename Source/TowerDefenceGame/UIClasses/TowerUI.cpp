@@ -13,24 +13,22 @@ void UTowerUI::NativeConstruct()
 
 	btnConfirmPlacement->OnClicked.AddDynamic(this, &ThisClass::OnConfirmPlacement);
 	btnAbortPlacement->OnClicked.AddDynamic(this, &ThisClass::OnAbortPlacement);
-        
-
-	if (auto const mBuildingPlacementSubsystem = GetGameInstance()->GetSubsystem<UBuildingPlacementSubsystem>())
-	{
-		mBuildingPlacementSubsystem->OnPlacementStateUpdate.AddDynamic(this, &ThisClass::OnPlacementStateUpdate);
-	}
+	
 }
 
-void UTowerUI::OnPlacementStateUpdate_Implementation(EPlacementState State, APlacementActor* PlacementActor)
+void UTowerUI::ToggleWidgetSwitcher_Implementation(EDeckType Type)
 {
+	
 }
 
 void UTowerUI::OnConfirmPlacement_Implementation()
 {
 	GetGameInstance()->GetSubsystem<UBuildingSubsystem>()->Trigger_OnBuildDecisionTaken(BUILD_CONFIRM);
+	ToggleWidgetSwitcher(NoWidget);
 }
 
 void UTowerUI::OnAbortPlacement_Implementation()
 {
 	GetGameInstance()->GetSubsystem<UBuildingSubsystem>()->Trigger_OnBuildDecisionTaken(BUILD_ABORT);
+	ToggleWidgetSwitcher(NoWidget);
 }

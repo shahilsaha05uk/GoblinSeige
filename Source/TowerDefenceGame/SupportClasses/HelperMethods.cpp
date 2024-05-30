@@ -48,19 +48,19 @@ FString UHelperMethods::GetDescription(FBuildingStats stats)
 {
 	return FString::Printf(TEXT("Damage: %.1f\n"
 									"Range: %.1f\n"
-									"Speed: %.1f\n"),
-									stats.BaseDamage,
-									stats.AttackRange,
-									stats.AttackSpeed);
+									"RateOfFire: %.1f\n"),
+									stats.Damage,
+									stats.Range,
+									stats.RateOfFire);
 }
 
 FString UHelperMethods::GetUpgradeDescription(FBuildingStats CurrentStats, FBuildingStats UpgradeStats)
 {
 	return FString::Printf(TEXT("Damage: %.1f -> %.1f\n"
 								"Range: %.1f -> %.1f\n"
-								"Speed: %.1f -> %.1f\n"),
-								CurrentStats.BaseDamage, UpgradeStats.BaseDamage,
-								CurrentStats.AttackRange, UpgradeStats.AttackRange,
-								CurrentStats.AttackSpeed, UpgradeStats.AttackSpeed);
+								"RateOfFire: %.1f -> %.1f\n"),
+								CurrentStats.Damage, UpgradeStats.Damage,
+								CurrentStats.Range, UpgradeStats.Range,
+								CurrentStats.RateOfFire, UpgradeStats.RateOfFire);
 }
 

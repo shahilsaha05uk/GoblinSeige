@@ -24,11 +24,13 @@ class TOWERDEFENCEGAME_API IEnemyInterface
 public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void IA_FollowTheSpline(class ASpline* Spline);
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void IA_EnemyMove(FVector TargetLocation);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void IA_EnemyAttack();
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	bool isDead();
-
 };

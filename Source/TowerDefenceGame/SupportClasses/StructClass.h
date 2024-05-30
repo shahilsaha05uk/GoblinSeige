@@ -14,20 +14,16 @@ struct FBuildingStats
 
 public:
 
-	FBuildingStats(): BaseDamage(0), BaseDamageRadius(0), AttackRange(0), AttackSpeed(0), ProjectileLaunchSpeed(0)
+	FBuildingStats(): Damage(0), Range(0), RateOfFire(0)
 	{
 	}
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
-	float BaseDamage;
+	float Damage;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
-	float BaseDamageRadius;
+	float Range;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
-	float AttackRange;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
-	float AttackSpeed;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Turret Properties")
-	float ProjectileLaunchSpeed;
+	float RateOfFire;
 	
 };
 
@@ -50,8 +46,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
 	FBuildingStats BuildingStats;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
-	TSubclassOf<class ABaseBuilding> BuildingClass;
-
+	class UNiagaraSystem* mBuildingNiagara;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
+	class TSubclassOf<class AProjectile> mProjectileClass;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
 	class UDA_UpgradeAsset* UpgradeAsset;
 
@@ -71,7 +68,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int UpgradeCost;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UMaterialInterface* UpgradeMaterial;
+	class UNiagaraSystem* UpgradeNiagara;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	FBuildingStats BuildingStats;

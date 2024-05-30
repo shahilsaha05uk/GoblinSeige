@@ -15,13 +15,19 @@ class TOWERDEFENCEGAME_API ABaseEnemy : public ACharacter, public IEnemyInterfac
 {
 	GENERATED_BODY()
 
+private:
+
+	UPROPERTY(EditDefaultsOnly)
+	float mDealDamage;
+	
 public:
 
+	UPROPERTY(BlueprintReadWrite)
+	AActor* Target;
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsDead;
 	
 	// Sets default values for this character's properties
-	ABaseEnemy();
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private Component")
 	class UWidgetComponent* mHealthBarWidgetComponent;
@@ -37,13 +43,28 @@ public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnPawnDeadSignature OnPawnDeadSignature;
 	
+	ABaseEnemy();
+
 	virtual void BeginPlay() override;
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void Init();
 
 
+	// Interface Methods
 	virtual void IA_EnemyMove_Implementation(FVector TargetLocation) override;
+	virtual void IA_FollowTheSpline_Implementation(ASpline* Spline) override;
 	virtual void IA_EnemyAttack_Implementation() override;
-	virtual bool isDead_Implementation() override { return false; }
+	virtual bool isDead_Implementation() override { return bIsDead; }
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
+
+	UFUNCTION(BlueprintCallable)
+	void OnHealthUpdated(float CurrentHealth);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnAttackNotified();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnEnemyBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 };
