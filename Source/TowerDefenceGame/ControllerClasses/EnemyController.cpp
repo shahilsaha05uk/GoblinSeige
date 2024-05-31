@@ -46,9 +46,9 @@ void AEnemyController::OnControllerDestroy_Implementation()
 	Destroy();
 }
 
-void AEnemyController::SpawnPawn_Implementation(AEnemySpawnPoint* SpawnBox)
+void AEnemyController::SpawnPawn_Implementation(AEnemySpawnPoint* SpawnBox, int Type)
 {
 	//EnemyRef->OnPawnDeadSignature.AddDynamic(this, &AEnemyController::OnDead);
 
-	Possess(EnemyRef);
+	//Possess(EnemyRef);
 }

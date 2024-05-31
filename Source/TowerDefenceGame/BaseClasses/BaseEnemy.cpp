@@ -54,6 +54,11 @@ void ABaseEnemy::IA_EnemyAttack_Implementation()
 	
 }
 
+AActor* ABaseEnemy::GetTarget_Implementation()
+{
+	return Target;
+}
+
 void ABaseEnemy::OnDamageTaken_Implementation(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
 	mHealthComponent->DeductHealth(Damage);

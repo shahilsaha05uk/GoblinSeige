@@ -22,14 +22,13 @@ void UEnemySubsystem::DeRegisterSpawnPoint()
 	mSpawnPoints.Empty();
 }
 
-
 #pragma endregion
 
 #pragma region Getters
 
 AEnemySpawnPoint* UEnemySubsystem::GetRandomEnemySpawnPoint()
 {
-	int rand = FMath::RandRange(0, EnemySpawnPointCount);
+	int rand = FMath::RandRange(0, EnemySpawnPointCount -1);
 	return mSpawnPoints[rand];
 }
 
