@@ -56,6 +56,7 @@ public:
 	virtual void IA_FollowTheSpline_Implementation(ASpline* Spline) override;
 	virtual void IA_EnemyAttack_Implementation() override;
 	virtual bool isDead_Implementation() override { return bIsDead; }
+	virtual AActor* GetTarget_Implementation() override;
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);

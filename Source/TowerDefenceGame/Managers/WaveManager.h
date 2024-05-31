@@ -25,10 +25,5 @@ public:
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnWaveStart(int Wave);
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnWaveComplete(int WaveNumber);
-
-
 };

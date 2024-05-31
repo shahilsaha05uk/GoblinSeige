@@ -10,7 +10,7 @@ void UQuickAssetAction::DuplicateAssets(int32 NumOfDuplicates)
 {
 	if(NumOfDuplicates <= 0)
 	{
-		Print(TEXT("Please enter a valid duplicate Number"), FColor::Red);
+		ShowMessageDialog(EAppMsgType::Ok, TEXT("Enter a valid number"));
 		return;
 	}
 
@@ -30,5 +30,9 @@ void UQuickAssetAction::DuplicateAssets(int32 NumOfDuplicates)
 				++count;
 			}
 		}
+	}
+	if(count > 0)
+	{
+		ShowNotifyInfo(TEXT("Duplication Successful"));
 	}
 }

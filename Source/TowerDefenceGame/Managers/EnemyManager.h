@@ -3,54 +3,56 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/DataTable.h"
 #include "GameFramework/Actor.h"
 #include "EnemyManager.generated.h"
 
 
 USTRUCT(BlueprintType)
-struct FEnemyStruct
+struct FFixedEnemy
 {
 	GENERATED_BODY()
 
-public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Fixed Enemy")
+	int32 EnemyLevel;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	int Easy;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	int Medium;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	int Hard;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Fixed Enemy")
+	int32 Count;
 };
 
 USTRUCT(BlueprintType)
-struct FWaveStruct
+struct FEnemyProbability
 {
 	GENERATED_BODY()
 
-public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Enemy Probability")
+	int32 EnemyLevel;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	int Min;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	int Max;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Enemy Probability", meta = (ClampMin = "0.0", ClampMax = "1.0", SliderExponent))
+	float Probability;
 };
+
 
 USTRUCT(BlueprintType)
-struct FWaveEnemyStruct
+struct FWaveRangeConfig
 {
 	GENERATED_BODY()
 
-public:
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	int TotalEnemiesToSpawn;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	FEnemyStruct FixedEnemies;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	FEnemyStruct RandomEnemies;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Wave Range Config")
+	int32 StartWave;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Wave Range Config")
+	int32 EndWave;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Wave Range Config")
+	int32 TotalEnemies;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Wave Range Config")
+	TArray<FFixedEnemy> FixedEnemies;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Wave Range Config")
+	TArray<FEnemyProbability> EnemyProbabilities;
 };
-
-
-
 
 UCLASS()
 class TOWERDEFENCEGAME_API AEnemyManager : public AActor
@@ -58,60 +60,64 @@ class TOWERDEFENCEGAME_API AEnemyManager : public AActor
 	GENERATED_BODY()
 
 private:
-	int EnemySpawnPointCount = -1;
-	int TotalEnemiesToSpawnThisRound = 0;
-	
 	UPROPERTY(EditDefaultsOnly)
-	TMap<int, FWaveEnemyStruct> mEnemyMap;
-	UPROPERTY()
 	TSubclassOf<class AEnemyController> mEnemyControllerClass;
 
 	UPROPERTY()
 	FTimerHandle EnemySpawnTimerHandle;
 	
+	UPROPERTY(EditDefaultsOnly, Category="Wave Configurations")
+	TMap<int, FWaveRangeConfig> WaveRangeConfigurations;
 	UPROPERTY()
 	TArray<class AEnemyController*> mAllocatedController;
-	UPROPERTY()
-	TArray<class AEnemyController*> mFreeControllers;
 	
 	UPROPERTY()
 	TArray<class AEnemySpawnPoint*> mSpawnPoints;
 	
-	UPROPERTY(EditDefaultsOnly, Category = "Wave Settings")
-	int EnemyMinRange;
-	UPROPERTY(EditDefaultsOnly, Category = "Wave Settings")
-	int EnemyMaxRange;
-	
-	UFUNCTION()
-	void CacheControllers();
-	UFUNCTION()
-	void SpawnEnemies();
-
 public:
 
 	UPROPERTY(BlueprintReadOnly)
+	TArray<class AEnemyController*> mFreeControllers;
+	UPROPERTY(BlueprintReadOnly)
 	class UEnemySubsystem* mEnemySubsystem;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int mRemainingEnemies;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FWaveRangeConfig mLatestWaveConfigs;
 	
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintCallable)
+	void CacheControllers(int ControllerCount);
 	UFUNCTION()
 	void InitSub(TSubclassOf<AEnemyController> EnemyControllerClass);
 	
+	UFUNCTION(BlueprintCallable)
+	void AssignEnemy(int EnemyID);
 	UFUNCTION(BlueprintCallable)
 	void RequestEnemy();
 	UFUNCTION(BlueprintCallable)
 	void FreeController(AEnemyController* EnemyController);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PrepareForWave(int Wave);
 
 	UFUNCTION(BlueprintCallable)
 	void FlushEverything();
 
 	UFUNCTION(BlueprintPure, BlueprintCallable)
-	int GetRandomEnemyCounts(int Wave);
+	TMap<int, FWaveRangeConfig> GetWaveConfigs() {return WaveRangeConfigurations;}
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void GameOver();
 
+	// Spawners
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	bool HasEnoughControllers(int &RequiredControllers);
+	UFUNCTION(BlueprintCallable)
+	void NormalizeProbabilities(TArray<FEnemyProbability>& Probabilities);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void SpawnFixedEnemies(const TArray<FFixedEnemy> &FixedEnemyData);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void SpawnProbableEnemies(const TArray<FEnemyProbability> &ProbableData);
 };
