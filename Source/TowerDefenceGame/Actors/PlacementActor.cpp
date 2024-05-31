@@ -57,7 +57,7 @@ void APlacementActor::UpdateState(EPlacementState State)
 		ToggleVisibility(false);
 		break;
 	}
-	GetGameInstance()->GetSubsystem<UBuildingPlacementSubsystem>()->Trigger_OnPlacementStateUpdate(State, this);
+	GetGameInstance()->GetSubsystem<UBuildingPlacementSubsystem>()->OnPlacementStateUpdate.Broadcast(State, this);
 }
 
 #pragma region Interfaces

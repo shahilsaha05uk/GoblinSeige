@@ -88,33 +88,7 @@ public:
 	USoundClass* SoundClassRef;
 };
 
-USTRUCT(Blueprintable, BlueprintType)
-struct FBuildingDetails
-{
-	GENERATED_BODY()
-
-public:
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
-	FString ID;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
-	FString BuildingName;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
-	int BuildingCost;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
-	FBuildingStats BuildingStats;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
-	class UDA_UpgradeAsset* UpgradeAsset;
-	
-	FBuildingDetails(class UDA_BuildingAsset* BuildingAsset);
-	FBuildingDetails();
-};
-
-
-
 // Save Game Structs
-
 USTRUCT(Blueprintable, BlueprintType)
 struct FSoundSave
 {
