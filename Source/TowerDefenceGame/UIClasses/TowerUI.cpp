@@ -23,12 +23,12 @@ void UTowerUI::ToggleWidgetSwitcher_Implementation(EDeckType Type)
 
 void UTowerUI::OnConfirmPlacement_Implementation()
 {
-	GetGameInstance()->GetSubsystem<UBuildingSubsystem>()->Trigger_OnBuildDecisionTaken(BUILD_CONFIRM);
+	GetGameInstance()->GetSubsystem<UBuildingSubsystem>()->OnBuildDecisionTaken.Broadcast(BUILD_CONFIRM);
 	ToggleWidgetSwitcher(NoWidget);
 }
 
 void UTowerUI::OnAbortPlacement_Implementation()
 {
-	GetGameInstance()->GetSubsystem<UBuildingSubsystem>()->Trigger_OnBuildDecisionTaken(BUILD_ABORT);
+	GetGameInstance()->GetSubsystem<UBuildingSubsystem>()->OnBuildDecisionTaken.Broadcast(BUILD_ABORT);
 	ToggleWidgetSwitcher(NoWidget);
 }

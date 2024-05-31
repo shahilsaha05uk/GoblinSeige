@@ -29,13 +29,8 @@ public:
 	FOnWaveCompleteSignature OnWaveComplete;
 
 	UFUNCTION()
-	void Init(int initialWave, int finalWave)
-	{
-		mInitialWave = initialWave;
-		mFinalWave = finalWave;
-		mCurrentWave = mInitialWave;
-		OnWaveUpdated.Broadcast(mCurrentWave);
-	}
+	void Init(int initialWave, int finalWave);
+
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetCurrentWave(){ return mCurrentWave; }
 	UFUNCTION(BlueprintCallable, BlueprintPure)

@@ -16,7 +16,4 @@ class TOWERDEFENCEGAME_API UBuildingPlacementSubsystem : public UGameInstanceSub
 public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnPlacementStateUpdateSignature OnPlacementStateUpdate;
-	
-	UFUNCTION(BlueprintCallable)
-	void Trigger_OnPlacementStateUpdate(EPlacementState State, APlacementActor* PlacementActor);
 };

@@ -66,7 +66,7 @@ void UBuyButton::OnButtonUnhovered_Implementation()
 
 void UBuyButton::OnBuyButtonClicked_Implementation()
 {
-	GetGameInstance()->GetSubsystem<UBuildingSubsystem>()->Trigger_OnBuildingRequestedForBuy(mBuildingDetails.ID);
+	GetGameInstance()->GetSubsystem<UBuildingSubsystem>()->OnBuildingRequestedForBuy.Broadcast(mBuildingDetails.ID);
 }
 
 void UBuyButton::UpdateButton_Implementation()

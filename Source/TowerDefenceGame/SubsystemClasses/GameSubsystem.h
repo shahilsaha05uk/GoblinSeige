@@ -35,9 +35,4 @@ public:
 		mHud = HudRef;
 		OnHudInitialised.Broadcast(mHud);
 	}
-	UFUNCTION(BlueprintCallable)
-	void Trigger_OnGameDecisionMade()
-	{
-		OnGameDecisionMade.Broadcast();
-	}
 };
