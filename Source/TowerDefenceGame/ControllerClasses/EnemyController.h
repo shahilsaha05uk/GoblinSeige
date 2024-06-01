@@ -23,20 +23,15 @@ public:
 	UBehaviorTree* BehaviorTreeRef;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	class ABaseEnemy* EnemyRef;
-	
+
 	virtual void OnPossess(APawn* InPawn) override;
+	UFUNCTION(BlueprintCallable)
+	void OnPawnDestroyed(AActor* DestroyedActor);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SpawnPawn(class AEnemySpawnPoint* SpawnBox, int Type);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnDead();
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnControllerDestroy();
-
 	virtual void EnemyMove_Implementation(FVector TargetLocation) override;
 	virtual void EnemyAttack_Implementation() override;
 	
-	virtual bool EnemyHasAValidPath_Implementation() override;
-
 };

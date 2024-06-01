@@ -20,5 +20,5 @@ void UWaveSubsystem::EndWave()
 {
 	if(mCurrentWave >= mFinalWave) return;
 	mCurrentWave++;
-	OnWaveComplete.Broadcast(mCurrentWave);
+	OnWaveUpdated.Broadcast(mCurrentWave);
 }

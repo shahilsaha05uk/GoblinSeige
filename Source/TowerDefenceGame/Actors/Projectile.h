@@ -44,7 +44,7 @@ public:
 	AProjectile();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void ActivateProjectile();
+	void ActivateProjectile(AActor* Target);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void DeactivateProjectile();
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)

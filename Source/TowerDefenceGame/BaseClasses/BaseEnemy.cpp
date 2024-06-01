@@ -6,6 +6,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "TowerDefenceGame/ActorComponentClasses/HealthComponent.h"
@@ -59,13 +60,17 @@ AActor* ABaseEnemy::GetTarget_Implementation()
 	return Target;
 }
 
+void ABaseEnemy::OnDeadAnimationEnd_Implementation()
+{
+}
+
 void ABaseEnemy::OnDamageTaken_Implementation(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
 	mHealthComponent->DeductHealth(Damage);
 }
 
 
-void ABaseEnemy::OnHealthUpdated(float CurrentHealth)
+void ABaseEnemy::OnHealthUpdated_Implementation(float CurrentHealth)
 {
 	if(CurrentHealth <= 0.0f)
 	{
@@ -74,6 +79,8 @@ void ABaseEnemy::OnHealthUpdated(float CurrentHealth)
 
 		// Die
 		bIsDead = true;
+		GetCharacterMovement()->StopMovementImmediately();
+		GetCharacterMovement()->StopMovementKeepPathing();
 	}
 }
 

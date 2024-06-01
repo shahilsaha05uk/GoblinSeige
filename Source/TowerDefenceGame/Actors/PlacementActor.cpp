@@ -20,45 +20,6 @@ void APlacementActor::BeginPlay()
 	if(const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
 		BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
 }
-void APlacementActor::OnBuildingDecisionTaken_Implementation(EBuildStatus Status)
-{
-	if(!mOccupiedBuilding) return;
-	switch (Status) {
-	case BUILD_CONFIRM:
-		UpdateState(OccupiedPlacement);
-		break;
-	case BUILD_ABORT:
-		UpdateState(EmptyPlacement);
-		break;
-	default: ;
-	}
-}
-
-
-void APlacementActor::UpdateState(EPlacementState State)
-{
-	switch (State) {
-	case EmptyPlacement:
-		ToggleMaterial(false);
-		ToggleVisibility(true);
-		break;
-	case SelectedPlacement:
-		ToggleMaterial(true);
-		break;
-	case DeselectedPlacement:
-		ToggleMaterial(false);
-		break;
-	case OccupiedPlacement:
-		ToggleMaterial(false);
-		ToggleVisibility(false);
-		break;
-	case DecisionPlacement:
-		ToggleMaterial(false);
-		ToggleVisibility(false);
-		break;
-	}
-	GetGameInstance()->GetSubsystem<UBuildingPlacementSubsystem>()->OnPlacementStateUpdate.Broadcast(State, this);
-}
 
 #pragma region Interfaces
 
@@ -102,6 +63,49 @@ void APlacementActor::ToggleVisibility_Implementation(bool Value)
 
 void APlacementActor::ToggleMaterial_Implementation(bool Value)
 {
+}
+
+#pragma endregion
+
+#pragma region Privates
+
+void APlacementActor::OnBuildingDecisionTaken_Implementation(EBuildStatus Status)
+{
+	if(!mOccupiedBuilding) return;
+	switch (Status) {
+	case BUILD_CONFIRM:
+		UpdateState(OccupiedPlacement);
+		break;
+	case BUILD_ABORT:
+		UpdateState(EmptyPlacement);
+		break;
+	default: ;
+	}
+}
+
+void APlacementActor::UpdateState(EPlacementState State)
+{
+	switch (State) {
+	case EmptyPlacement:
+		ToggleMaterial(false);
+		ToggleVisibility(true);
+		break;
+	case SelectedPlacement:
+		ToggleMaterial(true);
+		break;
+	case DeselectedPlacement:
+		ToggleMaterial(false);
+		break;
+	case OccupiedPlacement:
+		ToggleMaterial(false);
+		ToggleVisibility(false);
+		break;
+	case DecisionPlacement:
+		ToggleMaterial(false);
+		ToggleVisibility(false);
+		break;
+	}
+	GetGameInstance()->GetSubsystem<UBuildingPlacementSubsystem>()->OnPlacementStateUpdate.Broadcast(State, this);
 }
 
 #pragma endregion

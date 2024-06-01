@@ -2,8 +2,6 @@
 
 
 #include "EnemyManager.h"
-
-#include "Kismet/KismetMathLibrary.h"
 #include "TowerDefenceGame/ControllerClasses/EnemyController.h"
 #include "TowerDefenceGame/SubsystemClasses/EnemySubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/WaveSubsystem.h"
@@ -16,9 +14,11 @@ void AEnemyManager::BeginPlay()
 	{
 		mEnemySubsystem->OnEnemyDead.AddDynamic(this, &ThisClass::FreeController);
 	}
-	if(const auto WaveSubs = GetGameInstance()->GetSubsystem<UWaveSubsystem>())
+
+	mWaveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>();
+	if(mWaveSubsystem)
 	{
-		WaveSubs->OnWaveStarted.AddDynamic(this, &ThisClass::PrepareForWave);
+		mWaveSubsystem->OnWaveStarted.AddDynamic(this, &ThisClass::PrepareForWave);
 	}
 }
 
@@ -44,11 +44,6 @@ void AEnemyManager::AssignEnemy(int EnemyID)
 	const auto Controller = mFreeControllers.Pop(true);	// take out a free controller
 	Controller->SpawnPawn(SpawnPoint, EnemyID);	// spawn the pawn
 	mAllocatedController.Add(Controller);	// add it to the allocated controller
-
-}
-
-void AEnemyManager::RequestEnemy()
-{
 
 }
 
@@ -94,7 +89,6 @@ void AEnemyManager::SpawnProbableEnemies_Implementation(const TArray<FEnemyProba
 	// Normalize the probabilities to ensure they sum to 1
 	TArray<FEnemyProbability> NormalizedProbabilities = mLatestWaveConfigs.EnemyProbabilities;
 	NormalizeProbabilities(NormalizedProbabilities);
-
 	
 	// Calculate cumulative probabilities for random enemy selection
 	TArray<float> CumulativeProbabilities;
@@ -162,6 +156,11 @@ void AEnemyManager::FreeController(AEnemyController* EnemyController)
 	{
 		mAllocatedController.Remove(EnemyController);
 		mFreeControllers.Add(EnemyController);
+	}
+
+	if(mAllocatedController.IsEmpty())
+	{
+		if(mWaveSubsystem) mWaveSubsystem->EndWave();
 	}
 }
 

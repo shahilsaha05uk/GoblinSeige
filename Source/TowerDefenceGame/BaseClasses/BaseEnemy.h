@@ -61,11 +61,14 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnHealthUpdated(float CurrentHealth);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnAttackNotified();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnEnemyBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnDeadAnimationEnd();
 };

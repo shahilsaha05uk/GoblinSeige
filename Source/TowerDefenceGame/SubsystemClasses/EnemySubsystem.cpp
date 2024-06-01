@@ -3,9 +3,6 @@
 
 #include "EnemySubsystem.h"
 
-#include "Kismet/KismetMathLibrary.h"
-#include "TowerDefenceGame/ControllerClasses/EnemyController.h"
-
 #pragma region Register Spawn Points
 
 void UEnemySubsystem::RegisterSpawnPoint(AEnemySpawnPoint* SpawnPoint)

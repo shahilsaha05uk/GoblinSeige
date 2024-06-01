@@ -53,6 +53,8 @@ public:
 	
 
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	class UTimerComponent* mTimerComp;
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	class UCameraComponent* mCameraComp;
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	class USpringArmComponent* mSpringArmComp;
