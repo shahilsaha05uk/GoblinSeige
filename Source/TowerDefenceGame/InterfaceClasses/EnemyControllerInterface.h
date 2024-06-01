@@ -27,7 +27,4 @@ public:
 	void EnemyMove(FVector TargetLocation);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void EnemyAttack();
-	
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	bool EnemyHasAValidPath();
 };

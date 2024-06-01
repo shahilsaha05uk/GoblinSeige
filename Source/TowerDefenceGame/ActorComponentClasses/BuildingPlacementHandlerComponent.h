@@ -41,6 +41,10 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnBuildDecisionTaken(EBuildStatus Status);
 	UFUNCTION(BlueprintCallable)
+	void CallInteract();
+	UFUNCTION(BlueprintCallable)
+	void CallDisassociate();
+	UFUNCTION(BlueprintCallable)
 	void HandleInteraction();
 
 	UFUNCTION(BlueprintPure, BlueprintCallable)

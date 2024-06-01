@@ -10,7 +10,12 @@
 void AEnemyController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
+	InPawn->OnDestroyed.AddDynamic(this, &ThisClass::OnPawnDestroyed);
 	RunBehaviorTree(BehaviorTreeRef);
+}
+
+void AEnemyController::SpawnPawn_Implementation(AEnemySpawnPoint* SpawnBox, int Type)
+{
 }
 
 void AEnemyController::EnemyMove_Implementation(FVector TargetLocation)
@@ -23,32 +28,17 @@ void AEnemyController::EnemyAttack_Implementation()
 	
 }
 
-bool AEnemyController::EnemyHasAValidPath_Implementation()
-{
-	return GetPathFollowingComponent()->HasValidPath();
-}
-
-void AEnemyController::OnDead_Implementation()
-{
-	UnPossess();
-
-	if(const auto enemySubs = GetGameInstance()->GetSubsystem<UEnemySubsystem>())
-		enemySubs->OnEnemyDead.Broadcast(this);
-}
-
-void AEnemyController::OnControllerDestroy_Implementation()
+void AEnemyController::OnPawnDestroyed(AActor* DestroyedActor)
 {
 	if(APawn* p = GetPawn())
 	{
 		p->Destroy();
 		UnPossess();
+
+		if(const auto enemySubs = GetGameInstance()->GetSubsystem<UEnemySubsystem>())
+		{
+			enemySubs->OnEnemyDead.Broadcast(this);
+		}
 	}
-	Destroy();
 }
 
-void AEnemyController::SpawnPawn_Implementation(AEnemySpawnPoint* SpawnBox, int Type)
-{
-	//EnemyRef->OnPawnDeadSignature.AddDynamic(this, &AEnemyController::OnDead);
-
-	//Possess(EnemyRef);
-}

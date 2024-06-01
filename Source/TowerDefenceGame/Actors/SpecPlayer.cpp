@@ -2,20 +2,16 @@
 
 
 #include "SpecPlayer.h"
-
 #include <TowerDefenceGame/SubsystemClasses/GameSubsystem.h>
-
 #include "Camera/CameraComponent.h"
 #include "GameFramework/HUD.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "Subsystems/PlacementSubsystem.h"
 #include "TowerDefenceGame/ActorComponentClasses/BuildingPlacementHandlerComponent.h"
+#include "TowerDefenceGame/ActorComponentClasses/TimerComponent.h"
 #include "TowerDefenceGame/ControllerClasses/InputController.h"
 #include "TowerDefenceGame/InterfaceClasses/HUDInterface.h"
-#include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
-#include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
 
 ASpecPlayer::ASpecPlayer()
 {
@@ -26,6 +22,8 @@ ASpecPlayer::ASpecPlayer()
 	mCameraComp->SetupAttachment(mSpringArmComp);
 	
 	mBuildingPlacementHandlerComponent = CreateDefaultSubobject<UBuildingPlacementHandlerComponent>("PlayerInteractionComponent");
+
+	mTimerComp = CreateDefaultSubobject<UTimerComponent>("TimerComponent");
 	
 	OrbitRadius = 300.0f;
 	OrbitSpeed = 50.0f;
@@ -59,7 +57,6 @@ void ASpecPlayer::PossessedBy(AController* NewController)	// Called before Begin
 	CalculateInitialAngles();
 	UpdateCameraPosition();
 }
-
 
 void ASpecPlayer::OnHudInitialised(AHUD* HudRef)
 {
@@ -152,5 +149,3 @@ void ASpecPlayer::UpdateCameraPosition()
 
 	SetActorLocationAndRotation(NewLocation, NewRotation);
 }
-
-

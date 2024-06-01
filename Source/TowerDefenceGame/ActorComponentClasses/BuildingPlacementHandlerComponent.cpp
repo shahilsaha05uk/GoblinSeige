@@ -45,30 +45,12 @@ void UBuildingPlacementHandlerComponent::HandleInteraction()
     FHitResult hit;
     const bool Success = GetHit(hit);
 
-    if(!Success)    // if no hit was detected
-    {
-        // deselect the currently hit actor
-        if(mCurrentHitActor && UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UInteractableInterface::StaticClass()))
-        {
-            IInteractableInterface::Execute_Disassociate(mCurrentHitActor);
-        }
-    }
-    else
-    {
-        // deselect the currently hit actor
-        if(mCurrentHitActor && UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UInteractableInterface::StaticClass()))
-        {
-            IInteractableInterface::Execute_Disassociate(mCurrentHitActor);
-        }
+    CallDisassociate();
 
-        // set the new hit actor as the current hit actor
+    if(Success)    // if no hit was detected
+    {
         mCurrentHitActor = hit.GetActor();
-
-        // interact with the new actor
-        if(UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UInteractableInterface::StaticClass()))
-        {
-            IInteractableInterface::Execute_Interact(mCurrentHitActor);
-        }
+        CallInteract();
     }
 }
 
@@ -89,3 +71,26 @@ void UBuildingPlacementHandlerComponent::SpawnBuilding(const FString& BuildingID
        tempBuilding = IBuildingPlacementInterface::Execute_Build(mCurrentHitActor, BuildingID);
     }
 }
+
+#pragma region Interaction Callers
+
+void UBuildingPlacementHandlerComponent::CallInteract()
+{
+    // interact with the new actor
+    if(UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UInteractableInterface::StaticClass()))
+    {
+        IInteractableInterface::Execute_Interact(mCurrentHitActor);
+    }
+}
+
+void UBuildingPlacementHandlerComponent::CallDisassociate()
+{
+    // deselect the currently hit actor
+    if(mCurrentHitActor && UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UInteractableInterface::StaticClass()))
+    {
+        IInteractableInterface::Execute_Disassociate(mCurrentHitActor);
+    }
+}
+
+#pragma endregion
+

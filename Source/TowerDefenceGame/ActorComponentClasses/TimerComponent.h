@@ -4,9 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Engine/DataTable.h"
+#include "TowerDefenceGame/DataAssetClasses/DA_CountdownTimer.h"
 #include "TimerComponent.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnTimerValueUpdateSignature, FString, Time);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable, BlueprintType )
 class TOWERDEFENCEGAME_API UTimerComponent : public UActorComponent
@@ -15,29 +16,44 @@ class TOWERDEFENCEGAME_API UTimerComponent : public UActorComponent
 
 private:
 	UPROPERTY(EditDefaultsOnly)
-	float mTotalduration;
-public:
+	class UDA_CountdownTimer* mDACountDownTimer;
+	UPROPERTY()
+	FWaveCountDownTimerDetails mCountDownTimerDetails;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	float mRate;
-	UPROPERTY(BlueprintReadWrite)
-	float cTime;
-	UPROPERTY(BlueprintReadOnly)
-	class UClockSubsystem* mClockSubsystem;
+	UPROPERTY()
+	class UWaveSubsystem* mWaveSubsystem;
 	
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnTimerValueUpdateSignature OnTimerUpdate;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPROPERTY()
 	FTimerHandle TimerHandle;
 
+	UPROPERTY()
+	float mTotalDuration;
+
+	UPROPERTY(EditDefaultsOnly)
+	float mRate;
+
+	UPROPERTY()
+	float cTime;
+
+	UPROPERTY()
+	class UClockSubsystem* mClockSubsystem;
+
+public:
 	virtual void BeginPlay() override;
+
+	UFUNCTION(BlueprintCallable)
+	bool FetchAndUpdateCountdownDetails();
+
 	
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void Countdown();
+	UFUNCTION(BlueprintCallable)
+	void OnWaveComplete(int Wave);
+	UFUNCTION(BlueprintCallable)
+	void UpdateTimer();
 	
 	UFUNCTION(BlueprintCallable)
 	void StartTimer();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void Countdown();
 	UFUNCTION(BlueprintCallable)
 	void FinishTimer();
 };

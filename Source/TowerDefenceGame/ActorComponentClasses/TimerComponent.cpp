@@ -6,6 +6,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetStringLibrary.h"
 #include "TowerDefenceGame/SubsystemClasses/ClockSubsystem.h"
+#include "TowerDefenceGame/SubsystemClasses/WaveSubsystem.h"
 
 void UTimerComponent::BeginPlay()
 {
@@ -15,10 +16,28 @@ void UTimerComponent::BeginPlay()
 	{
 		mClockSubsystem = LocalPlayer->GetSubsystem<UClockSubsystem>();
 	}
+
+	if(const UWorld* world = GetWorld())
+	{
+		mWaveSubsystem = world->GetGameInstance()->GetSubsystem<UWaveSubsystem>();
+		if(mWaveSubsystem)
+		{
+			mWaveSubsystem->OnWaveUpdated.AddDynamic(this, &ThisClass::OnWaveComplete);
+		}
+	}
+	FetchAndUpdateCountdownDetails();
+	StartTimer();
+}
+
+void UTimerComponent::UpdateTimer()
+{
+	const FString timeToStr = UKismetStringLibrary::TimeSecondsToString(cTime);
+	mClockSubsystem->CurrentTime.Broadcast(timeToStr);
 }
 
 void UTimerComponent::StartTimer()
 {
+	cTime = mCountDownTimerDetails.CountDownTimer;
 	mClockSubsystem->StartTimer.Broadcast();
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::Countdown, mRate, true);
 }
@@ -27,24 +46,52 @@ void UTimerComponent::Countdown_Implementation()
 {
 	if(cTime > 0.0f)
 	{
-		float Val = cTime - mRate;
+		const float Val = cTime - mRate;
 		cTime = UKismetMathLibrary::FClamp(Val, 0.0f, 100000.0f);
+		UpdateTimer();
+
+		UE_LOG(LogTemp, Warning, TEXT("Countdown: %f"), cTime);
 	}
 	else
 	{
 		FinishTimer();
 	}
 	
-	FString timeToStr = UKismetStringLibrary::TimeSecondsToString(cTime);
-	mClockSubsystem->CurrentTime.Broadcast(timeToStr);
 }
 
 void UTimerComponent::FinishTimer()
 {
 	GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
 	TimerHandle.Invalidate();
-	OnTimerUpdate.Broadcast(UKismetStringLibrary::TimeSecondsToString(0.0f));
+	cTime = 0.0f;
+	UpdateTimer();
 	mClockSubsystem->FinishTimer.Broadcast();
 }
 
+// Updating the Countdown Timer Details
+bool UTimerComponent::FetchAndUpdateCountdownDetails()
+{
+	if(mDACountDownTimer)
+	{
+		if(mDACountDownTimer->GetCountDownDetails(mWaveSubsystem->GetCurrentWave(), mCountDownTimerDetails))
+		{
+			return true;
+		}
+	}
+	return false;
+}
 
+void UTimerComponent::OnWaveComplete(int Wave)
+{
+	if(Wave == mCountDownTimerDetails.MaxLevel)
+	{
+		if(FetchAndUpdateCountdownDetails())
+		{
+			StartTimer();
+		}
+	}
+	else
+	{
+		StartTimer();
+	}
+}

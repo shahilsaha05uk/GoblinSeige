@@ -31,45 +31,16 @@ public:
 	class UShopMenu* mShop;
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UDescriptionBox* mDescriptionBox;
-	/*
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
-	class UVerticalBox* vbBuildingSettings;
-
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
-	class UWidgetSwitcher* wsMenuSwitcher;
-
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
-	class UBorder* root;
-
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
-	class UOverlay* ol_Prompter;
-	
-	
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
-	class UButton* btnUpgrade;
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
-	class UButton* btnMove;
-	*/
-	
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
-	class UButton* btnWaveStart;
-
 
 #pragma endregion
 	
 #pragma region Properties
-	/*
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	ABaseBuilding* BuildingRef;
-	*/
-	
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FUpgradeButtonClickedSignature OnUpgradeButtonClickedSignature;
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FMoveButtonClickedSignature OnMoveButtonClickedSignature;
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnCurrentBalanceUpdatedSignature OnCurrentBalanceUpdated;
-	
 	
 	UPROPERTY(BlueprintReadWrite)
 	TSubclassOf<UBaseWidget> PrompterWidgetClass;
@@ -78,29 +49,11 @@ public:
 
 	virtual void NativeConstruct() override;
 
-	/*
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void WidgetToggler(class ABaseBuilding* Building);
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Building Settings Menu")
-	void OnUpgradeButtonClick();
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Building Settings Menu")
-	void OnMoveButtonClick();
-	
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OpenBuildingSettingsUI(ABaseBuilding* Building);
-	*/
-	
-	// On Events Triggered methods
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnWaveStart();
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void ToggleShop(bool Value);
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnButtonStateUpdate(const FString& String, EButtonState State);
-
 
 #pragma region Building Methods
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -114,5 +67,3 @@ public:
 
 #pragma endregion
 };
-
-

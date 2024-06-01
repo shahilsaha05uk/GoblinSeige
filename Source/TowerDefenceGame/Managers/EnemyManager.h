@@ -80,6 +80,8 @@ public:
 	TArray<class AEnemyController*> mFreeControllers;
 	UPROPERTY(BlueprintReadOnly)
 	class UEnemySubsystem* mEnemySubsystem;
+	UPROPERTY(BlueprintReadOnly)
+	class UWaveSubsystem* mWaveSubsystem;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int mRemainingEnemies;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -94,8 +96,6 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void AssignEnemy(int EnemyID);
-	UFUNCTION(BlueprintCallable)
-	void RequestEnemy();
 	UFUNCTION(BlueprintCallable)
 	void FreeController(AEnemyController* EnemyController);
 
