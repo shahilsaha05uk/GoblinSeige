@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Engine/DataTable.h"
 #include "GameFramework/Actor.h"
 #include "EnemyManager.generated.h"
 
@@ -64,20 +63,25 @@ private:
 	TSubclassOf<class AEnemyController> mEnemyControllerClass;
 
 	UPROPERTY()
+	int TotalEnemyControllersAssigned = 0;
+	UPROPERTY()
 	FTimerHandle EnemySpawnTimerHandle;
 	
 	UPROPERTY(EditDefaultsOnly, Category="Wave Configurations")
 	TMap<int, FWaveRangeConfig> WaveRangeConfigurations;
-	UPROPERTY()
-	TArray<class AEnemyController*> mAllocatedController;
+
 	
 	UPROPERTY()
 	TArray<class AEnemySpawnPoint*> mSpawnPoints;
 	
 public:
-
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadWrite)
+	int TotalEnemyControllers = 0;
+	UPROPERTY(BlueprintReadWrite)
 	TArray<class AEnemyController*> mFreeControllers;
+
+
+	
 	UPROPERTY(BlueprintReadOnly)
 	class UEnemySubsystem* mEnemySubsystem;
 	UPROPERTY(BlueprintReadOnly)
@@ -89,15 +93,13 @@ public:
 	
 	virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void CacheControllers(int ControllerCount);
-	UFUNCTION()
-	void InitSub(TSubclassOf<AEnemyController> EnemyControllerClass);
 	
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void AssignEnemy(int EnemyID);
 	UFUNCTION(BlueprintCallable)
-	void FreeController(AEnemyController* EnemyController);
+	void FreeController(class AEnemyController* ControllerRef);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PrepareForWave(int Wave);

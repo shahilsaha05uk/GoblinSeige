@@ -49,8 +49,6 @@ void UTimerComponent::Countdown_Implementation()
 		const float Val = cTime - mRate;
 		cTime = UKismetMathLibrary::FClamp(Val, 0.0f, 100000.0f);
 		UpdateTimer();
-
-		UE_LOG(LogTemp, Warning, TEXT("Countdown: %f"), cTime);
 	}
 	else
 	{
@@ -83,7 +81,7 @@ bool UTimerComponent::FetchAndUpdateCountdownDetails()
 
 void UTimerComponent::OnWaveComplete(int Wave)
 {
-	if(Wave == mCountDownTimerDetails.MaxLevel)
+	if(Wave > mCountDownTimerDetails.MaxLevel)
 	{
 		if(FetchAndUpdateCountdownDetails())
 		{

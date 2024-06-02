@@ -23,8 +23,6 @@ private:
 	TSubclassOf<class AWaveManager> WaveManagerClass;
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<class AEnemyManager> EnemyManagerClass;
-	
-
 public:
 
 	UPROPERTY(BlueprintReadOnly)

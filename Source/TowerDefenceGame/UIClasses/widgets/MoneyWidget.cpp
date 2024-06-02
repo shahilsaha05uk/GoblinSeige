@@ -11,7 +11,7 @@ void UMoneyWidget::NativeConstruct()
 	Super::NativeConstruct();
 
 	
-	if(const auto ResourceSubsystem = GetGameInstance()->GetSubsystem<UResourceSubsystem>())
+	if(const auto ResourceSubsystem = GetWorld()->GetFirstLocalPlayerFromController()->GetSubsystem<UResourceSubsystem>())
 	{
 		ResourceSubsystem->OnResourceUpdated.AddDynamic(this, &ThisClass::UpdateMoney);
 		UpdateMoney(ResourceSubsystem->GetCurrentResources());

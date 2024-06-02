@@ -8,20 +8,13 @@
 #include "BuildingSubsystem.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingRequestedForBuySignature, const FString&, BuildingID);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildRequestSignature, EBuildStatus, Status);
-
 UCLASS()
 class TOWERDEFENCEGAME_API UBuildingSubsystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 
 public:
-
 	
-
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnBuildingRequestedForBuySignature OnBuildingRequestedForBuy;
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnBuildRequestSignature OnBuildDecisionTaken;
-
 };

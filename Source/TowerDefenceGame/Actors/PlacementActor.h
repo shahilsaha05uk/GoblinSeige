@@ -38,7 +38,7 @@ public:
 	APlacementActor();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnBuildingDecisionTaken(EBuildStatus Status);
+	void OnBuildingDecisionTaken(bool HasConfirmed);
 	virtual void BeginPlay() override;
 	
 	UFUNCTION(BlueprintCallable)
@@ -54,6 +54,9 @@ public:
 #pragma region Builders
 
 	virtual ABaseBuilding* Build_Implementation(const FString& BuildingID) override;
+
+	UFUNCTION(BlueprintCallable)
+	void OnBuildingDestructed();
 
 #pragma endregion
 

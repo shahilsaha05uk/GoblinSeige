@@ -8,7 +8,7 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnResourceUpdatedSignature, int, CurrentBalance);
 
 UCLASS()
-class TOWERDEFENCEGAME_API UResourceSubsystem : public UGameInstanceSubsystem
+class TOWERDEFENCEGAME_API UResourceSubsystem : public ULocalPlayerSubsystem
 {
 	GENERATED_BODY()
 

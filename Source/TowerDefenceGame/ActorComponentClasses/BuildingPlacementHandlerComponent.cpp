@@ -19,7 +19,7 @@ void UBuildingPlacementHandlerComponent::BeginPlay()
         
         if (mBuildingSubsystem)
         {
-            mBuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildDecisionTaken);
+            //mBuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildDecisionTaken);
             mBuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::SpawnBuilding);
         }
     }
@@ -27,9 +27,10 @@ void UBuildingPlacementHandlerComponent::BeginPlay()
 
 void UBuildingPlacementHandlerComponent::OnBuildDecisionTaken_Implementation(EBuildStatus Status)
 {
-    if(!tempBuilding) return;
+    /*if(!tempBuilding) return;
     switch (Status) {
     case BUILD_CONFIRM:
+
         break;
     case BUILD_ABORT:
         tempBuilding->Destroy();
@@ -37,7 +38,7 @@ void UBuildingPlacementHandlerComponent::OnBuildDecisionTaken_Implementation(EBu
     default: ;
     }
 
-    tempBuilding = nullptr;
+    tempBuilding = nullptr;*/
 }
 
 void UBuildingPlacementHandlerComponent::HandleInteraction()
@@ -68,7 +69,7 @@ void UBuildingPlacementHandlerComponent::SpawnBuilding(const FString& BuildingID
 {
     if(UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UBuildingPlacementInterface::StaticClass()))
     {
-       tempBuilding = IBuildingPlacementInterface::Execute_Build(mCurrentHitActor, BuildingID);
+       IBuildingPlacementInterface::Execute_Build(mCurrentHitActor, BuildingID);
     }
 }
 

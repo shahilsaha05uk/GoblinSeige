@@ -8,9 +8,14 @@
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMaterialLibrary.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "TowerDefenceGame/ActorComponentClasses/UpgradeComponent.h"
 #include "TowerDefenceGame/BaseClasses/BaseEnemy.h"
+#include "TowerDefenceGame/DataAssetClasses/DA_UpgradeAsset.h"
 #include "TowerDefenceGame/InterfaceClasses/EnemyInterface.h"
+#include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 #include "TowerDefenceGame/UIClasses/TowerUI.h"
 
 // Sets default values
@@ -29,7 +34,8 @@ ATower::ATower()
 	mTowerWidgetComp->SetupAttachment(RootComponent);
 
 	mStaticMeshSelectedComp->SetupAttachment(RootComponent);
-	
+
+	mUpgradeComp = CreateDefaultSubobject<UUpgradeComponent>("UpgradeComp");
 }
 
 void ATower::BeginPlay()
@@ -40,17 +46,24 @@ void ATower::BeginPlay()
 	mRangeColliderComp->OnComponentEndOverlap.AddDynamic(this, &ThisClass::OnEnemyExitedTheRange);
 
 	UpdateTowerState(ETowerState::Idle);
-}
 
-void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails)
-{
-	Super::Init_Implementation(BuildingDetails);
 	mTowerUI = Cast<UTowerUI>(mTowerWidgetComp->GetWidget());
 
 	if(mTowerUI)
+	{
 		mTowerUI->ToggleWidgetSwitcher(ConfirmWidget);
+		mTowerUI->OnDecisionMade.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
+		mTowerWidgetComp->SetTickMode(ETickMode::Enabled);
+	}
+	mUpgradeComp->OnUpgradeApplied.AddDynamic(this, &ThisClass::Upgrade);
+}
+
+void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacementActor* PlacementActor)
+{
+	Super::Init_Implementation(BuildingDetails, PlacementActor);
 	
 	mNiagaraComp->SetAsset(BuildingDetails.mBuildingNiagara, true);
+	mUpgradeComp->Init(BuildingDetails.UpgradeAsset);
 }
 
 #pragma region States
@@ -96,13 +109,18 @@ void ATower::Seek_Implementation()
 void ATower::Interact_Implementation()
 {
 	Super::Interact_Implementation();
-	mTowerUI->ToggleWidgetSwitcher(UpgradeWidget);
-	mTowerUI->SetVisibility(ESlateVisibility::Visible);
+
+	if(bIsPlaced)
+	{
+		mTowerUI->ToggleWidgetSwitcher(UpgradeWidget);
+		mTowerUI->SetVisibility(ESlateVisibility::Visible);
+	}
 }
 
 void ATower::Disassociate_Implementation()
 {
 	Super::Disassociate_Implementation();
+	if(!bIsPlaced) return;
 	mTowerUI->ToggleWidgetSwitcher(NoWidget);
 	mTowerUI->SetVisibility(ESlateVisibility::Hidden);
 }
@@ -166,9 +184,17 @@ void ATower::OnEnemyExitedTheRange_Implementation(UPrimitiveComponent* Overlappe
 
 #pragma region Privates
 
-void ATower::OnBuildingDecisionTaken_Implementation(EBuildStatus Status)
+void ATower::OnBuildingDecisionTaken_Implementation(bool HasConfirmed)
 {
-	Super::OnBuildingDecisionTaken_Implementation(Status);
+	Super::OnBuildingDecisionTaken_Implementation(HasConfirmed);
+	if(HasConfirmed)
+	{
+		if(UpgradeAsset)
+		{
+			mUpgradeDetails = UpgradeAsset->GetUpgradeDetails();
+			mTowerUI->Init(mBuildingDetails.BuildingCost, this);
+		}
+	}
 	mTowerUI->ToggleWidgetSwitcher(NoWidget);
 }
 
@@ -209,6 +235,18 @@ bool ATower::FindTarget_Implementation()
 		mTarget = UGameplayStatics::FindNearestActor(GetActorLocation(), OverlappedActors, Distance);
 	}
 	return (mTarget != nullptr);
+}
+
+void ATower::Upgrade_Implementation(FUpgradeDetails Details)
+{
+	BuildingStats = Details.BuildingStats;
+	UpdateTowerState(Idle);
+}
+
+void ATower::DestructBuilding_Implementation()
+{
+	Super::DestructBuilding_Implementation();
+
 }
 
 #pragma endregion

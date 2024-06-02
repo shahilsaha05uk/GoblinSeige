@@ -22,29 +22,27 @@ void AEnemyManager::BeginPlay()
 	}
 }
 
-void AEnemyManager::CacheControllers(int ControllerCount)
+void AEnemyManager::CacheControllers_Implementation(int ControllerCount)
 {
 	for (int i = 0; i < ControllerCount; i++)
 	{
-		auto EController= GetWorld()->SpawnActor<AEnemyController>(mEnemyControllerClass);
+		UE_LOG(LogTemp, Warning, TEXT("Spawning Controller %d"), i);
+		AEnemyController* EController = GetWorld()->SpawnActor<AEnemyController>(mEnemyControllerClass);
+
 		mFreeControllers.Add(EController);
+		TotalEnemyControllers++;
 	}
 }
 
-void AEnemyManager::InitSub(TSubclassOf<AEnemyController> EnemyControllerClass)
-{
-	mEnemyControllerClass = EnemyControllerClass;
-}
-
-void AEnemyManager::AssignEnemy(int EnemyID)
+void AEnemyManager::AssignEnemy_Implementation(int EnemyID)
 {
 	if(mFreeControllers.IsEmpty()) return;
 	const auto SpawnPoint = mEnemySubsystem->GetRandomEnemySpawnPoint();
 
 	const auto Controller = mFreeControllers.Pop(true);	// take out a free controller
 	Controller->SpawnPawn(SpawnPoint, EnemyID);	// spawn the pawn
-	mAllocatedController.Add(Controller);	// add it to the allocated controller
 
+	TotalEnemyControllersAssigned++;
 }
 
 void AEnemyManager::GameOver_Implementation()
@@ -55,6 +53,7 @@ void AEnemyManager::GameOver_Implementation()
 #pragma region Spawners
 void AEnemyManager::PrepareForWave_Implementation(int Wave)
 {
+	
 	if(WaveRangeConfigurations.Contains(Wave))
 	{
 		mLatestWaveConfigs = WaveRangeConfigurations[Wave];
@@ -68,6 +67,7 @@ void AEnemyManager::PrepareForWave_Implementation(int Wave)
 	
 	SpawnFixedEnemies(mLatestWaveConfigs.FixedEnemies);
 	SpawnProbableEnemies(mLatestWaveConfigs.EnemyProbabilities);
+
 }
 
 void AEnemyManager::SpawnFixedEnemies_Implementation(const TArray<FFixedEnemy>& FixedEnemyData)
@@ -150,15 +150,14 @@ void AEnemyManager::NormalizeProbabilities(TArray<FEnemyProbability>& Probabilit
 #pragma endregion
 
 #pragma region Cleaners
-void AEnemyManager::FreeController(AEnemyController* EnemyController)
+void AEnemyManager::FreeController(AEnemyController* ControllerRef)
 {
-	if(mAllocatedController.Contains(EnemyController))
+	if(!mFreeControllers.Contains(ControllerRef))
 	{
-		mAllocatedController.Remove(EnemyController);
-		mFreeControllers.Add(EnemyController);
+		mFreeControllers.Add(ControllerRef);
+		TotalEnemyControllersAssigned--;
 	}
-
-	if(mAllocatedController.IsEmpty())
+	if(TotalEnemyControllersAssigned == 0)
 	{
 		if(mWaveSubsystem) mWaveSubsystem->EndWave();
 	}
@@ -169,11 +168,7 @@ void AEnemyManager::FlushEverything()
 	for (auto c : mFreeControllers)
 		c->Destroy();
 
-	for (auto c : mAllocatedController)
-		c->Destroy();
-	
 	mFreeControllers.Empty();
-	mAllocatedController.Empty();
 }
 
 #pragma endregion
