@@ -13,7 +13,6 @@ void AEnemyController::BeginPlay()
 void AEnemyController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
-	RunBehaviorTree(BehaviorTreeRef);
 }
 
 void AEnemyController::OnUnPossess()

@@ -20,8 +20,6 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TMap<int, TSubclassOf<class ABaseEnemy>> mEnemyClassMap;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	UBehaviorTree* BehaviorTreeRef;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	class ABaseEnemy* EnemyRef;
 
 	virtual void BeginPlay() override;

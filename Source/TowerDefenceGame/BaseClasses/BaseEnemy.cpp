@@ -38,6 +38,7 @@ void ABaseEnemy::Init_Implementation()
 	mHealthComponent->OnHealthUpdated.AddDynamic(this, &ThisClass::OnHealthUpdated);
 
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnEnemyBeginOverlap);
+	
 }
 
 #pragma region Interface Enemy Movement
@@ -75,7 +76,6 @@ void ABaseEnemy::OnHealthUpdated_Implementation(float CurrentHealth)
 	if(CurrentHealth <= 0.0f)
 	{
 		mHealthComponent->OnHealthUpdated.Clear();
-		mHealthComponent->SetHealth(0.0f);
 
 		// Reward money
 		if(const auto LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController())

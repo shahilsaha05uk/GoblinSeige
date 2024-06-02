@@ -16,6 +16,8 @@ class TOWERDEFENCEGAME_API ABaseEnemy : public ACharacter, public IEnemyInterfac
 	GENERATED_BODY()
 
 private:
+	UPROPERTY(EditDefaultsOnly)
+	class UBehaviorTree* BehaviorTreeRef;
 
 	UPROPERTY(EditDefaultsOnly)
 	float mDealDamage;
