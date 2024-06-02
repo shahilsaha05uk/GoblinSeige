@@ -81,7 +81,7 @@ void UPlayerHUD::OnRequestForBuildingBuy_Implementation(const FString& BuildingI
 
 void UPlayerHUD::OnShopButtonHovered(FBuildingBuyDetails BuildingDetails)
 {
-	mDescriptionBox->UpdateDescription(BuildingDetails);
+	mDescriptionBox->UpdateDescriptionOnHovered(BuildingDetails);
 }
 
 void UPlayerHUD::OnBuildingInterationBegin_Implementation(ABaseBuilding* BuildingRef)

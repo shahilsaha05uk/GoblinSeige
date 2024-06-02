@@ -18,6 +18,6 @@ public:
 
 	virtual void NativeConstruct() override;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void UpdateMoney(int Value);
 };

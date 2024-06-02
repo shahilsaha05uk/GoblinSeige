@@ -19,7 +19,7 @@ void UMoneyWidget::NativeConstruct()
 
 }
 
-void UMoneyWidget::UpdateMoney(int Value)
+void UMoneyWidget::UpdateMoney_Implementation(int Value)
 {
-	txtMoney->SetText(FText::AsNumber(Value));
+	
 }

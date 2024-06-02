@@ -59,9 +59,6 @@ void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacement
 	mUpgradeComp->OnUpgradeApplied.AddDynamic(this, &ThisClass::Upgrade);
 	mUpgradeComp->Init(BuildingDetails.UpgradeAsset);
 
-	// Setting the initial state of the tower
-	UpdateTowerState(ETowerState::Idle);
-
 	//Setting the Niagara Component
 	mNiagaraComp->SetAsset(BuildingDetails.mBuildingNiagara, true);
 }
@@ -198,6 +195,12 @@ void ATower::OnBuildingDecisionTaken_Implementation(bool HasConfirmed)
 	}
 	mTowerUI->Init(mBuildingDetails.BuildingCost, this);
 	mTowerUI->ToggleWidgetSwitcher(NoWidget);
+
+	if(bIsPlaced)
+	{
+		// Setting the initial state of the tower
+		UpdateTowerState(ETowerState::Idle);
+	}
 }
 
 void ATower::UpdateTowerState(ETowerState State)
