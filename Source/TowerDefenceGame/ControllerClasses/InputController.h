@@ -10,6 +10,9 @@
 #include "InputController.generated.h"
 
 
+UENUM(BlueprintType)
+enum EInputModeType { UI_Only, UI_Game, Game_Only };
+
 class UDA_InputActions;
 //DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuyMenuOptionClickSignature, class UDA_BuildingAsset*, BuildingAsset);
 
@@ -58,6 +61,8 @@ public:
 	void RequestGameCompleteUI(bool hasWon);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ManageAudio(bool hasWaveStarted);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnDoorBroken();
 
 	/*
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)

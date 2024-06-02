@@ -8,6 +8,8 @@
 #include "BuildingSubsystem.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingRequestedForBuySignature, const FString&, BuildingID);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingInteractionBeginSignature, class ABaseBuilding*, BuildingRef);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuildingInteractionEndSignature, class ABaseBuilding*, BuildingRef);
 UCLASS()
 class TOWERDEFENCEGAME_API UBuildingSubsystem : public UGameInstanceSubsystem
 {
@@ -17,4 +19,9 @@ public:
 	
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnBuildingRequestedForBuySignature OnBuildingRequestedForBuy;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnBuildingInteractionBeginSignature OnBuildingInteractionBegin;
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnBuildingInteractionEndSignature OnBuildingInteractionEnd;
 };

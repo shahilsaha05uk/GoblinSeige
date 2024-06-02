@@ -3,6 +3,7 @@
 
 #include "DescriptionBox.h"
 
+#include "PlayerHUD.h"
 #include "Components/Button.h"
 #include "Components/MultiLineEditableTextBox.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
@@ -17,27 +18,12 @@ void UDescriptionBox::NativeConstruct()
 	
 }
 
-void UDescriptionBox::UpdateDescription(const FString& BuildingID, EButtonState State)
+void UDescriptionBox::UpdateDescriptionWithUpgrade_Implementation(ABaseBuilding* BuildingRef)
 {
-	switch (State) {
-	case BUTTON_ENABLED:
+	
+}
 
-		break;
-	case BUTTON_DISABLED:
-
-		break;
-	case BUTTON_HOVERED:
-		{
-			FBuildingBuyDetails Details;
-			if(mBuildingAsset->FindBuildingDetails(BuildingID, Details))
-			{
-				const auto description = UHelperMethods::GetDescription(Details.BuildingStats);
-				txtDescription->SetText(FText::FromString(description));
-			}
-		}
-		break;
-	case BUTTON_UNHOVERED:
-		txtDescription->SetText(FText::FromString(""));
-		break;
-	}
+void UDescriptionBox::UpdateDescription_Implementation(FBuildingBuyDetails BuildingDetails)
+{
+	
 }

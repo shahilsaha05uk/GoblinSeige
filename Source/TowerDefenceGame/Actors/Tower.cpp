@@ -194,9 +194,9 @@ void ATower::OnBuildingDecisionTaken_Implementation(bool HasConfirmed)
 		if(UpgradeAsset)
 		{
 			mUpgradeDetails = UpgradeAsset->GetUpgradeDetails();
-			mTowerUI->Init(mBuildingDetails.BuildingCost, this);
 		}
 	}
+	mTowerUI->Init(mBuildingDetails.BuildingCost, this);
 	mTowerUI->ToggleWidgetSwitcher(NoWidget);
 }
 

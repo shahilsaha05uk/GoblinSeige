@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "TowerDefenceGame/BaseClasses/BaseWidget.h"
+#include "TowerDefenceGame/SupportClasses/StructClass.h"
 #include "ShopMenu.generated.h"
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnShopButtonHoverSignature, FBuildingBuyDetails, BuildingDetails);
 
 UCLASS()
 class TOWERDEFENCEGAME_API UShopMenu : public UBaseWidget
@@ -19,14 +22,15 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, meta=  (ExposeOnSpawn))
 	class UPlayerHUD* mHUD;
-	/*
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
-	class UMultiLineEditableTextBox* txtDescription;
-	*/
 
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnShopButtonHoverSignature OnShopButtonHovered;
 	
 
 	virtual void NativeConstruct() override;
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void Init(class UPlayerHUD* Hud);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SetupButtons();

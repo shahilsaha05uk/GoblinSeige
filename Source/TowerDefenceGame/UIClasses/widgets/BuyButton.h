@@ -8,9 +8,6 @@
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "BuyButton.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnButtonStateUpdateSignature, FString, BuildingID, EButtonState, CurrentState);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuyButtonClickSignature, FString, BuildingID);
-
 UCLASS()
 class TOWERDEFENCEGAME_API UBuyButton : public UUserWidget
 {
@@ -30,6 +27,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Properties")
 	class UButton* BuyButton;
 
+	UPROPERTY(BlueprintReadWrite, meta = (ExposeOnSpawn), Category = "Properties")
+	class UShopMenu* mShop;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
 	TMap<TEnumAsByte<EButtonState>, FLinearColor> ButtonColorMap;
 	
@@ -38,12 +38,6 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
 	FButtonStyle ButtonStyle;
-
-	// Delegates
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnButtonStateUpdateSignature OnButtonStateUpdate;
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnBuyButtonClickSignature OnBuyButtonClick;
 
 	UFUNCTION(BlueprintCallable)
 	void Init();
