@@ -23,9 +23,7 @@ void UDescriptionBox::UpdateDescriptionWithUpgrade_Implementation(ABaseBuilding*
 	
 }
 
-/*
-void UDescriptionBox::UpdateDescription_Implementation(FBuildingBuyDetails BuildingDetails)
+void UDescriptionBox::UpdateDescriptionOnHovered_Implementation(FBuildingBuyDetails BuildingDetails)
 {
 	
 }
-*/

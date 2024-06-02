@@ -25,10 +25,8 @@ public:
 	
 	virtual void NativeConstruct() override;
 
-	/*
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void UpdateDescriptionOn(FBuildingBuyDetails BuildingDetails);
-	*/
+	void UpdateDescriptionOnHovered(FBuildingBuyDetails BuildingDetails);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void UpdateDescriptionWithUpgrade(class ABaseBuilding* BuildingRef);
 };

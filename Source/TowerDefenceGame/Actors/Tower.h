@@ -93,7 +93,7 @@ public:
 	void OnProjectilePool();
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnProjectileJobComplete(class AProjectile* Projectile);
-
+	
 
 	// Upgrades
 	virtual void Upgrade_Implementation(FUpgradeDetails Details) override;
