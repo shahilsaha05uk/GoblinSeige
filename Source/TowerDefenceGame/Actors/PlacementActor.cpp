@@ -5,7 +5,6 @@
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
-#include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
 
 APlacementActor::APlacementActor()
 {
@@ -16,9 +15,6 @@ APlacementActor::APlacementActor()
 void APlacementActor::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if(const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
-		BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
 }
 
 #pragma region Interfaces
@@ -45,11 +41,19 @@ ABaseBuilding* APlacementActor::Build_Implementation(const FString& BuildingID)
 		mBuildingID = BuildingID;
 		FActorSpawnParameters SpawnParams;
 		mOccupiedBuilding = GetWorld()->SpawnActor<ABaseBuilding>(BuildingTowerClass, GetActorLocation(), GetActorRotation());
-		mOccupiedBuilding->Init(BuildingDetails);
+		mOccupiedBuilding->OnBuildingDecisionMade.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
+		mOccupiedBuilding->OnBuildingDestructed.AddDynamic(this, &ThisClass::OnBuildingDestructed);
+		mOccupiedBuilding->Init(BuildingDetails, this);
 
 		UpdateState(DecisionPlacement);
 	}
 	return mOccupiedBuilding;
+}
+
+void APlacementActor::OnBuildingDestructed()
+{
+	mOccupiedBuilding->Destroy();
+	UpdateState(EmptyPlacement);
 }
 
 #pragma endregion
@@ -69,17 +73,16 @@ void APlacementActor::ToggleMaterial_Implementation(bool Value)
 
 #pragma region Privates
 
-void APlacementActor::OnBuildingDecisionTaken_Implementation(EBuildStatus Status)
+void APlacementActor::OnBuildingDecisionTaken_Implementation(bool HasConfirmed)
 {
-	if(!mOccupiedBuilding) return;
-	switch (Status) {
-	case BUILD_CONFIRM:
+	if(HasConfirmed)
+	{
 		UpdateState(OccupiedPlacement);
-		break;
-	case BUILD_ABORT:
+	}
+	else
+	{
 		UpdateState(EmptyPlacement);
-		break;
-	default: ;
+		mOccupiedBuilding->Destroy();
 	}
 }
 
@@ -109,3 +112,4 @@ void APlacementActor::UpdateState(EPlacementState State)
 }
 
 #pragma endregion
+

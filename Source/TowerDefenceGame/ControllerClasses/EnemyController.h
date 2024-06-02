@@ -13,10 +13,10 @@ class TOWERDEFENCEGAME_API AEnemyController : public AAIController, public IEnem
 	GENERATED_BODY()
 
 private:
-
 	class AEnemyManager* mEnemyManager;
 
 public:
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TMap<int, TSubclassOf<class ABaseEnemy>> mEnemyClassMap;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
@@ -24,9 +24,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	class ABaseEnemy* EnemyRef;
 
+	virtual void BeginPlay() override;
+
 	virtual void OnPossess(APawn* InPawn) override;
-	UFUNCTION(BlueprintCallable)
-	void OnPawnDestroyed(AActor* DestroyedActor);
+	virtual void OnUnPossess() override;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SpawnPawn(class AEnemySpawnPoint* SpawnBox, int Type);

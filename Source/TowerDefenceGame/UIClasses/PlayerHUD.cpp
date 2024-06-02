@@ -12,18 +12,19 @@ void UPlayerHUD::NativeConstruct()
 	Super::NativeConstruct();
 
 	mWaveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>();
-	mResourceSubsystem = GetGameInstance()->GetSubsystem<UResourceSubsystem>();
+	mResourceSubsystem = GetWorld()->GetFirstLocalPlayerFromController()->GetSubsystem<UResourceSubsystem>();
 
 	if (const auto PlacementSubs = GetGameInstance()->GetSubsystem<UBuildingPlacementSubsystem>())
 	{
 		PlacementSubs->OnPlacementStateUpdate.AddDynamic(this, &ThisClass::OnPlacementStateUpdated);
 	}
-
+	/*
 	if (const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
 	{
 		BuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::OnRequestForBuildingBuy);
 		BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
 	}
+*/
 }
 
 void UPlayerHUD::OnButtonStateUpdate_Implementation(const FString& String, EButtonState State)
@@ -34,6 +35,7 @@ void UPlayerHUD::ToggleShop_Implementation(bool Value)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Open the shop"));
 }
+
 #pragma region Building Methods
 
 void UPlayerHUD::OnPlacementStateUpdated(EPlacementState State, APlacementActor* PlacementActor)
@@ -48,8 +50,10 @@ void UPlayerHUD::OnPlacementStateUpdated(EPlacementState State, APlacementActor*
 		ToggleShop(false);
 		break;
 	case DecisionPlacement:
+		ToggleShop(false);
 		break;
 	case OccupiedPlacement:
+		ToggleShop(false);
 		break;
 	}
 }

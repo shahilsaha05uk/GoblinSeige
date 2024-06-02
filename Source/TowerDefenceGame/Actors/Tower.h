@@ -20,7 +20,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	float mSeekRate = 0.5f;
-	
+
 	UPROPERTY()
 	FTimerHandle TowerStateTimeHandler;
 	UPROPERTY(EditDefaultsOnly)
@@ -34,6 +34,11 @@ private:
 public:
 	UPROPERTY(BlueprintReadOnly)
 	TEnumAsByte<ETowerState> TowerState;
+
+	UPROPERTY(BlueprintReadOnly)
+	TArray<FUpgradeDetails> mUpgradeDetails;
+
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<AProjectile*> mPooledProjectiles;
@@ -57,8 +62,8 @@ public:
 
 	virtual void BeginPlay() override;
 
-	virtual void Init_Implementation(FBuildingBuyDetails BuildingDetails) override;
-	virtual void OnBuildingDecisionTaken_Implementation(EBuildStatus Status) override;
+	virtual void Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacementActor* PlacementActor) override;
+	virtual void OnBuildingDecisionTaken_Implementation(bool HasConfirmed) override;
 
 	UFUNCTION(BlueprintCallable)
 	void UpdateTowerState(ETowerState State);
@@ -89,5 +94,9 @@ public:
 	void OnProjectilePool();
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnProjectileJobComplete(class AProjectile* Projectile);
-	
+
+
+	// Upgrades
+	virtual void Upgrade_Implementation(FUpgradeDetails Details) override;
+	virtual void DestructBuilding_Implementation() override;
 };

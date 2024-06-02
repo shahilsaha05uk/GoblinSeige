@@ -62,7 +62,7 @@ struct FUpgradeDetails
 public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	FString UpgradeID;
+	int UpgradeID;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FString UpgradeName;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -72,6 +72,10 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	FBuildingStats BuildingStats;
+
+	FUpgradeDetails(): UpgradeID(-1), UpgradeCost(0), UpgradeNiagara(nullptr)
+	{
+	}
 };
 
 

@@ -6,7 +6,7 @@
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "EnemySubsystem.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEnemyOnDeadSignature, class AEnemyController*, ControllerRef);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEnemyOnDeadSignature, AEnemyController*, ControllerRef);
 UCLASS()
 class TOWERDEFENCEGAME_API UEnemySubsystem : public UGameInstanceSubsystem
 {

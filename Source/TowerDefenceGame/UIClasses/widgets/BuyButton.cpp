@@ -19,15 +19,10 @@ void UBuyButton::Init()
 	BuyButton->OnUnhovered.AddDynamic(this, &ThisClass::OnButtonUnhovered);
 
 	// Binds the button to the Resource Subsystem
-	mResourceSubsystem = GetGameInstance()->GetSubsystem<UResourceSubsystem>();
+	mResourceSubsystem = GetWorld()->GetFirstLocalPlayerFromController()->GetSubsystem<UResourceSubsystem>();
 
 	if(mResourceSubsystem)
 		mResourceSubsystem->OnResourceUpdated.AddDynamic(this, &ThisClass::OnResourceUpdated);
-
-	/*
-	if(const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
-		BuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::OnBuildRequest);
-		*/
 
 	// if the Building asset is valid, this will update the button styles
 	defaultStyle = BuyButton->GetStyle();
@@ -86,5 +81,6 @@ void UBuyButton::OnResourceUpdated_Implementation(int CurrentBalance)
 
 void UBuyButton::OnBuildRequest_Implementation()
 {
-		
+	if(const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
+		BuildingSubsystem->OnBuildingRequestedForBuy.Broadcast(mBuildingDetails.ID);
 }
