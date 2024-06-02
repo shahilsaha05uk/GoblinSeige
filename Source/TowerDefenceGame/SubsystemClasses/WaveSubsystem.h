@@ -6,8 +6,7 @@
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "WaveSubsystem.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWaveUpdateSignature, int, Wave);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWaveCompleteSignature, int, Wave);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWaveCompletedSignature, int, Wave);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWaveStartSignature, int, Wave);
 
 UCLASS()
@@ -22,20 +21,13 @@ private:
 
 public:
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
-	FOnWaveUpdateSignature OnWaveUpdated;
+	FOnWaveCompletedSignature OnWaveUpdated;
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
 	FOnWaveStartSignature OnWaveStarted;
-	UPROPERTY(BlueprintCallable, BlueprintAssignable)
-	FOnWaveCompleteSignature OnWaveComplete;
 
 	UFUNCTION()
-	void Init(int initialWave, int finalWave)
-	{
-		mInitialWave = initialWave;
-		mFinalWave = finalWave;
-		mCurrentWave = mInitialWave;
-		OnWaveUpdated.Broadcast(mCurrentWave);
-	}
+	void Init(int initialWave, int finalWave);
+
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetCurrentWave(){ return mCurrentWave; }
 	UFUNCTION(BlueprintCallable, BlueprintPure)

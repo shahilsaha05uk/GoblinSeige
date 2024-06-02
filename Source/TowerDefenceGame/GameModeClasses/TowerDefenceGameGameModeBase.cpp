@@ -16,7 +16,6 @@ void ATowerDefenceGameGameModeBase::BeginPlay()
 
 	mWaveManager = GetWorld()->SpawnActor<AWaveManager>(WaveManagerClass);
 	mEnemyManager = GetWorld()->SpawnActor<AEnemyManager>(EnemyManagerClass);
-	
 	Super::BeginPlay();
 }
 
@@ -27,6 +26,6 @@ void ATowerDefenceGameGameModeBase::GameOver_Implementation()
 void ATowerDefenceGameGameModeBase::PostLogin(APlayerController* NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
-	GetGameInstance()->GetSubsystem<UResourceSubsystem>()->Add(mStartingResources);
+	GetWorld()->GetFirstLocalPlayerFromController()->GetSubsystem<UResourceSubsystem>()->Add(mStartingResources);
 	mPlayerController = NewPlayer;
 }

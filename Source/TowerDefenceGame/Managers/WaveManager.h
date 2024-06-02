@@ -21,14 +21,12 @@ public:
 
 	UPROPERTY(BlueprintReadOnly)
 	class UWaveSubsystem* mWaveSubsystem;
-	
+
 	virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnWaveStart(int Wave);
+	UFUNCTION(BlueprintCallable)
+	void OnTimerFinish();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnWaveComplete(int WaveNumber);
-
-
 };

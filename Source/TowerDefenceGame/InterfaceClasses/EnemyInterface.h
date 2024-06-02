@@ -24,6 +24,8 @@ class TOWERDEFENCEGAME_API IEnemyInterface
 public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	AActor* GetTarget();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void IA_FollowTheSpline(class ASpline* Spline);
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)

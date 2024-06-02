@@ -15,8 +15,13 @@ class TOWERDEFENCEGAME_API UDA_UpgradeAsset : public UDataAsset
 {
 	GENERATED_BODY()
 
-public:
+private:
 	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Next Skill")
-	TMap<int, FUpgradeDetails> UpgradeDetails;
+	UPROPERTY(EditDefaultsOnly)
+	TArray<FUpgradeDetails> UpgradeDetails;
+public:
+
+	UFUNCTION(BlueprintPure, BlueprintCallable)
+	TArray<FUpgradeDetails> GetUpgradeDetails(){return UpgradeDetails;}
+	
 };

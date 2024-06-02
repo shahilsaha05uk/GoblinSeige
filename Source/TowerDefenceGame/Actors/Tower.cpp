@@ -7,6 +7,15 @@
 #include "Components/DecalComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMaterialLibrary.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "TowerDefenceGame/ActorComponentClasses/UpgradeComponent.h"
+#include "TowerDefenceGame/BaseClasses/BaseEnemy.h"
+#include "TowerDefenceGame/DataAssetClasses/DA_UpgradeAsset.h"
+#include "TowerDefenceGame/InterfaceClasses/EnemyInterface.h"
+#include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 #include "TowerDefenceGame/UIClasses/TowerUI.h"
 
 // Sets default values
@@ -25,59 +34,106 @@ ATower::ATower()
 	mTowerWidgetComp->SetupAttachment(RootComponent);
 
 	mStaticMeshSelectedComp->SetupAttachment(RootComponent);
-	
+
+	mUpgradeComp = CreateDefaultSubobject<UUpgradeComponent>("UpgradeComp");
 }
 
-void ATower::BeginPlay()
+void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacementActor* PlacementActor)
 {
-	Super::BeginPlay();
-	
+	Super::Init_Implementation(BuildingDetails, PlacementActor);
+
+	// Binding the Range collider overlap events
 	mRangeColliderComp->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnEnemyEnteredTheRange);
 	mRangeColliderComp->OnComponentEndOverlap.AddDynamic(this, &ThisClass::OnEnemyExitedTheRange);
 
-}
-
-void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails)
-{
-	Super::Init_Implementation(BuildingDetails);
+	// Initialising the Tower UI
 	mTowerUI = Cast<UTowerUI>(mTowerWidgetComp->GetWidget());
-
 	if(mTowerUI)
+	{
 		mTowerUI->ToggleWidgetSwitcher(ConfirmWidget);
+		mTowerUI->OnDecisionMade.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
+		mTowerWidgetComp->SetTickMode(ETickMode::Enabled);
+	}
 	
+	// Initialising the Upgrade Component
+	mUpgradeComp->OnUpgradeApplied.AddDynamic(this, &ThisClass::Upgrade);
+	mUpgradeComp->Init(BuildingDetails.UpgradeAsset);
+
+	// Setting the initial state of the tower
+	UpdateTowerState(ETowerState::Idle);
+
+	//Setting the Niagara Component
 	mNiagaraComp->SetAsset(BuildingDetails.mBuildingNiagara, true);
 }
 
-void ATower::OnBuildingDecisionTaken_Implementation(EBuildStatus Status)
-{
-	Super::OnBuildingDecisionTaken_Implementation(Status);
-	mTowerUI->ToggleWidgetSwitcher(NoWidget);
-}
-
-void ATower::OnEnemyEnteredTheRange_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
-	
-}
-
-void ATower::OnEnemyExitedTheRange_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int OtherBodyIndex)
-{
-}
+#pragma region States
 
 void ATower::Fire_Implementation()
 {
-	if(bShouldPool)
+	// if there is no target in range, it will go back to the idle state
+	if(!mTarget)
 	{
-		OnProjectilePool();
-		return;
+		if(!FindTarget())
+		{
+			UpdateTowerState(ETowerState::Idle);
+		}
+	}
+	else
+	{
+		// if the projectile needs to poll, then calls the pool
+		if(bShouldPool)
+		{
+			OnProjectilePool();
+		}
 	}
 }
 
 void ATower::StopFire_Implementation()
 {
+	// if there are no more targets in the range, destroy the projectiles
 	for (auto p : mPooledProjectiles)
 	{
 		p->Destroy();
 	}
+	UpdateTowerState(ETowerState::Seek);
+}
+
+void ATower::Seek_Implementation()
+{
+	if(FindTarget())
+		UpdateTowerState(ETowerState::Firing);
+}
+
+#pragma endregion
+
+#pragma region Interact
+
+void ATower::Interact_Implementation()
+{
+	Super::Interact_Implementation();
+
+	if(bIsPlaced)
+	{
+		mTowerUI->ToggleWidgetSwitcher(UpgradeWidget);
+		mTowerUI->SetVisibility(ESlateVisibility::Visible);
+	}
+}
+
+void ATower::Disassociate_Implementation()
+{
+	Super::Disassociate_Implementation();
+	if(!bIsPlaced) return;
+	mTowerUI->ToggleWidgetSwitcher(NoWidget);
+	mTowerUI->SetVisibility(ESlateVisibility::Hidden);
+}
+
+#pragma endregion
+
+#pragma region Pooling Projectile
+
+void ATower::OnProjectileJobComplete_Implementation(AProjectile* Projectile)
+{
+	
 }
 
 void ATower::OnProjectilePool_Implementation()
@@ -87,7 +143,7 @@ void ATower::OnProjectilePool_Implementation()
 		if(const auto projectile = SpawnProjectile())
 		{
 			projectile->OnProjectileJobComplete.AddDynamic(this, &ThisClass::OnProjectileJobComplete);
-			projectile->ActivateProjectile();
+			if(mTarget) projectile->ActivateProjectile(mTarget);
 			mPooledProjectiles.Add(projectile);
 			PoolCount++;
 		}
@@ -100,8 +156,69 @@ void ATower::CallPooledProjectile_Implementation()
 	if(tempPoolCount < PoolCount-1) tempPoolCount++;
 	else tempPoolCount = 0;
 	if(const auto proj = mPooledProjectiles[tempPoolCount])
-		proj->ActivateProjectile();
+	{
+		if(mTarget) proj->ActivateProjectile(mTarget);
+	}
+}
 
+#pragma endregion
+
+#pragma region Overlapped
+
+void ATower::OnEnemyEnteredTheRange_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if(UKismetSystemLibrary::DoesImplementInterface(OtherActor, UEnemyInterface::StaticClass()) && TowerState != Firing)
+	{
+		UpdateTowerState(Firing);
+	}
+}
+
+void ATower::OnEnemyExitedTheRange_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int OtherBodyIndex)
+{
+	// if the actor that ended overlapped is the same as the target, then find a new target
+	if(mTarget == OtherActor)
+	{
+		UpdateTowerState(ETowerState::Seek);
+	}
+}
+
+#pragma endregion
+
+#pragma region Privates
+
+void ATower::OnBuildingDecisionTaken_Implementation(bool HasConfirmed)
+{
+	Super::OnBuildingDecisionTaken_Implementation(HasConfirmed);
+	if(HasConfirmed)
+	{
+		if(UpgradeAsset)
+		{
+			mUpgradeDetails = UpgradeAsset->GetUpgradeDetails();
+			mTowerUI->Init(mBuildingDetails.BuildingCost, this);
+		}
+	}
+	mTowerUI->ToggleWidgetSwitcher(NoWidget);
+}
+
+void ATower::UpdateTowerState(ETowerState State)
+{
+	GetWorld()->GetTimerManager().ClearTimer(TowerStateTimeHandler);
+	TowerStateTimeHandler.Invalidate();
+
+	TowerState = State;
+
+	switch (TowerState) {
+	case ETowerState::Firing:
+		GetWorld()->GetTimerManager().SetTimer(TowerStateTimeHandler, this, &ThisClass::Seek, BuildingStats.RateOfFire, true);
+		Fire();
+		break;
+	case ETowerState::Seek:
+		GetWorld()->GetTimerManager().SetTimer(TowerStateTimeHandler, this, &ThisClass::Seek, mSeekRate, true);
+		break;
+	case ETowerState::Idle:
+		StopFire();
+		break;
+	}
 }
 
 AProjectile* ATower::SpawnProjectile_Implementation()
@@ -109,21 +226,29 @@ AProjectile* ATower::SpawnProjectile_Implementation()
 	return nullptr;
 }
 
-void ATower::OnProjectileJobComplete_Implementation(AProjectile* Projectile)
+bool ATower::FindTarget_Implementation()
 {
-	
+	TArray<AActor*> OverlappedActors;
+	mRangeColliderComp->GetOverlappingActors(OverlappedActors, ABaseEnemy::StaticClass());
+
+	if(!OverlappedActors.IsEmpty())
+	{
+		float Distance = 0.0f;
+		mTarget = UGameplayStatics::FindNearestActor(GetActorLocation(), OverlappedActors, Distance);
+	}
+	return (mTarget != nullptr);
 }
 
-void ATower::Interact_Implementation()
+void ATower::Upgrade_Implementation(FUpgradeDetails Details)
 {
-	Super::Interact_Implementation();
-	mTowerUI->ToggleWidgetSwitcher(UpgradeWidget);
-	mTowerUI->SetVisibility(ESlateVisibility::Visible);
+	BuildingStats = Details.BuildingStats;
+	UpdateTowerState(Idle);
 }
 
-void ATower::Disassociate_Implementation()
+void ATower::DestructBuilding_Implementation()
 {
-	Super::Disassociate_Implementation();
-	mTowerUI->ToggleWidgetSwitcher(NoWidget);
-	mTowerUI->SetVisibility(ESlateVisibility::Hidden);
+	Super::DestructBuilding_Implementation();
+
 }
+
+#pragma endregion

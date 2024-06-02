@@ -7,6 +7,10 @@
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "Tower.generated.h"
 
+
+UENUM(Blueprintable, BlueprintType)
+enum ETowerState { Firing, Seek, Idle };
+
 UCLASS()
 class TOWERDEFENCEGAME_API ATower : public ABaseBuilding
 {
@@ -14,6 +18,11 @@ class TOWERDEFENCEGAME_API ATower : public ABaseBuilding
 
 private:
 
+	UPROPERTY(EditDefaultsOnly)
+	float mSeekRate = 0.5f;
+
+	UPROPERTY()
+	FTimerHandle TowerStateTimeHandler;
 	UPROPERTY(EditDefaultsOnly)
 	int ProjectilePoolCount = 10;
 	UPROPERTY(EditDefaultsOnly)
@@ -23,6 +32,13 @@ private:
 	UPROPERTY()
 	int tempPoolCount;
 public:
+	UPROPERTY(BlueprintReadOnly)
+	TEnumAsByte<ETowerState> TowerState;
+
+	UPROPERTY(BlueprintReadOnly)
+	TArray<FUpgradeDetails> mUpgradeDetails;
+
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<AProjectile*> mPooledProjectiles;
@@ -37,14 +53,19 @@ public:
 	class USphereComponent* mRangeColliderComp;
 
 	UPROPERTY(BlueprintReadWrite)
+	AActor* mTarget;
+	
+	UPROPERTY(BlueprintReadWrite)
 	class UTowerUI* mTowerUI;
 	
 	ATower();
 
-	virtual void BeginPlay() override;
-	
-	virtual void Init_Implementation(FBuildingBuyDetails BuildingDetails) override;
-	virtual void OnBuildingDecisionTaken_Implementation(EBuildStatus Status) override;
+	virtual void Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacementActor* PlacementActor) override;
+
+	virtual void OnBuildingDecisionTaken_Implementation(bool HasConfirmed) override;
+
+	UFUNCTION(BlueprintCallable)
+	void UpdateTowerState(ETowerState State);
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnEnemyEnteredTheRange(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -52,18 +73,29 @@ public:
 	void OnEnemyExitedTheRange(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int OtherBodyIndex);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	class AProjectile* SpawnProjectile();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	bool FindTarget();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void Fire();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void Seek();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void StopFire();
+	
+	virtual void Interact_Implementation() override;
+	virtual void Disassociate_Implementation() override;
+
+	//Projectile Pooling Methods
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void CallPooledProjectile();
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnProjectilePool();
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	class AProjectile* SpawnProjectile();
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void Fire();
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void StopFire();
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnProjectileJobComplete(class AProjectile* Projectile);
-	
-	virtual void Interact_Implementation() override;
-	virtual void Disassociate_Implementation() override;
+
+
+	// Upgrades
+	virtual void Upgrade_Implementation(FUpgradeDetails Details) override;
+	virtual void DestructBuilding_Implementation() override;
 };

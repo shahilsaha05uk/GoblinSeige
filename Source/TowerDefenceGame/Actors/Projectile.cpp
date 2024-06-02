@@ -13,9 +13,9 @@ void AProjectile::DeactivateProjectile_Implementation()
 {
 }
 
-void AProjectile::ActivateProjectile_Implementation()
+void AProjectile::ActivateProjectile_Implementation(AActor* Target)
 {
-	this->SetHidden(false);
+	
 }
 
 void AProjectile::SpawnMuzzle_Implementation()

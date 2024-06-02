@@ -16,27 +16,24 @@ class TOWERDEFENCEGAME_API ABaseEnemy : public ACharacter, public IEnemyInterfac
 	GENERATED_BODY()
 
 private:
+	UPROPERTY(EditDefaultsOnly)
+	class UBehaviorTree* BehaviorTreeRef;
 
 	UPROPERTY(EditDefaultsOnly)
 	float mDealDamage;
-	
+	UPROPERTY(EditDefaultsOnly)
+	int AmountToReward;
 public:
 
 	UPROPERTY(BlueprintReadWrite)
-	AActor* Target;
+	AActor* mTarget;
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsDead;
 	
-	// Sets default values for this character's properties
-
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private Component")
 	class UWidgetComponent* mHealthBarWidgetComponent;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private Component")
 	class UHealthComponent* mHealthComponent;
-	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
-	FVector2D WidgetDrawSize;
-
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Actor Properties")
 	class UHealthBarWidget* mHealthWidget;
 
@@ -49,22 +46,33 @@ public:
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void Init();
-
-
+	
 	// Interface Methods
 	virtual void IA_EnemyMove_Implementation(FVector TargetLocation) override;
 	virtual void IA_FollowTheSpline_Implementation(ASpline* Spline) override;
 	virtual void IA_EnemyAttack_Implementation() override;
+
 	virtual bool isDead_Implementation() override { return bIsDead; }
 
+	virtual AActor* GetTarget_Implementation() override { return mTarget; }
+
+	// When the Enemy takes any kind of damage
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
 
-	UFUNCTION(BlueprintCallable)
+	// When the enemy overlaps the tower range
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnEnemyBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	// when the Health Updates
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnHealthUpdated(float CurrentHealth);
+
+	// When the enemy attacks
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnAttackNotified();
 
+	// when the dead animation ends
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnEnemyBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	void OnDeadAnimationEnd();
 };

@@ -19,7 +19,7 @@ void UBuildingPlacementHandlerComponent::BeginPlay()
         
         if (mBuildingSubsystem)
         {
-            mBuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildDecisionTaken);
+            //mBuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildDecisionTaken);
             mBuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::SpawnBuilding);
         }
     }
@@ -27,9 +27,10 @@ void UBuildingPlacementHandlerComponent::BeginPlay()
 
 void UBuildingPlacementHandlerComponent::OnBuildDecisionTaken_Implementation(EBuildStatus Status)
 {
-    if(!tempBuilding) return;
+    /*if(!tempBuilding) return;
     switch (Status) {
     case BUILD_CONFIRM:
+
         break;
     case BUILD_ABORT:
         tempBuilding->Destroy();
@@ -37,7 +38,7 @@ void UBuildingPlacementHandlerComponent::OnBuildDecisionTaken_Implementation(EBu
     default: ;
     }
 
-    tempBuilding = nullptr;
+    tempBuilding = nullptr;*/
 }
 
 void UBuildingPlacementHandlerComponent::HandleInteraction()
@@ -45,30 +46,12 @@ void UBuildingPlacementHandlerComponent::HandleInteraction()
     FHitResult hit;
     const bool Success = GetHit(hit);
 
-    if(!Success)    // if no hit was detected
-    {
-        // deselect the currently hit actor
-        if(mCurrentHitActor && UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UInteractableInterface::StaticClass()))
-        {
-            IInteractableInterface::Execute_Disassociate(mCurrentHitActor);
-        }
-    }
-    else
-    {
-        // deselect the currently hit actor
-        if(mCurrentHitActor && UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UInteractableInterface::StaticClass()))
-        {
-            IInteractableInterface::Execute_Disassociate(mCurrentHitActor);
-        }
+    CallDisassociate();
 
-        // set the new hit actor as the current hit actor
+    if(Success)    // if no hit was detected
+    {
         mCurrentHitActor = hit.GetActor();
-
-        // interact with the new actor
-        if(UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UInteractableInterface::StaticClass()))
-        {
-            IInteractableInterface::Execute_Interact(mCurrentHitActor);
-        }
+        CallInteract();
     }
 }
 
@@ -86,6 +69,29 @@ void UBuildingPlacementHandlerComponent::SpawnBuilding(const FString& BuildingID
 {
     if(UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UBuildingPlacementInterface::StaticClass()))
     {
-       tempBuilding = IBuildingPlacementInterface::Execute_Build(mCurrentHitActor, BuildingID);
+       IBuildingPlacementInterface::Execute_Build(mCurrentHitActor, BuildingID);
     }
 }
+
+#pragma region Interaction Callers
+
+void UBuildingPlacementHandlerComponent::CallInteract()
+{
+    // interact with the new actor
+    if(UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UInteractableInterface::StaticClass()))
+    {
+        IInteractableInterface::Execute_Interact(mCurrentHitActor);
+    }
+}
+
+void UBuildingPlacementHandlerComponent::CallDisassociate()
+{
+    // deselect the currently hit actor
+    if(mCurrentHitActor && UKismetSystemLibrary::DoesImplementInterface(mCurrentHitActor, UInteractableInterface::StaticClass()))
+    {
+        IInteractableInterface::Execute_Disassociate(mCurrentHitActor);
+    }
+}
+
+#pragma endregion
+

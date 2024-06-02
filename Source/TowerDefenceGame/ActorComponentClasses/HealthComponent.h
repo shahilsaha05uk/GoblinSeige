@@ -46,6 +46,7 @@ public:
 	void DeductHealth(float DamageValue)
 	{
 		mHealth-= DamageValue;
+		if(mHealth <= 0) mHealth = 0;
 		OnHealthUpdated.Broadcast(mHealth);
 	}
 };

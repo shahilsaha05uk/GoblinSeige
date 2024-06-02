@@ -3,64 +3,100 @@
 
 #include "BaseBuilding.h"
 
-#include "TowerDefenceGame/SupportClasses/EnumClass.h"
-#include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
-#include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
+#include "TowerDefenceGame/ActorComponentClasses/UpgradeComponent.h"
+#include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 
 ABaseBuilding::ABaseBuilding()
 {
 	mStaticMeshSelectedComp = CreateDefaultSubobject<UStaticMeshComponent>("TowerSelection");
 }
 
-void ABaseBuilding::BeginPlay()
+void ABaseBuilding::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacementActor* PlacementActor)
 {
-	Super::BeginPlay();
-	UpdateBuildingState(NO_STATE);
-
-	if(const auto BuildingSubs = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
-		BuildingSubs->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
-}
-
-void ABaseBuilding::Init_Implementation(FBuildingBuyDetails BuildingDetails)
-{
-	mBuildingDetails = BuildingDetails;
-}
-
-void ABaseBuilding::Upgrade_Implementation()
-{
+	if(const auto LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController())
+	{
+		mResourceSubsystem = LocalPlayer->GetSubsystem<UResourceSubsystem>();
+	}
 	
+	mBuildingDetails = BuildingDetails;
+
+	mPlacement = PlacementActor;
+
+	mStaticMeshSelectedComp->SetVisibility(false);
+	bIsPlaced = false;
 }
 
-void ABaseBuilding::UpdateBuildingState_Implementation(EBuildingState State)
-{
-	BuildingState = State;
-
-	// Changing the Material on the building
-	if(BuildingState == SELECTED)
-		mStaticMeshSelectedComp->SetVisibility(true);
-	else
-		mStaticMeshSelectedComp->SetVisibility(false);
-}
-
+#pragma region Interactions
 
 void ABaseBuilding::Interact_Implementation()
 {
-	UpdateBuildingState(SELECTED);
-	OnBuildingSelectedSignature.Broadcast(this);
+	if(!bIsPlaced) return;;
+	mStaticMeshSelectedComp->SetVisibility(true);
+
 }
 
 void ABaseBuilding::Disassociate_Implementation()
 {
-	UpdateBuildingState(DESELECTED);
+	if(!bIsPlaced) return;
+	mStaticMeshSelectedComp->SetVisibility(false);
 }
 
-void ABaseBuilding::OnBuildingDecisionTaken_Implementation(EBuildStatus Status)
+#pragma endregion
+
+#pragma region Upgrade
+
+void ABaseBuilding::Upgrade_Implementation(FUpgradeDetails Details)
 {
-	if(Status == BUILD_CONFIRM)
+	
+}
+
+#pragma endregion
+
+#pragma region Destruction
+
+void ABaseBuilding::DestructBuilding_Implementation()
+{
+	if(mResourceSubsystem)
 	{
+		// total money spent on buying the asset
+		int Cost = mBuildingDetails.BuildingCost;
+
+		// this gets the total money spent on the upgrades as well
+		if(mUpgradeComp)
+			Cost += mUpgradeComp->GetTotalMoneySpentOnUpgrades();
+
+		// calculating the percentage;
+		const int deductedCost = Cost - ((DeductionPercentage/100) * Cost);	
+
+		// adding the balance back to the account
+		mResourceSubsystem->Add(deductedCost);
+	}
+
+	OnBuildingDestructed.Broadcast();
+}
+
+#pragma endregion
+
+#pragma region Privates
+
+void ABaseBuilding::OnBuildingDecisionTaken_Implementation(bool HasConfirmed)
+{
+	if(HasConfirmed)
+	{
+		// initialises the building details
 		BuildingID = mBuildingDetails.ID;
 		BuildingStats = mBuildingDetails.BuildingStats;
 		ProjectileClass = mBuildingDetails.mProjectileClass;
 		UpgradeAsset = mBuildingDetails.UpgradeAsset;
+
+		// deducts the building cost from the balance
+		if(mResourceSubsystem) mResourceSubsystem->Deduct(mBuildingDetails.BuildingCost);
+		
+		bIsPlaced = true;
 	}
+
+	// Notifies all the objects about the building decision
+	OnBuildingDecisionMade.Broadcast(HasConfirmed);
 }
+
+#pragma endregion

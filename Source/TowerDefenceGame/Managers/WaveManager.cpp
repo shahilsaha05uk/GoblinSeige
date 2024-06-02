@@ -1,4 +1,6 @@
 ﻿#include "WaveManager.h"
+
+#include "TowerDefenceGame/SubsystemClasses/ClockSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/WaveSubsystem.h"
 
@@ -8,13 +10,17 @@ void AWaveManager::BeginPlay()
 	mWaveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>();
 	if(mWaveSubsystem)
 	{
-		mWaveSubsystem->OnWaveStarted.AddDynamic(this, &ThisClass::OnWaveStart);
-		mWaveSubsystem->OnWaveComplete.AddDynamic(this, &ThisClass::OnWaveComplete);
+		mWaveSubsystem->Init(mInitialWave, mFinalWave);
+		mWaveSubsystem->OnWaveUpdated.AddDynamic(this, &ThisClass::OnWaveComplete);
 	}
-}
-void AWaveManager::OnWaveStart_Implementation(int Wave)
-{
-	mWaveSubsystem->OnWaveStarted.Broadcast(Wave);
+
+	if(const ULocalPlayer* LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController())
+	{
+		if(auto const ClockSubsystem = LocalPlayer->GetSubsystem<UClockSubsystem>())
+		{
+			ClockSubsystem->FinishTimer.AddDynamic(this, &ThisClass::OnTimerFinish);
+		}
+	}
 }
 
 void AWaveManager::OnWaveComplete_Implementation(int WaveNumber)
@@ -26,4 +32,9 @@ void AWaveManager::OnWaveComplete_Implementation(int WaveNumber)
 			GetGameInstance()->GetSubsystem<UGameSubsystem>()->OnGameDecisionMade.Broadcast();
 		}
 	}
+}
+
+void AWaveManager::OnTimerFinish()
+{
+	mWaveSubsystem->StartWave();
 }
