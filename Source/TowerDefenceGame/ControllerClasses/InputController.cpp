@@ -14,6 +14,7 @@
 #include "TowerDefenceGame/DataAssetClasses/DA_InputActions.h"
 #include "TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
+#include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
 #include "TowerDefenceGame/UIClasses/GameComplete.h"
 
 AInputController::AInputController()
@@ -33,6 +34,10 @@ void AInputController::BeginPlay()
 		PlacementSubs->OnPlacementStateUpdate.AddDynamic(this, &ThisClass::OnPlacementUpdated);
 	}
 	
+	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
+	{
+		GameSubs->OnDoorBroken.AddDynamic(this, &ThisClass::OnDoorBroken);
+	}
 
 	
 	bShowMouseCursor = true;
@@ -109,6 +114,15 @@ void AInputController::PlaySound_Implementation()
 void AInputController::StopSound_Implementation()
 {
 	LevelAudioComp->Stop();
+}
+
+void AInputController::OnDoorBroken_Implementation()
+{
+	// Disable the inputs
+	
+	// Play the Cinematics
+	
+	// re enable the inputs
 }
 
 void AInputController::OnPlacementUpdated_Implementation(EPlacementState State, APlacementActor* PlacementActor)

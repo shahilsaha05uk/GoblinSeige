@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "TowerDefenceGame/SupportClasses/EnumClass.h"
+#include "TowerDefenceGame/SupportClasses/StructClass.h"
 #include "DescriptionBox.generated.h"
 
 /**
@@ -22,11 +23,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UTextBlock* txtBuildingName;
 	
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
-	class UMultiLineEditableTextBox* txtDescription;
-	
 	virtual void NativeConstruct() override;
-	
-	UFUNCTION(BlueprintCallable)
-	void UpdateDescription(const FString& BuildingID, EButtonState State);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void UpdateDescriptionOn(FBuildingBuyDetails BuildingDetails);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void UpdateDescriptionWithUpgrade(class ABaseBuilding* BuildingRef);
 };

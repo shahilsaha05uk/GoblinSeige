@@ -32,8 +32,11 @@ public:
 	
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnGameOverSignature OnGameOver;
-	
+
 	virtual void BeginPlay() override;
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnDoorBroken();
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void GameOver();

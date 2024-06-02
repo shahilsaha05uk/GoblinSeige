@@ -9,6 +9,7 @@
 #include "TowerDefenceGame/SupportClasses/HelperMethods.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
+#include "TowerDefenceGame/UIClasses/ShopMenu.h"
 
 
 void UBuyButton::Init()
@@ -45,12 +46,11 @@ void UBuyButton::UpdateButtonState_Implementation(EButtonState State)
 	{
 		ButtonBorder->SetBrushColor(ButtonColorMap[State]);
 	}
-
-	OnButtonStateUpdate.Broadcast(mBuildingDetails.ID, State);
 }
 
 void UBuyButton::OnButtonHovered_Implementation()
 {
+	mShop->OnShopButtonHovered.Broadcast(mBuildingDetails);
 	UpdateButtonState(BUTTON_HOVERED);
 }
 

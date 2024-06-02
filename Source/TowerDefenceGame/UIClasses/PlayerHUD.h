@@ -5,11 +5,13 @@
 #include "CoreMinimal.h"
 #include "TowerDefenceGame/BaseClasses/BaseWidget.h"
 #include "TowerDefenceGame/SupportClasses/EnumClass.h"
+#include "TowerDefenceGame/SupportClasses/StructClass.h"
 #include "PlayerHUD.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FUpgradeButtonClickedSignature, class ABaseBuilding*, BuildingToUpgrade, int, UpgradeCost);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMoveButtonClickedSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCurrentBalanceUpdatedSignature, int, CurrentBalance);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FBuyButtonHoveredClickedSignature, FBuildingBuyDetails, BuildingDetails);
 
 
 
@@ -31,10 +33,14 @@ public:
 	class UShopMenu* mShop;
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UDescriptionBox* mDescriptionBox;
+	//UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
+
 
 #pragma endregion
 	
 #pragma region Properties
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FBuyButtonHoveredClickedSignature OnBuyButtonHovered;
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FUpgradeButtonClickedSignature OnUpgradeButtonClickedSignature;
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
@@ -64,6 +70,27 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void OnPlacementStateUpdated(EPlacementState State, class APlacementActor* PlacementActor);
+
+#pragma endregion
+
+
+#pragma region Shop Bindings
+
+	UFUNCTION(BlueprintCallable, BlueprintCallable)
+	void OnShopButtonHovered(FBuildingBuyDetails BuildingDetails);
+
+#pragma endregion
+
+#pragma region Description Bindings
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnBuildingInterationBegin(ABaseBuilding* BuildingRef);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnBuildingInterationEnd(ABaseBuilding* BuildingRef);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ToggleDescriptionBox(bool Activate);
 
 #pragma endregion
 };

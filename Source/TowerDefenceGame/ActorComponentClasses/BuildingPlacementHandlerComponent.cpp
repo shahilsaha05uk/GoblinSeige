@@ -19,26 +19,9 @@ void UBuildingPlacementHandlerComponent::BeginPlay()
         
         if (mBuildingSubsystem)
         {
-            //mBuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildDecisionTaken);
             mBuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::SpawnBuilding);
         }
     }
-}
-
-void UBuildingPlacementHandlerComponent::OnBuildDecisionTaken_Implementation(EBuildStatus Status)
-{
-    /*if(!tempBuilding) return;
-    switch (Status) {
-    case BUILD_CONFIRM:
-
-        break;
-    case BUILD_ABORT:
-        tempBuilding->Destroy();
-        break;
-    default: ;
-    }
-
-    tempBuilding = nullptr;*/
 }
 
 void UBuildingPlacementHandlerComponent::HandleInteraction()

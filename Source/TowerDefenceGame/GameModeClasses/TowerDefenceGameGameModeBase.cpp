@@ -12,11 +12,17 @@ void ATowerDefenceGameGameModeBase::BeginPlay()
 	if(const auto gameSubsystem = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 	{
 		gameSubsystem->OnGameDecisionMade.AddDynamic(this, &ThisClass::GameOver);
+		gameSubsystem->OnDoorBroken.AddDynamic(this, &ThisClass::OnDoorBroken);
 	}
 
 	mWaveManager = GetWorld()->SpawnActor<AWaveManager>(WaveManagerClass);
 	mEnemyManager = GetWorld()->SpawnActor<AEnemyManager>(EnemyManagerClass);
 	Super::BeginPlay();
+}
+
+void ATowerDefenceGameGameModeBase::OnDoorBroken_Implementation()
+{
+	
 }
 
 void ATowerDefenceGameGameModeBase::GameOver_Implementation()

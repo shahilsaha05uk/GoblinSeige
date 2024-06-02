@@ -1,4 +1,6 @@
 #include "PlayerHUD.h"
+
+#include "DescriptionBox.h"
 #include "ShopMenu.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
@@ -18,13 +20,16 @@ void UPlayerHUD::NativeConstruct()
 	{
 		PlacementSubs->OnPlacementStateUpdate.AddDynamic(this, &ThisClass::OnPlacementStateUpdated);
 	}
-	/*
-	if (const auto BuildingSubsystem = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
+
+	if(const auto BuildingSubs = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
 	{
-		BuildingSubsystem->OnBuildingRequestedForBuy.AddDynamic(this, &ThisClass::OnRequestForBuildingBuy);
-		BuildingSubsystem->OnBuildDecisionTaken.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
+		BuildingSubs->OnBuildingInteractionBegin.AddDynamic(this, &ThisClass::OnBuildingInterationBegin);
+		BuildingSubs->OnBuildingInteractionEnd.AddDynamic(this, &ThisClass::OnBuildingInterationEnd);
 	}
-*/
+	
+
+	mShop->Init(this);
+	mShop->OnShopButtonHovered.AddDynamic(this, &ThisClass::OnShopButtonHovered);
 }
 
 void UPlayerHUD::OnButtonStateUpdate_Implementation(const FString& String, EButtonState State)
@@ -42,6 +47,7 @@ void UPlayerHUD::OnPlacementStateUpdated(EPlacementState State, APlacementActor*
 {
 	switch (State) {
 	case EmptyPlacement:
+		ToggleDescriptionBox(false);
 		break;
 	case SelectedPlacement:
 		ToggleShop(true);
@@ -54,6 +60,7 @@ void UPlayerHUD::OnPlacementStateUpdated(EPlacementState State, APlacementActor*
 		break;
 	case OccupiedPlacement:
 		ToggleShop(false);
+		ToggleDescriptionBox(false);
 		break;
 	}
 }
@@ -66,6 +73,29 @@ void UPlayerHUD::OnBuildingDecisionTaken_Implementation(EBuildStatus Status)
 void UPlayerHUD::OnRequestForBuildingBuy_Implementation(const FString& BuildingID)
 {
 	ToggleShop(false);
+}
+
+#pragma endregion
+
+#pragma region Shop methods
+
+void UPlayerHUD::OnShopButtonHovered(FBuildingBuyDetails BuildingDetails)
+{
+	mDescriptionBox->UpdateDescription(BuildingDetails);
+}
+
+void UPlayerHUD::OnBuildingInterationBegin_Implementation(ABaseBuilding* BuildingRef)
+{
+	mDescriptionBox->UpdateDescriptionWithUpgrade(BuildingRef);
+}
+
+void UPlayerHUD::OnBuildingInterationEnd_Implementation(ABaseBuilding* BuildingRef)
+{
+}
+
+void UPlayerHUD::ToggleDescriptionBox_Implementation(bool Activate)
+{
+	
 }
 
 #pragma endregion

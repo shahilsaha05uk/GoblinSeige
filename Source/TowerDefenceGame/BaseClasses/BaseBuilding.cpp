@@ -4,6 +4,7 @@
 #include "BaseBuilding.h"
 
 #include "TowerDefenceGame/ActorComponentClasses/UpgradeComponent.h"
+#include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 
 ABaseBuilding::ABaseBuilding()
@@ -17,7 +18,6 @@ void ABaseBuilding::Init_Implementation(FBuildingBuyDetails BuildingDetails, APl
 	{
 		mResourceSubsystem = LocalPlayer->GetSubsystem<UResourceSubsystem>();
 	}
-	
 	mBuildingDetails = BuildingDetails;
 
 	mPlacement = PlacementActor;
@@ -33,12 +33,21 @@ void ABaseBuilding::Interact_Implementation()
 	if(!bIsPlaced) return;;
 	mStaticMeshSelectedComp->SetVisibility(true);
 
+	if(const auto BuildingSubs = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
+	{
+		BuildingSubs->OnBuildingInteractionBegin.Broadcast(this);
+	}
 }
 
 void ABaseBuilding::Disassociate_Implementation()
 {
 	if(!bIsPlaced) return;
 	mStaticMeshSelectedComp->SetVisibility(false);
+
+	if(const auto BuildingSubs = GetGameInstance()->GetSubsystem<UBuildingSubsystem>())
+	{
+		BuildingSubs->OnBuildingInteractionEnd.Broadcast(this);
+	}
 }
 
 #pragma endregion

@@ -12,6 +12,11 @@ void UShopMenu::NativeConstruct()
 	SetupButtons();
 }
 
+void UShopMenu::Init_Implementation(UPlayerHUD* Hud)
+{
+	mHUD = Hud;
+}
+
 void UShopMenu::SetupButtons_Implementation()
 {
 
