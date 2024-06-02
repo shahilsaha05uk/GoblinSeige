@@ -60,9 +60,8 @@ public:
 	
 	ATower();
 
-	virtual void BeginPlay() override;
-
 	virtual void Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacementActor* PlacementActor) override;
+
 	virtual void OnBuildingDecisionTaken_Implementation(bool HasConfirmed) override;
 
 	UFUNCTION(BlueprintCallable)

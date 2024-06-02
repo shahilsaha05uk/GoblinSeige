@@ -11,6 +11,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "TowerDefenceGame/ActorComponentClasses/HealthComponent.h"
 #include "TowerDefenceGame/InterfaceClasses/TargetInterface.h"
+#include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 #include "TowerDefenceGame/UIClasses/HealthBarWidget.h"
 
 // Sets default values
@@ -20,7 +21,6 @@ ABaseEnemy::ABaseEnemy()
 
 	mHealthBarWidgetComponent = CreateDefaultSubobject<UWidgetComponent>("Health Bar Comp");
 	mHealthBarWidgetComponent->SetupAttachment(RootComponent);
-	mHealthBarWidgetComponent->SetDrawSize(WidgetDrawSize);
 }
 
 void ABaseEnemy::BeginPlay()
@@ -40,6 +40,8 @@ void ABaseEnemy::Init_Implementation()
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnEnemyBeginOverlap);
 }
 
+#pragma region Interface Enemy Movement
+
 void ABaseEnemy::IA_EnemyMove_Implementation(FVector TargetLocation)
 {
 	
@@ -55,10 +57,9 @@ void ABaseEnemy::IA_EnemyAttack_Implementation()
 	
 }
 
-AActor* ABaseEnemy::GetTarget_Implementation()
-{
-	return Target;
-}
+#pragma endregion
+
+#pragma region On Triggers
 
 void ABaseEnemy::OnDeadAnimationEnd_Implementation()
 {
@@ -69,7 +70,6 @@ void ABaseEnemy::OnDamageTaken_Implementation(AActor* DamagedActor, float Damage
 	mHealthComponent->DeductHealth(Damage);
 }
 
-
 void ABaseEnemy::OnHealthUpdated_Implementation(float CurrentHealth)
 {
 	if(CurrentHealth <= 0.0f)
@@ -77,6 +77,12 @@ void ABaseEnemy::OnHealthUpdated_Implementation(float CurrentHealth)
 		mHealthComponent->OnHealthUpdated.Clear();
 		mHealthComponent->SetHealth(0.0f);
 
+		// Reward money
+		if(const auto LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController())
+		{
+			if(const auto mResourceSubsystem = LocalPlayer->GetSubsystem<UResourceSubsystem>())
+				mResourceSubsystem->Add(AmountToReward);
+		}
 		// Die
 		bIsDead = true;
 		GetCharacterMovement()->StopMovementImmediately();
@@ -88,11 +94,13 @@ void ABaseEnemy::OnEnemyBeginOverlap_Implementation(UPrimitiveComponent* Overlap
 {
 	if(UKismetSystemLibrary::DoesImplementInterface(OtherActor, UTargetInterface::StaticClass()))
 	{
-		Target = OtherActor;
+		mTarget = OtherActor;
 	}
 }
 
 void ABaseEnemy::OnAttackNotified_Implementation()
 {
-	UGameplayStatics::ApplyDamage(Target, mDealDamage, GetController(), this, nullptr);
+	UGameplayStatics::ApplyDamage(mTarget, mDealDamage, GetController(), this, nullptr);
 }
+
+#pragma endregion

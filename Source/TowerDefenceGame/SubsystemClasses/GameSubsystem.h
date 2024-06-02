@@ -8,6 +8,7 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGameDecisionMadeSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHUDInitialisedSignature, AHUD*, HudRef);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDoorBrokenSignature);
 
 UCLASS()
 class TOWERDEFENCEGAME_API UGameSubsystem : public UGameInstanceSubsystem
@@ -21,6 +22,8 @@ private:
 
 public:
 
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnDoorBrokenSignature OnDoorBroken;
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnGameDecisionMadeSignature OnGameDecisionMade;
 	UPROPERTY(BlueprintAssignable)
