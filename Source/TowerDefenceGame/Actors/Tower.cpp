@@ -38,38 +38,39 @@ ATower::ATower()
 	mUpgradeComp = CreateDefaultSubobject<UUpgradeComponent>("UpgradeComp");
 }
 
-void ATower::BeginPlay()
+void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacementActor* PlacementActor)
 {
-	Super::BeginPlay();
-	
+	Super::Init_Implementation(BuildingDetails, PlacementActor);
+
+	// Binding the Range collider overlap events
 	mRangeColliderComp->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnEnemyEnteredTheRange);
 	mRangeColliderComp->OnComponentEndOverlap.AddDynamic(this, &ThisClass::OnEnemyExitedTheRange);
 
-	UpdateTowerState(ETowerState::Idle);
-
+	// Initialising the Tower UI
 	mTowerUI = Cast<UTowerUI>(mTowerWidgetComp->GetWidget());
-
 	if(mTowerUI)
 	{
 		mTowerUI->ToggleWidgetSwitcher(ConfirmWidget);
 		mTowerUI->OnDecisionMade.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
 		mTowerWidgetComp->SetTickMode(ETickMode::Enabled);
 	}
-	mUpgradeComp->OnUpgradeApplied.AddDynamic(this, &ThisClass::Upgrade);
-}
-
-void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacementActor* PlacementActor)
-{
-	Super::Init_Implementation(BuildingDetails, PlacementActor);
 	
-	mNiagaraComp->SetAsset(BuildingDetails.mBuildingNiagara, true);
+	// Initialising the Upgrade Component
+	mUpgradeComp->OnUpgradeApplied.AddDynamic(this, &ThisClass::Upgrade);
 	mUpgradeComp->Init(BuildingDetails.UpgradeAsset);
+
+	// Setting the initial state of the tower
+	UpdateTowerState(ETowerState::Idle);
+
+	//Setting the Niagara Component
+	mNiagaraComp->SetAsset(BuildingDetails.mBuildingNiagara, true);
 }
 
 #pragma region States
 
 void ATower::Fire_Implementation()
 {
+	// if there is no target in range, it will go back to the idle state
 	if(!mTarget)
 	{
 		if(!FindTarget())
@@ -79,6 +80,7 @@ void ATower::Fire_Implementation()
 	}
 	else
 	{
+		// if the projectile needs to poll, then calls the pool
 		if(bShouldPool)
 		{
 			OnProjectilePool();

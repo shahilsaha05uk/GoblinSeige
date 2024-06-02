@@ -25,6 +25,7 @@ void UUpgradeComponent::BeginPlay()
 
 void UUpgradeComponent::Init(UDA_UpgradeAsset* UpgradeAsset)
 {
+	if(!UpgradeAsset) return;
 	mUpgradeDetails.Append(UpgradeAsset->GetUpgradeDetails());
 	MoveToNextUpgrade();
 }

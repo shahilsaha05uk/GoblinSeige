@@ -4,20 +4,11 @@
 #include "BaseBuilding.h"
 
 #include "TowerDefenceGame/ActorComponentClasses/UpgradeComponent.h"
-#include "TowerDefenceGame/SupportClasses/EnumClass.h"
-#include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 
 ABaseBuilding::ABaseBuilding()
 {
 	mStaticMeshSelectedComp = CreateDefaultSubobject<UStaticMeshComponent>("TowerSelection");
-}
-
-void ABaseBuilding::BeginPlay()
-{
-	Super::BeginPlay();
-	UpdateBuildingState(NO_STATE);
-	bIsPlaced = false;
 }
 
 void ABaseBuilding::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacementActor* PlacementActor)
@@ -30,21 +21,38 @@ void ABaseBuilding::Init_Implementation(FBuildingBuyDetails BuildingDetails, APl
 	mBuildingDetails = BuildingDetails;
 
 	mPlacement = PlacementActor;
+
+	mStaticMeshSelectedComp->SetVisibility(false);
+	bIsPlaced = false;
 }
 
-void ABaseBuilding::UpdateBuildingState_Implementation(EBuildingState State)
+#pragma region Interactions
+
+void ABaseBuilding::Interact_Implementation()
 {
-	BuildingState = State;
-	if(State == SELECTED)
-		mStaticMeshSelectedComp->SetVisibility(true);
-	else
-		mStaticMeshSelectedComp->SetVisibility(false);
+	if(!bIsPlaced) return;;
+	mStaticMeshSelectedComp->SetVisibility(true);
+
 }
+
+void ABaseBuilding::Disassociate_Implementation()
+{
+	if(!bIsPlaced) return;
+	mStaticMeshSelectedComp->SetVisibility(false);
+}
+
+#pragma endregion
+
+#pragma region Upgrade
 
 void ABaseBuilding::Upgrade_Implementation(FUpgradeDetails Details)
 {
 	
 }
+
+#pragma endregion
+
+#pragma region Destruction
 
 void ABaseBuilding::DestructBuilding_Implementation()
 {
@@ -63,20 +71,13 @@ void ABaseBuilding::DestructBuilding_Implementation()
 		// adding the balance back to the account
 		mResourceSubsystem->Add(deductedCost);
 	}
+
+	OnBuildingDestructed.Broadcast();
 }
 
-void ABaseBuilding::Interact_Implementation()
-{
-	if(!bIsPlaced) return;;
-	UpdateBuildingState(SELECTED);
-	OnBuildingSelectedSignature.Broadcast(this);
-}
+#pragma endregion
 
-void ABaseBuilding::Disassociate_Implementation()
-{
-	if(!bIsPlaced) return;
-	UpdateBuildingState(DESELECTED);
-}
+#pragma region Privates
 
 void ABaseBuilding::OnBuildingDecisionTaken_Implementation(bool HasConfirmed)
 {
@@ -98,3 +99,4 @@ void ABaseBuilding::OnBuildingDecisionTaken_Implementation(bool HasConfirmed)
 	OnBuildingDecisionMade.Broadcast(HasConfirmed);
 }
 
+#pragma endregion
