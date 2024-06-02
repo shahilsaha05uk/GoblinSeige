@@ -9,20 +9,22 @@
   <component name="ChangeListManager">
     <list default="true" id="9e7763e5-9dad-44e7-9cef-d89b5e8a74c4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BB_Goblin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BB_Goblin.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin1.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin2.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin3.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/Towers/BP_Tower.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Towers/BP_Tower.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BT_Goblin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BT_Goblin.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/EQS/Queries/target_querier.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/EQS/Queries/target_querier.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/EQS/eqs_splinefinder.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/EQS/eqs_splinefinder.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/EQS/eqs_targetFinder.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/EQS/eqs_targetFinder.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/Services/service_validPointChecker.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/Services/service_validPointChecker.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/Tasks/task_FindClosestSpline.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/Tasks/task_FindClosestSpline.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/AI/Tasks/task_folowTheSpline.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/Tasks/task_folowTheSpline.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Actors/bp_DOOR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Actors/bp_DOOR.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/TestGame.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/TestGame.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/FileSystemMappings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/FileSystemMappings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/UpgradeComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/UpgradeComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Tower.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Tower.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Tower.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Tower.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseBuilding.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseEnemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseEnemy.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseEnemy.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/BaseEnemy.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/GameSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/GameSubsystem.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -282,7 +284,7 @@
       <workItem from="1717230185901" duration="1984000" />
       <workItem from="1717232895089" duration="3205000" />
       <workItem from="1717236957052" duration="38846000" />
-      <workItem from="1717289624500" duration="3348000" />
+      <workItem from="1717289624500" duration="7173000" />
     </task>
     <servers />
   </component>

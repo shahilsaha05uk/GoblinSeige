@@ -92,10 +92,10 @@ void ABaseEnemy::OnHealthUpdated_Implementation(float CurrentHealth)
 
 void ABaseEnemy::OnEnemyBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,UPrimitiveComponent* OtherComp, int OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(UKismetSystemLibrary::DoesImplementInterface(OtherActor, UTargetInterface::StaticClass()))
-	{
-		mTarget = OtherActor;
-	}
+	if(UKismetSystemLibrary::DoesImplementInterface(OtherActor, UTargetInterface::StaticClass()) && OtherActor == mTarget) return;
+
+	mTarget = OtherActor;
+
 }
 
 void ABaseEnemy::OnAttackNotified_Implementation()
