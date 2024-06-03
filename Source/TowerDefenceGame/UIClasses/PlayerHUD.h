@@ -33,8 +33,8 @@ public:
 	class UShopMenu* mShop;
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UDescriptionBox* mDescriptionBox;
-	//UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
-
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
+	class UFeedbackWidget* mFeedbackBox;
 
 #pragma endregion
 	
@@ -50,7 +50,7 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite)
 	TSubclassOf<UBaseWidget> PrompterWidgetClass;
-	
+
 #pragma endregion
 
 	virtual void NativeConstruct() override;
@@ -73,7 +73,6 @@ public:
 
 #pragma endregion
 
-
 #pragma region Shop Bindings
 
 	UFUNCTION(BlueprintCallable, BlueprintCallable)
@@ -91,6 +90,16 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ToggleDescriptionBox(bool Activate);
+
+#pragma endregion
+
+#pragma region Feedback
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnFeedbackRecieved(EFeedbackType Type, const FString& MessageToDisplay);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void EnableCutscene();
 
 #pragma endregion
 };

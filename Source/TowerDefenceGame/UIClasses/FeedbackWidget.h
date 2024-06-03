@@ -4,9 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "TowerDefenceGame/SupportClasses/EnumClass.h"
 #include "FeedbackWidget.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnFeedbackSystemEnableSignature);
 
 UCLASS()
 class TOWERDEFENCEGAME_API UFeedbackWidget : public UUserWidget
@@ -18,21 +18,6 @@ public:
 	UPROPERTY(meta = (BindWidget), BlueprintReadOnly)
 	class UTextBlock* txtFeedback;
 
-	UPROPERTY(BlueprintReadOnly)
-	class UPlayerHUD* mPlayerHUD;
-
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnFeedbackSystemEnableSignature OnFeedbackEnabled;
-	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void Init(class UPlayerHUD* HudRef);
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void UpdateFeedback(const FString& StrToDisplay);
-
-	UFUNCTION(BlueprintCallable)
-	void OnWaveStarted(int Wave);
-	UFUNCTION()
-	void OnWaveEnded(int Wave);
-	UFUNCTION(BlueprintCallable)
-	void OnDoorBroken();
+	void UpdateFeedback(EFeedbackType Type, const FString& StrToDisplay);
 };

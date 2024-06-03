@@ -38,7 +38,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private Component")
 	class UHealthComponent* mHealthComponent;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Actor Properties")
-	class UHealthBarWidget* mHealthWidget;
+	class UParentBar* mHealthWidget;
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnPawnDeadSignature OnPawnDeadSignature;

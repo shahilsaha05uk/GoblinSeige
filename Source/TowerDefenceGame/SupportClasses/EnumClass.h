@@ -6,6 +6,9 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "EnumClass.generated.h"
 
+UENUM(Blueprintable, BlueprintType)
+enum EFeedbackType { Feed_Warning, Feed_Success, Feed_Failed };
+
 UENUM(BlueprintType)
 enum EHudValue
 {

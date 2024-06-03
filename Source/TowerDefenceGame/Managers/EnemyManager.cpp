@@ -4,6 +4,7 @@
 #include "EnemyManager.h"
 #include "TowerDefenceGame/ControllerClasses/EnemyController.h"
 #include "TowerDefenceGame/SubsystemClasses/EnemySubsystem.h"
+#include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/WaveSubsystem.h"
 
 void AEnemyManager::BeginPlay()
@@ -53,7 +54,6 @@ void AEnemyManager::GameOver_Implementation()
 #pragma region Spawners
 void AEnemyManager::PrepareForWave_Implementation(int Wave)
 {
-	
 	if(WaveRangeConfigurations.Contains(Wave))
 	{
 		mLatestWaveConfigs = WaveRangeConfigurations[Wave];
