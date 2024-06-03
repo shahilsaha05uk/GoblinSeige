@@ -43,11 +43,6 @@ void ABaseEnemy::Init_Implementation()
 
 #pragma region Interface Enemy Movement
 
-void ABaseEnemy::IA_EnemyMove_Implementation(FVector TargetLocation)
-{
-	
-}
-
 void ABaseEnemy::IA_FollowTheSpline_Implementation(ASpline* Spline)
 {
 	

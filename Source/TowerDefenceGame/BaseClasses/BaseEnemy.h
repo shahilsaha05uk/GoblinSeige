@@ -48,7 +48,6 @@ public:
 	void Init();
 	
 	// Interface Methods
-	virtual void IA_EnemyMove_Implementation(FVector TargetLocation) override;
 	virtual void IA_FollowTheSpline_Implementation(ASpline* Spline) override;
 	virtual void IA_EnemyAttack_Implementation() override;
 

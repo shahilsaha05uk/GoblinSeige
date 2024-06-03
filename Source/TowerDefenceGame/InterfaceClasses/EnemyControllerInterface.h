@@ -24,7 +24,7 @@ class TOWERDEFENCEGAME_API IEnemyControllerInterface
 public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void EnemyMove(FVector TargetLocation);
+	void EnemyMove(class ASpline* Spline);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void EnemyAttack();
 };

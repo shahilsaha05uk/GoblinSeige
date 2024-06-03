@@ -30,7 +30,7 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SpawnPawn(class AEnemySpawnPoint* SpawnBox, int Type);
 
-	virtual void EnemyMove_Implementation(FVector TargetLocation) override;
+	virtual void EnemyMove_Implementation(class ASpline* Spline) override;
 	virtual void EnemyAttack_Implementation() override;
 	
 };

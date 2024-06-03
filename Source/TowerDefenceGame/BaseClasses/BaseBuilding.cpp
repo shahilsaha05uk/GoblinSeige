@@ -12,8 +12,8 @@ ABaseBuilding::ABaseBuilding()
 {
 	mStaticMeshSelectedComp = CreateDefaultSubobject<UStaticMeshComponent>("TowerSelection");
 
-	mNiagaraComp = CreateDefaultSubobject<UNiagaraComponent>("NiagaraComp");
-	mNiagaraComp->SetupAttachment(RootComponent);
+	mNiagaraUpgradeComp = CreateDefaultSubobject<UNiagaraComponent>("NiagaraComp");
+	mNiagaraUpgradeComp->SetupAttachment(RootComponent);
 }
 
 void ABaseBuilding::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacementActor* PlacementActor)
