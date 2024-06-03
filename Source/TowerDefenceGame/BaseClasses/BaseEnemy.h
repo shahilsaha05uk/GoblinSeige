@@ -22,6 +22,9 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float mDealDamage;
 	UPROPERTY(EditDefaultsOnly)
+	FName blackboard_Target = "Target";
+	
+	UPROPERTY(EditDefaultsOnly)
 	int AmountToReward;
 public:
 
