@@ -3,6 +3,7 @@
 
 #include "BaseBuilding.h"
 
+#include "NiagaraComponent.h"
 #include "TowerDefenceGame/ActorComponentClasses/UpgradeComponent.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
@@ -10,6 +11,9 @@
 ABaseBuilding::ABaseBuilding()
 {
 	mStaticMeshSelectedComp = CreateDefaultSubobject<UStaticMeshComponent>("TowerSelection");
+
+	mNiagaraComp = CreateDefaultSubobject<UNiagaraComponent>("NiagaraComp");
+	mNiagaraComp->SetupAttachment(RootComponent);
 }
 
 void ABaseBuilding::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacementActor* PlacementActor)
