@@ -22,9 +22,13 @@ void UTowerUI::NativeConstruct()
 
 void UTowerUI::Init_Implementation(int Cost, class ATower* Tower)
 {
-	mTowerRef = Tower;
+	if(Tower)
+	{
+		mTowerRef = Tower;
+		mTowerRef->mUpgradeComp;
+	}
+	
 	mBuildingCost = Cost;
-	mTowerRef->mUpgradeComp;
 }
 
 
