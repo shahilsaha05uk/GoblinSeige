@@ -3,6 +3,8 @@
 
 #include "BaseEnemy.h"
 
+#include "BehaviorTree/BlackboardComponent.h"
+#include "Blueprint/AIBlueprintHelperLibrary.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
@@ -91,6 +93,10 @@ void ABaseEnemy::OnEnemyBeginOverlap_Implementation(UPrimitiveComponent* Overlap
 
 	mTarget = OtherActor;
 
+	if(auto const blackboard = UAIBlueprintHelperLibrary::GetBlackboard(this))
+	{
+		blackboard->SetValueAsObject(blackboard_Target, mTarget);
+	}
 }
 
 void ABaseEnemy::OnAttackNotified_Implementation()
