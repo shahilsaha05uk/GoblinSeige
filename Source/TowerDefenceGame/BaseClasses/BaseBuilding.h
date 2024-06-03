@@ -23,7 +23,7 @@ public:
 #pragma region Components
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-	class UNiagaraComponent* mNiagaraComp;
+	class UNiagaraComponent* mNiagaraUpgradeComp;
 	
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
 	class UStaticMeshComponent* mStaticMeshSelectedComp;

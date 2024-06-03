@@ -2,6 +2,9 @@
 
 
 #include "EnemyController.h"
+
+#include "Kismet/KismetSystemLibrary.h"
+#include "TowerDefenceGame/InterfaceClasses/EnemyInterface.h"
 #include "TowerDefenceGame/SubsystemClasses/EnemySubsystem.h"
 
 void AEnemyController::BeginPlay()
@@ -29,13 +32,21 @@ void AEnemyController::SpawnPawn_Implementation(AEnemySpawnPoint* SpawnBox, int 
 
 }
 
-void AEnemyController::EnemyMove_Implementation(FVector TargetLocation)
+void AEnemyController::EnemyMove_Implementation(ASpline* Spline)
 {
-	
+	APawn* pawn = GetPawn();
+	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UEnemyInterface::StaticClass()))
+	{
+		IEnemyInterface::Execute_IA_FollowTheSpline(pawn, Spline);
+	}
 }
 
 void AEnemyController::EnemyAttack_Implementation()
 {
-	
+	APawn* pawn = GetPawn();
+	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UEnemyInterface::StaticClass()))
+	{
+		IEnemyInterface::Execute_IA_EnemyAttack(pawn);
+	}
 }
 
