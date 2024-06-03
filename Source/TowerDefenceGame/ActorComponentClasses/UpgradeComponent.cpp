@@ -50,8 +50,7 @@ void UUpgradeComponent::MoveToNextUpgrade()
 
 void UUpgradeComponent::ApplyUpgrade()
 {
-	if(!IsValidUpgrade()) return;
-	OnUpgradeApplied.Broadcast(mCurrentUpgrade);
+	if(!IsValidUpgrade() || mUpgradeDetails.IsEmpty()) return;
 	if(mResourceSubsystem)
 	{
 		mTotalMoneySpentOnUpgrades += mCurrentUpgrade.UpgradeCost;
@@ -60,5 +59,6 @@ void UUpgradeComponent::ApplyUpgrade()
 
 	mUpgradeDetails.Pop();
 	MoveToNextUpgrade();
+	OnUpgradeApplied.Broadcast(mCurrentUpgrade);
 }
 
