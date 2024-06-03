@@ -22,8 +22,6 @@ ASpecPlayer::ASpecPlayer()
 	mCameraComp->SetupAttachment(mSpringArmComp);
 	
 	mBuildingPlacementHandlerComponent = CreateDefaultSubobject<UBuildingPlacementHandlerComponent>("PlayerInteractionComponent");
-
-	mTimerComp = CreateDefaultSubobject<UTimerComponent>("TimerComponent");
 	
 	OrbitRadius = 300.0f;
 	OrbitSpeed = 50.0f;

@@ -11,7 +11,7 @@
 
 
 UENUM(BlueprintType)
-enum EInputModeType { UI_Only, UI_Game, Game_Only };
+enum EInputModeType { UI_Only, UI_And_Game, Game_Only };
 
 class UDA_InputActions;
 //DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuyMenuOptionClickSignature, class UDA_BuildingAsset*, BuildingAsset);
@@ -25,6 +25,8 @@ class TOWERDEFENCEGAME_API AInputController : public APlayerController, public I
 public:
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsPaused;
+	UPROPERTY(BlueprintReadOnly)
+	class UPlayerHUD* mPlayerHUD;
 
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
@@ -63,12 +65,10 @@ public:
 	void ManageAudio(bool hasWaveStarted);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnDoorBroken();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnPhaseChange();
 
-	/*
-	UPROPERTY(BlueprintCallable, BlueprintAssignable)
-	FOnBuyMenuOptionClickSignature OnBuyMenuOptionClickSignature;
 
-	*/
 	
 	// Controller Input Methods
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -86,16 +86,7 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void PauseGame();
 
-
-	/*
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnBuyOptionClicked(FString BuildingID);
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnUpgradeButtonClick(ABaseBuilding* BuildingToUpgrade, int UpgradeCost);
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnMoveButtonClick();
-
-	*/
+	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnEnemyKilled();
 
@@ -115,5 +106,7 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnPlacementUpdated(EPlacementState State, APlacementActor* PlacementActor);
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void SetInputMoveType(EInputModeType Type);
 };
 

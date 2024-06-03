@@ -1,11 +1,14 @@
 #include "PlayerHUD.h"
 
 #include "DescriptionBox.h"
+#include "FeedbackWidget.h"
 #include "ShopMenu.h"
+#include "Animation/WidgetAnimation.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
+#include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/WaveSubsystem.h"
 
@@ -26,7 +29,12 @@ void UPlayerHUD::NativeConstruct()
 		BuildingSubs->OnBuildingInteractionBegin.AddDynamic(this, &ThisClass::OnBuildingInterationBegin);
 		BuildingSubs->OnBuildingInteractionEnd.AddDynamic(this, &ThisClass::OnBuildingInterationEnd);
 	}
-	
+	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
+	{
+		GameSubs->OnFeedbackEnabled.AddDynamic(this, &ThisClass::OnFeedbackRecieved);
+		GameSubs->OnDoorBroken.AddDynamic(this, &ThisClass::EnableCutscene);
+	}
+
 
 	mShop->Init(this);
 	mShop->OnShopButtonHovered.AddDynamic(this, &ThisClass::OnShopButtonHovered);
@@ -96,6 +104,22 @@ void UPlayerHUD::OnBuildingInterationEnd_Implementation(ABaseBuilding* BuildingR
 void UPlayerHUD::ToggleDescriptionBox_Implementation(bool Activate)
 {
 	
+}
+
+#pragma endregion
+
+#pragma region Feedback
+
+void UPlayerHUD::OnFeedbackRecieved_Implementation(EFeedbackType Type, const FString& MessageToDisplay)
+{
+	mFeedbackBox->UpdateFeedback(Type, MessageToDisplay);
+}
+#pragma endregion
+
+#pragma region Cutscene
+
+void UPlayerHUD::EnableCutscene_Implementation()
+{
 }
 
 #pragma endregion

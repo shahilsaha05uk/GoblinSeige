@@ -33,4 +33,6 @@ public:
 	virtual void EnemyMove_Implementation(class ASpline* Spline) override;
 	virtual void EnemyAttack_Implementation() override;
 	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnDoorBroken();
 };

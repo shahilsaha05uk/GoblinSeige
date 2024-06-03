@@ -15,6 +15,7 @@
 #include "TowerDefenceGame/InterfaceClasses/TargetInterface.h"
 #include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 #include "TowerDefenceGame/UIClasses/HealthBarWidget.h"
+#include "TowerDefenceGame/UIClasses/widgets/ParentBar.h"
 
 // Sets default values
 ABaseEnemy::ABaseEnemy()
@@ -33,14 +34,13 @@ void ABaseEnemy::BeginPlay()
 
 void ABaseEnemy::Init_Implementation()
 {
-	mHealthWidget = Cast<UHealthBarWidget>(mHealthBarWidgetComponent->GetWidget());
-
 	OnTakeAnyDamage.AddDynamic(this, &ThisClass::OnDamageTaken);
 
 	mHealthComponent->OnHealthUpdated.AddDynamic(this, &ThisClass::OnHealthUpdated);
 
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnEnemyBeginOverlap);
 	
+	mHealthWidget = Cast<UParentBar>(mHealthBarWidgetComponent->GetWidget());
 }
 
 #pragma region Interface Enemy Movement
@@ -61,6 +61,7 @@ void ABaseEnemy::IA_EnemyAttack_Implementation()
 
 void ABaseEnemy::OnDeadAnimationEnd_Implementation()
 {
+	Destroy();
 }
 
 void ABaseEnemy::OnDamageTaken_Implementation(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
@@ -84,6 +85,12 @@ void ABaseEnemy::OnHealthUpdated_Implementation(float CurrentHealth)
 		bIsDead = true;
 		GetCharacterMovement()->StopMovementImmediately();
 		GetCharacterMovement()->StopMovementKeepPathing();
+
+		GetController()->UnPossess();
+	}
+	if(mHealthWidget)
+	{
+		mHealthWidget->UpdateBar(CurrentHealth);
 	}
 }
 
@@ -93,6 +100,7 @@ void ABaseEnemy::OnEnemyBeginOverlap_Implementation(UPrimitiveComponent* Overlap
 
 	mTarget = OtherActor;
 
+	// Setting the Blackboard key
 	if(auto const blackboard = UAIBlueprintHelperLibrary::GetBlackboard(this))
 	{
 		blackboard->SetValueAsObject(blackboard_Target, mTarget);
@@ -101,6 +109,7 @@ void ABaseEnemy::OnEnemyBeginOverlap_Implementation(UPrimitiveComponent* Overlap
 
 void ABaseEnemy::OnAttackNotified_Implementation()
 {
+	// Applies damage when the enemy makes the damage animation
 	UGameplayStatics::ApplyDamage(mTarget, mDealDamage, GetController(), this, nullptr);
 }
 

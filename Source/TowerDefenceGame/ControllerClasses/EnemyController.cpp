@@ -6,10 +6,15 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "TowerDefenceGame/InterfaceClasses/EnemyInterface.h"
 #include "TowerDefenceGame/SubsystemClasses/EnemySubsystem.h"
+#include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
 
 void AEnemyController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if(auto const GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
+		GameSubs->OnDoorBroken.AddDynamic(this, &ThisClass::OnDoorBroken);
+
 }
 
 
@@ -47,6 +52,15 @@ void AEnemyController::EnemyAttack_Implementation()
 	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UEnemyInterface::StaticClass()))
 	{
 		IEnemyInterface::Execute_IA_EnemyAttack(pawn);
+	}
+}
+
+void AEnemyController::OnDoorBroken_Implementation()
+{
+	if(APawn* pawn = GetPawn())
+	{
+		UnPossess();
+		pawn->Destroy();
 	}
 }
 

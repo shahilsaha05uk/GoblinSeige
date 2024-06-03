@@ -15,6 +15,7 @@ void UTimerComponent::BeginPlay()
 	if(const ULocalPlayer* LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController())
 	{
 		mClockSubsystem = LocalPlayer->GetSubsystem<UClockSubsystem>();
+		mClockSubsystem->ForceStopTimer.AddDynamic(this, &UTimerComponent::FinishTimer);
 	}
 
 	if(const UWorld* world = GetWorld())
@@ -53,6 +54,7 @@ void UTimerComponent::Countdown_Implementation()
 	else
 	{
 		FinishTimer();
+		mClockSubsystem->FinishTimer.Broadcast();
 	}
 	
 }
@@ -63,7 +65,6 @@ void UTimerComponent::FinishTimer()
 	TimerHandle.Invalidate();
 	cTime = 0.0f;
 	UpdateTimer();
-	mClockSubsystem->FinishTimer.Broadcast();
 }
 
 // Updating the Countdown Timer Details

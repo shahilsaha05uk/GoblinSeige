@@ -14,13 +14,12 @@
 #include "TowerDefenceGame/DataAssetClasses/DA_InputActions.h"
 #include "TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
+#include "TowerDefenceGame/SubsystemClasses/ClockSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
 #include "TowerDefenceGame/UIClasses/GameComplete.h"
 
 AInputController::AInputController()
 {
-	//OnBuyMenuOptionClickSignature.AddDynamic(this, &AInputController::OnBuyOptionClicked);
-
 	LevelAudioComp = CreateDefaultSubobject<UAudioComponent>(TEXT("AudioComp"));
 	LevelAudioComp->SetupAttachment(RootComponent);
 }
@@ -37,6 +36,7 @@ void AInputController::BeginPlay()
 	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 	{
 		GameSubs->OnDoorBroken.AddDynamic(this, &ThisClass::OnDoorBroken);
+		GameSubs->OnPhaseChange.AddDynamic(this, &ThisClass::OnPhaseChange);
 	}
 
 	
@@ -46,8 +46,9 @@ void AInputController::BeginPlay()
 	const auto hud = GetHUD();
 	if(UKismetSystemLibrary::DoesImplementInterface(hud, UHUDInterface::StaticClass()))
 	{
-		if(UBaseWidget* playerHud = IHUDInterface::Execute_WidgetInitialiser(hud, PLAYER_HUD, this))
-			playerHud->AddToViewport();
+		mPlayerHUD = Cast<UPlayerHUD>(IHUDInterface::Execute_WidgetInitialiser(hud, PLAYER_HUD, this));
+		if(mPlayerHUD)
+			mPlayerHUD->AddToViewport();
 	}
 }
 
@@ -114,15 +115,6 @@ void AInputController::PlaySound_Implementation()
 void AInputController::StopSound_Implementation()
 {
 	LevelAudioComp->Stop();
-}
-
-void AInputController::OnDoorBroken_Implementation()
-{
-	// Disable the inputs
-	
-	// Play the Cinematics
-	
-	// re enable the inputs
 }
 
 void AInputController::OnPlacementUpdated_Implementation(EPlacementState State, APlacementActor* PlacementActor)
@@ -248,3 +240,29 @@ void AInputController::PauseGame_Implementation()
 	
 }
 #pragma endregion
+
+void AInputController::OnDoorBroken_Implementation()
+{
+	// Stop the Timer
+	if(const ULocalPlayer* LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController())
+	{
+		if(const auto ClockSubs = LocalPlayer->GetSubsystem<UClockSubsystem>())
+			ClockSubs->ForceStopTimer.Broadcast();
+	}
+	// Disable the inputs
+	SetInputMoveType(UI_Only);
+
+	// Play the Cinematics
+	
+}
+
+void AInputController::OnPhaseChange_Implementation()
+{
+	// re enable the inputs
+	SetInputMoveType(UI_And_Game);
+}
+
+void AInputController::SetInputMoveType_Implementation(EInputModeType Type)
+{
+	
+}

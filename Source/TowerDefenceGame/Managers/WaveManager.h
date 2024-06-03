@@ -21,6 +21,10 @@ public:
 
 	UPROPERTY(BlueprintReadOnly)
 	class UWaveSubsystem* mWaveSubsystem;
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	class UTimerComponent* mTimerComp;
+
+	AWaveManager();
 
 	virtual void BeginPlay() override;
 
@@ -29,4 +33,8 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnWaveComplete(int WaveNumber);
+
+
+	UFUNCTION(BlueprintCallable)
+	void OnPhaseChange();
 };
