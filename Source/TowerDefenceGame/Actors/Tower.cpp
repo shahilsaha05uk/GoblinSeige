@@ -36,6 +36,9 @@ ATower::ATower()
 	mStaticMeshSelectedComp->SetupAttachment(RootComponent);
 
 	mUpgradeComp = CreateDefaultSubobject<UUpgradeComponent>("UpgradeComp");
+
+	mNiagaraUpgradeComp->SetupAttachment(RootComponent);
+
 }
 
 void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacementActor* PlacementActor)
@@ -60,7 +63,7 @@ void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacement
 	mUpgradeComp->Init(BuildingDetails.UpgradeAsset);
 
 	//Setting the Niagara Component
-	mNiagaraComp->SetAsset(BuildingDetails.mBuildingNiagara, true);
+	//mNiagaraComp->SetAsset(BuildingDetails.mBuildingNiagara, true);
 }
 
 #pragma region States
@@ -244,6 +247,7 @@ bool ATower::FindTarget_Implementation()
 
 void ATower::Upgrade_Implementation(FUpgradeDetails Details)
 {
+	Super::Upgrade_Implementation(Details);
 	BuildingStats = Details.BuildingStats;
 	UpdateTowerState(Idle);
 }
@@ -251,7 +255,6 @@ void ATower::Upgrade_Implementation(FUpgradeDetails Details)
 void ATower::DestructBuilding_Implementation()
 {
 	Super::DestructBuilding_Implementation();
-
 }
 
 #pragma endregion

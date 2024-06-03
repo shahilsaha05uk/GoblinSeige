@@ -13,7 +13,6 @@ ABaseBuilding::ABaseBuilding()
 	mStaticMeshSelectedComp = CreateDefaultSubobject<UStaticMeshComponent>("TowerSelection");
 
 	mNiagaraUpgradeComp = CreateDefaultSubobject<UNiagaraComponent>("NiagaraComp");
-	mNiagaraUpgradeComp->SetupAttachment(RootComponent);
 }
 
 void ABaseBuilding::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacementActor* PlacementActor)
@@ -60,7 +59,7 @@ void ABaseBuilding::Disassociate_Implementation()
 
 void ABaseBuilding::Upgrade_Implementation(FUpgradeDetails Details)
 {
-	
+	Execute_Disassociate(this);
 }
 
 #pragma endregion
