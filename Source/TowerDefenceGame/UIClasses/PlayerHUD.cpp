@@ -32,7 +32,7 @@ void UPlayerHUD::NativeConstruct()
 	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 	{
 		GameSubs->OnFeedbackEnabled.AddDynamic(this, &ThisClass::OnFeedbackRecieved);
-		GameSubs->OnDoorBroken.AddDynamic(this, &ThisClass::EnableCutscene);
+		GameSubs->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::EnableCutscene);
 	}
 
 

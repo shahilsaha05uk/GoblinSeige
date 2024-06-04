@@ -15,11 +15,6 @@ class TOWERDEFENCEGAME_API UTimerComponent : public UActorComponent
 	GENERATED_BODY()
 
 private:
-	UPROPERTY(EditDefaultsOnly)
-	class UDA_CountdownTimer* mDACountDownTimer;
-	UPROPERTY()
-	FWaveCountDownTimerDetails mCountDownTimerDetails;
-
 	UPROPERTY()
 	class UWaveSubsystem* mWaveSubsystem;
 	
@@ -42,16 +37,12 @@ public:
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable)
-	bool FetchAndUpdateCountdownDetails();
-
-	
-	UFUNCTION(BlueprintCallable)
-	void OnWaveComplete(int Wave);
-	UFUNCTION(BlueprintCallable)
 	void UpdateTimer();
 	
 	UFUNCTION(BlueprintCallable)
-	void StartTimer();
+	void ForceStopTimer();
+	UFUNCTION(BlueprintCallable)
+	void StartTimer(const float Duration);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void Countdown();
 	UFUNCTION(BlueprintCallable)

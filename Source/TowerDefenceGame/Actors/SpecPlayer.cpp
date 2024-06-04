@@ -79,8 +79,8 @@ void ASpecPlayer::Move_Implementation(const FInputActionValue& InputActionValue)
 	const FVector fwdVec = fwdRot.Vector();
 	const FVector rhtVec = FRotationMatrix(rhtRot).GetScaledAxis(EAxis::Y);
 
-	AddMovementInput(fwdVec, vec.X);
-	AddMovementInput(rhtVec, vec.Y);
+	AddMovementInput(fwdVec, vec.X * MoveSpeed);
+	AddMovementInput(rhtVec, vec.Y * MoveSpeed);
 */
 }
 
@@ -105,8 +105,8 @@ void ASpecPlayer::Look_Implementation(const FInputActionValue& InputActionValue)
 	mCurrentPitchAngle = FMath::Clamp(mCurrentPitchAngle, MinPitchAngle, MaxPitchAngle);
 
 	UpdateCameraPosition();
-}
 
+}
 void ASpecPlayer::EnableLook_Implementation()
 {
 }

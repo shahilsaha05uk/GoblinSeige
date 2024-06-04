@@ -21,6 +21,12 @@ void AEnemyManager::BeginPlay()
 	{
 		mWaveSubsystem->OnWaveStarted.AddDynamic(this, &ThisClass::PrepareForWave);
 	}
+
+	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
+	{
+		GameSubs->OnPhaseChangeComplete.AddDynamic(this, &ThisClass::OnPhaseChangeComplete);
+		GameSubs->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::OnPrepareForPhaseChange);
+	}
 }
 
 void AEnemyManager::CacheControllers_Implementation(int ControllerCount)
@@ -40,8 +46,8 @@ void AEnemyManager::AssignEnemy_Implementation(int EnemyID)
 	if(mFreeControllers.IsEmpty()) return;
 	const auto SpawnPoint = mEnemySubsystem->GetRandomEnemySpawnPoint();
 
-	const auto Controller = mFreeControllers.Pop(true);	// take out a free controller
-	Controller->SpawnPawn(SpawnPoint, EnemyID);	// spawn the pawn
+	if(const auto Controller = mFreeControllers.Pop(true))
+		Controller->SpawnPawn(SpawnPoint, EnemyID);	// spawn the pawn
 
 	TotalEnemyControllersAssigned++;
 }
@@ -157,7 +163,7 @@ void AEnemyManager::FreeController(AEnemyController* ControllerRef)
 		mFreeControllers.Add(ControllerRef);
 		TotalEnemyControllersAssigned--;
 	}
-	if(TotalEnemyControllersAssigned == 0)
+	if(TotalEnemyControllersAssigned == 0 && !bPhaseComplete)
 	{
 		if(mWaveSubsystem) mWaveSubsystem->EndWave();
 	}
@@ -169,6 +175,21 @@ void AEnemyManager::FlushEverything()
 		c->Destroy();
 
 	mFreeControllers.Empty();
+}
+
+#pragma endregion
+
+#pragma region Phase
+
+void AEnemyManager::OnPrepareForPhaseChange_Implementation()
+{
+	bPhaseComplete = true;
+	FlushEverything();
+}
+
+void AEnemyManager::OnPhaseChangeComplete_Implementation()
+{
+	bPhaseComplete = false;
 }
 
 #pragma endregion

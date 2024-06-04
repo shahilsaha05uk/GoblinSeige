@@ -14,9 +14,13 @@ void UEnemySubsystem::RegisterSpawnPoint(AEnemySpawnPoint* SpawnPoint)
 	}
 }
 
-void UEnemySubsystem::DeRegisterSpawnPoint()
+void UEnemySubsystem::DeRegisterSpawnPoint(AEnemySpawnPoint* SpawnPoint)
 {
-	mSpawnPoints.Empty();
+	if(mSpawnPoints.Contains(SpawnPoint))
+	{
+		mSpawnPoints.Remove(SpawnPoint);
+		EnemySpawnPointCount--;
+	}
 }
 
 #pragma endregion

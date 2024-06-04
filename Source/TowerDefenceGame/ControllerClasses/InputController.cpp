@@ -5,7 +5,9 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputTriggers.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Components/AudioComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Sound/SoundCue.h"
 #include "TowerDefenceGame/Actors/SpecPlayer.h"
@@ -35,7 +37,6 @@ void AInputController::BeginPlay()
 	
 	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 	{
-		GameSubs->OnDoorBroken.AddDynamic(this, &ThisClass::OnDoorBroken);
 		GameSubs->OnPhaseChange.AddDynamic(this, &ThisClass::OnPhaseChange);
 	}
 
@@ -50,6 +51,8 @@ void AInputController::BeginPlay()
 		if(mPlayerHUD)
 			mPlayerHUD->AddToViewport();
 	}
+
+	SetInputMoveType(UI_And_Game);
 }
 
 void AInputController::SetupInputComponent()
@@ -119,6 +122,14 @@ void AInputController::StopSound_Implementation()
 
 void AInputController::OnPlacementUpdated_Implementation(EPlacementState State, APlacementActor* PlacementActor)
 {
+	if(State == DecisionPlacement)
+	{
+		SetInputMoveType(UI_Only);
+	}
+	else
+	{
+		SetInputMoveType(UI_And_Game);
+	}
 }
 #pragma endregion
 
@@ -237,24 +248,23 @@ void AInputController::DisableLook_Implementation(const FInputActionValue& Input
 
 void AInputController::PauseGame_Implementation()
 {
-	
+	if(!bIsPaused)
+	{
+		if(auto pauseWid = IHUDInterface::Execute_WidgetInitialiser(GetHUD(), PAUSE_MENU, this))
+		{
+			pauseWid->AddToViewport();
+			bIsPaused = true;
+			UGameplayStatics::SetGamePaused(GetWorld(), true);
+		}
+	}
+	else
+	{
+		IHUDInterface::Execute_DestroyWidget(GetHUD(), PAUSE_MENU);
+		bIsPaused = false;
+		UGameplayStatics::SetGamePaused(GetWorld(), false);
+	}
 }
 #pragma endregion
-
-void AInputController::OnDoorBroken_Implementation()
-{
-	// Stop the Timer
-	if(const ULocalPlayer* LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController())
-	{
-		if(const auto ClockSubs = LocalPlayer->GetSubsystem<UClockSubsystem>())
-			ClockSubs->ForceStopTimer.Broadcast();
-	}
-	// Disable the inputs
-	SetInputMoveType(UI_Only);
-
-	// Play the Cinematics
-	
-}
 
 void AInputController::OnPhaseChange_Implementation()
 {
@@ -262,7 +272,21 @@ void AInputController::OnPhaseChange_Implementation()
 	SetInputMoveType(UI_And_Game);
 }
 
+void AInputController::OnPrepareForPhaseChange_Implementation()
+{
+	SetInputMoveType(UI_Only);
+}
+
 void AInputController::SetInputMoveType_Implementation(EInputModeType Type)
 {
-	
+	switch (Type) {
+	case UI_Only:
+		UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(this);
+		break;
+	case UI_And_Game:
+		UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(this);
+		break;
+	case Game_Only:
+		break;
+	}
 }

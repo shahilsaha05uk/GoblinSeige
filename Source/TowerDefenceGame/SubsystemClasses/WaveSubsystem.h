@@ -43,4 +43,11 @@ public:
 	void StartWave();
 	UFUNCTION(BlueprintCallable)
 	void EndWave();
+
+	UFUNCTION(BlueprintCallable)
+	void SetWave(int Wave)
+	{
+		mCurrentWave = Wave;
+		OnWaveUpdated.Broadcast(mCurrentWave);
+	}
 };

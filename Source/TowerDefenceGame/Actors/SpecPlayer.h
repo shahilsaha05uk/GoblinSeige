@@ -22,13 +22,18 @@ private:
 	UPROPERTY()
 	float CurrentAngle;
 	
+	UPROPERTY(EditDefaultsOnly, Category = "Move")
+	float MoveSpeed = 600.0f;
+	UPROPERTY(EditDefaultsOnly, Category = "Move")
+	FVector MovementBounds = FVector(1000.0f, 1000.0f, 1000.0f);
+	
 	UPROPERTY(EditDefaultsOnly, Category = "Orbit")
 	float MinPitchAngle;
 	UPROPERTY(EditDefaultsOnly, Category = "Orbit")
 	float MaxPitchAngle;
-	
 	UPROPERTY(EditDefaultsOnly, Category = "Orbit")
 	TSubclassOf<AActor> mOrbitActorClass;
+
 	UPROPERTY()
 	AActor* mOrbitActor;
 	UPROPERTY()

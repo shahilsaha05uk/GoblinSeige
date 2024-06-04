@@ -63,8 +63,10 @@ public:
 	void RequestGameCompleteUI(bool hasWon);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ManageAudio(bool hasWaveStarted);
+
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnDoorBroken();
+	void OnPrepareForPhaseChange();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnPhaseChange();
 

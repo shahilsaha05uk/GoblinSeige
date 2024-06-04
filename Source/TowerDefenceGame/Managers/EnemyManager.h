@@ -63,6 +63,8 @@ private:
 	TSubclassOf<class AEnemyController> mEnemyControllerClass;
 
 	UPROPERTY()
+	bool bPhaseComplete;
+	UPROPERTY()
 	int TotalEnemyControllersAssigned = 0;
 	UPROPERTY()
 	FTimerHandle EnemySpawnTimerHandle;
@@ -90,7 +92,7 @@ public:
 	int mRemainingEnemies;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FWaveRangeConfig mLatestWaveConfigs;
-	
+
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -122,4 +124,18 @@ public:
 	void SpawnFixedEnemies(const TArray<FFixedEnemy> &FixedEnemyData);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void SpawnProbableEnemies(const TArray<FEnemyProbability> &ProbableData);
+
+
+	// Phase
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnPhaseChangeComplete();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnPrepareForPhaseChange();
+
+
+
+
+
+
 };
