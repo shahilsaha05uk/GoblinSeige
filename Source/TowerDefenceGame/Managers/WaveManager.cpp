@@ -1,9 +1,8 @@
 ﻿#include "WaveManager.h"
 
 #include "TowerDefenceGame/ActorComponentClasses/TimerComponent.h"
-#include "TowerDefenceGame/SubsystemClasses/ClockSubsystem.h"
+#include "TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h"
 #include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
-#include "TowerDefenceGame/SubsystemClasses/WaveSubsystem.h"
 
 AWaveManager::AWaveManager()
 {
@@ -13,50 +12,26 @@ AWaveManager::AWaveManager()
 void AWaveManager::BeginPlay()
 {
 	Super::BeginPlay();
-	mWaveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>();
-	if(mWaveSubsystem)
+
+	mGameSubsystem = GetGameInstance()->GetSubsystem<UGameSubsystem>();
+	if(mGameSubsystem)
 	{
-		mWaveSubsystem->Init(mInitialWave, mFinalWave);
-		mWaveSubsystem->OnWaveUpdated.AddDynamic(this, &ThisClass::OnWaveComplete);
+		mGameSubsystem->OnPhaseChangeComplete.AddDynamic(this, &ThisClass::OnPhaseChangeComplete);
+		mGameSubsystem->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::OnPrepareForPhaseChange);
+		mGameSubsystem->OnAllDead.AddDynamic(this, &ThisClass::WaveComplete);
+
+		mGameSubsystem->OnGetCurrentWave.BindDynamic(this, &ThisClass::GetCurrentWave);
 	}
 
-	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
-	{
-		GameSubs->OnPhaseChangeComplete.AddDynamic(this, &ThisClass::OnPhaseChangeComplete);
-		GameSubs->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::OnPrepareForPhaseChange);
-	}
-
-	if(const ULocalPlayer* LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController())
-	{
-		if(auto const ClockSubsystem = LocalPlayer->GetSubsystem<UClockSubsystem>())
-		{
-			ClockSubsystem->FinishTimer.AddDynamic(this, &ThisClass::OnTimerFinish);
-		}
-	}
-
+	mTimerComp->OnFinishTimer.AddDynamic(this, &ThisClass::AWaveManager::OnTimerFinish);
+	
 	// get the latest timer and start the timer
-	FetchAndUpdateCountdownDetails();
-	mTimerComp->StartTimer(mCountDownTimerDetails.CountDownTimer);
+	StartNextWave();
 }
 
-void AWaveManager::OnWaveComplete_Implementation(int WaveNumber)
+void AWaveManager::Init(ATowerDefenceGameGameModeBase* GameMode)
 {
-	if(mWaveSubsystem->GetCurrentWave() >= mWaveSubsystem->GetFinalWave())
-	{
-		GetGameInstance()->GetSubsystem<UGameSubsystem>()->OnGameDecisionMade.Broadcast();
-	}
-
-	if(WaveNumber > mCountDownTimerDetails.MaxLevel)
-	{
-		if(FetchAndUpdateCountdownDetails())
-		{
-			mTimerComp->StartTimer(mCountDownTimerDetails.CountDownTimer);
-		}
-	}
-	else
-	{
-		mTimerComp->StartTimer(mCountDownTimerDetails.CountDownTimer);
-	}
+	mGameMode = GameMode;
 }
 
 #pragma region Phase Methods
@@ -65,7 +40,7 @@ void AWaveManager::OnPhaseChangeComplete()
 {
 	if(FetchAndUpdateCountdownDetails(Phase2StartWave))
 	{
-		mWaveSubsystem->SetWave(Phase2StartWave);
+		SetWave(Phase2StartWave);
 		mTimerComp->StartTimer(mCountDownTimerDetails.CountDownTimer);
 	}
 }
@@ -81,7 +56,7 @@ void AWaveManager::OnPrepareForPhaseChange()
 
 bool AWaveManager::FetchAndUpdateCountdownDetails(int Wave)
 {
-	int waveToLookFor = (Wave == -1)? mWaveSubsystem->GetCurrentWave() : Wave;
+	int waveToLookFor = (Wave == -1)? mCurrentWave : Wave;
 	if(mDACountDownTimer)
 	{
 		if(mDACountDownTimer->GetCountDownDetails(waveToLookFor, mCountDownTimerDetails))
@@ -94,7 +69,56 @@ bool AWaveManager::FetchAndUpdateCountdownDetails(int Wave)
 
 void AWaveManager::OnTimerFinish()
 {
-	mWaveSubsystem->StartWave();
+	mGameSubsystem->OnWaveStarted.Broadcast(mCurrentWave);
+}
+
+#pragma endregion
+
+#pragma region Wave Management
+
+void AWaveManager::SetWave(int Wave)
+{
+	mCurrentWave = Wave;
+	mGameSubsystem->OnWaveUpdated.Broadcast(mCurrentWave);
+}
+
+void AWaveManager::AddWaveCount()
+{
+	mCurrentWave++;
+	mGameSubsystem->OnWaveUpdated.Broadcast(mCurrentWave);
+}
+
+void AWaveManager::WaveComplete_Implementation()
+{
+	mCurrentWave++;
+	if(mCurrentWave >= mFinalWave)
+	{
+		mGameMode->MakeDecision();
+	}
+	else
+	{
+		if(mGameSubsystem)
+		{
+			mGameSubsystem->OnWaveUpdated.Broadcast(mCurrentWave);
+		}
+		
+		StartNextWave();
+	}
+}
+
+void AWaveManager::StartNextWave_Implementation()
+{
+	if(mCurrentWave > mCountDownTimerDetails.MaxLevel)
+	{
+		if(FetchAndUpdateCountdownDetails())
+		{
+			mTimerComp->StartTimer(mCountDownTimerDetails.CountDownTimer);
+		}
+	}
+	else
+	{
+		mTimerComp->StartTimer(mCountDownTimerDetails.CountDownTimer);
+	}
 }
 
 #pragma endregion

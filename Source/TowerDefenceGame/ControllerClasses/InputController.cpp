@@ -37,7 +37,7 @@ void AInputController::BeginPlay()
 	
 	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 	{
-		GameSubs->OnPhaseChange.AddDynamic(this, &ThisClass::OnPhaseChange);
+		GameSubs->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
 	}
 
 	
@@ -287,6 +287,13 @@ void AInputController::SetInputMoveType_Implementation(EInputModeType Type)
 		UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(this);
 		break;
 	case Game_Only:
+		UWidgetBlueprintLibrary::SetInputMode_GameOnly(this);
 		break;
 	}
 }
+
+void AInputController::OnPhaseComplete_Implementation(int Phase)
+{
+	SetInputMoveType(UI_Only);
+}
+

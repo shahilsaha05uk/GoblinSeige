@@ -24,6 +24,9 @@ public:
 
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void InitController(AEnemyManager* EnemyManager);
+
 	virtual void OnPossess(APawn* InPawn) override;
 	virtual void OnUnPossess() override;
 
@@ -33,6 +36,9 @@ public:
 	virtual void EnemyMove_Implementation(class ASpline* Spline) override;
 	virtual void EnemyAttack_Implementation() override;
 	
+
+	// Phase Methods
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnDoorBroken();
+	void OnPhaseComplete(int Phase);
+
 };

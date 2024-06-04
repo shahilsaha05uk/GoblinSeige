@@ -2,11 +2,9 @@
 
 
 #include "TimerComponent.h"
-
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetStringLibrary.h"
 #include "TowerDefenceGame/SubsystemClasses/ClockSubsystem.h"
-#include "TowerDefenceGame/SubsystemClasses/WaveSubsystem.h"
 
 
 #pragma region Starters
@@ -24,7 +22,7 @@ void UTimerComponent::BeginPlay()
 void UTimerComponent::StartTimer(const float Duration)
 {
 	cTime = Duration;
-	mClockSubsystem->StartTimer.Broadcast();
+	OnStartTimer.Broadcast();
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::Countdown, mRate, true);
 }
 
@@ -48,7 +46,7 @@ void UTimerComponent::Countdown_Implementation()
 	else
 	{
 		FinishTimer();
-		mClockSubsystem->FinishTimer.Broadcast();
+		OnFinishTimer.Broadcast();
 	}
 
 	UpdateTimer();
@@ -72,4 +70,5 @@ void UTimerComponent::ForceStopTimer()
 {
 	FinishTimer();
 }
+
 #pragma endregion

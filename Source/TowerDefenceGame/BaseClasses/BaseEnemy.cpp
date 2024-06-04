@@ -13,6 +13,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "TowerDefenceGame/ActorComponentClasses/HealthComponent.h"
 #include "TowerDefenceGame/InterfaceClasses/TargetInterface.h"
+#include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 #include "TowerDefenceGame/UIClasses/HealthBarWidget.h"
 #include "TowerDefenceGame/UIClasses/widgets/ParentBar.h"
@@ -41,6 +42,11 @@ void ABaseEnemy::Init_Implementation()
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnEnemyBeginOverlap);
 	
 	mHealthWidget = Cast<UParentBar>(mHealthBarWidgetComponent->GetWidget());
+
+	if(auto const GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
+		GameSubs->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
+
+
 }
 
 #pragma region Interface Enemy Movement
@@ -114,3 +120,9 @@ void ABaseEnemy::OnAttackNotified_Implementation()
 }
 
 #pragma endregion
+
+void ABaseEnemy::OnPhaseComplete_Implementation(int Phase)
+{
+	Destroy();
+
+}

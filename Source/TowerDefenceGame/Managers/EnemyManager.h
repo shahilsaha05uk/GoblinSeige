@@ -65,8 +65,6 @@ private:
 	UPROPERTY()
 	bool bPhaseComplete;
 	UPROPERTY()
-	int TotalEnemyControllersAssigned = 0;
-	UPROPERTY()
 	FTimerHandle EnemySpawnTimerHandle;
 	
 	UPROPERTY(EditDefaultsOnly, Category="Wave Configurations")
@@ -79,15 +77,15 @@ private:
 public:
 	UPROPERTY(BlueprintReadWrite)
 	int TotalEnemyControllers = 0;
+	UPROPERTY(BlueprintReadOnly)
+	int TotalEnemyControllersAssigned = 0;
+
 	UPROPERTY(BlueprintReadWrite)
 	TArray<class AEnemyController*> mFreeControllers;
 
-
+	UPROPERTY(BlueprintReadOnly)
+	class UGameSubsystem* mGameSubsystem;
 	
-	UPROPERTY(BlueprintReadOnly)
-	class UEnemySubsystem* mEnemySubsystem;
-	UPROPERTY(BlueprintReadOnly)
-	class UWaveSubsystem* mWaveSubsystem;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int mRemainingEnemies;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -133,6 +131,8 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnPrepareForPhaseChange();
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnPhaseComplete(int Phase);
 
 
 

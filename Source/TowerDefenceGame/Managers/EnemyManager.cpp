@@ -3,29 +3,22 @@
 
 #include "EnemyManager.h"
 #include "TowerDefenceGame/ControllerClasses/EnemyController.h"
-#include "TowerDefenceGame/SubsystemClasses/EnemySubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
-#include "TowerDefenceGame/SubsystemClasses/WaveSubsystem.h"
 
 void AEnemyManager::BeginPlay()
 {
 	Super::BeginPlay();
-	mEnemySubsystem = GetGameInstance()->GetSubsystem<UEnemySubsystem>();
-	if(mEnemySubsystem)
-	{
-		mEnemySubsystem->OnEnemyDead.AddDynamic(this, &ThisClass::FreeController);
-	}
 
-	mWaveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>();
-	if(mWaveSubsystem)
+	mGameSubsystem = GetGameInstance()->GetSubsystem<UGameSubsystem>();
+	if(mGameSubsystem)
 	{
-		mWaveSubsystem->OnWaveStarted.AddDynamic(this, &ThisClass::PrepareForWave);
-	}
+		mGameSubsystem->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
+		/*
+		mGameSubsystem->OnPhaseChangeComplete.AddDynamic(this, &ThisClass::OnPhaseChangeComplete);
+		mGameSubsystem->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::OnPrepareForPhaseChange);
 
-	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
-	{
-		GameSubs->OnPhaseChangeComplete.AddDynamic(this, &ThisClass::OnPhaseChangeComplete);
-		GameSubs->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::OnPrepareForPhaseChange);
+		*/
+		mGameSubsystem->OnWaveStarted.AddDynamic(this, &ThisClass::PrepareForWave);
 	}
 }
 
@@ -35,7 +28,7 @@ void AEnemyManager::CacheControllers_Implementation(int ControllerCount)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Spawning Controller %d"), i);
 		AEnemyController* EController = GetWorld()->SpawnActor<AEnemyController>(mEnemyControllerClass);
-
+		EController->InitController(this);
 		mFreeControllers.Add(EController);
 		TotalEnemyControllers++;
 	}
@@ -44,7 +37,7 @@ void AEnemyManager::CacheControllers_Implementation(int ControllerCount)
 void AEnemyManager::AssignEnemy_Implementation(int EnemyID)
 {
 	if(mFreeControllers.IsEmpty()) return;
-	const auto SpawnPoint = mEnemySubsystem->GetRandomEnemySpawnPoint();
+	const auto SpawnPoint = mGameSubsystem->GetRandomEnemySpawnPoint();
 
 	if(const auto Controller = mFreeControllers.Pop(true))
 		Controller->SpawnPawn(SpawnPoint, EnemyID);	// spawn the pawn
@@ -165,7 +158,7 @@ void AEnemyManager::FreeController(AEnemyController* ControllerRef)
 	}
 	if(TotalEnemyControllersAssigned == 0 && !bPhaseComplete)
 	{
-		if(mWaveSubsystem) mWaveSubsystem->EndWave();
+		if(mGameSubsystem) mGameSubsystem->OnAllDead.Broadcast();
 	}
 }
 
@@ -183,13 +176,19 @@ void AEnemyManager::FlushEverything()
 
 void AEnemyManager::OnPrepareForPhaseChange_Implementation()
 {
+	/*
 	bPhaseComplete = true;
 	FlushEverything();
+*/
 }
 
 void AEnemyManager::OnPhaseChangeComplete_Implementation()
 {
-	bPhaseComplete = false;
+	//bPhaseComplete = false;
 }
 
+void AEnemyManager::OnPhaseComplete_Implementation(int Phase)
+{
+	FlushEverything();
+}
 #pragma endregion

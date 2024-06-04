@@ -5,7 +5,7 @@
 
 #include "Kismet/KismetSystemLibrary.h"
 #include "TowerDefenceGame/InterfaceClasses/EnemyInterface.h"
-#include "TowerDefenceGame/SubsystemClasses/EnemySubsystem.h"
+#include "TowerDefenceGame/Managers/EnemyManager.h"
 #include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
 
 void AEnemyController::BeginPlay()
@@ -13,10 +13,16 @@ void AEnemyController::BeginPlay()
 	Super::BeginPlay();
 
 	if(auto const GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
-		GameSubs->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::OnDoorBroken);
+		GameSubs->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
 
 }
-
+void AEnemyController::InitController_Implementation(AEnemyManager* EnemyManager)
+{
+	if(EnemyManager)
+	{
+		mEnemyManager = EnemyManager;
+	}
+}
 
 void AEnemyController::OnPossess(APawn* InPawn)
 {
@@ -26,9 +32,10 @@ void AEnemyController::OnPossess(APawn* InPawn)
 void AEnemyController::OnUnPossess()
 {
 	Super::OnUnPossess();
-	if(const auto enemySubs = GetGameInstance()->GetSubsystem<UEnemySubsystem>())
+	if(APawn* pawn = GetPawn())
 	{
-		enemySubs->OnEnemyDead.Broadcast(this);
+		UnPossess();
+		pawn->Destroy();
 	}
 }
 
@@ -55,14 +62,9 @@ void AEnemyController::EnemyAttack_Implementation()
 	}
 }
 
-void AEnemyController::OnDoorBroken_Implementation()
+void AEnemyController::OnPhaseComplete_Implementation(int Phase)
 {
-	if(APawn* pawn = GetPawn())
-	{
-		UnPossess();
-		pawn->Destroy();
-	}
-
+	UnPossess();
 	Destroy();
-}
 
+}

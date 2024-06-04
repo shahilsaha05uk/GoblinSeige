@@ -21,42 +21,10 @@ class TOWERDEFENCEGAME_API ASpecPlayer : public APawn, public IPlayerInputInterf
 private:
 	UPROPERTY()
 	float CurrentAngle;
-	
 	UPROPERTY(EditDefaultsOnly, Category = "Move")
 	float MoveSpeed = 600.0f;
-	UPROPERTY(EditDefaultsOnly, Category = "Move")
-	FVector MovementBounds = FVector(1000.0f, 1000.0f, 1000.0f);
-	
-	UPROPERTY(EditDefaultsOnly, Category = "Orbit")
-	float MinPitchAngle;
-	UPROPERTY(EditDefaultsOnly, Category = "Orbit")
-	float MaxPitchAngle;
-	UPROPERTY(EditDefaultsOnly, Category = "Orbit")
-	TSubclassOf<AActor> mOrbitActorClass;
-
-	UPROPERTY()
-	AActor* mOrbitActor;
-	UPROPERTY()
-	FVector mOrbitCenter;
-	
-	UPROPERTY()
-	float mCurrentYawAngle;
-	float mCurrentPitchAngle;
-
-	UFUNCTION()
-	void CalculateInitialAngles();
-	UFUNCTION()
-	void UpdateCameraPosition();
 public:
-
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Orbit")
-	float OrbitRadius;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Orbit")
-	float OrbitSpeed;
-	
-
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	class UCameraComponent* mCameraComp;
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
@@ -91,4 +59,8 @@ public:
 	virtual void DisableLook_Implementation() override;
 	virtual void LeftMouseActions_Implementation() override;
 	virtual void Zoom_Implementation(float Value) override;
+
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnPhaseLoaded(int LoadedPhase);
 };

@@ -69,6 +69,8 @@ public:
 	void OnPrepareForPhaseChange();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnPhaseChange();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnPhaseComplete(int Phase);
 
 
 	
