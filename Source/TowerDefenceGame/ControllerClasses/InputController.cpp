@@ -7,6 +7,7 @@
 #include "InputTriggers.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Components/AudioComponent.h"
+#include "GameFramework/PawnMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Sound/SoundCue.h"
@@ -38,6 +39,7 @@ void AInputController::BeginPlay()
 	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 	{
 		GameSubs->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
+		GameSubs->OnPhaseLoadedSuccessfully.AddDynamic(this, &ThisClass::OnPhaseLoadedSuccess);
 	}
 
 	
@@ -60,7 +62,7 @@ void AInputController::SetupInputComponent()
 	Super::SetupInputComponent();
 	
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent)) {
-		
+
 		//Moving
 		EnhancedInputComponent->BindAction(DA_Inputs->IA_SpMove, ETriggerEvent::Triggered, this, &AInputController::Move);
 		EnhancedInputComponent->BindAction(DA_Inputs->IA_SpLook, ETriggerEvent::Triggered, this, &AInputController::Look);
@@ -295,5 +297,12 @@ void AInputController::SetInputMoveType_Implementation(EInputModeType Type)
 void AInputController::OnPhaseComplete_Implementation(int Phase)
 {
 	SetInputMoveType(UI_Only);
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
+}
+
+void AInputController::OnPhaseLoadedSuccess_Implementation(int LoadedPhase)
+{
+	SetInputMoveType(UI_And_Game);
+	UGameplayStatics::SetGamePaused(GetWorld(), false);
 }
 

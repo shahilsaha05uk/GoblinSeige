@@ -51,9 +51,9 @@ public:
 
 
 	UFUNCTION(BlueprintCallable)
-	void OnPhaseChangeComplete();
+	void OnPhaseLoadedSuccessfully(int Phase);
 	UFUNCTION(BlueprintCallable)
-	void OnPrepareForPhaseChange();
+	void OnPhaseComplete(int Phase);
 
 
 	// Wave Management

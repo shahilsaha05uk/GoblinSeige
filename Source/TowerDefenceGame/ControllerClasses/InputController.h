@@ -111,6 +111,9 @@ public:
 	void OnPlacementUpdated(EPlacementState State, APlacementActor* PlacementActor);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnPhaseLoadedSuccess(int LoadedPhase);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SetInputMoveType(EInputModeType Type);
 };
 

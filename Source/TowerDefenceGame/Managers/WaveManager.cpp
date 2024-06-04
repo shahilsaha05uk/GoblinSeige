@@ -16,8 +16,8 @@ void AWaveManager::BeginPlay()
 	mGameSubsystem = GetGameInstance()->GetSubsystem<UGameSubsystem>();
 	if(mGameSubsystem)
 	{
-		mGameSubsystem->OnPhaseChangeComplete.AddDynamic(this, &ThisClass::OnPhaseChangeComplete);
-		mGameSubsystem->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::OnPrepareForPhaseChange);
+		mGameSubsystem->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
+		mGameSubsystem->OnPhaseLoadedSuccessfully.AddDynamic(this, &ThisClass::OnPhaseLoadedSuccessfully);
 		mGameSubsystem->OnAllDead.AddDynamic(this, &ThisClass::WaveComplete);
 
 		mGameSubsystem->OnGetCurrentWave.BindDynamic(this, &ThisClass::GetCurrentWave);
@@ -36,7 +36,7 @@ void AWaveManager::Init(ATowerDefenceGameGameModeBase* GameMode)
 
 #pragma region Phase Methods
 
-void AWaveManager::OnPhaseChangeComplete()
+void AWaveManager::OnPhaseLoadedSuccessfully(int Phase)
 {
 	if(FetchAndUpdateCountdownDetails(Phase2StartWave))
 	{
@@ -45,7 +45,7 @@ void AWaveManager::OnPhaseChangeComplete()
 	}
 }
 
-void AWaveManager::OnPrepareForPhaseChange()
+void AWaveManager::OnPhaseComplete(int Phase)
 {
 	mTimerComp->ForceStopTimer();
 }
