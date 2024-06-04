@@ -13,7 +13,7 @@ void AEnemyController::BeginPlay()
 	Super::BeginPlay();
 
 	if(auto const GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
-		GameSubs->OnDoorBroken.AddDynamic(this, &ThisClass::OnDoorBroken);
+		GameSubs->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::OnDoorBroken);
 
 }
 
@@ -62,5 +62,7 @@ void AEnemyController::OnDoorBroken_Implementation()
 		UnPossess();
 		pawn->Destroy();
 	}
+
+	Destroy();
 }
 

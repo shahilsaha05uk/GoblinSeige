@@ -12,7 +12,6 @@ void ATowerDefenceGameGameModeBase::BeginPlay()
 	if(const auto gameSubsystem = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 	{
 		gameSubsystem->OnGameDecisionMade.AddDynamic(this, &ThisClass::GameOver);
-		gameSubsystem->OnDoorBroken.AddDynamic(this, &ThisClass::OnDoorBroken);
 	}
 
 	mWaveManager = GetWorld()->SpawnActor<AWaveManager>(WaveManagerClass);

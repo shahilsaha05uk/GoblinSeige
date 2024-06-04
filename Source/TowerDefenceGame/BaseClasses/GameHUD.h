@@ -26,7 +26,7 @@ private:
 public:
 
 	AGameHUD();
-	
+
 	virtual void BeginPlay() override;
 
 	UPROPERTY()
@@ -65,6 +65,10 @@ public:
 	};
 
 	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnPrepareForPhaseChange();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnPhaseChangeComplete();
 
 };
 

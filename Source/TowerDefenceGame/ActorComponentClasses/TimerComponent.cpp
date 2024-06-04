@@ -8,6 +8,9 @@
 #include "TowerDefenceGame/SubsystemClasses/ClockSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/WaveSubsystem.h"
 
+
+#pragma region Starters
+
 void UTimerComponent::BeginPlay()
 {
 	Super::BeginPlay();
@@ -15,32 +18,24 @@ void UTimerComponent::BeginPlay()
 	if(const ULocalPlayer* LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController())
 	{
 		mClockSubsystem = LocalPlayer->GetSubsystem<UClockSubsystem>();
-		mClockSubsystem->ForceStopTimer.AddDynamic(this, &UTimerComponent::FinishTimer);
 	}
-
-	if(const UWorld* world = GetWorld())
-	{
-		mWaveSubsystem = world->GetGameInstance()->GetSubsystem<UWaveSubsystem>();
-		if(mWaveSubsystem)
-		{
-			mWaveSubsystem->OnWaveUpdated.AddDynamic(this, &ThisClass::OnWaveComplete);
-		}
-	}
-	FetchAndUpdateCountdownDetails();
-	StartTimer();
 }
+
+void UTimerComponent::StartTimer(const float Duration)
+{
+	cTime = Duration;
+	mClockSubsystem->StartTimer.Broadcast();
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::Countdown, mRate, true);
+}
+
+#pragma endregion
+
+#pragma region Updaters
 
 void UTimerComponent::UpdateTimer()
 {
 	const FString timeToStr = UKismetStringLibrary::TimeSecondsToString(cTime);
 	mClockSubsystem->CurrentTime.Broadcast(timeToStr);
-}
-
-void UTimerComponent::StartTimer()
-{
-	cTime = mCountDownTimerDetails.CountDownTimer;
-	mClockSubsystem->StartTimer.Broadcast();
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::Countdown, mRate, true);
 }
 
 void UTimerComponent::Countdown_Implementation()
@@ -49,48 +44,32 @@ void UTimerComponent::Countdown_Implementation()
 	{
 		const float Val = cTime - mRate;
 		cTime = UKismetMathLibrary::FClamp(Val, 0.0f, 100000.0f);
-		UpdateTimer();
 	}
 	else
 	{
 		FinishTimer();
 		mClockSubsystem->FinishTimer.Broadcast();
 	}
-	
+
+	UpdateTimer();
 }
+
+#pragma endregion
+
+#pragma region Finish Timers
 
 void UTimerComponent::FinishTimer()
 {
 	GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
 	TimerHandle.Invalidate();
+
 	cTime = 0.0f;
+
 	UpdateTimer();
 }
 
-// Updating the Countdown Timer Details
-bool UTimerComponent::FetchAndUpdateCountdownDetails()
+void UTimerComponent::ForceStopTimer()
 {
-	if(mDACountDownTimer)
-	{
-		if(mDACountDownTimer->GetCountDownDetails(mWaveSubsystem->GetCurrentWave(), mCountDownTimerDetails))
-		{
-			return true;
-		}
-	}
-	return false;
+	FinishTimer();
 }
-
-void UTimerComponent::OnWaveComplete(int Wave)
-{
-	if(Wave > mCountDownTimerDetails.MaxLevel)
-	{
-		if(FetchAndUpdateCountdownDetails())
-		{
-			StartTimer();
-		}
-	}
-	else
-	{
-		StartTimer();
-	}
-}
+#pragma endregion

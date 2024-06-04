@@ -11,8 +11,9 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGameDecisionMadeSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHUDInitialisedSignature, AHUD*, HudRef);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnFeedbackSystemEnableSignature, EFeedbackType, Type, const FString&, MessageToDisplay);
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDoorBrokenSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPrepareForPhaseChangeSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPhaseChangeSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPhaseChangeCompleteSignature);
 
 
 UCLASS()
@@ -28,11 +29,15 @@ private:
 public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnFeedbackSystemEnableSignature OnFeedbackEnabled;
-	
+
+	// Phase Events
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnDoorBrokenSignature OnDoorBroken;
+	FOnPhaseChangeCompleteSignature OnPhaseChangeComplete;
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnPhaseChangeSignature OnPhaseChange;
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnPrepareForPhaseChangeSignature OnPrepareForPhaseChange;
+
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnGameDecisionMadeSignature OnGameDecisionMade;
 	UPROPERTY(BlueprintAssignable)

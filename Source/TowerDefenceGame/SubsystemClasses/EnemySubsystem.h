@@ -27,7 +27,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RegisterSpawnPoint(class AEnemySpawnPoint* SpawnPoint);
 	UFUNCTION(BlueprintCallable)
-	void DeRegisterSpawnPoint();
+	void DeRegisterSpawnPoint(class AEnemySpawnPoint* SpawnPoint);
 
 	UFUNCTION(BlueprintPure, BlueprintCallable)
 	class AEnemySpawnPoint* GetRandomEnemySpawnPoint();

@@ -22,7 +22,8 @@ void AWaveManager::BeginPlay()
 
 	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 	{
-		GameSubs->OnPhaseChange.AddDynamic(this, &ThisClass::OnPhaseChange);
+		GameSubs->OnPhaseChangeComplete.AddDynamic(this, &ThisClass::OnPhaseChangeComplete);
+		GameSubs->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::OnPrepareForPhaseChange);
 	}
 
 	if(const ULocalPlayer* LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController())
@@ -33,18 +34,62 @@ void AWaveManager::BeginPlay()
 		}
 	}
 
-	mTimerComp->StartTimer();
+	// get the latest timer and start the timer
+	FetchAndUpdateCountdownDetails();
+	mTimerComp->StartTimer(mCountDownTimerDetails.CountDownTimer);
 }
 
 void AWaveManager::OnWaveComplete_Implementation(int WaveNumber)
 {
-	if(const auto waveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>())
+	if(mWaveSubsystem->GetCurrentWave() >= mWaveSubsystem->GetFinalWave())
 	{
-		if(WaveNumber >= waveSubsystem->GetFinalWave())
+		GetGameInstance()->GetSubsystem<UGameSubsystem>()->OnGameDecisionMade.Broadcast();
+	}
+
+	if(WaveNumber > mCountDownTimerDetails.MaxLevel)
+	{
+		if(FetchAndUpdateCountdownDetails())
 		{
-			GetGameInstance()->GetSubsystem<UGameSubsystem>()->OnGameDecisionMade.Broadcast();
+			mTimerComp->StartTimer(mCountDownTimerDetails.CountDownTimer);
 		}
 	}
+	else
+	{
+		mTimerComp->StartTimer(mCountDownTimerDetails.CountDownTimer);
+	}
+}
+
+#pragma region Phase Methods
+
+void AWaveManager::OnPhaseChangeComplete()
+{
+	if(FetchAndUpdateCountdownDetails(Phase2StartWave))
+	{
+		mWaveSubsystem->SetWave(Phase2StartWave);
+		mTimerComp->StartTimer(mCountDownTimerDetails.CountDownTimer);
+	}
+}
+
+void AWaveManager::OnPrepareForPhaseChange()
+{
+	mTimerComp->ForceStopTimer();
+}
+
+#pragma endregion
+
+#pragma region Timer Methods
+
+bool AWaveManager::FetchAndUpdateCountdownDetails(int Wave)
+{
+	int waveToLookFor = (Wave == -1)? mWaveSubsystem->GetCurrentWave() : Wave;
+	if(mDACountDownTimer)
+	{
+		if(mDACountDownTimer->GetCountDownDetails(waveToLookFor, mCountDownTimerDetails))
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void AWaveManager::OnTimerFinish()
@@ -52,7 +97,4 @@ void AWaveManager::OnTimerFinish()
 	mWaveSubsystem->StartWave();
 }
 
-void AWaveManager::OnPhaseChange()
-{
-	mTimerComp->StartTimer();
-}
+#pragma endregion

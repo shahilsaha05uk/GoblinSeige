@@ -10,7 +10,6 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FStartTimerSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFinishedTimerSignature);    // when the timer automatically finishes
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCurrentTimeSignature, const FString&, CurrentTime);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FForceStopTimerSignature);    // when the timer automatically finishes
 
 UCLASS()
 class TOWERDEFENCEGAME_API UClockSubsystem : public ULocalPlayerSubsystem
@@ -24,5 +23,4 @@ public:
 
 	FStartTimerSignature StartTimer;
 	FFinishedTimerSignature FinishTimer;
-	FForceStopTimerSignature ForceStopTimer;
 };
