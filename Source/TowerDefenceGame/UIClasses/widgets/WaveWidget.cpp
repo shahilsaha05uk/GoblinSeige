@@ -4,16 +4,16 @@
 #include "WaveWidget.h"
 
 #include "Components/TextBlock.h"
-#include "TowerDefenceGame/SubsystemClasses/WaveSubsystem.h"
+#include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
 
 void UWaveWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	if(const auto WaveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>())
+	if(const auto gameSubsystem = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 	{
-		WaveSubsystem->OnWaveUpdated.AddDynamic(this, &ThisClass::OnWaveUpdate);
-		OnWaveUpdate(WaveSubsystem->GetCurrentWave());
+		gameSubsystem->OnWaveUpdated.AddDynamic(this, &ThisClass::OnWaveUpdate);
+		OnWaveUpdate(gameSubsystem->OnGetCurrentWave.Execute());
 	}
 }
 

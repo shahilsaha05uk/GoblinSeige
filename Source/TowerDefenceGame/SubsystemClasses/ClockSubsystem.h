@@ -7,8 +7,6 @@
 #include "ClockSubsystem.generated.h"
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FStartTimerSignature);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFinishedTimerSignature);    // when the timer automatically finishes
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCurrentTimeSignature, const FString&, CurrentTime);
 
 UCLASS()
@@ -21,6 +19,4 @@ public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FCurrentTimeSignature CurrentTime;
 
-	FStartTimerSignature StartTimer;
-	FFinishedTimerSignature FinishTimer;
 };

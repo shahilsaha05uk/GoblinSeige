@@ -17,6 +17,17 @@ private:
 
 	class APlayerController* mPlayerController;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Phase", meta = (ToolTip = "Key: Phase; Value: Total Targets that needs to be breached"))
+	TMap<int, int> mPhaseTargetBreachMap;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Phase")
+	int mTotalTargetsToDestroy = 0;
+	UPROPERTY(EditDefaultsOnly, Category = "Phase")
+	int mFinalPhase = 2;
+	UPROPERTY(EditDefaultsOnly, Category = "Phase")
+	int mCurrentPhase = 1;
+	
+	
 	UPROPERTY(EditDefaultsOnly)
 	int mStartingResources;
 	UPROPERTY(EditDefaultsOnly)
@@ -24,6 +35,8 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<class AEnemyManager> EnemyManagerClass;
 public:
+	UPROPERTY(BlueprintReadOnly)
+	class UGameSubsystem* mGameSubsystem;
 
 	UPROPERTY(BlueprintReadOnly)
 	class AWaveManager* mWaveManager;
@@ -36,10 +49,31 @@ public:
 	virtual void BeginPlay() override;
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnDoorBroken();
+	void OnTargetDestroyed();
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void GameOver();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnPhaseComplete();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnPhaseLoad();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnPhaseLoadedSuccess(int LoadedPhase);
+
+	UFUNCTION(BlueprintPure, BlueprintCallable)
+	int GetCurrentPhase() { return mCurrentPhase; }
+	UFUNCTION(BlueprintPure, BlueprintCallable)
+	int GetTotalPhases() {return mFinalPhase; }
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnWaveUpdated(int Wave);
+
 	
 	virtual void PostLogin(APlayerController* NewPlayer) override;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	bool MakeDecision();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void UpdateTargets();
 };

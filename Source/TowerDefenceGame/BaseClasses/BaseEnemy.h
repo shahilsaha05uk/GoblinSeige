@@ -53,9 +53,7 @@ public:
 	// Interface Methods
 	virtual void IA_FollowTheSpline_Implementation(ASpline* Spline) override;
 	virtual void IA_EnemyAttack_Implementation() override;
-
 	virtual bool isDead_Implementation() override { return bIsDead; }
-
 	virtual AActor* GetTarget_Implementation() override { return mTarget; }
 
 	// When the Enemy takes any kind of damage
@@ -77,4 +75,10 @@ public:
 	// when the dead animation ends
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnDeadAnimationEnd();
+
+	// Phase Methods
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnPhaseComplete(int Phase);
+
+
 };

@@ -69,6 +69,8 @@ public:
 	void OnPrepareForPhaseChange();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnPhaseChange();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnPhaseComplete(int Phase);
 
 
 	
@@ -107,6 +109,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnPlacementUpdated(EPlacementState State, APlacementActor* PlacementActor);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnPhaseLoadedSuccess(int LoadedPhase);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SetInputMoveType(EInputModeType Type);

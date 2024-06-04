@@ -23,8 +23,6 @@ class TOWERDEFENCEGAME_API UPlayerHUD : public UBaseWidget
 private:
 
 	UPROPERTY()
-	class UWaveSubsystem* mWaveSubsystem;
-	UPROPERTY()
 	class UResourceSubsystem* mResourceSubsystem;
 	
 public:
@@ -50,6 +48,8 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite)
 	TSubclassOf<UBaseWidget> PrompterWidgetClass;
+	UPROPERTY(BlueprintReadOnly)
+	class UGameSubsystem* mGameSubsystem;
 
 #pragma endregion
 

@@ -15,6 +15,7 @@ class TOWERDEFENCEGAME_API AWaveManager : public AActor
 private:
 	UPROPERTY(EditDefaultsOnly)
 	int Phase2StartWave = 11;
+
 	UPROPERTY(EditDefaultsOnly)
 	class UDA_CountdownTimer* mDACountDownTimer;
 	UPROPERTY()
@@ -22,13 +23,16 @@ private:
 
 
 	UPROPERTY(EditDefaultsOnly)
-	int mInitialWave = 1;
+	int mCurrentWave = 1;
 	UPROPERTY(EditDefaultsOnly)
 	int mFinalWave;
 public:
 
 	UPROPERTY(BlueprintReadOnly)
-	class UWaveSubsystem* mWaveSubsystem;
+	class ATowerDefenceGameGameModeBase* mGameMode;
+	
+	UPROPERTY(BlueprintReadOnly)
+	class UGameSubsystem* mGameSubsystem;
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	class UTimerComponent* mTimerComp;
 
@@ -37,18 +41,37 @@ public:
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable)
+	void Init(class ATowerDefenceGameGameModeBase* GameMode);
+	UFUNCTION(BlueprintCallable)
 	void OnTimerFinish();
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnWaveComplete(int WaveNumber);
 
 	UFUNCTION(BlueprintCallable)
 	bool FetchAndUpdateCountdownDetails(int Wave = -1);
 
 
 	UFUNCTION(BlueprintCallable)
-	void OnPhaseChangeComplete();
+	void OnPhaseLoadedSuccessfully(int Phase);
 	UFUNCTION(BlueprintCallable)
-	void OnPrepareForPhaseChange();
+	void OnPhaseComplete(int Phase);
+
+
+	// Wave Management
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	int GetCurrentWave(){ return mCurrentWave; }
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	int GetFinalWave() {return mFinalWave;}
+	UFUNCTION(BlueprintCallable)
+	void AddWaveCount();
+	UFUNCTION(BlueprintCallable)
+	void SetWave(int Wave);
+
+	// called when the current wave completes
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void WaveComplete();
+
+	// Starts the next wave
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void StartNextWave();
 
 };

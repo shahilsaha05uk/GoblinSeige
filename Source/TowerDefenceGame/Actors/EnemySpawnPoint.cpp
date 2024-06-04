@@ -3,7 +3,6 @@
 
 #include "EnemySpawnPoint.h"
 
-#include "TowerDefenceGame/SubsystemClasses/EnemySubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
 
 
@@ -11,24 +10,26 @@ void AEnemySpawnPoint::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
+	mGameSubsystem = GetGameInstance()->GetSubsystem<UGameSubsystem>();
+	if(mGameSubsystem)
 	{
-		GameSubs->OnPhaseChangeComplete.AddDynamic(this, &ThisClass::OnPhaseChangeComplete);
-		GameSubs->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::OnPrepareForPhaseChange);
+		mGameSubsystem->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
+		mGameSubsystem->OnPhaseLoadedSuccessfully.AddDynamic(this, &ThisClass::OnPhaseLoaded);
+		//mGameSubsystem->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::OnPrepareForPhaseChange);
+
+		mGameSubsystem->RegisterSpawnPoint(this);
 	}
-
-	mEnemySubsystem = GetGameInstance()->GetSubsystem<UEnemySubsystem>();
-	if(mEnemySubsystem) mEnemySubsystem->RegisterSpawnPoint(this);
 }
 
-void AEnemySpawnPoint::OnPrepareForPhaseChange()
+
+void AEnemySpawnPoint::OnPhaseComplete(int Phase)
 {
-	if(mEnemySubsystem) mEnemySubsystem->DeRegisterSpawnPoint(this);
+	if(mGameSubsystem) mGameSubsystem->DeRegisterSpawnPoint(this);
 }
 
-void AEnemySpawnPoint::OnPhaseChangeComplete()
+void AEnemySpawnPoint::OnPhaseLoaded(int LoadedPhase)
 {
-	if(mEnemySubsystem) mEnemySubsystem->RegisterSpawnPoint(this);
+	if(mGameSubsystem) mGameSubsystem->RegisterSpawnPoint(this);
 }
 
 FVector AEnemySpawnPoint::GetRandomPointInsideTheSpawnArea_Implementation()

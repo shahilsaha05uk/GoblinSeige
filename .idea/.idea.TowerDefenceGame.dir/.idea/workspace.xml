@@ -9,40 +9,14 @@
   <component name="ChangeListManager">
     <list default="true" id="9e7763e5-9dad-44e7-9cef-d89b5e8a74c4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Main_Level.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Main_Level.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Menu.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Menu.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Shahil1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Shahil1.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/Actors/bp_DOOR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Actors/bp_DOOR.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/BP/Controllers/BP_Controller.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Controllers/BP_Controller.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/HUD/BP_HUD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/HUD/BP_HUD.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/Managers/BP_WaveManager.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Managers/BP_WaveManager.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/BP/Pawn/BP_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Pawn/BP_Player.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/FileSystemMappings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/FileSystemMappings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/TimerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/TimerComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/TimerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/TimerComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/EnemySpawnPoint.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/EnemySpawnPoint.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/EnemySpawnPoint.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/EnemySpawnPoint.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/GameHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/GameHUD.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/GameHUD.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/BaseClasses/GameHUD.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/EnemyController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/EnemyController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_MediaPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_MediaPlayer.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/InputController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/InputController.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/InputController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/InputController.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/EnemyManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/EnemyManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/EnemyManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/EnemyManager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/WaveManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/WaveManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/WaveManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/WaveManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/ClockSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/ClockSubsystem.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/EnemySubsystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/EnemySubsystem.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/EnemySubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/EnemySubsystem.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/GameSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/GameSubsystem.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/WaveSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/WaveSubsystem.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +27,88 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -942,6 +998,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -1231,6 +1288,7 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -1258,11 +1316,6 @@
           <url>file://$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/UpgradeComponent.h</url>
           <line>47</line>
           <option name="timeStamp" value="60" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h</url>
-          <line>24</line>
-          <option name="timeStamp" value="77" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

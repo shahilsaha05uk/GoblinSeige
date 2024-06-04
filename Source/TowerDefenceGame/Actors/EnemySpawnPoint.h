@@ -14,7 +14,7 @@ class TOWERDEFENCEGAME_API AEnemySpawnPoint : public AActor
 private:
 
 	UPROPERTY()
-	class UEnemySubsystem* mEnemySubsystem;
+	class UGameSubsystem* mGameSubsystem;
 
 	
 public:
@@ -24,7 +24,8 @@ public:
 	
 
 	UFUNCTION(BlueprintCallable)
-	void OnPrepareForPhaseChange();
+	void OnPhaseComplete(int Phase);
 	UFUNCTION(BlueprintCallable)
-	void OnPhaseChangeComplete();
+	void OnPhaseLoaded(int LoadedPhase);
+
 };

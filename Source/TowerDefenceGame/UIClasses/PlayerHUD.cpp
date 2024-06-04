@@ -3,20 +3,16 @@
 #include "DescriptionBox.h"
 #include "FeedbackWidget.h"
 #include "ShopMenu.h"
-#include "Animation/WidgetAnimation.h"
-#include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
-#include "TowerDefenceGame/SubsystemClasses/WaveSubsystem.h"
 
 void UPlayerHUD::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	mWaveSubsystem = GetGameInstance()->GetSubsystem<UWaveSubsystem>();
 	mResourceSubsystem = GetWorld()->GetFirstLocalPlayerFromController()->GetSubsystem<UResourceSubsystem>();
 
 	if (const auto PlacementSubs = GetGameInstance()->GetSubsystem<UBuildingPlacementSubsystem>())
@@ -34,8 +30,7 @@ void UPlayerHUD::NativeConstruct()
 		GameSubs->OnFeedbackEnabled.AddDynamic(this, &ThisClass::OnFeedbackRecieved);
 		GameSubs->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::EnableCutscene);
 	}
-
-
+	
 	mShop->Init(this);
 	mShop->OnShopButtonHovered.AddDynamic(this, &ThisClass::OnShopButtonHovered);
 }

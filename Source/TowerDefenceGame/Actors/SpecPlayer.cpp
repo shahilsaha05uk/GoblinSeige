@@ -23,12 +23,7 @@ ASpecPlayer::ASpecPlayer()
 	
 	mBuildingPlacementHandlerComponent = CreateDefaultSubobject<UBuildingPlacementHandlerComponent>("PlayerInteractionComponent");
 	
-	OrbitRadius = 300.0f;
-	OrbitSpeed = 50.0f;
 	CurrentAngle = 0.0f;
-
-	MinPitchAngle = -30.0f;
-	MaxPitchAngle = 89.0f;
 }
 
 
@@ -40,20 +35,10 @@ void ASpecPlayer::PossessedBy(AController* NewController)	// Called before Begin
 
 	// Binding to the events inside the subsystems
 	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
+	{
 		GameSubs->OnHudInitialised.AddDynamic(this, &ThisClass::OnHudInitialised);
-
-	// Orbit setup
-	if(mOrbitActorClass)
-	{
-		mOrbitActor = UGameplayStatics::GetActorOfClass(GetWorld(), mOrbitActorClass);
+		GameSubs->OnPhaseLoadedSuccessfully.AddDynamic(this, &ThisClass::OnPhaseLoaded);
 	}
-	if(mOrbitActor)
-	{
-		mOrbitCenter = mOrbitActor->GetActorLocation();
-	}
-
-	CalculateInitialAngles();
-	UpdateCameraPosition();
 }
 
 void ASpecPlayer::OnHudInitialised(AHUD* HudRef)
@@ -68,7 +53,6 @@ void ASpecPlayer::OnHudInitialised(AHUD* HudRef)
 
 void ASpecPlayer::Move_Implementation(const FInputActionValue& InputActionValue)
 {
-	/*
 	const FVector vec = InputActionValue.Get<FVector>();
 
 	const FRotator cachedRot = GetControlRotation();
@@ -76,36 +60,18 @@ void ASpecPlayer::Move_Implementation(const FInputActionValue& InputActionValue)
 	FRotator fwdRot = cachedRot; fwdRot.Roll = fwdRot.Pitch = 0;
 	FRotator rhtRot = cachedRot; rhtRot.Pitch = 0;
 	
-	const FVector fwdVec = fwdRot.Vector();
-	const FVector rhtVec = FRotationMatrix(rhtRot).GetScaledAxis(EAxis::Y);
+	const FVector fwdVec = fwdRot.Vector() * MoveSpeed;
+	const FVector rhtVec = FRotationMatrix(rhtRot).GetScaledAxis(EAxis::Y) * MoveSpeed;
 
-	AddMovementInput(fwdVec, vec.X * MoveSpeed);
-	AddMovementInput(rhtVec, vec.Y * MoveSpeed);
-*/
+	AddMovementInput(fwdVec, vec.X);
+	AddMovementInput(rhtVec, vec.Y);
 }
 
 void ASpecPlayer::Look_Implementation(const FInputActionValue& InputActionValue)
 {
-	const FVector2D LookInput = InputActionValue.Get<FVector2D>();
-
-	const float Yaw = LookInput.X;
-	const float Pitch = LookInput.Y;
-
-	mCurrentYawAngle += Yaw * OrbitSpeed * GetWorld()->GetDeltaSeconds();
-	if (mCurrentYawAngle >= 360.0f)
-	{
-		mCurrentYawAngle -= 360.0f;
-	}
-	else if (mCurrentYawAngle < 0.0f)
-	{
-		mCurrentYawAngle += 360.0f;
-	}
+	float yaw = InputActionValue.Get<FVector>().X;
+	AddControllerYawInput(yaw);
 	
-	mCurrentPitchAngle += Pitch * OrbitSpeed * GetWorld()->GetDeltaSeconds();
-	mCurrentPitchAngle = FMath::Clamp(mCurrentPitchAngle, MinPitchAngle, MaxPitchAngle);
-
-	UpdateCameraPosition();
-
 }
 void ASpecPlayer::EnableLook_Implementation()
 {
@@ -127,23 +93,7 @@ void ASpecPlayer::Zoom_Implementation(float Value)
 
 #pragma endregion
 
-void ASpecPlayer::CalculateInitialAngles()
+void ASpecPlayer::OnPhaseLoaded_Implementation(int LoadedPhase)
 {
-	FVector Direction = GetActorLocation() - mOrbitCenter;
-	Direction.Normalize();
-
-	mCurrentYawAngle = FMath::Atan2(Direction.Y, Direction.X) * (180.0f / PI);
-	mCurrentPitchAngle = FMath::Asin(Direction.Z) * (180.0f / PI);
-	mCurrentPitchAngle = FMath::Clamp(mCurrentPitchAngle, MinPitchAngle, MaxPitchAngle);
 }
 
-void ASpecPlayer::UpdateCameraPosition()
-{
-	const float RadYaw = FMath::DegreesToRadians(mCurrentYawAngle);
-	const float RadPitch = FMath::DegreesToRadians(mCurrentPitchAngle);
-	
-	const FVector NewLocation = mOrbitCenter + FVector(FMath::Cos(RadYaw) * OrbitRadius, FMath::Sin(RadYaw) * OrbitRadius, FMath::Sin(RadPitch) * OrbitRadius);
-	const FRotator NewRotation = (mOrbitCenter - NewLocation).Rotation();
-
-	SetActorLocationAndRotation(NewLocation, NewRotation);
-}

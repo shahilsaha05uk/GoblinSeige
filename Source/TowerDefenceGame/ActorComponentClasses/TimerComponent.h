@@ -8,6 +8,8 @@
 #include "TowerDefenceGame/DataAssetClasses/DA_CountdownTimer.h"
 #include "TimerComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FStartTimerSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFinishedTimerSignature);    // when the timer automatically finishes
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable, BlueprintType )
 class TOWERDEFENCEGAME_API UTimerComponent : public UActorComponent
@@ -15,8 +17,6 @@ class TOWERDEFENCEGAME_API UTimerComponent : public UActorComponent
 	GENERATED_BODY()
 
 private:
-	UPROPERTY()
-	class UWaveSubsystem* mWaveSubsystem;
 	
 	UPROPERTY()
 	FTimerHandle TimerHandle;
@@ -34,6 +34,13 @@ private:
 	class UClockSubsystem* mClockSubsystem;
 
 public:
+
+	UPROPERTY(BlueprintReadOnly)
+	class UGameSubsystem* mGameSubsystem;
+
+	FStartTimerSignature OnStartTimer;
+	FFinishedTimerSignature OnFinishTimer;
+
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable)
