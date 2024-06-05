@@ -45,6 +45,13 @@ void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacement
 {
 	Super::Init_Implementation(BuildingDetails, PlacementActor);
 
+	if(PlacementActor)
+	{
+		float rad = PlacementActor->mSphereComp->GetUnscaledSphereRadius();
+		mRangeColliderComp->InitSphereRadius(rad);
+		mRangeColliderComp->SetSphereRadius(rad);
+	}
+	
 	// Binding the Range collider overlap events
 	mRangeColliderComp->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnEnemyEnteredTheRange);
 	mRangeColliderComp->OnComponentEndOverlap.AddDynamic(this, &ThisClass::OnEnemyExitedTheRange);

@@ -2,14 +2,20 @@
 
 
 #include "PlacementActor.h"
+
+#include "Components/SphereComponent.h"
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
 
 APlacementActor::APlacementActor()
 {
+	mSphereComp = CreateDefaultSubobject<USphereComponent>("FakeRange");
+	mSphereComp->SetupAttachment(RootComponent);
+
 	mStaticMesh = CreateDefaultSubobject<UStaticMeshComponent>("MeshComp");
-	mStaticMesh->SetupAttachment(RootComponent);
+	mStaticMesh->SetupAttachment(mSphereComp);
+
 }
 
 void APlacementActor::BeginPlay()
