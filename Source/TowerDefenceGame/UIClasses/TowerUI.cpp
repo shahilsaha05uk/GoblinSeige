@@ -4,6 +4,7 @@
 #include "TowerUI.h"
 
 #include "Components/Button.h"
+#include "Components/SphereComponent.h"
 #include "TowerDefenceGame/ActorComponentClasses/UpgradeComponent.h"
 #include "TowerDefenceGame/Actors/Tower.h"
 #include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"

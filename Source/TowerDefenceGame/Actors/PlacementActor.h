@@ -34,6 +34,8 @@ public:
 public:
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	class UStaticMeshComponent* mStaticMesh;
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	class USphereComponent* mSphereComp;
 
 	APlacementActor();
 

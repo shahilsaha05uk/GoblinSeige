@@ -9,65 +9,18 @@
   <component name="ChangeListManager">
     <list default="true" id="9e7763e5-9dad-44e7-9cef-d89b5e8a74c4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Goblin_01/Materials/MI_goblin_01_green.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Goblin_01/Materials/MI_goblin_01_green.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Main_Level.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Main_Level.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Shahil1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Shahil1.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Shahil2.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Shahil2.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Meshes/props/bp_test.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Enemy.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin2.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BP_Goblin3.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/AI/BT_Goblin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/AI/BT_Goblin.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/Controllers/BP_Controller.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Controllers/BP_Controller.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/Modes/BP_GameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Modes/BP_GameMode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/Pawn/BP_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Pawn/BP_Player.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Untitled.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Untitled.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Actors/BP_OrbitCenter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Actors/BP_OrbitCenter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Actors/BP_Placement.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Actors/BP_Placement.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/BP/Towers/BP_Tower.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Towers/BP_Tower.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/DataAssets/DA_Buildings.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DataAssets/DA_Buildings.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/Test_AJ.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Test_AJ.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_DescriptionBox.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_DescriptionBox.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_Feedback.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_Feedback.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_GameComplete.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_GameComplete.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_PlayerHUD.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VFX/Tower/NS_Air.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Tower/NS_Air.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VFX/Tower/NS_Electric.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Tower/NS_Electric.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VFX/Tower/NS_Fire.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Tower/NS_Fire.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VFX/Tower/NS_Fireworks.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Tower/NS_Fireworks.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VFX/Tower/NS_Flamethrower.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Tower/NS_Flamethrower.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/VFX/Tower/NS_Stone.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Tower/NS_Stone.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/VFX/Tower/NS_Upgrade.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/VFX/Tower/NS_Upgrade.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Muzzle_Lightning.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Muzzle_Lightning.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Projectile_FireBall.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Projectile_FireBall.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Projectile_LightningElectric.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Work/NiagaraSystems/NS_Projectile_LightningElectric.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/TimerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/TimerComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/UpgradeComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ActorComponentClasses/UpgradeComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/SpecPlayer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/PlacementActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/PlacementActor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/PlacementActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/PlacementActor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Tower.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Tower.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Tower.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Actors/Tower.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/MainMenuMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/MainMenuMode.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/EnemyManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/EnemyManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/WaveManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/WaveManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ObjectClasses/UpgradeObject.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ObjectClasses/UpgradeObject.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/GameSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/GameSubsystem.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SupportClasses/EnumClass.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SupportClasses/EnumClass.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/DescriptionBox.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/DescriptionBox.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/DescriptionBox.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/DescriptionBox.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/GameComplete.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/GameComplete.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/HealthBarWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/HealthBarWidget.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/MainMenu.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/MainMenu.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PauseMenu.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PauseMenu.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/PlayerHUD.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/Settings.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/Settings.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/ShopMenu.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/ShopMenu.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/TowerUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/TowerUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/TowerUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/TowerUI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/BuyButton.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/widgets/BuyButton.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +31,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -739,7 +696,7 @@
       <workItem from="1717236957052" duration="38846000" />
       <workItem from="1717289624500" duration="22053000" />
       <workItem from="1717342177563" duration="1629000" />
-      <workItem from="1717540511863" duration="40833000" />
+      <workItem from="1717540511863" duration="43849000" />
     </task>
     <servers />
   </component>
@@ -767,7 +724,7 @@
       <breakpoints>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Source/TowerDefenceGame/Actors/PlacementActor.cpp</url>
-          <line>30</line>
+          <line>36</line>
           <option name="timeStamp" value="58" />
         </line-breakpoint>
       </breakpoints>
