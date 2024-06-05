@@ -33,4 +33,6 @@ public:
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	bool isDead();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void TakeRadiamDamage();
 };

@@ -22,6 +22,7 @@ public:
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnBuildingInteractionBeginSignature OnBuildingInteractionBegin;
+
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnBuildingInteractionEndSignature OnBuildingInteractionEnd;
 };

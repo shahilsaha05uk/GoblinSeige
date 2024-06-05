@@ -63,12 +63,5 @@ public:
 
 		return (bCasted)? Cast<T>(mWidgetInstanceMap[Type]) : mWidgetInstanceMap[Type];
 	};
-
-	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnPrepareForPhaseChange();
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnPhaseChangeComplete();
-
 };
 

@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "TowerDefenceGame/ObjectClasses/UpgradeObject.h"
 #include "TowerDefenceGame/SupportClasses/StructClass.h"
 #include "UpgradeComponent.generated.h"
 
@@ -19,17 +18,17 @@ private:
 
 	UPROPERTY()
 	FUpgradeDetails mCurrentUpgrade;
+
 	UPROPERTY()
 	int mTotalMoneySpentOnUpgrades;
 
-	
 public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnUpgradeAppliedSignature OnUpgradeApplied;
+
 	UPROPERTY(BlueprintReadOnly)
 	TArray<FUpgradeDetails> mUpgradeDetails;
-	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<UUpgradeObject> UpgradeClass;
+
 	UPROPERTY(BlueprintReadOnly)
 	class UResourceSubsystem* mResourceSubsystem;
 
@@ -42,14 +41,19 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetTotalMoneySpentOnUpgrades() { return mTotalMoneySpentOnUpgrades; }
+
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool IsValidUpgrade() const;
+
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	FUpgradeDetails GetCurrentUpgrade() {return mCurrentUpgrade;}
+
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool HasNextUpgrade() const;
+
 	UFUNCTION(BlueprintCallable)
 	void MoveToNextUpgrade();
+
 	UFUNCTION(BlueprintCallable)
 	void ApplyUpgrade();
 };

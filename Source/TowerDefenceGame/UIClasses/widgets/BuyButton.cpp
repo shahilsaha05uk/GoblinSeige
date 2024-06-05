@@ -56,6 +56,7 @@ void UBuyButton::OnButtonHovered_Implementation()
 
 void UBuyButton::OnButtonUnhovered_Implementation()
 {
+	mShop->OnShopButtonUnhover.Broadcast();
 	UpdateButtonState(BUTTON_UNHOVERED);
 }
 

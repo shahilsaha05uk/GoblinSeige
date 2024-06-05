@@ -18,8 +18,10 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UButton* btnResume;
+
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UButton* btnReturnToMainMenu;
+
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UButton* btnQuit;
 
@@ -27,8 +29,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnResumeClicked();
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnReturnToMainMenuClicked();
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnQuitClicked();
 };

@@ -15,9 +15,6 @@ void ATowerDefenceGameGameModeBase::BeginPlay()
 		mGameSubsystem->OnGameDecisionMade.AddDynamic(this, &ThisClass::GameOver);
 		mGameSubsystem->OnTargetDestroyed.AddDynamic(this, &ThisClass::OnTargetDestroyed);
 		mGameSubsystem->OnWaveUpdated.AddDynamic(this, &ThisClass::OnWaveUpdated);
-
-		mGameSubsystem->OnPhaseLoad.AddDynamic(this, &ThisClass::OnPhaseLoad);
-		mGameSubsystem->OnPhaseChangeComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
 	}
 
 	mWaveManager = GetWorld()->SpawnActor<AWaveManager>(WaveManagerClass);
@@ -25,8 +22,6 @@ void ATowerDefenceGameGameModeBase::BeginPlay()
 	
 	mEnemyManager = GetWorld()->SpawnActor<AEnemyManager>(EnemyManagerClass);
 
-	UpdateTargets();
-	
 	Super::BeginPlay();
 }
 
@@ -43,19 +38,15 @@ void ATowerDefenceGameGameModeBase::GameOver_Implementation()
 {
 }
 
-void ATowerDefenceGameGameModeBase::OnPhaseComplete_Implementation()
-{
-	/* Check if all the phases are complete
-	 * if yes:
-	 *		check if the current wave == total wave AND all the enemies are killed
-	 *			if so, Game Won,
-	 *			else, Game Lost
-	 */
-
-}
-
 void ATowerDefenceGameGameModeBase::OnWaveUpdated_Implementation(int Wave)
 {
+	if(Wave >= mWaveManager->GetFinalWave())
+	{
+		mGameSubsystem->OnGameComplete.Broadcast(true);
+	}
+	{
+		mWaveManager->StartNextWave();
+	}
 }
 
 void ATowerDefenceGameGameModeBase::PostLogin(APlayerController* NewPlayer)
@@ -67,26 +58,23 @@ void ATowerDefenceGameGameModeBase::PostLogin(APlayerController* NewPlayer)
 
 bool ATowerDefenceGameGameModeBase::MakeDecision_Implementation()
 {
-	// Win Conditions
-	/*
-	 * if the current wave is == total wave
-	 * if the enemies are all destroyed
-	 */
-
-	//if(mCurrentPhase >= mFinalPhase && )
-	if(mCurrentPhase <= mFinalPhase &&
-		mEnemyManager->TotalEnemyControllersAssigned &&
-		mWaveManager->GetCurrentWave() >= mWaveManager->GetFinalWave())
+	if(mWaveManager->GetCurrentWave() >= mWaveManager->GetFinalWave())
 	{
-		// Game Won
-		UE_LOG(LogTemp, Warning, TEXT("Game Won"));
+		mGameSubsystem->OnGameComplete.Broadcast(true);
+		return true;
 	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Game Lost"));
-	}
-
+	mGameSubsystem->OnGameComplete.Broadcast(false);
 	return false;
+}
+
+
+void ATowerDefenceGameGameModeBase::OnPhaseLoad_Implementation()
+{
+	UpdateTargets();
+}
+
+void ATowerDefenceGameGameModeBase::LoadPhase_Implementation()
+{
 }
 
 void ATowerDefenceGameGameModeBase::OnTargetDestroyed_Implementation()
@@ -101,26 +89,18 @@ void ATowerDefenceGameGameModeBase::OnTargetDestroyed_Implementation()
 	if(mTotalTargetsToDestroy <=0)
 	{
 		mCurrentPhase++;
-	
-		if(mCurrentPhase > mFinalPhase)
+
+		if(mCurrentPhase > mFinalPhase) mCurrentPhase = -1;
+
+		mGameSubsystem->OnPhaseComplete.Broadcast(mCurrentPhase);
+		if(mCurrentPhase == -1)
 		{
-			const bool bWon = MakeDecision();
-			mGameSubsystem->OnGameComplete.Broadcast(bWon);
+			MakeDecision();
 		}
 		else
 		{
+			mWaveManager->RevertWave(mCurrentPhase);
 			UpdateTargets();
-			mGameSubsystem->OnPhaseComplete.Broadcast(mCurrentPhase);
 		}
 	}
-}
-
-void ATowerDefenceGameGameModeBase::OnPhaseLoad_Implementation()
-{
-	mGameSubsystem->OnPhaseLoadedSuccessfully.AddDynamic(this, &ThisClass::OnPhaseLoadedSuccess);
-}
-
-void ATowerDefenceGameGameModeBase::OnPhaseLoadedSuccess_Implementation(int LoadedPhase)
-{
-	
-}
+} 

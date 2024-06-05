@@ -23,6 +23,13 @@ private:
 	float CurrentAngle;
 	UPROPERTY(EditDefaultsOnly, Category = "Move")
 	float MoveSpeed = 600.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Camera")
+	float MinPitch = -80.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Camera")
+	float MaxPitch = 80.0f;
+
 public:
 	
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)

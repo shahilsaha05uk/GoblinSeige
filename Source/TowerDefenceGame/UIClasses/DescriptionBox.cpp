@@ -27,3 +27,8 @@ void UDescriptionBox::UpdateDescriptionOnHovered_Implementation(FBuildingBuyDeta
 {
 	
 }
+
+void UDescriptionBox::UpdateDescriptionOnUnhovered_Implementation()
+{
+	
+}

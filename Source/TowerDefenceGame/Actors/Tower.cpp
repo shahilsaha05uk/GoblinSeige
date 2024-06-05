@@ -63,7 +63,7 @@ void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacement
 	mUpgradeComp->Init(BuildingDetails.UpgradeAsset);
 
 	//Setting the Niagara Component
-	//mNiagaraComp->SetAsset(BuildingDetails.mBuildingNiagara, true);
+	mNiagaraComp->SetAsset(BuildingDetails.mBuildingNiagara, true);
 }
 
 #pragma region States
@@ -209,6 +209,7 @@ void ATower::OnBuildingDecisionTaken_Implementation(bool HasConfirmed)
 void ATower::UpdateTowerState(ETowerState State)
 {
 	GetWorld()->GetTimerManager().ClearTimer(TowerStateTimeHandler);
+
 	TowerStateTimeHandler.Invalidate();
 
 	TowerState = State;
@@ -235,13 +236,16 @@ AProjectile* ATower::SpawnProjectile_Implementation()
 bool ATower::FindTarget_Implementation()
 {
 	TArray<AActor*> OverlappedActors;
+	
 	mRangeColliderComp->GetOverlappingActors(OverlappedActors, ABaseEnemy::StaticClass());
 
 	if(!OverlappedActors.IsEmpty())
 	{
 		float Distance = 0.0f;
+		
 		mTarget = UGameplayStatics::FindNearestActor(GetActorLocation(), OverlappedActors, Distance);
 	}
+	
 	return (mTarget != nullptr);
 }
 
@@ -249,7 +253,6 @@ void ATower::Upgrade_Implementation(FUpgradeDetails Details)
 {
 	Super::Upgrade_Implementation(Details);
 	BuildingStats = Details.BuildingStats;
-	UpdateTowerState(Idle);
 }
 
 void ATower::DestructBuilding_Implementation()

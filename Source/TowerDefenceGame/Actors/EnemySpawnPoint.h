@@ -4,10 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "TowerDefenceGame/InterfaceClasses/EnemyInterface.h"
+#include "TowerDefenceGame/InterfaceClasses/SpawnPointInterface.h"
 #include "EnemySpawnPoint.generated.h"
 
 UCLASS()
-class TOWERDEFENCEGAME_API AEnemySpawnPoint : public AActor
+class TOWERDEFENCEGAME_API AEnemySpawnPoint : public AActor, public ISpawnPointInterface
 {
 	GENERATED_BODY()
 
@@ -15,17 +17,8 @@ private:
 
 	UPROPERTY()
 	class UGameSubsystem* mGameSubsystem;
-
-	
 public:
 	virtual void BeginPlay() override;
-	UFUNCTION(BlueprintPure, BlueprintCallable, BlueprintNativeEvent)
-	FVector GetRandomPointInsideTheSpawnArea();
 	
-
-	UFUNCTION(BlueprintCallable)
-	void OnPhaseComplete(int Phase);
-	UFUNCTION(BlueprintCallable)
-	void OnPhaseLoaded(int LoadedPhase);
-
+	virtual FVector GetRandomPointWithinTheBounds_Implementation() override;
 };

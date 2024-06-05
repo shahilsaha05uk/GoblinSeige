@@ -10,7 +10,7 @@ public class TowerDefenceGame : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Json", "JsonUtilities", "Custom_BlueprintSImplifiers", "Niagara", "AIModule", "GameplayTasks"});
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "EnhancedInput", "EnemyWaveSpawnPlugin" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "EnhancedInput"});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 	}

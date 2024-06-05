@@ -35,8 +35,6 @@ void ABaseEnemy::BeginPlay()
 
 void ABaseEnemy::Init_Implementation()
 {
-	OnTakeAnyDamage.AddDynamic(this, &ThisClass::OnDamageTaken);
-
 	mHealthComponent->OnHealthUpdated.AddDynamic(this, &ThisClass::OnHealthUpdated);
 
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnEnemyBeginOverlap);
@@ -44,9 +42,11 @@ void ABaseEnemy::Init_Implementation()
 	mHealthWidget = Cast<UParentBar>(mHealthBarWidgetComponent->GetWidget());
 
 	if(auto const GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
+	{
 		GameSubs->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
-
-
+		GameSubs->OnGameComplete.AddDynamic(this, &ThisClass::OnGameComplete);
+	}
+	bIsDead = false;
 }
 
 #pragma region Interface Enemy Movement
@@ -70,9 +70,17 @@ void ABaseEnemy::OnDeadAnimationEnd_Implementation()
 	Destroy();
 }
 
-void ABaseEnemy::OnDamageTaken_Implementation(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
+void ABaseEnemy::TakeRadiamDamage_Implementation()
 {
-	mHealthComponent->DeductHealth(Damage);
+	
+}
+
+float ABaseEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent,
+                             AController* EventInstigator, AActor* DamageCauser)
+{
+	mHealthComponent->DeductHealth(DamageAmount);
+
+	return 0.0f;
 }
 
 void ABaseEnemy::OnHealthUpdated_Implementation(float CurrentHealth)
@@ -124,5 +132,9 @@ void ABaseEnemy::OnAttackNotified_Implementation()
 void ABaseEnemy::OnPhaseComplete_Implementation(int Phase)
 {
 	Destroy();
+}
 
+void ABaseEnemy::OnGameComplete_Implementation(bool bWon)
+{
+	Destroy();
 }

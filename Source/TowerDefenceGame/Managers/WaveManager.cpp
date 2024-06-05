@@ -16,8 +16,9 @@ void AWaveManager::BeginPlay()
 	mGameSubsystem = GetGameInstance()->GetSubsystem<UGameSubsystem>();
 	if(mGameSubsystem)
 	{
+		mGameSubsystem->OnGameComplete.AddDynamic(this, &ThisClass::OnGameComplete);
 		mGameSubsystem->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
-		mGameSubsystem->OnPhaseLoadedSuccessfully.AddDynamic(this, &ThisClass::OnPhaseLoadedSuccessfully);
+		mGameSubsystem->OnPhaseReadyToPlay.AddDynamic(this, &ThisClass::OnPhaseReadyToPlay);
 		mGameSubsystem->OnAllDead.AddDynamic(this, &ThisClass::WaveComplete);
 
 		mGameSubsystem->OnGetCurrentWave.BindDynamic(this, &ThisClass::GetCurrentWave);
@@ -29,6 +30,7 @@ void AWaveManager::BeginPlay()
 	StartNextWave();
 }
 
+
 void AWaveManager::Init(ATowerDefenceGameGameModeBase* GameMode)
 {
 	mGameMode = GameMode;
@@ -36,13 +38,18 @@ void AWaveManager::Init(ATowerDefenceGameGameModeBase* GameMode)
 
 #pragma region Phase Methods
 
-void AWaveManager::OnPhaseLoadedSuccessfully(int Phase)
+void AWaveManager::RevertWave(int PhaseLostCount)
 {
+	// TODO: find a scalable solution for this
 	if(FetchAndUpdateCountdownDetails(Phase2StartWave))
 	{
 		SetWave(Phase2StartWave);
-		mTimerComp->StartTimer(mCountDownTimerDetails.CountDownTimer);
 	}
+}
+
+void AWaveManager::OnPhaseReadyToPlay(int PhaseCount)
+{
+	mTimerComp->StartTimer(mCountDownTimerDetails.CountDownTimer);
 }
 
 void AWaveManager::OnPhaseComplete(int Phase)
@@ -56,7 +63,7 @@ void AWaveManager::OnPhaseComplete(int Phase)
 
 bool AWaveManager::FetchAndUpdateCountdownDetails(int Wave)
 {
-	int waveToLookFor = (Wave == -1)? mCurrentWave : Wave;
+	const int waveToLookFor = (Wave == -1)? mCurrentWave : Wave;
 	if(mDACountDownTimer)
 	{
 		if(mDACountDownTimer->GetCountDownDetails(waveToLookFor, mCountDownTimerDetails))
@@ -90,20 +97,7 @@ void AWaveManager::AddWaveCount()
 
 void AWaveManager::WaveComplete_Implementation()
 {
-	mCurrentWave++;
-	if(mCurrentWave >= mFinalWave)
-	{
-		mGameMode->MakeDecision();
-	}
-	else
-	{
-		if(mGameSubsystem)
-		{
-			mGameSubsystem->OnWaveUpdated.Broadcast(mCurrentWave);
-		}
-		
-		StartNextWave();
-	}
+	AddWaveCount();
 }
 
 void AWaveManager::StartNextWave_Implementation()
@@ -122,3 +116,8 @@ void AWaveManager::StartNextWave_Implementation()
 }
 
 #pragma endregion
+
+void AWaveManager::OnGameComplete(bool bWon)
+{
+	mTimerComp->ForceStopTimer();
+}

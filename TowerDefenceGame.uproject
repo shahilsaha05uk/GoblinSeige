@@ -24,10 +24,6 @@
 			]
 		},
 		{
-			"Name": "EnemyWaveSpawnPlugin",
-			"Enabled": true
-		},
-		{
 			"Name": "EditorScriptingUtilities",
 			"Enabled": true
 		},
@@ -53,6 +49,10 @@
 				"Win64",
 				"Android"
 			]
+		},
+		{
+			"Name": "HoudiniEngine",
+			"Enabled": true
 		},
 		{
 			"Name": "Audius",

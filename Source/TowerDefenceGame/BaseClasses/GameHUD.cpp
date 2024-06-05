@@ -18,8 +18,6 @@ void AGameHUD::BeginPlay()
 	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 	{
 		GameSubs->InitialiseHud(this);
-		GameSubs->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::OnPrepareForPhaseChange);
-		GameSubs->OnPhaseChangeComplete.AddDynamic(this, &ThisClass::OnPhaseChangeComplete);
 	}
 }
 
@@ -78,16 +76,3 @@ UBaseWidget* AGameHUD::Blueprint_GetWidget(EWidgetType Type)
 {
 	return GetWidget<UBaseWidget>(Type);
 }
-
-// Phase change complete
-void AGameHUD::OnPrepareForPhaseChange_Implementation()
-{
-	
-}
-
-void AGameHUD::OnPhaseChangeComplete_Implementation()
-{
-	
-}
-
-

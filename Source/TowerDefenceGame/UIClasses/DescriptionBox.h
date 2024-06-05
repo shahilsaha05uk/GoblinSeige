@@ -27,6 +27,9 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void UpdateDescriptionOnHovered(FBuildingBuyDetails BuildingDetails);
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void UpdateDescriptionWithUpgrade(class ABaseBuilding* BuildingRef);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void UpdateDescriptionOnUnhovered();
 };

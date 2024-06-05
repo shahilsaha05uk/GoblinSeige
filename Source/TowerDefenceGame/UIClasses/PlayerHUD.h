@@ -29,23 +29,16 @@ public:
 #pragma region Components
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UShopMenu* mShop;
+
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UDescriptionBox* mDescriptionBox;
+
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UFeedbackWidget* mFeedbackBox;
 
 #pragma endregion
 	
 #pragma region Properties
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FBuyButtonHoveredClickedSignature OnBuyButtonHovered;
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FUpgradeButtonClickedSignature OnUpgradeButtonClickedSignature;
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FMoveButtonClickedSignature OnMoveButtonClickedSignature;
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnCurrentBalanceUpdatedSignature OnCurrentBalanceUpdated;
-	
 	UPROPERTY(BlueprintReadWrite)
 	TSubclassOf<UBaseWidget> PrompterWidgetClass;
 	UPROPERTY(BlueprintReadOnly)
@@ -65,9 +58,6 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnBuildingDecisionTaken(EBuildStatus Status);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnRequestForBuildingBuy(const FString& BuildingID);
-
 	UFUNCTION(BlueprintCallable)
 	void OnPlacementStateUpdated(EPlacementState State, class APlacementActor* PlacementActor);
 
@@ -77,6 +67,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintCallable)
 	void OnShopButtonHovered(FBuildingBuyDetails BuildingDetails);
+	UFUNCTION(BlueprintCallable, BlueprintCallable)
+	void OnShopUnhovered();
 
 #pragma endregion
 
@@ -98,8 +90,10 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnFeedbackRecieved(EFeedbackType Type, const FString& MessageToDisplay);
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void EnableCutscene();
-
 #pragma endregion
+
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnGameComplete(bool bWon);
+
 };

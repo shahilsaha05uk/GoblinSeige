@@ -56,9 +56,9 @@ public:
 	virtual bool isDead_Implementation() override { return bIsDead; }
 	virtual AActor* GetTarget_Implementation() override { return mTarget; }
 
-	// When the Enemy takes any kind of damage
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnDamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
+	virtual void TakeRadiamDamage_Implementation() override;
+
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser);
 
 	// When the enemy overlaps the tower range
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -80,5 +80,6 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnPhaseComplete(int Phase);
 
-
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnGameComplete(bool bWon);
 };
