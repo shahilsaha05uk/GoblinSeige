@@ -13,7 +13,7 @@ class TOWERDEFENCEGAME_API AEnemyController : public AAIController, public IEnem
 	GENERATED_BODY()
 
 private:
-	class AEnemyManager* mEnemyManager;
+	class UGameSubsystem* mGameSubsytem;
 
 public:
 
@@ -24,14 +24,10 @@ public:
 
 	virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void InitController(AEnemyManager* EnemyManager);
-
-	virtual void OnPossess(APawn* InPawn) override;
 	virtual void OnUnPossess() override;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void SpawnPawn(class AEnemySpawnPoint* SpawnBox, int Type);
+	void SpawnPawn(FVector SpawnPoint, int Type);
 
 	virtual void EnemyMove_Implementation(class ASpline* Spline) override;
 	virtual void EnemyAttack_Implementation() override;
@@ -40,5 +36,8 @@ public:
 	// Phase Methods
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnPhaseComplete(int Phase);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnGameComplete(bool bWon);
 
 };

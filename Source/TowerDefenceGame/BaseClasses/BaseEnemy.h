@@ -79,4 +79,7 @@ public:
 	// Phase Methods
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnPhaseComplete(int Phase);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnGameComplete(bool bWon);
 };

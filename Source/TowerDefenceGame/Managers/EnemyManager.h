@@ -63,18 +63,16 @@ private:
 	TSubclassOf<class AEnemyController> mEnemyControllerClass;
 
 	UPROPERTY()
-	bool bPhaseComplete;
-	UPROPERTY()
 	FTimerHandle EnemySpawnTimerHandle;
 	
 	UPROPERTY(EditDefaultsOnly, Category="Wave Configurations")
 	TMap<int, FWaveRangeConfig> WaveRangeConfigurations;
 
-	
-	UPROPERTY()
-	TArray<class AEnemySpawnPoint*> mSpawnPoints;
-	
 public:
+
+	UPROPERTY(BlueprintReadWrite)
+	TArray<AActor*> mSpawnPoints;
+	
 	UPROPERTY(BlueprintReadWrite)
 	int TotalEnemyControllers = 0;
 	UPROPERTY(BlueprintReadOnly)
@@ -122,20 +120,14 @@ public:
 	void SpawnFixedEnemies(const TArray<FFixedEnemy> &FixedEnemyData);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void SpawnProbableEnemies(const TArray<FEnemyProbability> &ProbableData);
-
-
+	
 	// Phase
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnPhaseChangeComplete();
-
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnPrepareForPhaseChange();
-
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnPhaseComplete(int Phase);
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
+	FVector GetSpawnPoint();
 
-
-
-
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnPhaseLoadedSuccessfully(int LoadedPhase);
 };

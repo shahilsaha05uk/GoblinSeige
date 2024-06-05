@@ -41,6 +41,9 @@ public:
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable)
+	void RevertWave(int PhaseLostCount);
+
+	UFUNCTION(BlueprintCallable)
 	void Init(class ATowerDefenceGameGameModeBase* GameMode);
 	UFUNCTION(BlueprintCallable)
 	void OnTimerFinish();
@@ -51,7 +54,7 @@ public:
 
 
 	UFUNCTION(BlueprintCallable)
-	void OnPhaseLoadedSuccessfully(int Phase);
+	void OnPhaseReadyToPlay(int PhaseCount);
 	UFUNCTION(BlueprintCallable)
 	void OnPhaseComplete(int Phase);
 
@@ -73,5 +76,9 @@ public:
 	// Starts the next wave
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void StartNextWave();
+
+
+	UFUNCTION(BlueprintCallable)
+	void OnGameComplete(bool bWon);
 
 };

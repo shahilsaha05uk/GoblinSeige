@@ -14,14 +14,11 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnFeedbackSystemEnableSignature, E
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGameCompleteSignature, bool, bWon);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPhaseCompleteSignature, int, Phase);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPhaseLoadSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPhaseLoadedSuccessfullySignature, int, LoadedPhase);
-
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPrepareForPhaseChangeSignature);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPhaseChangeSignature);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPhaseChangeCompleteSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPhaseReadyToPlaySignature, int, PhaseCount);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FAllEnemyDeadSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEnemyDieSignature, class AEnemyController*, Controller);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnTargetDestroyedSignature);
 // Wave Delegates
@@ -45,8 +42,6 @@ private:
 
 	// Enemy spawn points
 	UPROPERTY()
-	TArray<class AEnemySpawnPoint*> mSpawnPoints;
-	UPROPERTY()
 	int EnemySpawnPointCount;
 
 public:
@@ -64,18 +59,13 @@ public:
 
 	// Phase Events
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnPhaseLoadSignature OnPhaseLoad;
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnPhaseCompleteSignature OnPhaseComplete;
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnPhaseLoadedSuccessfullySignature OnPhaseLoadedSuccessfully;
-	
+
+	// On Ready to play
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnPhaseChangeCompleteSignature OnPhaseChangeComplete;
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnPhaseChangeSignature OnPhaseChange;
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnPrepareForPhaseChangeSignature OnPrepareForPhaseChange;
+	FPhaseReadyToPlaySignature OnPhaseReadyToPlay;
 
 	// Game Decision Delegates
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
@@ -88,6 +78,8 @@ public:
 	// Enemy Delegates
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FAllEnemyDeadSignature OnAllDead;
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnEnemyDieSignature OnEnemyDie;
 
 	// Wave Delegates
 	UPROPERTY()
@@ -110,17 +102,5 @@ public:
 	}
 
 
-#pragma region Spawn points
-	
-	// All the spawn points registers themselves with the subsystem at the start of the play 
-	UFUNCTION(BlueprintCallable)
-	void RegisterSpawnPoint(class AEnemySpawnPoint* SpawnPoint);
-	UFUNCTION(BlueprintCallable)
-	void DeRegisterSpawnPoint(class AEnemySpawnPoint* SpawnPoint);
-
-	UFUNCTION(BlueprintPure, BlueprintCallable)
-	class AEnemySpawnPoint* GetRandomEnemySpawnPoint();
-
-#pragma endregion
 
 };

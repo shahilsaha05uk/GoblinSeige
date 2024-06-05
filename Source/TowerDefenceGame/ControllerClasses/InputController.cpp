@@ -40,6 +40,7 @@ void AInputController::BeginPlay()
 	{
 		GameSubs->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
 		GameSubs->OnPhaseLoadedSuccessfully.AddDynamic(this, &ThisClass::OnPhaseLoadedSuccess);
+		GameSubs->OnGameComplete.AddDynamic(this, &ThisClass::OnGameComplete);
 	}
 
 	
@@ -83,20 +84,6 @@ void AInputController::SetupInputComponent()
 	}
 }
 
-void AInputController::OnEnemyKilled_Implementation()
-{
-	APawn* pawn = GetPawn();
-
-	if(UKismetSystemLibrary::DoesImplementInterface(pawn, UPlayerInterface::StaticClass()))
-	{
-		/*
-		IPlayerInterface::Execute_AddMoneyToAccount(pawn, 100);
-		
-		HUDUpdater(MONEY_VALUE, IPlayerInterface::Execute_GetCurrentBalance(pawn));
-	*/
-	}
-}
-
 #pragma region Audio Methods
 
 void AInputController::ManageAudio_Implementation(bool hasWaveStarted)
@@ -133,49 +120,6 @@ void AInputController::OnPlacementUpdated_Implementation(EPlacementState State, 
 		SetInputMoveType(UI_And_Game);
 	}
 }
-#pragma endregion
-
-#pragma region Wave
-
-void AInputController::OnWaveStart_Implementation()
-{
-	ManageAudio(true);
-}
-
-void AInputController::OnWaveComplete_Implementation(int WaveNumber)
-{
-	ManageAudio(false);
-}
-
-void AInputController::OnGameComplete_Implementation()
-{
-	RequestGameCompleteUI(true);
-}
-
-void AInputController::OnGameOver_Implementation()
-{
-	RequestGameCompleteUI(false);
-}
-
-void AInputController::RequestGameCompleteUI_Implementation(bool hasWon)
-{
-	if(APawn* pawn = GetPawn())
-	{
-		UnPossess();
-		pawn->Destroy();
-	}
-
-	const auto hud = GetHUD();
-	if(UKismetSystemLibrary::DoesImplementInterface(hud, UHUDInterface::StaticClass()))
-	{
-		UBaseWidget* GameCompleteUI = IHUDInterface::Execute_WidgetInitialiser(hud, GAMECOMPLETE_MENU, this);
-		Cast<UGameComplete>(GameCompleteUI)->bWonGame = hasWon;
-		GameCompleteUI->AddToViewport();
-	}
-	
-	LevelAudioComp->Stop();
-}
-
 #pragma endregion
 
 #pragma region Control Methods
@@ -268,17 +212,6 @@ void AInputController::PauseGame_Implementation()
 }
 #pragma endregion
 
-void AInputController::OnPhaseChange_Implementation()
-{
-	// re enable the inputs
-	SetInputMoveType(UI_And_Game);
-}
-
-void AInputController::OnPrepareForPhaseChange_Implementation()
-{
-	SetInputMoveType(UI_Only);
-}
-
 void AInputController::SetInputMoveType_Implementation(EInputModeType Type)
 {
 	switch (Type) {
@@ -296,11 +229,19 @@ void AInputController::SetInputMoveType_Implementation(EInputModeType Type)
 
 void AInputController::OnPhaseComplete_Implementation(int Phase)
 {
-	SetInputMoveType(UI_Only);
+	SetIgnoreLookInput(true);
+	SetIgnoreLookInput(true);
+	DisableInput(this);
 }
 
 void AInputController::OnPhaseLoadedSuccess_Implementation(int LoadedPhase)
 {
-	SetInputMoveType(UI_And_Game);
+	ResetIgnoreLookInput();
+	ResetIgnoreMoveInput();
+	EnableInput(this);
 }
 
+void AInputController::OnGameComplete_Implementation(bool bWon)
+{
+	SetInputMoveType(UI_Only);
+}

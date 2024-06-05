@@ -24,8 +24,6 @@ private:
 	int mTotalTargetsToDestroy = 0;
 	UPROPERTY(EditDefaultsOnly, Category = "Phase")
 	int mFinalPhase = 2;
-	UPROPERTY(EditDefaultsOnly, Category = "Phase")
-	int mCurrentPhase = 1;
 	
 	
 	UPROPERTY(EditDefaultsOnly)
@@ -35,6 +33,14 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<class AEnemyManager> EnemyManagerClass;
 public:
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TMap<int, TSoftObjectPtr<UWorld>> mLevelMap;
+	UPROPERTY(BlueprintReadWrite, Category = "Phase")
+	int mLastPhase;
+	UPROPERTY(BlueprintReadWrite, Category = "Phase")
+	int mCurrentPhase = 1;
+
 	UPROPERTY(BlueprintReadOnly)
 	class UGameSubsystem* mGameSubsystem;
 
@@ -49,17 +55,15 @@ public:
 	virtual void BeginPlay() override;
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void LoadPhase();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnTargetDestroyed();
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void GameOver();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnPhaseComplete();
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnPhaseLoad();
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnPhaseLoadedSuccess(int LoadedPhase);
 
 	UFUNCTION(BlueprintPure, BlueprintCallable)
 	int GetCurrentPhase() { return mCurrentPhase; }

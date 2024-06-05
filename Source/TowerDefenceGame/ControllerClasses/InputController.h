@@ -60,19 +60,11 @@ public:
 	virtual void StopSound_Implementation() override;
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void RequestGameCompleteUI(bool hasWon);
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ManageAudio(bool hasWaveStarted);
 
-
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnPrepareForPhaseChange();
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnPhaseChange();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnPhaseComplete(int Phase);
-
-
+	
 	
 	// Controller Input Methods
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -91,21 +83,9 @@ public:
 	void PauseGame();
 
 	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnEnemyKilled();
-
 	// Wave Methods
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnGameComplete();
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnGameOver();
-
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnWaveStart();
-
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnWaveComplete(int WaveNumber);
-
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnGameComplete(bool bWon);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnPlacementUpdated(EPlacementState State, APlacementActor* PlacementActor);

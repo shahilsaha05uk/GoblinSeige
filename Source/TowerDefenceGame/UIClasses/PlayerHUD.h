@@ -102,4 +102,9 @@ public:
 	void EnableCutscene();
 
 #pragma endregion
+
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnGameComplete(bool bWon);
+
 };

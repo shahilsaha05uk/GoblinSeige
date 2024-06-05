@@ -28,7 +28,7 @@ void UPlayerHUD::NativeConstruct()
 	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 	{
 		GameSubs->OnFeedbackEnabled.AddDynamic(this, &ThisClass::OnFeedbackRecieved);
-		GameSubs->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::EnableCutscene);
+		GameSubs->OnGameComplete.AddDynamic(this, &ThisClass::OnGameComplete);
 	}
 	
 	mShop->Init(this);
@@ -118,3 +118,8 @@ void UPlayerHUD::EnableCutscene_Implementation()
 }
 
 #pragma endregion
+
+void UPlayerHUD::OnGameComplete_Implementation(bool bWon)
+{
+	
+}

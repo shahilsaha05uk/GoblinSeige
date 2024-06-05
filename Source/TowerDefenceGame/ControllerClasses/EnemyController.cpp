@@ -11,35 +11,23 @@
 void AEnemyController::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if(auto const GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
-		GameSubs->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
-
-}
-void AEnemyController::InitController_Implementation(AEnemyManager* EnemyManager)
-{
-	if(EnemyManager)
+	mGameSubsytem = GetGameInstance()->GetSubsystem<UGameSubsystem>();
+	if(mGameSubsytem)
 	{
-		mEnemyManager = EnemyManager;
+		mGameSubsytem->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
+		mGameSubsytem->OnGameComplete.AddDynamic(this, &ThisClass::OnGameComplete);
 	}
-}
 
-void AEnemyController::OnPossess(APawn* InPawn)
-{
-	Super::OnPossess(InPawn);
 }
 
 void AEnemyController::OnUnPossess()
 {
 	Super::OnUnPossess();
-	if(APawn* pawn = GetPawn())
-	{
-		UnPossess();
-		pawn->Destroy();
-	}
+
+	mGameSubsytem->OnEnemyDie.Broadcast(this);
 }
 
-void AEnemyController::SpawnPawn_Implementation(AEnemySpawnPoint* SpawnBox, int Type)
+void AEnemyController::SpawnPawn_Implementation(FVector SpawnPoint, int Type)
 {
 
 }
@@ -66,5 +54,10 @@ void AEnemyController::OnPhaseComplete_Implementation(int Phase)
 {
 	UnPossess();
 	Destroy();
+}
 
+void AEnemyController::OnGameComplete_Implementation(bool bWon)
+{
+	UnPossess();
+	Destroy();
 }

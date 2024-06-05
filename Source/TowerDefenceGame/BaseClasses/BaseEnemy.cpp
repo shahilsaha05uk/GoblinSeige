@@ -42,8 +42,11 @@ void ABaseEnemy::Init_Implementation()
 	mHealthWidget = Cast<UParentBar>(mHealthBarWidgetComponent->GetWidget());
 
 	if(auto const GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
+	{
 		GameSubs->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
-
+		GameSubs->OnGameComplete.AddDynamic(this, &ThisClass::OnGameComplete);
+	}
+	bIsDead = false;
 }
 
 #pragma region Interface Enemy Movement
@@ -129,5 +132,9 @@ void ABaseEnemy::OnAttackNotified_Implementation()
 void ABaseEnemy::OnPhaseComplete_Implementation(int Phase)
 {
 	Destroy();
+}
 
+void ABaseEnemy::OnGameComplete_Implementation(bool bWon)
+{
+	Destroy();
 }

@@ -24,9 +24,4 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
 	FLinearColor GameCompleteColor;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Properties")
-	bool bWonGame;
-
-	virtual void NativeConstruct() override;
 };

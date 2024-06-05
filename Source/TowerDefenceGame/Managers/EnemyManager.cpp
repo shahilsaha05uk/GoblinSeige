@@ -2,6 +2,9 @@
 
 
 #include "EnemyManager.h"
+
+#include "Kismet/GameplayStatics.h"
+#include "TowerDefenceGame/Actors/EnemySpawnPoint.h"
 #include "TowerDefenceGame/ControllerClasses/EnemyController.h"
 #include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
 
@@ -13,22 +16,17 @@ void AEnemyManager::BeginPlay()
 	if(mGameSubsystem)
 	{
 		mGameSubsystem->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
-		/*
-		mGameSubsystem->OnPhaseChangeComplete.AddDynamic(this, &ThisClass::OnPhaseChangeComplete);
-		mGameSubsystem->OnPrepareForPhaseChange.AddDynamic(this, &ThisClass::OnPrepareForPhaseChange);
-
-		*/
 		mGameSubsystem->OnWaveStarted.AddDynamic(this, &ThisClass::PrepareForWave);
+		mGameSubsystem->OnEnemyDie.AddDynamic(this, &ThisClass::FreeController);
+		mGameSubsystem->OnPhaseLoadedSuccessfully.AddDynamic(this, &ThisClass::OnPhaseLoadedSuccessfully);
 	}
 }
-
 void AEnemyManager::CacheControllers_Implementation(int ControllerCount)
 {
 	for (int i = 0; i < ControllerCount; i++)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Spawning Controller %d"), i);
 		AEnemyController* EController = GetWorld()->SpawnActor<AEnemyController>(mEnemyControllerClass);
-		EController->InitController(this);
 		mFreeControllers.Add(EController);
 		TotalEnemyControllers++;
 	}
@@ -37,7 +35,7 @@ void AEnemyManager::CacheControllers_Implementation(int ControllerCount)
 void AEnemyManager::AssignEnemy_Implementation(int EnemyID)
 {
 	if(mFreeControllers.IsEmpty()) return;
-	const auto SpawnPoint = mGameSubsystem->GetRandomEnemySpawnPoint();
+	const auto SpawnPoint = GetSpawnPoint();
 
 	if(const auto Controller = mFreeControllers.Pop(true))
 		Controller->SpawnPawn(SpawnPoint, EnemyID);	// spawn the pawn
@@ -146,20 +144,25 @@ void AEnemyManager::NormalizeProbabilities(TArray<FEnemyProbability>& Probabilit
 	}
 }
 
+FVector AEnemyManager::GetSpawnPoint_Implementation()
+{
+	return FVector(0, 0, 0);
+}
+
+
 #pragma endregion
 
 #pragma region Cleaners
 void AEnemyManager::FreeController(AEnemyController* ControllerRef)
 {
-	if(!mFreeControllers.Contains(ControllerRef))
+	if(!mFreeControllers.Contains(ControllerRef) && TotalEnemyControllersAssigned > 0)
 	{
 		mFreeControllers.Add(ControllerRef);
 		TotalEnemyControllersAssigned--;
+		return;
 	}
-	if(TotalEnemyControllersAssigned == 0 && !bPhaseComplete)
-	{
-		if(mGameSubsystem) mGameSubsystem->OnAllDead.Broadcast();
-	}
+	
+	if(mGameSubsystem) mGameSubsystem->OnAllDead.Broadcast();
 }
 
 void AEnemyManager::FlushEverything()
@@ -167,28 +170,25 @@ void AEnemyManager::FlushEverything()
 	for (auto c : mFreeControllers)
 		c->Destroy();
 
-	mFreeControllers.Empty();
+	mFreeControllers.Empty(0);
 }
 
 #pragma endregion
 
 #pragma region Phase
 
-void AEnemyManager::OnPrepareForPhaseChange_Implementation()
-{
-	/*
-	bPhaseComplete = true;
-	FlushEverything();
-*/
-}
-
-void AEnemyManager::OnPhaseChangeComplete_Implementation()
-{
-	//bPhaseComplete = false;
-}
-
 void AEnemyManager::OnPhaseComplete_Implementation(int Phase)
 {
 	FlushEverything();
+	TotalEnemyControllersAssigned = 0;
+	if(!mSpawnPoints.IsEmpty()) mSpawnPoints.Empty();
 }
+
+void AEnemyManager::OnPhaseLoadedSuccessfully_Implementation(int LoadedPhase)
+{
+	if(!mSpawnPoints.IsEmpty()) mSpawnPoints.Empty();
+
+	UGameplayStatics::GetAllActorsWithInterface(GetWorld(), USpawnPointInterface::StaticClass(), mSpawnPoints);
+}
+
 #pragma endregion
