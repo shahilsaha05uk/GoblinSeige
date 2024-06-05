@@ -97,10 +97,7 @@ void AWaveManager::AddWaveCount()
 
 void AWaveManager::WaveComplete_Implementation()
 {
-	if(mGameSubsystem)
-	{
-		mGameSubsystem->OnWaveUpdated.Broadcast(mCurrentWave);
-	}
+	AddWaveCount();
 }
 
 void AWaveManager::StartNextWave_Implementation()

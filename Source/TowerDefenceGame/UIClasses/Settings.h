@@ -31,11 +31,13 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class USlider* sdr_MenuVolume;
+
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class USlider* sdr_GameVolume;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UTextBlock* txt_MenuVolume;
+
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UTextBlock* txt_GameVolume;
 	

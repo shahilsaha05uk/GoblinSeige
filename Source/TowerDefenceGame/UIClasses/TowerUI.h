@@ -13,8 +13,6 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDecisionMadeSignature, bool, HasC
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUpgradeRequestedSignature, const FUpgradeDetails&, UpgradeDetails);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDestroyRequestedSignature);
 
-UENUM(BlueprintType)
-enum EDeckType { NoWidget, ConfirmWidget, UpgradeWidget };
 UCLASS()
 class TOWERDEFENCEGAME_API UTowerUI : public UUserWidget
 {
@@ -29,11 +27,13 @@ public:
 
 	UPROPERTY(meta = (BindWidget), BlueprintReadOnly)
 	class UButton* btnConfirmPlacement;
+
 	UPROPERTY(meta = (BindWidget), BlueprintReadOnly)
 	class UButton* btnAbortPlacement;
 
 	UPROPERTY(meta = (BindWidget), BlueprintReadOnly)
 	class UButton* btnUpgradeBuilding;
+
 	UPROPERTY(meta = (BindWidget), BlueprintReadOnly)
 	class UButton* btnDestroyBuilding;
 
@@ -43,17 +43,21 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	int mBuildingCost;
 	
-	virtual void NativeConstruct() override;
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnUpgradeRequestedSignature OnUpgradeRequested;
+
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnDecisionMadeSignature OnDecisionMade;
 	
+	virtual void NativeConstruct() override;
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Init(int Cost, class ATower* Tower);
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ToggleWidgetSwitcher(EDeckType Type);
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void UpdateUI();
 
@@ -62,6 +66,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnConfirmPlacement();
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnAbortPlacement();
 
@@ -71,9 +76,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnUpgradeBuilding();
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnDestroyBuilding();
 #pragma endregion
-
 	
 };

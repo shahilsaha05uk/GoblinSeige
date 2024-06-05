@@ -27,10 +27,13 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnNewGameClicked();
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnSettingsClicked();
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnInstructionsClicked();
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnQuitClicked();
 };

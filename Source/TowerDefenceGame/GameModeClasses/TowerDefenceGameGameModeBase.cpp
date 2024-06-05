@@ -44,6 +44,9 @@ void ATowerDefenceGameGameModeBase::OnWaveUpdated_Implementation(int Wave)
 	{
 		mGameSubsystem->OnGameComplete.Broadcast(true);
 	}
+	{
+		mWaveManager->StartNextWave();
+	}
 }
 
 void ATowerDefenceGameGameModeBase::PostLogin(APlayerController* NewPlayer)

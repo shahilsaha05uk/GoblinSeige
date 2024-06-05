@@ -19,6 +19,7 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UButton* btnReturnToMainMenu;
+
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UButton* btnQuit;
 

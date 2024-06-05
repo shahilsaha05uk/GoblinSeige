@@ -9,12 +9,12 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnShopButtonHoverSignature, FBuildingBuyDetails, BuildingDetails);
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnShopButtonUnhoverSignature);
+
 UCLASS()
 class TOWERDEFENCEGAME_API UShopMenu : public UBaseWidget
 {
 	GENERATED_BODY()
-
-private:
 
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
@@ -26,6 +26,8 @@ public:
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnShopButtonHoverSignature OnShopButtonHovered;
 	
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnShopButtonUnhoverSignature OnShopButtonUnhover;
 
 	virtual void NativeConstruct() override;
 

@@ -18,6 +18,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPhaseLoadedSuccessfullySignature,
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPhaseReadyToPlaySignature, int, PhaseCount);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FAllEnemyDeadSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEnemiesReadySignature, int, TotalEnemies);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEnemyDieSignature, class AEnemyController*, Controller);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnTargetDestroyedSignature);
@@ -36,13 +37,8 @@ class TOWERDEFENCEGAME_API UGameSubsystem : public UGameInstanceSubsystem
 
 private:
 
-	// Hud
 	UPROPERTY()
 	AHUD* mHud;
-
-	// Enemy spawn points
-	UPROPERTY()
-	int EnemySpawnPointCount;
 
 public:
 
@@ -60,6 +56,7 @@ public:
 	// Phase Events
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnPhaseCompleteSignature OnPhaseComplete;
+
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnPhaseLoadedSuccessfullySignature OnPhaseLoadedSuccessfully;
 
@@ -77,7 +74,11 @@ public:
 
 	// Enemy Delegates
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnEnemiesReadySignature OnEnemiesReady;
+	
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FAllEnemyDeadSignature OnAllDead;
+
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnEnemyDieSignature OnEnemyDie;
 
@@ -87,6 +88,7 @@ public:
 	
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
 	FOnWaveCompletedSignature OnWaveUpdated;
+
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
 	FOnWaveStartSignature OnWaveStarted;
 	
@@ -100,7 +102,5 @@ public:
 		mHud = HudRef;
 		OnHudInitialised.Broadcast(mHud);
 	}
-
-
-
+	
 };

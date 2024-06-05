@@ -69,9 +69,19 @@ void ASpecPlayer::Move_Implementation(const FInputActionValue& InputActionValue)
 
 void ASpecPlayer::Look_Implementation(const FInputActionValue& InputActionValue)
 {
+	/*
 	float yaw = InputActionValue.Get<FVector>().X;
 	AddControllerYawInput(yaw);
-	
+	*/
+	FVector2D LookInput = InputActionValue.Get<FVector2D>();
+
+	// Yaw input
+	float Yaw = LookInput.X;
+	AddControllerYawInput(Yaw);
+
+	// Pitch input
+	float Pitch = LookInput.Y;
+	AddControllerPitchInput(Pitch);
 }
 void ASpecPlayer::EnableLook_Implementation()
 {

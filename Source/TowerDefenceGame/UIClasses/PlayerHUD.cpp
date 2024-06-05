@@ -25,6 +25,7 @@ void UPlayerHUD::NativeConstruct()
 		BuildingSubs->OnBuildingInteractionBegin.AddDynamic(this, &ThisClass::OnBuildingInterationBegin);
 		BuildingSubs->OnBuildingInteractionEnd.AddDynamic(this, &ThisClass::OnBuildingInterationEnd);
 	}
+	
 	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 	{
 		GameSubs->OnFeedbackEnabled.AddDynamic(this, &ThisClass::OnFeedbackRecieved);
@@ -33,6 +34,7 @@ void UPlayerHUD::NativeConstruct()
 	
 	mShop->Init(this);
 	mShop->OnShopButtonHovered.AddDynamic(this, &ThisClass::OnShopButtonHovered);
+	mShop->OnShopButtonUnhover.AddDynamic(this, &ThisClass::OnShopUnhovered);
 }
 
 void UPlayerHUD::OnButtonStateUpdate_Implementation(const FString& String, EButtonState State)
@@ -63,17 +65,11 @@ void UPlayerHUD::OnPlacementStateUpdated(EPlacementState State, APlacementActor*
 		break;
 	case OccupiedPlacement:
 		ToggleShop(false);
-		ToggleDescriptionBox(false);
 		break;
 	}
 }
 
 void UPlayerHUD::OnBuildingDecisionTaken_Implementation(EBuildStatus Status)
-{
-	ToggleShop(false);
-}
-
-void UPlayerHUD::OnRequestForBuildingBuy_Implementation(const FString& BuildingID)
 {
 	ToggleShop(false);
 }
@@ -85,6 +81,11 @@ void UPlayerHUD::OnRequestForBuildingBuy_Implementation(const FString& BuildingI
 void UPlayerHUD::OnShopButtonHovered(FBuildingBuyDetails BuildingDetails)
 {
 	mDescriptionBox->UpdateDescriptionOnHovered(BuildingDetails);
+}
+
+void UPlayerHUD::OnShopUnhovered()
+{
+	mDescriptionBox->UpdateDescriptionOnUnhovered();
 }
 
 void UPlayerHUD::OnBuildingInterationBegin_Implementation(ABaseBuilding* BuildingRef)
@@ -111,13 +112,6 @@ void UPlayerHUD::OnFeedbackRecieved_Implementation(EFeedbackType Type, const FSt
 }
 #pragma endregion
 
-#pragma region Cutscene
-
-void UPlayerHUD::EnableCutscene_Implementation()
-{
-}
-
-#pragma endregion
 
 void UPlayerHUD::OnGameComplete_Implementation(bool bWon)
 {

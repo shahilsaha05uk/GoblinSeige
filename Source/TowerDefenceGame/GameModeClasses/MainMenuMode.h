@@ -24,10 +24,12 @@ public:
 
 
 	virtual void BeginPlay() override;
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Init();
 
 	virtual TMap<TEnumAsByte<ESoundValue>, FSoundStruct> GetSoundMap_Implementation() override { return mSoundMap; }
+
 	virtual TMap<TEnumAsByte<ESoundValue>, float> ReadSoundSettingsFromFile_Implementation() override;
 
 	virtual void UpdateSoundMixVolume_Implementation(ESoundValue SoundValue, float Volume) override;

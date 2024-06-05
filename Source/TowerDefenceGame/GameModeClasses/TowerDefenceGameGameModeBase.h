@@ -36,9 +36,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TMap<int, TSoftObjectPtr<UWorld>> mLevelMap;
-	UPROPERTY(BlueprintReadWrite, Category = "Phase")
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Phase")
 	int mLastPhase;
-	UPROPERTY(BlueprintReadWrite, Category = "Phase")
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Phase")
 	int mCurrentPhase = 1;
 
 	UPROPERTY(BlueprintReadOnly)

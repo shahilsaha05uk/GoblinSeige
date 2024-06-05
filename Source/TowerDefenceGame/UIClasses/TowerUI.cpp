@@ -26,6 +26,11 @@ void UTowerUI::Init_Implementation(int Cost, class ATower* Tower)
 	{
 		mTowerRef = Tower;
 		mTowerRef->mUpgradeComp;
+
+		if(mTowerRef->mUpgradeDetails.IsEmpty())
+		{
+			btnUpgradeBuilding->SetIsEnabled(false);
+		}
 	}
 	
 	mBuildingCost = Cost;
@@ -44,6 +49,12 @@ void UTowerUI::ToggleWidgetSwitcher_Implementation(EDeckType Type)
 
 void UTowerUI::UpdateUI_Implementation()
 {
+	if(mTowerRef->mUpgradeDetails.IsEmpty())
+	{
+		btnUpgradeBuilding->SetIsEnabled(false);
+		return;
+	}
+
 	if(const auto LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController())
 	{
 		if(auto const ResourceSubs = LocalPlayer->GetSubsystem<UResourceSubsystem>())

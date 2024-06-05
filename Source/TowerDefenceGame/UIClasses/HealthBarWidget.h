@@ -20,13 +20,16 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	UProgressBar* pbr_HealthBar;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	UTextBlock* txt_HealthVal;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private")
 	FTimerHandle Health_TimeHandler;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private")
 	float mNewHealthVal;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Private")
 	float mNewHealthVal_AsPercent;
 	
@@ -36,6 +39,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void ProgressBarUpdater();
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void TextUpdater();
 };

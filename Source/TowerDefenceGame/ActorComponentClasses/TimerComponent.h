@@ -39,6 +39,7 @@ public:
 	class UGameSubsystem* mGameSubsystem;
 
 	FStartTimerSignature OnStartTimer;
+
 	FFinishedTimerSignature OnFinishTimer;
 
 	virtual void BeginPlay() override;
@@ -48,10 +49,13 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void ForceStopTimer();
+
 	UFUNCTION(BlueprintCallable)
 	void StartTimer(const float Duration);
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void Countdown();
+
 	UFUNCTION(BlueprintCallable)
 	void FinishTimer();
 };

@@ -56,7 +56,7 @@ void AEnemyManager::PrepareForWave_Implementation(int Wave)
 		mLatestWaveConfigs = WaveRangeConfigurations[Wave];
 	}
 	mRemainingEnemies = mLatestWaveConfigs.TotalEnemies;
-
+	
 	int RequiredControllers = 0;
 		
 	if(!HasEnoughControllers(RequiredControllers))
@@ -65,6 +65,7 @@ void AEnemyManager::PrepareForWave_Implementation(int Wave)
 	SpawnFixedEnemies(mLatestWaveConfigs.FixedEnemies);
 	SpawnProbableEnemies(mLatestWaveConfigs.EnemyProbabilities);
 
+	mGameSubsystem->OnEnemiesReady.Broadcast(TotalEnemyControllersAssigned);
 }
 
 void AEnemyManager::SpawnFixedEnemies_Implementation(const TArray<FFixedEnemy>& FixedEnemyData)
@@ -159,10 +160,11 @@ void AEnemyManager::FreeController(AEnemyController* ControllerRef)
 	{
 		mFreeControllers.Add(ControllerRef);
 		TotalEnemyControllersAssigned--;
-		return;
+		mGameSubsystem->OnEnemiesReady.Broadcast(TotalEnemyControllersAssigned);
+
+		if(TotalEnemyControllersAssigned == 0)
+			if(mGameSubsystem) mGameSubsystem->OnAllDead.Broadcast();
 	}
-	
-	if(mGameSubsystem) mGameSubsystem->OnAllDead.Broadcast();
 }
 
 void AEnemyManager::FlushEverything()
