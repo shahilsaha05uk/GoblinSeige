@@ -297,12 +297,10 @@ void AInputController::SetInputMoveType_Implementation(EInputModeType Type)
 void AInputController::OnPhaseComplete_Implementation(int Phase)
 {
 	SetInputMoveType(UI_Only);
-	UGameplayStatics::SetGamePaused(GetWorld(), true);
 }
 
 void AInputController::OnPhaseLoadedSuccess_Implementation(int LoadedPhase)
 {
 	SetInputMoveType(UI_And_Game);
-	UGameplayStatics::SetGamePaused(GetWorld(), false);
 }
 

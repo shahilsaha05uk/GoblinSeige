@@ -35,8 +35,6 @@ void ABaseEnemy::BeginPlay()
 
 void ABaseEnemy::Init_Implementation()
 {
-	OnTakeAnyDamage.AddDynamic(this, &ThisClass::OnDamageTaken);
-
 	mHealthComponent->OnHealthUpdated.AddDynamic(this, &ThisClass::OnHealthUpdated);
 
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnEnemyBeginOverlap);
@@ -45,7 +43,6 @@ void ABaseEnemy::Init_Implementation()
 
 	if(auto const GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 		GameSubs->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
-
 
 }
 
@@ -70,9 +67,17 @@ void ABaseEnemy::OnDeadAnimationEnd_Implementation()
 	Destroy();
 }
 
-void ABaseEnemy::OnDamageTaken_Implementation(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
+void ABaseEnemy::TakeRadiamDamage_Implementation()
 {
-	mHealthComponent->DeductHealth(Damage);
+	
+}
+
+float ABaseEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent,
+                             AController* EventInstigator, AActor* DamageCauser)
+{
+	mHealthComponent->DeductHealth(DamageAmount);
+
+	return 0.0f;
 }
 
 void ABaseEnemy::OnHealthUpdated_Implementation(float CurrentHealth)

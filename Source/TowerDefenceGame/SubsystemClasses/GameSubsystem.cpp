@@ -27,7 +27,7 @@ void UGameSubsystem::DeRegisterSpawnPoint(AEnemySpawnPoint* SpawnPoint)
 AEnemySpawnPoint* UGameSubsystem::GetRandomEnemySpawnPoint()
 {
 	int rand = FMath::RandRange(0, EnemySpawnPointCount -1);
-	return mSpawnPoints[rand];
+	return (rand == -1)? nullptr : mSpawnPoints[rand];
 }
 
 #pragma endregion

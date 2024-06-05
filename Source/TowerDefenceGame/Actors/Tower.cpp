@@ -63,7 +63,7 @@ void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacement
 	mUpgradeComp->Init(BuildingDetails.UpgradeAsset);
 
 	//Setting the Niagara Component
-	//mNiagaraComp->SetAsset(BuildingDetails.mBuildingNiagara, true);
+	mNiagaraComp->SetAsset(BuildingDetails.mBuildingNiagara, true);
 }
 
 #pragma region States
@@ -215,7 +215,7 @@ void ATower::UpdateTowerState(ETowerState State)
 
 	switch (TowerState) {
 	case ETowerState::Firing:
-		GetWorld()->GetTimerManager().SetTimer(TowerStateTimeHandler, this, &ThisClass::Seek, BuildingStats.RateOfFire, true);
+		GetWorld()->GetTimerManager().SetTimer(TowerStateTimeHandler, this, &ThisClass::Fire, BuildingStats.RateOfFire, true);
 		Fire();
 		break;
 	case ETowerState::Seek:
