@@ -1,0 +1,26 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "BetterHomingProjectiles",
+	"Description": "Improves the Projectile Movement Component by adding proportional navigation to the homing algorithm and enabling homing on any arbitrary point.",
+	"Category": "Projectile Homing",
+	"CreatedBy": "Pitch n' Roll Games",
+	"CreatedByURL": "https://discord.gg/V749Y79zHQ",
+	"DocsURL": "https://drive.google.com/file/d/1uMK7QN2ElvhFIykFtUxrqPsRGzLY3KOW/view?usp=drive_link",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/3ae2009200f8416ca2b78741f33c97af",
+	"SupportURL": "https://discord.gg/V749Y79zHQ",
+	"EngineVersion": "5.2.0",
+	"CanContainContent": true,
+	"Installed": true,
+	"Modules": [
+		{
+			"Name": "BetterHomingProjectiles",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [
+				"Win64"
+			]
+		}
+	]
+}

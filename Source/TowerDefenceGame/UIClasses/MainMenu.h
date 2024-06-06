@@ -14,14 +14,14 @@ class TOWERDEFENCEGAME_API UMainMenu : public UBaseWidget
 
 public:
 
-	//UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	//class UButton* btnNewGame;
-	//UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	//class UButton* btnSettings;
-	//UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	//class UButton* btnInstructions;
-	//UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	//class UButton* btnQuit;
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	class UButton* btnNewGame;
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	class UButton* btnSettings;
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	class UButton* btnInstructions;
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	class UButton* btnQuit;
 
 	virtual void NativeConstruct() override;
 
