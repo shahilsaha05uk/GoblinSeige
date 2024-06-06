@@ -24,7 +24,9 @@ private:
 	int mTotalTargetsToDestroy = 0;
 	UPROPERTY(EditDefaultsOnly, Category = "Phase")
 	int mFinalPhase = 2;
-	
+
+	UPROPERTY()
+	bool bPhaseChanging = false;
 	
 	UPROPERTY(EditDefaultsOnly)
 	int mStartingResources;
@@ -58,10 +60,9 @@ public:
 	void LoadPhase();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnTargetDestroyed();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void UpdatePhase();
 	
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void GameOver();
-
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnPhaseLoad();
 
@@ -77,7 +78,17 @@ public:
 	virtual void PostLogin(APlayerController* NewPlayer) override;
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	bool MakeDecision();
+	void MakePhaseDecision();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void MakeWaveDecision();
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void UpdateTargets();
+
+	// Decision making methods
+	UFUNCTION(BlueprintPure)
+	bool HasCompletedAllTheWaves(int Wave = -1) const;
+	UFUNCTION(BlueprintPure)
+	bool HasDestroyedAllTheTargets() const;
+	UFUNCTION(BlueprintPure)
+	bool HasPhasesLeft() const;
 };
