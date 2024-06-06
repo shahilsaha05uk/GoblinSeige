@@ -59,6 +59,10 @@
 			"Name": "BetterHomingProjectiles",
 			"Enabled": true,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/3ae2009200f8416ca2b78741f33c97af"
+		},
+		{
+			"Name": "HoudiniEngine",
+			"Enabled": true
 		}
 	]
 }
