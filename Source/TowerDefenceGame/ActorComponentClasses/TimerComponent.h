@@ -48,7 +48,7 @@ public:
 	void UpdateTimer();
 	
 	UFUNCTION(BlueprintCallable)
-	void ForceStopTimer();
+	void StopAndResetTimer();
 
 	UFUNCTION(BlueprintCallable)
 	void StartTimer(const float Duration);

@@ -19,7 +19,8 @@ void AWaveManager::BeginPlay()
 		mGameSubsystem->OnGameComplete.AddDynamic(this, &ThisClass::OnGameComplete);
 		mGameSubsystem->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
 		mGameSubsystem->OnPhaseReadyToPlay.AddDynamic(this, &ThisClass::OnPhaseReadyToPlay);
-		mGameSubsystem->OnAllDead.AddDynamic(this, &ThisClass::WaveComplete);
+
+		mGameSubsystem->OnAllDead.AddDynamic(this, &ThisClass::OnAllEnemiesDead);
 
 		mGameSubsystem->OnGetCurrentWave.BindDynamic(this, &ThisClass::GetCurrentWave);
 	}
@@ -27,13 +28,19 @@ void AWaveManager::BeginPlay()
 	mTimerComp->OnFinishTimer.AddDynamic(this, &ThisClass::AWaveManager::OnTimerFinish);
 	
 	// get the latest timer and start the timer
-	StartNextWave();
+	//StartNextWave();
 }
 
 
 void AWaveManager::Init(ATowerDefenceGameGameModeBase* GameMode)
 {
 	mGameMode = GameMode;
+}
+
+void AWaveManager::OnAllEnemiesDead_Implementation()
+{
+	AddWaveCount();
+	StartNextWave();
 }
 
 #pragma region Phase Methods
@@ -49,12 +56,15 @@ void AWaveManager::RevertWave(int PhaseLostCount)
 
 void AWaveManager::OnPhaseReadyToPlay(int PhaseCount)
 {
-	mTimerComp->StartTimer(mCountDownTimerDetails.CountDownTimer);
+	const FString str = "Wave Countdown Started"; 
+	mGameSubsystem->OnFeedbackEnabled.Broadcast(Feed_Success, str);
+	
+	StartNextWave();
 }
 
 void AWaveManager::OnPhaseComplete(int Phase)
 {
-	mTimerComp->ForceStopTimer();
+	mTimerComp->StopAndResetTimer();
 }
 
 #pragma endregion
@@ -95,11 +105,6 @@ void AWaveManager::AddWaveCount()
 	mGameSubsystem->OnWaveUpdated.Broadcast(mCurrentWave);
 }
 
-void AWaveManager::WaveComplete_Implementation()
-{
-	AddWaveCount();
-}
-
 void AWaveManager::StartNextWave_Implementation()
 {
 	if(mCurrentWave > mCountDownTimerDetails.MaxLevel)
@@ -119,5 +124,5 @@ void AWaveManager::StartNextWave_Implementation()
 
 void AWaveManager::OnGameComplete(bool bWon)
 {
-	mTimerComp->ForceStopTimer();
+	mTimerComp->StopAndResetTimer();
 }

@@ -66,9 +66,8 @@ void UTimerComponent::FinishTimer()
 	UpdateTimer();
 }
 
-void UTimerComponent::ForceStopTimer()
+void UTimerComponent::StopAndResetTimer()
 {
 	FinishTimer();
 }
-
 #pragma endregion
