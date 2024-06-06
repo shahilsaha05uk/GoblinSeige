@@ -33,6 +33,7 @@ void UTimerComponent::StartTimer(const float Duration)
 void UTimerComponent::UpdateTimer()
 {
 	const FString timeToStr = UKismetStringLibrary::TimeSecondsToString(cTime);
+	
 	mClockSubsystem->CurrentTime.Broadcast(timeToStr);
 }
 
