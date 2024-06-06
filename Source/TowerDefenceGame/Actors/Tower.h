@@ -69,6 +69,9 @@ public:
 
 	virtual void OnBuildingDecisionTaken_Implementation(bool HasConfirmed) override;
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void UpdateRange();
+	
 	UFUNCTION(BlueprintCallable)
 	void UpdateTowerState(ETowerState State);
 	

@@ -47,9 +47,7 @@ void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacement
 
 	if(PlacementActor)
 	{
-		float rad = PlacementActor->mSphereComp->GetUnscaledSphereRadius();
-		mRangeColliderComp->InitSphereRadius(rad);
-		mRangeColliderComp->SetSphereRadius(rad);
+		UpdateRange();
 	}
 	
 	// Binding the Range collider overlap events
@@ -71,6 +69,7 @@ void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacement
 
 	//Setting the Niagara Component
 	mNiagaraComp->SetAsset(BuildingDetails.mBuildingNiagara, true);
+
 }
 
 #pragma region States
@@ -211,6 +210,14 @@ void ATower::OnBuildingDecisionTaken_Implementation(bool HasConfirmed)
 		// Setting the initial state of the tower
 		UpdateTowerState(ETowerState::Idle);
 	}
+}
+
+void ATower::UpdateRange_Implementation()
+{
+	if(!mPlacement) return;
+	const float rad = mPlacement->mSphereComp->GetScaledSphereRadius();
+	mRangeColliderComp->SetSphereRadius(rad);
+	
 }
 
 void ATower::UpdateTowerState(ETowerState State)

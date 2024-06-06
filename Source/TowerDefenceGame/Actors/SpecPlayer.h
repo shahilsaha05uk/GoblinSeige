@@ -33,6 +33,8 @@ private:
 public:
 	
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	class UCapsuleComponent* mColliderComp;
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	class UCameraComponent* mCameraComp;
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	class USpringArmComponent* mSpringArmComp;

@@ -30,6 +30,7 @@ public:
 	FVector mTargetLocation;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn), Category = "Private | Projectile Properties")
 	AActor* mTarget;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Projectile Properties")
 	class UNiagaraSystem* mProjectileMuzzleAsset;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Projectile Properties")
@@ -47,13 +48,5 @@ public:
 	void ActivateProjectile(AActor* Target);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void DeactivateProjectile();
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void SpawnMuzzle();
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void SpawnProjectile();
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void StopProjectile();
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void SetProjectileTemplateToEmpty();
 };
 
