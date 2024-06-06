@@ -71,7 +71,7 @@ public:
 
 	// called when the current wave completes
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void WaveComplete();
+	void OnAllEnemiesDead();
 
 	// Starts the next wave
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
