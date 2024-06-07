@@ -7,6 +7,7 @@
 #include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingSubsystem.h"
 #include "TowerDefenceGame/SupportClasses/HelperMethods.h"
+#include "TowerDefenceGame/InterfaceClasses/PlayerInterface.h"
 
 void UBuildingPlacementHandlerComponent::BeginPlay()
 {
@@ -33,6 +34,11 @@ void UBuildingPlacementHandlerComponent::HandleInteraction()
 
     if(Success)    // if no hit was detected
     {
+        auto const owner = GetOwner();
+        if (UKismetSystemLibrary::DoesImplementInterface(owner, UPlayerInterface::StaticClass()))
+        {
+            IPlayerInterface::Execute_RecenterCamera(owner, hit);
+        }
         mCurrentHitActor = hit.GetActor();
         CallInteract();
     }

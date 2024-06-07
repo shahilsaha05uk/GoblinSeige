@@ -110,14 +110,16 @@ void ABaseEnemy::OnHealthUpdated_Implementation(float CurrentHealth)
 
 void ABaseEnemy::OnEnemyBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,UPrimitiveComponent* OtherComp, int OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(UKismetSystemLibrary::DoesImplementInterface(OtherActor, UTargetInterface::StaticClass()) && OtherActor == mTarget) return;
-
-	mTarget = OtherActor;
-
-	// Setting the Blackboard key
-	if(auto const blackboard = UAIBlueprintHelperLibrary::GetBlackboard(this))
+	if (UKismetSystemLibrary::DoesImplementInterface(OtherActor, UTargetInterface::StaticClass()))
 	{
-		blackboard->SetValueAsObject(blackboard_Target, mTarget);
+		if (OtherActor == mTarget) return;
+
+		mTarget = OtherActor;
+		// Setting the Blackboard key
+		if(auto const blackboard = UAIBlueprintHelperLibrary::GetBlackboard(this))
+		{
+			blackboard->SetValueAsObject(blackboard_Target, mTarget);
+		}
 	}
 }
 

@@ -33,6 +33,9 @@ private:
 public:
 	
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	float DesiredCameraDistance = 1000.0f; // Distance from the building to the camera
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	class UCapsuleComponent* mColliderComp;
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	class UCameraComponent* mCameraComp;
