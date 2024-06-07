@@ -104,7 +104,6 @@ void ASpecPlayer::Zoom_Implementation(float Value)
 {
 	
 }
-
 #pragma endregion
 
 void ASpecPlayer::OnPhaseLoaded_Implementation(int LoadedPhase, FPhaseDetails Details)

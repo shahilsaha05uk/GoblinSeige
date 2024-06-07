@@ -25,4 +25,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void UpgradeSelectedBuilding(int BuildingID);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void RecenterCamera(FHitResult hit);
 };
