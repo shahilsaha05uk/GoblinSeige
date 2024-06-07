@@ -149,6 +149,7 @@ void ATower::OnProjectilePool_Implementation()
 		if(const auto projectile = SpawnProjectile())
 		{
 			projectile->OnProjectileJobComplete.AddDynamic(this, &ThisClass::OnProjectileJobComplete);
+			projectile->Init(OnProjectileUpgrade);
 			if(mTarget) projectile->ActivateProjectile(mTarget);
 			mPooledProjectiles.Add(projectile);
 			PoolCount++;
@@ -267,6 +268,12 @@ void ATower::Upgrade_Implementation(FUpgradeDetails Details)
 {
 	Super::Upgrade_Implementation(Details);
 	BuildingStats = Details.BuildingStats;
+	ProjectileClass = (Details.UpgradeProjectile == nullptr)? ProjectileClass : Details.UpgradeProjectile;
+
+	if(Details.HasProjectileStats)
+	{
+		OnProjectileUpgrade.Broadcast(Details.ProjectileStats);
+	}
 }
 
 void ATower::DestructBuilding_Implementation()

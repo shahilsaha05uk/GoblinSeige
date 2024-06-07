@@ -71,5 +71,5 @@ public:
 
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnPhaseLoaded(int LoadedPhase);
+	void OnPhaseLoaded(int LoadedPhase, FPhaseDetails Details);
 };

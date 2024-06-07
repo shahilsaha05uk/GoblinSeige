@@ -7,6 +7,7 @@
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "Tower.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnProjectileUpgradeSignature, FProjectileDetails, ProjectileDetails);
 
 UENUM(Blueprintable, BlueprintType)
 enum ETowerState { Firing, Seek, Idle };
@@ -62,7 +63,10 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite)
 	class UTowerUI* mTowerUI;
-	
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnProjectileUpgradeSignature OnProjectileUpgrade;
+
 	ATower();
 
 	virtual void Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacementActor* PlacementActor) override;
@@ -115,4 +119,5 @@ public:
 	virtual void Upgrade_Implementation(FUpgradeDetails Details) override;
 
 	virtual void DestructBuilding_Implementation() override;
+
 };

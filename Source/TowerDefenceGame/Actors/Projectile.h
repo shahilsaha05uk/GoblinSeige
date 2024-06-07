@@ -3,7 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Tower.h"
 #include "GameFramework/Actor.h"
+#include "TowerDefenceGame/SupportClasses/StructClass.h"
 #include "Projectile.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnProjectileJobCompleteSignature, class AProjectile*, Projectile);
@@ -44,9 +46,17 @@ public:
 
 	AProjectile();
 
+	UFUNCTION()
+	void Init(FOnProjectileUpgradeSignature OnUpgradeSignature);
+	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void ActivateProjectile(AActor* Target);
+	void ActivateProjectile(AActor* Target, float MinSpeed = -1, float MaxSpeed = -1);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void DeactivateProjectile();
+
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnUpgrade(FProjectileDetails ProjectileDetails);
+
 };
 
