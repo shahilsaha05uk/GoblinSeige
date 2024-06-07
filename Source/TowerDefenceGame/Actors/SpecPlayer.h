@@ -33,6 +33,8 @@ private:
 public:
 	
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	class UCapsuleComponent* mColliderComp;
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	class UCameraComponent* mCameraComp;
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	class USpringArmComponent* mSpringArmComp;
@@ -69,5 +71,5 @@ public:
 
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnPhaseLoaded(int LoadedPhase);
+	void OnPhaseLoaded(int LoadedPhase, FPhaseDetails Details);
 };

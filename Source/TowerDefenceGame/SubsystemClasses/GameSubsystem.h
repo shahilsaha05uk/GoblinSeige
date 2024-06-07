@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "TowerDefenceGame/SupportClasses/EnumClass.h"
+#include "TowerDefenceGame/SupportClasses/StructClass.h"
 #include "GameSubsystem.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGameDecisionMadeSignature);
@@ -13,10 +14,12 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnFeedbackSystemEnableSignature, E
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGameCompleteSignature, bool, bWon);
 
+// Phase Delegates
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPhaseCompleteSignature, int, Phase);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPhaseLoadedSuccessfullySignature, int, LoadedPhase);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnPhaseLoadedSuccessfullySignature, int, LoadedPhase, FPhaseDetails, PhaseDetails);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPhaseReadyToPlaySignature, int, PhaseCount);
 
+// Enemy Delegates
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FAllEnemyDeadSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEnemiesReadySignature, int, TotalEnemies);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEnemyDieSignature, class AEnemyController*, Controller);

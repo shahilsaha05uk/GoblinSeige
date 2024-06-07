@@ -3,7 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Tower.h"
 #include "GameFramework/Actor.h"
+#include "TowerDefenceGame/SupportClasses/StructClass.h"
 #include "Projectile.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnProjectileJobCompleteSignature, class AProjectile*, Projectile);
@@ -30,6 +32,7 @@ public:
 	FVector mTargetLocation;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (ExposeOnSpawn), Category = "Private | Projectile Properties")
 	AActor* mTarget;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Projectile Properties")
 	class UNiagaraSystem* mProjectileMuzzleAsset;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Projectile Properties")
@@ -43,17 +46,17 @@ public:
 
 	AProjectile();
 
+	UFUNCTION()
+	void Init(FOnProjectileUpgradeSignature OnUpgradeSignature);
+	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void ActivateProjectile(AActor* Target);
+	void ActivateProjectile(AActor* Target, float MinSpeed = -1, float MaxSpeed = -1);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void DeactivateProjectile();
+
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void SpawnMuzzle();
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void SpawnProjectile();
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void StopProjectile();
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void SetProjectileTemplateToEmpty();
+	void OnUpgrade(FProjectileDetails ProjectileDetails);
+
 };
 

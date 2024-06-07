@@ -47,9 +47,7 @@ void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacement
 
 	if(PlacementActor)
 	{
-		float rad = PlacementActor->mSphereComp->GetUnscaledSphereRadius();
-		mRangeColliderComp->InitSphereRadius(rad);
-		mRangeColliderComp->SetSphereRadius(rad);
+		UpdateRange();
 	}
 	
 	// Binding the Range collider overlap events
@@ -71,6 +69,7 @@ void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacement
 
 	//Setting the Niagara Component
 	mNiagaraComp->SetAsset(BuildingDetails.mBuildingNiagara, true);
+
 }
 
 #pragma region States
@@ -150,6 +149,7 @@ void ATower::OnProjectilePool_Implementation()
 		if(const auto projectile = SpawnProjectile())
 		{
 			projectile->OnProjectileJobComplete.AddDynamic(this, &ThisClass::OnProjectileJobComplete);
+			projectile->Init(OnProjectileUpgrade);
 			if(mTarget) projectile->ActivateProjectile(mTarget);
 			mPooledProjectiles.Add(projectile);
 			PoolCount++;
@@ -213,6 +213,14 @@ void ATower::OnBuildingDecisionTaken_Implementation(bool HasConfirmed)
 	}
 }
 
+void ATower::UpdateRange_Implementation()
+{
+	if(!mPlacement) return;
+	const float rad = mPlacement->mSphereComp->GetScaledSphereRadius();
+	mRangeColliderComp->SetSphereRadius(rad);
+	
+}
+
 void ATower::UpdateTowerState(ETowerState State)
 {
 	GetWorld()->GetTimerManager().ClearTimer(TowerStateTimeHandler);
@@ -260,6 +268,12 @@ void ATower::Upgrade_Implementation(FUpgradeDetails Details)
 {
 	Super::Upgrade_Implementation(Details);
 	BuildingStats = Details.BuildingStats;
+	ProjectileClass = (Details.UpgradeProjectile == nullptr)? ProjectileClass : Details.UpgradeProjectile;
+
+	if(Details.HasProjectileStats)
+	{
+		OnProjectileUpgrade.Broadcast(Details.ProjectileStats);
+	}
 }
 
 void ATower::DestructBuilding_Implementation()

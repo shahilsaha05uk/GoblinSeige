@@ -129,5 +129,5 @@ public:
 	FVector GetSpawnPoint();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnPhaseLoadedSuccessfully(int LoadedPhase);
+	void OnPhaseLoadedSuccessfully(int LoadedPhase, FPhaseDetails Details);
 };

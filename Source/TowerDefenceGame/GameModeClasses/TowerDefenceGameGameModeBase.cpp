@@ -32,9 +32,9 @@ void ATowerDefenceGameGameModeBase::PostLogin(APlayerController* NewPlayer)
 
 void ATowerDefenceGameGameModeBase::UpdateTargets_Implementation()
 {
-	if(mPhaseTargetBreachMap.Contains(mCurrentPhase))
+	if(mPhaseDetails.Contains(mCurrentPhase))
 	{
-		mTotalTargetsToDestroy = mPhaseTargetBreachMap[mCurrentPhase];
+		mTotalTargetsToDestroy = mPhaseDetails[mCurrentPhase].TargetsToDestroy;
 	}
 }
 
@@ -49,7 +49,7 @@ void ATowerDefenceGameGameModeBase::OnTargetDestroyed_Implementation()
 	// check how many targets are expected to be destroyed before moving to the next phase
 	mTotalTargetsToDestroy--;
 
-	MakePhaseDecision();
+	if(mTotalTargetsToDestroy <=0)	MakePhaseDecision();
 }
 
 void ATowerDefenceGameGameModeBase::MakeWaveDecision_Implementation()
@@ -69,14 +69,23 @@ void ATowerDefenceGameGameModeBase::MakePhaseDecision_Implementation()
 		
 		if(HasPhasesLeft())	// if there is any phases left than, load that
 		{
-			mGameSubsystem->OnPhaseComplete.Broadcast(mCurrentPhase);	// notify that the phase is complete
+			if(mPhaseDetails.Contains(mCurrentPhase))
+			{
+				mGameSubsystem->OnPhaseComplete.Broadcast(mCurrentPhase);	// notify that the phase is complete
 				
-			UpdatePhase();	// update the phase
+				UpdatePhase();	// update the phase
 				
-			OnPhaseLoad();	// load the next phase
+				OnPhaseLoad();	// load the next phase
+			}
+			else
+			{
+				UE_LOG(LogTemp, Error, TEXT("Phase Details doesnt have any details regarding Phase %d"), mCurrentPhase);
+			}
 		}
 		else	
 		{
+			//mGameSubsystem->OnPhaseComplete.Broadcast(-1);	// notify that the phase is complete
+
 			// Send Feedback that they failed to defend the doors
 			const FString str = "You failed to defend the doors"; 
 			mGameSubsystem->OnFeedbackEnabled.Broadcast(Feed_Failed, str);
@@ -114,7 +123,7 @@ void ATowerDefenceGameGameModeBase::LoadPhase_Implementation()
 
 bool ATowerDefenceGameGameModeBase::HasCompletedAllTheWaves(int Wave) const
 {
-	int waveCount = (Wave == -1)? mWaveManager->GetCurrentWave() : Wave;
+	const int waveCount = (Wave == -1)? mWaveManager->GetCurrentWave() : Wave;
 
 	return waveCount >= mWaveManager->GetFinalWave();
 }

@@ -234,7 +234,7 @@ void AInputController::OnPhaseComplete_Implementation(int Phase)
 	DisableInput(this);
 }
 
-void AInputController::OnPhaseLoadedSuccess_Implementation(int LoadedPhase)
+void AInputController::OnPhaseLoadedSuccess_Implementation(int LoadedPhase, FPhaseDetails Details)
 {
 	ResetIgnoreLookInput();
 	ResetIgnoreMoveInput();

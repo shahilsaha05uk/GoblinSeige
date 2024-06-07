@@ -4,9 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "TowerDefenceGame/SupportClasses/StructClass.h"
 #include "TowerDefenceGameGameModeBase.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGameOverSignature);
+
 
 UCLASS()
 class TOWERDEFENCEGAME_API ATowerDefenceGameGameModeBase : public AGameModeBase
@@ -17,9 +19,6 @@ private:
 
 	class APlayerController* mPlayerController;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Phase", meta = (ToolTip = "Key: Phase; Value: Total Targets that needs to be breached"))
-	TMap<int, int> mPhaseTargetBreachMap;
-	
 	UPROPERTY(EditDefaultsOnly, Category = "Phase")
 	int mTotalTargetsToDestroy = 0;
 	UPROPERTY(EditDefaultsOnly, Category = "Phase")
@@ -36,8 +35,9 @@ private:
 	TSubclassOf<class AEnemyManager> EnemyManagerClass;
 public:
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TMap<int, TSoftObjectPtr<UWorld>> mLevelMap;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Phase", meta = (ToolTip = "Key: Phase; Value: Phase Details"))
+	TMap<int, FPhaseDetails> mPhaseDetails;
+	
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Phase")
 	int mLastPhase;
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Phase")

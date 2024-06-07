@@ -7,6 +7,22 @@
 #include "StructClass.generated.h"
 
 
+USTRUCT(BlueprintType, Blueprintable)
+struct FPhaseDetails
+{
+	GENERATED_BODY()
+public:
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int TargetsToDestroy;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bHasCutscene;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	class UMediaSource* MediaSource;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TSoftObjectPtr<UWorld> LevelMap;
+};
+
 USTRUCT(Blueprintable, BlueprintType)
 struct FBuildingStats
 {
@@ -55,6 +71,26 @@ public:
 };
 
 USTRUCT(Blueprintable, BlueprintType)
+struct FProjectileDetails
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bIsRadialProjectile;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Radial")
+	float InitialSpeed;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Radial")
+	float MaxSpeed;
+
+	FProjectileDetails(): bIsRadialProjectile(false), InitialSpeed(-1), MaxSpeed(-1)
+	{
+	}
+};
+
+
+USTRUCT(Blueprintable, BlueprintType)
 struct FUpgradeDetails
 {
 	GENERATED_BODY()
@@ -67,16 +103,23 @@ public:
 	FString UpgradeName;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int UpgradeCost;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	class UNiagaraSystem* UpgradeNiagara;
+	TSubclassOf<AProjectile> UpgradeProjectile;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool HasProjectileStats;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FProjectileDetails ProjectileStats;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	FBuildingStats BuildingStats;
 
-	FUpgradeDetails(): UpgradeID(-1), UpgradeCost(0), UpgradeNiagara(nullptr)
+	FUpgradeDetails(): UpgradeID(-1), UpgradeCost(0), UpgradeProjectile(nullptr), HasProjectileStats(false),
+	                   ProjectileStats()
 	{
 	}
 };
+
 
 
 USTRUCT(Blueprintable, BlueprintType)

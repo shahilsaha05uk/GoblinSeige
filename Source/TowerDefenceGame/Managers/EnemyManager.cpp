@@ -186,7 +186,7 @@ void AEnemyManager::OnPhaseComplete_Implementation(int Phase)
 	if(!mSpawnPoints.IsEmpty()) mSpawnPoints.Empty();
 }
 
-void AEnemyManager::OnPhaseLoadedSuccessfully_Implementation(int LoadedPhase)
+void AEnemyManager::OnPhaseLoadedSuccessfully_Implementation(int LoadedPhase, FPhaseDetails Details)
 {
 	if(!mSpawnPoints.IsEmpty()) mSpawnPoints.Empty();
 

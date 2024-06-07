@@ -4,6 +4,7 @@
 #include "SpecPlayer.h"
 #include <TowerDefenceGame/SubsystemClasses/GameSubsystem.h>
 #include "Camera/CameraComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "GameFramework/HUD.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -15,6 +16,9 @@
 
 ASpecPlayer::ASpecPlayer()
 {
+	mColliderComp = CreateDefaultSubobject<UCapsuleComponent>("CollisionComp");
+	RootComponent = mColliderComp;
+	
 	mSpringArmComp = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
 	mSpringArmComp->SetupAttachment(RootComponent);
 
@@ -103,7 +107,7 @@ void ASpecPlayer::Zoom_Implementation(float Value)
 
 #pragma endregion
 
-void ASpecPlayer::OnPhaseLoaded_Implementation(int LoadedPhase)
+void ASpecPlayer::OnPhaseLoaded_Implementation(int LoadedPhase, FPhaseDetails Details)
 {
 }
 
