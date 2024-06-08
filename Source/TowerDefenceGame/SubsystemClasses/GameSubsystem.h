@@ -86,9 +86,6 @@ public:
 	FOnEnemyDieSignature OnEnemyDie;
 
 	// Wave Delegates
-	UPROPERTY()
-	FGetCurrentWaveSignature OnGetCurrentWave;
-	
 	UPROPERTY(BlueprintCallable, BlueprintAssignable)
 	FOnWaveCompletedSignature OnWaveUpdated;
 

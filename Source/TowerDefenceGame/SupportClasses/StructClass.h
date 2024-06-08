@@ -21,6 +21,10 @@ public:
 	class UMediaSource* MediaSource;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TSoftObjectPtr<UWorld> LevelMap;
+
+	FPhaseDetails(): TargetsToDestroy(0), bHasCutscene(false), MediaSource(nullptr)
+	{
+	}
 };
 
 USTRUCT(Blueprintable, BlueprintType)
@@ -68,6 +72,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
 	class UDA_UpgradeAsset* UpgradeAsset;
 
+	FBuildingBuyDetails(): BuildingCost(0), BuildingImage(nullptr), mBuildingNiagara(nullptr), UpgradeAsset(nullptr)
+	{
+	}
 };
 
 USTRUCT(Blueprintable, BlueprintType)
@@ -133,6 +140,10 @@ public:
 	USoundMix* SoundMixRef;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Sound Properties")
 	USoundClass* SoundClassRef;
+
+	FSoundStruct(): SoundMixRef(nullptr), SoundClassRef(nullptr)
+	{
+	}
 };
 
 // Save Game Structs

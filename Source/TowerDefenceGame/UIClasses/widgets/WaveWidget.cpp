@@ -9,11 +9,11 @@
 void UWaveWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
-
+	
 	if(const auto gameSubsystem = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 	{
+		gameSubsystem->OnWaveStarted.AddDynamic(this, &ThisClass::OnWaveUpdate);
 		gameSubsystem->OnWaveUpdated.AddDynamic(this, &ThisClass::OnWaveUpdate);
-		OnWaveUpdate(gameSubsystem->OnGetCurrentWave.Execute());
 	}
 }
 

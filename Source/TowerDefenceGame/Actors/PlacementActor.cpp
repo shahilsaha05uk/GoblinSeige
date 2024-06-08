@@ -18,6 +18,10 @@ APlacementActor::APlacementActor()
 
 }
 
+void APlacementActor::TogglePlacement_Implementation(bool Activate)
+{
+}
+
 void APlacementActor::BeginPlay()
 {
 	Super::BeginPlay();
@@ -51,6 +55,7 @@ ABaseBuilding* APlacementActor::Build_Implementation(const FString& BuildingID)
 		mOccupiedBuilding->OnBuildingDestructed.AddDynamic(this, &ThisClass::OnBuildingDestructed);
 		mOccupiedBuilding->Init(BuildingDetails, this);
 
+		bIsOccupied = true;
 		UpdateState(DecisionPlacement);
 	}
 	return mOccupiedBuilding;
@@ -59,6 +64,7 @@ ABaseBuilding* APlacementActor::Build_Implementation(const FString& BuildingID)
 void APlacementActor::OnBuildingDestructed()
 {
 	mOccupiedBuilding->Destroy();
+	bIsOccupied = false;
 	UpdateState(EmptyPlacement);
 }
 
@@ -94,6 +100,7 @@ void APlacementActor::OnBuildingDecisionTaken_Implementation(bool HasConfirmed)
 
 void APlacementActor::UpdateState(EPlacementState State)
 {
+	pState = State;
 	switch (State) {
 	case EmptyPlacement:
 		ToggleMaterial(false);

@@ -21,8 +21,6 @@ void AWaveManager::BeginPlay()
 		mGameSubsystem->OnPhaseReadyToPlay.AddDynamic(this, &ThisClass::OnPhaseReadyToPlay);
 
 		mGameSubsystem->OnAllDead.AddDynamic(this, &ThisClass::OnAllEnemiesDead);
-
-		mGameSubsystem->OnGetCurrentWave.BindDynamic(this, &ThisClass::GetCurrentWave);
 	}
 
 	mTimerComp->OnFinishTimer.AddDynamic(this, &ThisClass::AWaveManager::OnTimerFinish);

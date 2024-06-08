@@ -28,13 +28,13 @@ private:
 	bool bPhaseChanging = false;
 	
 	UPROPERTY(EditDefaultsOnly)
-	int mStartingResources;
-	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<class AWaveManager> WaveManagerClass;
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<class AEnemyManager> EnemyManagerClass;
 public:
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	int mStartingResources;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Phase", meta = (ToolTip = "Key: Phase; Value: Phase Details"))
 	TMap<int, FPhaseDetails> mPhaseDetails;
 	

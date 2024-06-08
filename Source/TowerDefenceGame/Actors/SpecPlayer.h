@@ -72,6 +72,7 @@ public:
 	virtual void LeftMouseActions_Implementation() override;
 	virtual void Zoom_Implementation(float Value) override;
 
+	virtual void RecenterCamera_Implementation(FHitResult hit) override;
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnPhaseLoaded(int LoadedPhase, FPhaseDetails Details);

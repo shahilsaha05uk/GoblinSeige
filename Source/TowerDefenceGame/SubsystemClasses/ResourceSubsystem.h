@@ -34,6 +34,13 @@ public:
 	}
 
 	UFUNCTION(BlueprintCallable)
+	void Set(int value)
+	{
+		mCurrentResources = value;
+		OnResourceUpdated.Broadcast(mCurrentResources);
+	}
+
+	UFUNCTION(BlueprintCallable)
 	void Deduct(int value)
 	{
 		TotalSpentResources += value;

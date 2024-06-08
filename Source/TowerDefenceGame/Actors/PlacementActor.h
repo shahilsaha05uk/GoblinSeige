@@ -33,12 +33,18 @@ public:
 	
 public:
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	bool bIsOccupied;
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	TEnumAsByte<EPlacementState> pState;
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	class UStaticMeshComponent* mStaticMesh;
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	class USphereComponent* mSphereComp;
 
 	APlacementActor();
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void TogglePlacement(bool Activate);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void OnBuildingDecisionTaken(bool HasConfirmed);
 	virtual void BeginPlay() override;
