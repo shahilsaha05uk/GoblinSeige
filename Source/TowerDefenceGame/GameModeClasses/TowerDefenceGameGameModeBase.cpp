@@ -26,7 +26,6 @@ void ATowerDefenceGameGameModeBase::BeginPlay()
 void ATowerDefenceGameGameModeBase::PostLogin(APlayerController* NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
-	GetWorld()->GetFirstLocalPlayerFromController()->GetSubsystem<UResourceSubsystem>()->Add(mStartingResources);
 	mPlayerController = NewPlayer;
 }
 

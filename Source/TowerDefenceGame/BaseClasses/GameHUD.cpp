@@ -23,7 +23,9 @@ void AGameHUD::BeginPlay()
 
 bool AGameHUD::OnUIHovered_Implementation()
 {
-	return OnUIHoveredSignature.Execute();
+	if(OnUIHoveredSignature.IsBound()) return OnUIHoveredSignature.Execute();
+
+	return false;
 }
 
 void AGameHUD::UpdateInstanceMap(EWidgetType Type, UBaseWidget* NewWidget)
