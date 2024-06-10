@@ -64,3 +64,15 @@ FString UHelperMethods::GetUpgradeDescription(FBuildingStats CurrentStats, FBuil
 								CurrentStats.RateOfFire, UpgradeStats.RateOfFire);
 }
 
+void UHelperMethods::SetActorLocationAndControllerRotation(AActor* Target, AController* Controller, FVector Location,
+	FRotator Rotation)
+{
+	Target->SetActorLocation(Location);
+	Controller->SetControlRotation(Rotation);
+}
+
+FString UHelperMethods::GetPhaseString(int count)
+{
+	return FString::Printf(TEXT("Phase%d"), count);
+}
+

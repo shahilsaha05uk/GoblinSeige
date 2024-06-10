@@ -37,4 +37,14 @@ public:
 
 	UFUNCTION(BlueprintPure, BlueprintCallable)
 	static FString GetUpgradeDescription(FBuildingStats CurrentStats, FBuildingStats UpgradeStats);
+
+	UFUNCTION(BlueprintCallable)
+	static void SetActorLocationAndControllerRotation(AActor* Target, AController* Controller, FVector Location, FRotator Rotation);
+
+
+
+	UFUNCTION(BlueprintPure, BlueprintCallable)
+	static FString GetPhaseString(int count);
+
+
 };
