@@ -21,6 +21,13 @@ class TOWERDEFENCEGAME_API AInputController : public APlayerController, public I
 {
 	GENERATED_BODY()
 
+private:
+
+	UPROPERTY(EditDefaultsOnly)
+	float mMinPitch = -120.0f;
+	UPROPERTY(EditDefaultsOnly)
+	float mMaxPitch = 20.0f;
+	
 
 public:
 	UPROPERTY(BlueprintReadWrite)
@@ -91,9 +98,19 @@ public:
 	void OnPlacementUpdated(EPlacementState State, APlacementActor* PlacementActor);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnPhaseLoadedSuccess(int LoadedPhase, FPhaseDetails Details);
+	void OnPhaseLoaded(int LoadedPhase, FPhaseDetails Details);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SetInputMoveType(EInputModeType Type);
+
+	UFUNCTION(BlueprintPure)
+	FTransform GetPlayerStart(int Phase);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ShowCutscene(UMediaSource* MediaSource);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ReadyToPlay();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void SetPlayer(int PhaseCount);
 };
 

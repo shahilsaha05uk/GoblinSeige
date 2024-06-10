@@ -72,5 +72,5 @@
 /DPROJECT_COPYRIGHT_STRING="Fill out your copyright notice in the Description page of Project Settings."
 /DPROJECT_PRODUCT_NAME=GoblinSiege
 /DPROJECT_PRODUCT_IDENTIFIER=TowerDefenceGame
-/fo "D:\GoblinSeige\Plugins\Developer\RiderLink\Intermediate\Build\Win64\x64\UnrealEditor\Development\RD\Default.rc2.res"
+/fo "C:\Users\s015695k\Desktop\GoblinSeige\Plugins\Developer\RiderLink\Intermediate\Build\Win64\x64\UnrealEditor\Development\RD\Default.rc2.res"
 "..\Build\Windows\Resources\Default.rc2"

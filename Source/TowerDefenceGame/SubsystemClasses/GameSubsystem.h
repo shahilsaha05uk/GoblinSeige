@@ -8,29 +8,29 @@
 #include "TowerDefenceGame/SupportClasses/StructClass.h"
 #include "GameSubsystem.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGameDecisionMadeSignature);
+// Hud
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHUDInitialisedSignature, AHUD*, HudRef);
+
+// Feedback delegates
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnFeedbackSystemEnableSignature, EFeedbackType, Type, const FString&, MessageToDisplay);
 
+// Game Decision
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGameCompleteSignature, bool, bWon);
 
 // Phase Delegates
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPhaseCompleteSignature, int, Phase);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnPhaseLoadedSuccessfullySignature, int, LoadedPhase, FPhaseDetails, PhaseDetails);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPhaseReadyToPlaySignature, int, PhaseCount);
 
 // Enemy Delegates
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FAllEnemyDeadSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEnemiesReadySignature, int, TotalEnemies);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEnemyDieSignature, class AEnemyController*, Controller);
-
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnTargetDestroyedSignature);
+
 // Wave Delegates
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWaveCompletedSignature, int, Wave);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWaveStartSignature, int, Wave);
 DECLARE_DYNAMIC_DELEGATE_RetVal(int, FGetCurrentWaveSignature);
-
-
 
 
 UCLASS()
@@ -48,11 +48,12 @@ public:
 	// Enemy when they destroy a target
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnTargetDestroyedSignature OnTargetDestroyed;
-	
+
+	// feedback delegates
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnFeedbackSystemEnableSignature OnFeedbackEnabled;
 
-	// Game Events
+	// Game Decision Delegates
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnGameCompleteSignature OnGameComplete;
 
@@ -62,15 +63,7 @@ public:
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnPhaseLoadedSuccessfullySignature OnPhaseLoadedSuccessfully;
-
-	// On Ready to play
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FPhaseReadyToPlaySignature OnPhaseReadyToPlay;
-
-	// Game Decision Delegates
-	UPROPERTY(BlueprintAssignable, BlueprintCallable)
-	FOnGameDecisionMadeSignature OnGameDecisionMade;
-
+	
 	// HUD Delegates
 	UPROPERTY(BlueprintAssignable)
 	FOnHUDInitialisedSignature OnHudInitialised;

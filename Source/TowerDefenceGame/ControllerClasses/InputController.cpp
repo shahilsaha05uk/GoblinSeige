@@ -5,6 +5,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputTriggers.h"
+#include "MediaSource.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Components/AudioComponent.h"
 #include "GameFramework/PawnMovementComponent.h"
@@ -16,10 +17,10 @@
 #include "TowerDefenceGame/BaseClasses/GameHUD.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_InputActions.h"
 #include "TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h"
+#include "TowerDefenceGame/Managers/PhaseManager.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
-#include "TowerDefenceGame/SubsystemClasses/ClockSubsystem.h"
 #include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
-#include "TowerDefenceGame/UIClasses/GameComplete.h"
+#include "TowerDefenceGame/SupportClasses/HelperMethods.h"
 
 AInputController::AInputController()
 {
@@ -30,18 +31,6 @@ AInputController::AInputController()
 void AInputController::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if(const auto PlacementSubs = GetGameInstance()->GetSubsystem<UBuildingPlacementSubsystem>())
-	{
-		PlacementSubs->OnPlacementStateUpdate.AddDynamic(this, &ThisClass::OnPlacementUpdated);
-	}
-	
-	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
-	{
-		GameSubs->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
-		GameSubs->OnPhaseLoadedSuccessfully.AddDynamic(this, &ThisClass::OnPhaseLoadedSuccess);
-		GameSubs->OnGameComplete.AddDynamic(this, &ThisClass::OnGameComplete);
-	}
 
 	
 	bShowMouseCursor = true;
@@ -55,6 +44,31 @@ void AInputController::BeginPlay()
 			mPlayerHUD->AddToViewport();
 	}
 
+	if(const auto PlacementSubs = GetGameInstance()->GetSubsystem<UBuildingPlacementSubsystem>())
+	{
+		PlacementSubs->OnPlacementStateUpdate.AddDynamic(this, &ThisClass::OnPlacementUpdated);
+	}
+	
+	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
+	{
+		GameSubs->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
+		GameSubs->OnPhaseLoadedSuccessfully.AddDynamic(this, &ThisClass::OnPhaseLoaded);
+		GameSubs->OnGameComplete.AddDynamic(this, &ThisClass::OnGameComplete);
+
+		GameSubs->OnFeedbackEnabled.Broadcast(Feed_Success, FString("The Phase Starts in 10 seconds"));
+	}
+
+	// setting the min and the max pitch
+	PlayerCameraManager->ViewPitchMin = mMinPitch;
+	PlayerCameraManager->ViewPitchMax = mMaxPitch;
+
+	/*
+	if(const auto gMode = Cast<ATowerDefenceGameGameModeBase>(GetWorld()->GetAuthGameMode()))
+	{
+		gMode->LoadPhase();
+	}
+	*/
+	
 	SetInputMoveType(UI_And_Game);
 }
 
@@ -83,6 +97,30 @@ void AInputController::SetupInputComponent()
 		Subsystem->AddMappingContext(InputMappingContext, 0);
 	}
 }
+
+#pragma region Privates
+
+void AInputController::ReadyToPlay_Implementation()
+{
+	if(const auto GameMode = Cast<ATowerDefenceGameGameModeBase>(GetWorld()->GetAuthGameMode()))
+	{
+		const int phaseCount = GameMode->mPhaseManager->GetCurrentPhase();
+		SetPlayer(phaseCount);
+		GameMode->ReadyToPlay();
+	}
+}
+
+void AInputController::OnGameComplete_Implementation(bool bWon)
+{
+	SetInputMoveType(UI_Only);
+}
+
+void AInputController::ShowCutscene_Implementation(UMediaSource* MediaSource)
+{
+	
+}
+
+#pragma endregion
 
 #pragma region Audio Methods
 
@@ -120,6 +158,7 @@ void AInputController::OnPlacementUpdated_Implementation(EPlacementState State, 
 		SetInputMoveType(UI_And_Game);
 	}
 }
+
 #pragma endregion
 
 #pragma region Control Methods
@@ -212,6 +251,57 @@ void AInputController::PauseGame_Implementation()
 }
 #pragma endregion
 
+#pragma region Phase
+
+void AInputController::OnPhaseComplete_Implementation(int Phase)
+{
+	SetIgnoreLookInput(true);
+	SetIgnoreLookInput(true);
+	DisableInput(this);
+}
+
+void AInputController::OnPhaseLoaded_Implementation(int LoadedPhase, FPhaseDetails Details)
+{
+	ResetIgnoreLookInput();
+	ResetIgnoreMoveInput();
+	EnableInput(this);
+
+	if(Details.MediaSource)
+	{
+		ShowCutscene(Details.MediaSource);
+	}
+	else
+	{
+		ReadyToPlay();
+	}
+}
+
+#pragma endregion
+
+#pragma region Getters
+
+FTransform AInputController::GetPlayerStart(int Phase)
+{
+	const FString str = FString::Printf(TEXT("Phase%d"), Phase);
+	auto const actorRef = GetWorld()->GetAuthGameMode()->FindPlayerStart(this, str);
+	UE_LOG(LogTemp, Warning, TEXT("Phase Start name: %s"), *actorRef->GetName());
+	return GetWorld()->GetAuthGameMode()->FindPlayerStart(this, str)->GetActorTransform();
+}
+
+#pragma endregion
+
+#pragma region Setters
+
+void AInputController::SetPlayer_Implementation(int PhaseCount)
+{
+	// Set the Player
+	const FTransform PlayerStartTransform = GetPlayerStart(PhaseCount);
+	if (const auto pawn = GetPawn())
+	{
+		UHelperMethods::SetActorLocationAndControllerRotation(pawn, this, PlayerStartTransform.GetLocation(), PlayerStartTransform.Rotator());
+	}
+}
+
 void AInputController::SetInputMoveType_Implementation(EInputModeType Type)
 {
 	switch (Type) {
@@ -227,21 +317,5 @@ void AInputController::SetInputMoveType_Implementation(EInputModeType Type)
 	}
 }
 
-void AInputController::OnPhaseComplete_Implementation(int Phase)
-{
-	SetIgnoreLookInput(true);
-	SetIgnoreLookInput(true);
-	DisableInput(this);
-}
 
-void AInputController::OnPhaseLoadedSuccess_Implementation(int LoadedPhase, FPhaseDetails Details)
-{
-	ResetIgnoreLookInput();
-	ResetIgnoreMoveInput();
-	EnableInput(this);
-}
-
-void AInputController::OnGameComplete_Implementation(bool bWon)
-{
-	SetInputMoveType(UI_Only);
-}
+#pragma endregion
