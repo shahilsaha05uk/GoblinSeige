@@ -54,7 +54,7 @@ public:
 
 
 	UFUNCTION(BlueprintCallable)
-	void OnPhaseReadyToPlay(int PhaseCount);
+	void OnPhaseReadyToPlay();
 	UFUNCTION(BlueprintCallable)
 	void OnPhaseComplete(int Phase);
 
@@ -80,5 +80,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void OnGameComplete(bool bWon);
+	
+	
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	bool HasCompletedAllTheWaves() const;
 
 };

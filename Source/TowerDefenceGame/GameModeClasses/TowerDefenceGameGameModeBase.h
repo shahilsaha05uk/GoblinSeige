@@ -31,6 +31,8 @@ private:
 	TSubclassOf<class AWaveManager> WaveManagerClass;
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<class AEnemyManager> EnemyManagerClass;
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<class APhaseManager> PhaseManagerClass;
 public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
@@ -50,45 +52,18 @@ public:
 	class AWaveManager* mWaveManager;
 	UPROPERTY(BlueprintReadOnly)
 	class AEnemyManager* mEnemyManager;
+	UPROPERTY(BlueprintReadOnly)
+	class APhaseManager* mPhaseManager;
 	
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnGameOverSignature OnGameOver;
 
-	virtual void BeginPlay() override;
-	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void LoadPhase();
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnTargetDestroyed();
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void UpdatePhase();
-	
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnPhaseLoad();
-
-	UFUNCTION(BlueprintPure, BlueprintCallable)
-	int GetCurrentPhase() { return mCurrentPhase; }
-	UFUNCTION(BlueprintPure, BlueprintCallable)
-	int GetTotalPhases() {return mFinalPhase; }
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnWaveUpdated(int Wave);
-
-	
+	virtual void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;
 	virtual void PostLogin(APlayerController* NewPlayer) override;
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void MakePhaseDecision();
+	void OnWaveUpdated(int Wave);
+	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void MakeWaveDecision();
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void UpdateTargets();
-
-	// Decision making methods
-	UFUNCTION(BlueprintPure)
-	bool HasCompletedAllTheWaves(int Wave = -1) const;
-	UFUNCTION(BlueprintPure)
-	bool HasDestroyedAllTheTargets() const;
-	UFUNCTION(BlueprintPure)
-	bool HasPhasesLeft() const;
+	void ReadyToPlay();
 };

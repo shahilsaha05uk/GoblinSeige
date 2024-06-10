@@ -2,34 +2,38 @@
 
 
 #include "PhaseManager.h"
+
+#include "Engine/LevelStreaming.h"
 #include "Kismet/GameplayStatics.h"
+#include "Streaming/LevelStreamingDelegates.h"
 #include "TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h"
 #include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
-
-void APhaseManager::BeginPlay()
-{
-	Super::BeginPlay();
-	mGameSubsystem = GetGameInstance()->GetSubsystem<UGameSubsystem>();
-
-	LoadPhase();
-}
 
 void APhaseManager::Init_Implementation(ATowerDefenceGameGameModeBase* GameMode)
 {
 	mGameMode = GameMode;
+	mGameSubsystem = GetGameInstance()->GetSubsystem<UGameSubsystem>();
+
+	if(mGameSubsystem)
+	{
+		mGameSubsystem->OnTargetDestroyed.AddDynamic(this, &ThisClass::TargetDestroyed);
+	}
+
+	LoadPhase();
 }
 
 bool APhaseManager::LoadPhase_Implementation()
 {
-	FLatentActionInfo info;
-	info.CallbackTarget = this;
-	info.Linkage = 0;
-
 	// unloading the last phase
 	if(mPhaseDetails.Contains(mCurrentPhase))
 	{
+		FLatentActionInfo unloadInfo;
+		unloadInfo.CallbackTarget = this;
+		unloadInfo.ExecutionFunction = FName("OnPhaseUnloaded");
+		unloadInfo.Linkage = 0;
+		unloadInfo.UUID = __LINE__; // Ensure uniqueness
 		auto const PhaseDetails = mPhaseDetails[mCurrentPhase];
-		UGameplayStatics::UnloadStreamLevelBySoftObjectPtr(GetWorld(), PhaseDetails.LevelMap, info, true);
+		UGameplayStatics::UnloadStreamLevelBySoftObjectPtr(GetWorld(), PhaseDetails.LevelMap, unloadInfo, true);
 	}
 
 	// increment the phase count
@@ -38,32 +42,52 @@ bool APhaseManager::LoadPhase_Implementation()
 	// loading the next phase
 	if(mPhaseDetails.Contains(mCurrentPhase))
 	{
-		info.ExecutionFunction = FName("OnPhaseLoaded");
+		FLatentActionInfo loadInfo;
+		loadInfo.CallbackTarget = this;
+		loadInfo.ExecutionFunction = FName("OnPhaseLoaded");
+		loadInfo.Linkage = 0;
+		loadInfo.UUID = __LINE__; // Ensure uniqueness
 		mCurrentPhaseDetails = mPhaseDetails[mCurrentPhase];
-		UGameplayStatics::LoadStreamLevelBySoftObjectPtr(GetWorld(), mCurrentPhaseDetails.LevelMap, true, true, info);
+
+		// gets the streaming level
+		const FSoftObjectPath LevelPath = mCurrentPhaseDetails.LevelMap.ToSoftObjectPath();
+		const FString PackageName = LevelPath.GetLongPackageName();
+		const auto levelStream = UGameplayStatics::GetStreamingLevel(GetWorld(), FName(*PackageName));
+
+		// Load the stream level
+		UGameplayStatics::LoadStreamLevel(GetWorld(), FName(*PackageName), true, true, loadInfo);
+
+		// called when the level is loaded
+		if(levelStream)
+		{
+			levelStream->OnLevelShown.AddDynamic(this, &ThisClass::OnPhaseLoaded);
+		}
+
 		return true;
 	}
-
+	
 	return false;
 }
+
 void APhaseManager::OnPhaseLoaded_Implementation()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Loading Finish"));
 	UpdateTargets();
-	mGameSubsystem->OnPhaseReadyToPlay.Broadcast(mCurrentPhase, mCurrentPhaseDetails);
+
+	if(mGameSubsystem)
+		mGameSubsystem->OnPhaseLoadedSuccessfully.Broadcast(mCurrentPhase, mCurrentPhaseDetails);
 }
 
 void APhaseManager::TargetDestroyed_Implementation()
 {
-	if(mGameSubsystem) mGameSubsystem->OnTargetDestroyed.Broadcast();
-
+	mTotalTargetsToDestroy--;
+	
 	if(mTotalTargetsToDestroy <= 0)
 	{
 		OnNoTargetsLeft.Broadcast();
 
 		if(!LoadPhase())
 		{
-			mGameMode->MakeDecision();
+			mGameSubsystem->OnGameComplete.Broadcast(false);
 		}
 		else
 		{

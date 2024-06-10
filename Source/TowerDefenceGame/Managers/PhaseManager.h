@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/LevelStreaming.h"
 #include "GameFramework/Actor.h"
 #include "TowerDefenceGame/SupportClasses/StructClass.h"
 #include "PhaseManager.generated.h"
@@ -16,15 +17,13 @@ class TOWERDEFENCEGAME_API APhaseManager : public AActor
 
 private:
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY()
 	int mTotalTargetsToDestroy = 0;
 	UPROPERTY(EditDefaultsOnly, Category = "Phase")
 	int mCurrentPhase = 0;
 	UPROPERTY(EditDefaultsOnly, Category = "Phase")
 	int mFinalPhase = 2;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Phase")
-	TArray<ULevel*> LevelsToSelect;
 public:
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
@@ -41,22 +40,22 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Phase")
 	FPhaseDetails mCurrentPhaseDetails;
 
-	virtual void BeginPlay() override;
 
 	//Privates
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void Init(class ATowerDefenceGameGameModeBase* GameMode);
-
+	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	bool LoadPhase();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnPhaseLoaded();
+	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void TargetDestroyed();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void UpdatePhase();
 	
 	// on loading/unloading finish
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnPhaseLoaded();
 
 	// Updaters
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
