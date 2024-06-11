@@ -17,6 +17,7 @@ void UParentBar::UpdateBar(float Value)
 void UParentBar::UpdateTextValue(float Value)
 {
 	const int IntVal = UKismetMathLibrary::FCeil(Value);
+	UE_LOG(LogTemp, Warning, TEXT("Value: %d"), IntVal);
 	mTextValue->SetText(FText::AsNumber(IntVal));
 }
 

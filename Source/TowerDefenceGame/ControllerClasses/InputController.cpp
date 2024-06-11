@@ -56,19 +56,15 @@ void AInputController::BeginPlay()
 		GameSubs->OnGameComplete.AddDynamic(this, &ThisClass::OnGameComplete);
 
 		GameSubs->OnFeedbackEnabled.Broadcast(Feed_Success, FString("The Phase Starts in 10 seconds"));
+
+		GameSubs->OnWaveStarted.AddDynamic(this, &ThisClass::OnWaveStarted);
+		GameSubs->OnWaveUpdated.AddDynamic(this, &ThisClass::OnWaveComplete);
 	}
 
 	// setting the min and the max pitch
 	PlayerCameraManager->ViewPitchMin = mMinPitch;
 	PlayerCameraManager->ViewPitchMax = mMaxPitch;
 
-	/*
-	if(const auto gMode = Cast<ATowerDefenceGameGameModeBase>(GetWorld()->GetAuthGameMode()))
-	{
-		gMode->LoadPhase();
-	}
-	*/
-	
 	SetInputMoveType(UI_And_Game);
 }
 
@@ -317,5 +313,17 @@ void AInputController::SetInputMoveType_Implementation(EInputModeType Type)
 	}
 }
 
+
+#pragma endregion
+
+#pragma region Wave
+
+void AInputController::OnWaveStarted_Implementation(int Wave)
+{
+}
+
+void AInputController::OnWaveComplete_Implementation(int Wave)
+{
+}
 
 #pragma endregion

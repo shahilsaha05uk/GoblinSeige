@@ -36,11 +36,11 @@ void ABaseEnemy::BeginPlay()
 void ABaseEnemy::Init_Implementation()
 {
 	mHealthComponent->OnHealthUpdated.AddDynamic(this, &ThisClass::OnHealthUpdated);
-
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnEnemyBeginOverlap);
 	
 	mHealthWidget = Cast<UParentBar>(mHealthBarWidgetComponent->GetWidget());
-
+	mHealthWidget->Init(mHealthComponent);
+	
 	if(auto const GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
 	{
 		GameSubs->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);

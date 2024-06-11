@@ -112,5 +112,11 @@ public:
 	void ReadyToPlay();
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SetPlayer(int PhaseCount);
+
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnWaveStarted(int Wave);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnWaveComplete(int Wave);
 };
 
