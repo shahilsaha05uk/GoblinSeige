@@ -43,32 +43,41 @@ ATower::ATower()
 
 void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacementActor* PlacementActor)
 {
-	Super::Init_Implementation(BuildingDetails, PlacementActor);
-
-	if(PlacementActor)
+	if(bIsInstanced)
 	{
-		UpdateRange();
+		ProjectileClass = InstancedProjectileClass;
+		UpdateTowerState(ETowerState::Seek);
 	}
+	else
+	{
+		Super::Init_Implementation(BuildingDetails, PlacementActor);
+
+		// Initialising the Tower UI
+		mTowerUI = Cast<UTowerUI>(mTowerWidgetComp->GetWidget());
+		if(mTowerUI)
+		{
+			mTowerUI->ToggleWidgetSwitcher(ConfirmWidget);
+			mTowerUI->OnDecisionMade.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
+			mTowerWidgetComp->SetTickMode(ETickMode::Enabled);
+		}
+
+		if(PlacementActor)
+		{
+			UpdateRange();
+		}
+
+		// Initialising the Upgrade Component
+		mUpgradeComp->OnUpgradeApplied.AddDynamic(this, &ThisClass::Upgrade);
+		mUpgradeComp->Init(BuildingDetails.UpgradeAsset);
+
+		//Setting the Niagara Component
+		mNiagaraComp->SetAsset(BuildingDetails.mBuildingNiagara, true);
+	}
+
 	
 	// Binding the Range collider overlap events
 	mRangeColliderComp->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnEnemyEnteredTheRange);
 	mRangeColliderComp->OnComponentEndOverlap.AddDynamic(this, &ThisClass::OnEnemyExitedTheRange);
-
-	// Initialising the Tower UI
-	mTowerUI = Cast<UTowerUI>(mTowerWidgetComp->GetWidget());
-	if(mTowerUI)
-	{
-		mTowerUI->ToggleWidgetSwitcher(ConfirmWidget);
-		mTowerUI->OnDecisionMade.AddDynamic(this, &ThisClass::OnBuildingDecisionTaken);
-		mTowerWidgetComp->SetTickMode(ETickMode::Enabled);
-	}
-	
-	// Initialising the Upgrade Component
-	mUpgradeComp->OnUpgradeApplied.AddDynamic(this, &ThisClass::Upgrade);
-	mUpgradeComp->Init(BuildingDetails.UpgradeAsset);
-
-	//Setting the Niagara Component
-	mNiagaraComp->SetAsset(BuildingDetails.mBuildingNiagara, true);
 
 }
 
