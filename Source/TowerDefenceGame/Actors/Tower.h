@@ -37,11 +37,18 @@ private:
 	UPROPERTY()
 	int tempPoolCount;
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Tower")
+	bool bIsInstanced;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Tower")
+	TSubclassOf<AProjectile> InstancedProjectileClass;
+
+
 	UPROPERTY(BlueprintReadOnly)
 	TEnumAsByte<ETowerState> TowerState;
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<FUpgradeDetails> mUpgradeDetails;
+	
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<AProjectile*> mPooledProjectiles;
