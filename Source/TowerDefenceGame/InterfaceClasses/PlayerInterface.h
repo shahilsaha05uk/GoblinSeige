@@ -27,4 +27,6 @@ public:
 	void UpgradeSelectedBuilding(int BuildingID);
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void RecenterCamera(FHitResult hit);
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ShakeWhenInRange();
 };

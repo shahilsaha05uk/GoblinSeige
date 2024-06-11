@@ -109,6 +109,11 @@ void ASpecPlayer::RecenterCamera_Implementation(FHitResult hit)
 {
 	
 }
+
+void ASpecPlayer::ShakeWhenInRange_Implementation()
+{
+	
+}
 #pragma endregion
 
 void ASpecPlayer::OnPhaseLoaded_Implementation(int LoadedPhase, FPhaseDetails Details)
