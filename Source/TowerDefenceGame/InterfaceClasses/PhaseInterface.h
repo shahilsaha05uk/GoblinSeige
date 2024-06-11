@@ -27,8 +27,5 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Phase Interface")
 	void OnPhaseComplete(int Phase);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Phase Interface")
-	void OnPhaseLoadedSuccessfully(int LoadedPhase, FPhaseDetails Details);
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Phase Interface")
-	void OnPhaseReadyToPlay(int Phase, FPhaseDetails Details);
-
+	void OnPhaseLoaded(int LoadedPhase, FPhaseDetails Details);
 };

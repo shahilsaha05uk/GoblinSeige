@@ -9,18 +9,47 @@
   <component name="ChangeListManager">
     <list default="true" id="9e7763e5-9dad-44e7-9cef-d89b5e8a74c4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TowerDefenceGame.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Main_Level.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Main_Level.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Menu/Menu.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Menu/Menu.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Shahil1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Shahil1.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Shahil2.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Stylized_Egypt/Maps/Shahil2.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/Actors/bp_DOOR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Actors/bp_DOOR.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/BP/Controllers/BP_Controller.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Controllers/BP_Controller.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/Managers/BP_EnemyManager.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Managers/BP_EnemyManager.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/Managers/BP_PhaseManager.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Managers/BP_PhaseManager.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/BP/Modes/BP_GameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Modes/BP_GameMode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_Feedback.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_Feedback.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Controllers/BP_MenuController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Controllers/BP_MenuController.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP/Modes/BP_MenuGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/BP/Modes/BP_MenuGameMode.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/GameMix.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/GameMusic.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/Master.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/MasterMix.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/MenuMix.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/MenuMusic.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundCues/BackgroundMusic_Cue.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundCues/GameSound.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundCues/MainMenuTrack_Cue.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundCues/Weapon/Electric_Tower_Cue.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundCues/Weapon/FlameTower_Cue.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundCues/Weapon/arrowShooting_Cue.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundCues/Weapon/cannon-shot_Cue.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundCues/Weapon/launchpad_Cue.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundCues/Weapon/machineGun_Cue.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundCues/goblin_Cue.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundCues/waveSong_Cue.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundWaves/BackgroundMusic.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundWaves/Button/buttonClick.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundWaves/Button/buttonhover.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundWaves/Enemy/goblin1.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundWaves/Enemy/goblin2.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundWaves/MainMenuTrack.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundWaves/Weapon/Electric_Tower.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundWaves/Weapon/FlameTower.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundWaves/Weapon/arrowShooting.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundWaves/Weapon/cannon-shot.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundWaves/Weapon/launchpad.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundWaves/Weapon/machineGun.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/SoundWaves/waveSong.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/raw/gameMusic_Cue.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/raw/menuMusic_Cue.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Sounds/raw/waveMusic_Cue.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_GameComplete.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_GameComplete.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/UI/WBP_Instructions.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_Instructions.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_MainMenu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_MainMenu.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/WBP_PauseMenu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/WBP_PauseMenu.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RD.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RD.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderBlueprint.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderBlueprint.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderGameControl.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor-RiderGameControl.pdb" afterDir="false" />
@@ -276,14 +305,7 @@
       <change beforePath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/FileSystemMappings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/Developer/RiderLink/Intermediate/FileSystemMappings.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/InputController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/InputController.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/InputController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/ControllerClasses/InputController.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/GameModeClasses/TowerDefenceGameGameModeBase.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/PhaseManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/PhaseManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/PhaseManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/PhaseManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/WaveManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/WaveManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/WaveManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/Managers/WaveManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/GameSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/SubsystemClasses/GameSubsystem.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/FeedbackWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/UIClasses/FeedbackWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/PhaseInterface.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TowerDefenceGame/InterfaceClasses/PhaseInterface.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -707,183 +729,229 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Uproject.TowerDefenceGame.executor&quot;: &quot;Debug&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;polish-2&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;RiderCppLiveTemplatesSettingsId&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Uproject.TowerDefenceGame.executor": "Debug",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "polish-2",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "RiderCppLiveTemplatesSettingsId",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\s015695k\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\s015695k\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\s015695k\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\THUNDER_PC\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\THUNDER_PC\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\THUNDER_PC\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="TowerDefenceGame" type="Uproject" factoryName="rider.uproject">
-      <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TowerDefenceGame.uproject" />
-      <configuration_2>
+      <configuration_1>
         <option name="CONFIGURATION" value="DebugGame Editor" />
         <option name="PLATFORM" value="Win64" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TowerDefenceGame.uproject" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
         <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\Win64\UnrealEditor-Win64-DebugGame.exe" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\s015695k\Desktop\GoblinSeige\TowerDefenceGame.uproject&quot;" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\THUNDER_PC\Desktop\GoblinSeige\TowerDefenceGame.uproject&quot;" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_2>
-      <configuration_3>
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+      </configuration_1>
+      <configuration_2>
         <option name="CONFIGURATION" value="DebugGame" />
         <option name="PLATFORM" value="Win64" />
-        <option name="EXECUTABLE_PATH" value="C:\Users\s015695k\Desktop\GoblinSeige\Binaries\Win64\TowerDefenceGame-Win64-DebugGame.exe" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TowerDefenceGame.uproject" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="C:\Users\THUNDER_PC\Desktop\GoblinSeige\Binaries\Win64\TowerDefenceGame-Win64-DebugGame.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_3>
-      <configuration_4>
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+      </configuration_2>
+      <configuration_3>
         <option name="CONFIGURATION" value="Development Editor" />
         <option name="PLATFORM" value="Win64" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TowerDefenceGame.uproject" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
         <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\Win64\UnrealEditor.exe" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\s015695k\Desktop\GoblinSeige\TowerDefenceGame.uproject&quot;" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\THUNDER_PC\Desktop\GoblinSeige\TowerDefenceGame.uproject&quot;" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_4>
-      <configuration_5>
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+      </configuration_3>
+      <configuration_4>
         <option name="CONFIGURATION" value="Development" />
         <option name="PLATFORM" value="Win64" />
-        <option name="EXECUTABLE_PATH" value="C:\Users\s015695k\Desktop\GoblinSeige\Binaries\Win64\TowerDefenceGame.exe" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TowerDefenceGame.uproject" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="C:\Users\THUNDER_PC\Desktop\GoblinSeige\Binaries\Win64\TowerDefenceGame.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_5>
-      <configuration_6>
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+      </configuration_4>
+      <configuration_5>
         <option name="CONFIGURATION" value="Shipping" />
         <option name="PLATFORM" value="Win64" />
-        <option name="EXECUTABLE_PATH" value="C:\Users\s015695k\Desktop\GoblinSeige\Binaries\Win64\TowerDefenceGame-Win64-Shipping.exe" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TowerDefenceGame.uproject" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="C:\Users\THUNDER_PC\Desktop\GoblinSeige\Binaries\Win64\TowerDefenceGame-Win64-Shipping.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+      </configuration_5>
+      <configuration_6>
+        <option name="CONFIGURATION" value="DebugGame Editor" />
+        <option name="PLATFORM" value="Linux" />
+        <option name="PROJECT_FILE_PATH" value="" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\Linux\UnrealEditor-Linux-DebugGame" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\TowerDefenceGame.uproject&quot;" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="PASS_PARENT_ENVS" value="1" />
+        <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_6>
       <configuration_7>
         <option name="CONFIGURATION" value="DebugGame Editor" />
-        <option name="PLATFORM" value="Linux" />
-        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\Linux\UnrealEditor-Linux-DebugGame" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="PLATFORM" value="LinuxArm64" />
+        <option name="PROJECT_FILE_PATH" value="" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\LinuxArm64\UnrealEditor-LinuxArm64-DebugGame" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\TowerDefenceGame.uproject&quot;" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_7>
       <configuration_8>
-        <option name="CONFIGURATION" value="DebugGame Editor" />
-        <option name="PLATFORM" value="LinuxArm64" />
-        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\LinuxArm64\UnrealEditor-LinuxArm64-DebugGame" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\TowerDefenceGame.uproject&quot;" />
+        <option name="CONFIGURATION" value="DebugGame" />
+        <option name="PLATFORM" value="Linux" />
+        <option name="PROJECT_FILE_PATH" value="" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\Linux\TowerDefenceGame-Linux-DebugGame" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_8>
       <configuration_9>
         <option name="CONFIGURATION" value="DebugGame" />
-        <option name="PLATFORM" value="Linux" />
-        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\Linux\TowerDefenceGame-Linux-DebugGame" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="PLATFORM" value="LinuxArm64" />
+        <option name="PROJECT_FILE_PATH" value="" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\LinuxArm64\TowerDefenceGame-LinuxArm64-DebugGame" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_9>
       <configuration_10>
-        <option name="CONFIGURATION" value="DebugGame" />
-        <option name="PLATFORM" value="LinuxArm64" />
-        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\LinuxArm64\TowerDefenceGame-LinuxArm64-DebugGame" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
+        <option name="CONFIGURATION" value="Development Editor" />
+        <option name="PLATFORM" value="Linux" />
+        <option name="PROJECT_FILE_PATH" value="" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\Linux\UnrealEditor" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\TowerDefenceGame.uproject&quot;" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_10>
       <configuration_11>
         <option name="CONFIGURATION" value="Development Editor" />
-        <option name="PLATFORM" value="Linux" />
-        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\Linux\UnrealEditor" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="PLATFORM" value="LinuxArm64" />
+        <option name="PROJECT_FILE_PATH" value="" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\LinuxArm64\UnrealEditor" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\TowerDefenceGame.uproject&quot;" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_11>
       <configuration_12>
-        <option name="CONFIGURATION" value="Development Editor" />
-        <option name="PLATFORM" value="LinuxArm64" />
-        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.2\Engine\Binaries\LinuxArm64\UnrealEditor" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\TowerDefenceGame.uproject&quot;" />
+        <option name="CONFIGURATION" value="Development" />
+        <option name="PLATFORM" value="Linux" />
+        <option name="PROJECT_FILE_PATH" value="" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\Linux\TowerDefenceGame" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_12>
       <configuration_13>
         <option name="CONFIGURATION" value="Development" />
-        <option name="PLATFORM" value="Linux" />
-        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\Linux\TowerDefenceGame" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="PLATFORM" value="LinuxArm64" />
+        <option name="PROJECT_FILE_PATH" value="" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\LinuxArm64\TowerDefenceGame" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_13>
       <configuration_14>
-        <option name="CONFIGURATION" value="Development" />
-        <option name="PLATFORM" value="LinuxArm64" />
-        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\LinuxArm64\TowerDefenceGame" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
+        <option name="CONFIGURATION" value="Shipping" />
+        <option name="PLATFORM" value="Linux" />
+        <option name="PROJECT_FILE_PATH" value="" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\Linux\TowerDefenceGame-Linux-Shipping" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
       </configuration_14>
       <configuration_15>
         <option name="CONFIGURATION" value="Shipping" />
-        <option name="PLATFORM" value="Linux" />
-        <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\Linux\TowerDefenceGame-Linux-Shipping" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
-        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_15>
-      <configuration_16>
-        <option name="CONFIGURATION" value="Shipping" />
         <option name="PLATFORM" value="LinuxArm64" />
+        <option name="PROJECT_FILE_PATH" value="" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
         <option name="EXECUTABLE_PATH" value="G:\FINAL YEAR PROJECTS\TowerDefense\TowerDefenceGame\Binaries\LinuxArm64\TowerDefenceGame-LinuxArm64-Shipping" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.2" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      </configuration_16>
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+      </configuration_15>
+      <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/TowerDefenceGame.uproject" />
+      <option name="AUTO_SELECT_PRIORITY" value="10010" />
       <method v="2">
         <option name="Build" />
       </method>
@@ -941,6 +1009,7 @@
       <workItem from="1717749650332" duration="7511000" />
       <workItem from="1717759703292" duration="3767000" />
       <workItem from="1718024408192" duration="30033000" />
+      <workItem from="1718057403436" duration="3112000" />
     </task>
     <servers />
   </component>
