@@ -73,6 +73,7 @@ public:
 	virtual void Zoom_Implementation(float Value) override;
 
 	virtual void RecenterCamera_Implementation(FHitResult hit) override;
+	virtual void ShakeWhenInRange_Implementation() override;
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnPhaseLoaded(int LoadedPhase, FPhaseDetails Details);

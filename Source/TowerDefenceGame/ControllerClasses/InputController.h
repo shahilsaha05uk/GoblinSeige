@@ -14,7 +14,6 @@ UENUM(BlueprintType)
 enum EInputModeType { UI_Only, UI_And_Game, Game_Only };
 
 class UDA_InputActions;
-//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuyMenuOptionClickSignature, class UDA_BuildingAsset*, BuildingAsset);
 
 UCLASS()
 class TOWERDEFENCEGAME_API AInputController : public APlayerController, public IControllerInterface, public ISoundInterface

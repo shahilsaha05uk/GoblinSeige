@@ -69,7 +69,7 @@ void UBuyButton::UpdateButton_Implementation()
 {
 	if(mResourceSubsystem)
 	{
-		const bool ShouldEnable = (mResourceSubsystem->GetCurrentResources() > mBuildingDetails.BuildingCost);
+		const bool ShouldEnable = (mResourceSubsystem->GetCurrentResources() >= mBuildingDetails.BuildingCost);
 		BuyButton->SetIsEnabled(ShouldEnable);
 		UpdateButtonState((ShouldEnable) ? BUTTON_ENABLED : BUTTON_DISABLED);
 	}
