@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerState.h"
+#include "SupportClasses/StructClass.h"
 #include "GoblinState.generated.h"
 
 /**
@@ -16,8 +17,15 @@ class TOWERDEFENCEGAME_API AGoblinState : public APlayerState
 
 public:
 
+	UPROPERTY(BlueprintReadOnly)
+	class UResourceSubsystem* mResourceSubsystem;
+	
 	UPROPERTY(EditDefaultsOnly)
 	int mStartingResources;
 
 	virtual void BeginPlay() override;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnPhaseLoaded(int LoadedPhase, FPhaseDetails PhaseDetails);
+
 };

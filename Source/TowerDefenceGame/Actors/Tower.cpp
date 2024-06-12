@@ -158,6 +158,7 @@ void ATower::OnProjectilePool_Implementation()
 		if(const auto projectile = SpawnProjectile())
 		{
 			projectile->OnProjectileJobComplete.AddDynamic(this, &ThisClass::OnProjectileJobComplete);
+			projectile->OnDamageDealt.AddDynamic(this, &ThisClass::OnProjectileDealtDamage);
 			projectile->Init(OnProjectileUpgrade);
 			if(mTarget) projectile->ActivateProjectile(mTarget);
 			mPooledProjectiles.Add(projectile);
@@ -175,6 +176,10 @@ void ATower::CallPooledProjectile_Implementation()
 	{
 		if(mTarget) proj->ActivateProjectile(mTarget);
 	}
+}
+
+void ATower::OnProjectileDealtDamage_Implementation()
+{
 }
 
 #pragma endregion
@@ -283,6 +288,8 @@ void ATower::Upgrade_Implementation(FUpgradeDetails Details)
 	{
 		OnProjectileUpgrade.Broadcast(Details.ProjectileStats);
 	}
+
+	mNiagaraUpgradeComp->Activate();
 }
 
 void ATower::DestructBuilding_Implementation()

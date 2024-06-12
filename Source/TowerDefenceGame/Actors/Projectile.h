@@ -9,6 +9,7 @@
 #include "Projectile.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnProjectileJobCompleteSignature, class AProjectile*, Projectile);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDamageDealtSignature);
 
 
 UCLASS()
@@ -22,6 +23,8 @@ public:
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable)
 	FOnProjectileJobCompleteSignature OnProjectileJobComplete;
+	UPROPERTY(BlueprintAssignable, BlueprintCallable)
+	FOnDamageDealtSignature OnDamageDealt;
 
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Private | Projectile Properties")

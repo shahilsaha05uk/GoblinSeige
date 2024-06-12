@@ -7,6 +7,7 @@
 #include "TowerDefenceGame/BaseClasses/BaseBuilding.h"
 #include "TowerDefenceGame/DataAssetClasses/DA_BuildingAsset.h"
 #include "TowerDefenceGame/SubsystemClasses/BuildingPlacementSubsystem.h"
+#include "TowerDefenceGame/SubsystemClasses/GameSubsystem.h"
 
 APlacementActor::APlacementActor()
 {
@@ -25,6 +26,11 @@ void APlacementActor::TogglePlacement_Implementation(bool Activate)
 void APlacementActor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if(const auto GameSubs = GetGameInstance()->GetSubsystem<UGameSubsystem>())
+	{
+		GameSubs->OnPhaseComplete.AddDynamic(this, &ThisClass::OnPhaseComplete);
+	}
 }
 
 #pragma region Interfaces
@@ -66,6 +72,14 @@ void APlacementActor::OnBuildingDestructed()
 	mOccupiedBuilding->Destroy();
 	bIsOccupied = false;
 	UpdateState(EmptyPlacement);
+}
+
+void APlacementActor::OnPhaseComplete_Implementation(int Phase)
+{
+	if(mOccupiedBuilding)
+	{
+		mOccupiedBuilding->Destroy();
+	}
 }
 
 #pragma endregion

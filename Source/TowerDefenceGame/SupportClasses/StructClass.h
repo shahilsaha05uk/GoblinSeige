@@ -18,11 +18,13 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool bHasCutscene;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int TotalMoneyToAddBack;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	class UMediaSource* MediaSource;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TSoftObjectPtr<UWorld> LevelMap;
 
-	FPhaseDetails(): TargetsToDestroy(0), bHasCutscene(false), MediaSource(nullptr)
+	FPhaseDetails(): TargetsToDestroy(0), bHasCutscene(false), TotalMoneyToAddBack(10), MediaSource(nullptr)
 	{
 	}
 };

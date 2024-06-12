@@ -16,6 +16,9 @@ class TOWERDEFENCEGAME_API UBuyButton : public UUserWidget
 private:
 
 	UPROPERTY()
+	bool bIsBuyEnabled;
+
+	UPROPERTY()
 	class UResourceSubsystem* mResourceSubsystem;
 
 public:
@@ -26,6 +29,8 @@ public:
 	class UBorder* ButtonBorder;
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Properties")
 	class UButton* BuyButton;
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Properties")
+	class UButton* DisabledButton;
 
 	UPROPERTY(BlueprintReadWrite, meta = (ExposeOnSpawn), Category = "Properties")
 	class UShopMenu* mShop;

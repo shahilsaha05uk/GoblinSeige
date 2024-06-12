@@ -71,6 +71,11 @@ void UHelperMethods::SetActorLocationAndControllerRotation(AActor* Target, ACont
 	Controller->SetControlRotation(Rotation);
 }
 
+FText UHelperMethods::GetTextFromString(const FString& TextToConvert)
+{
+	return FText::FromString(TextToConvert);
+}
+
 FString UHelperMethods::GetPhaseString(int count)
 {
 	return FString::Printf(TEXT("Phase%d"), count);

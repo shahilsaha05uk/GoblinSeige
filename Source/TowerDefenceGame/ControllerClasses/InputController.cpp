@@ -31,7 +31,6 @@ AInputController::AInputController()
 void AInputController::BeginPlay()
 {
 	Super::BeginPlay();
-
 	
 	bShowMouseCursor = true;
 	SpecPawn = Cast<ASpecPlayer>(GetPawn());

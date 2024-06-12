@@ -129,6 +129,14 @@ public:
 	virtual void Disassociate_Implementation() override;
 #pragma endregion
 
+
+#pragma region Getters
+
+	UFUNCTION(BlueprintCallable)
+	class UUpgradeComponent* GetUpgradeComp() {return mUpgradeComp;}
+
+#pragma endregion
+	
 #pragma endregion
 	
 };

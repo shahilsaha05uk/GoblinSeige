@@ -80,17 +80,17 @@ void UPlayerHUD::OnBuildingDecisionTaken_Implementation(EBuildStatus Status)
 
 void UPlayerHUD::OnShopButtonHovered(FBuildingBuyDetails BuildingDetails)
 {
-	mDescriptionBox->UpdateDescriptionOnHovered(BuildingDetails);
+	mDescriptionBox->ModifyForBuy(BuildingDetails);
 }
 
 void UPlayerHUD::OnShopUnhovered()
 {
-	mDescriptionBox->UpdateDescriptionOnUnhovered();
+	mDescriptionBox->ModifyWhenUnHovered();
 }
 
 void UPlayerHUD::OnBuildingInterationBegin_Implementation(ABaseBuilding* BuildingRef)
 {
-	mDescriptionBox->UpdateDescriptionWithUpgrade(BuildingRef);
+	mDescriptionBox->ModifyForUpgrade(BuildingRef);
 }
 
 void UPlayerHUD::OnBuildingInterationEnd_Implementation(ABaseBuilding* BuildingRef)

@@ -23,13 +23,33 @@ public:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UTextBlock* txtBuildingName;
 	
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
+	class UTextBlock* txtCost;
+	
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
+	class UDescriptionEntry* entryDamage;
+	
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
+	class UDescriptionEntry* entryRange;
+	
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
+	class UDescriptionEntry* entryRateOfFire;
+	
 	virtual void NativeConstruct() override;
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void UpdateDescriptionOnHovered(FBuildingBuyDetails BuildingDetails);
-
+	void ModifyForUpgrade(class ABaseBuilding* BuildingRef);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void UpdateDescriptionWithUpgrade(class ABaseBuilding* BuildingRef);
+	void ModifyForBuy(FBuildingBuyDetails BuildingDetails);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void UpdateDescriptionOnUnhovered();
+	void ModifyWhenUnHovered();
+	
+	UFUNCTION(BlueprintCallable)
+	void ClearFields();
+	UFUNCTION(BlueprintCallable)
+	void UpgradeCurrents(FBuildingStats Stats);
+	UFUNCTION(BlueprintCallable)
+	void UpgradeNexts(FBuildingStats CurrentStats, FBuildingStats NextStats);
+	UFUNCTION(BlueprintCallable)
+	int CompareStats(float Current, float Next);
 };

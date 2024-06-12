@@ -44,7 +44,8 @@ public:
 
 
 	UFUNCTION(BlueprintPure, BlueprintCallable)
+	static FText GetTextFromString(const FString& TextToConvert);
+
+	UFUNCTION(BlueprintPure, BlueprintCallable)
 	static FString GetPhaseString(int count);
-
-
 };

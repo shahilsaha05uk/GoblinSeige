@@ -19,6 +19,9 @@ void UBuyButton::Init()
 	BuyButton->OnHovered.AddDynamic(this, &ThisClass::OnButtonHovered);
 	BuyButton->OnUnhovered.AddDynamic(this, &ThisClass::OnButtonUnhovered);
 
+	DisabledButton->OnHovered.AddDynamic(this, &ThisClass::OnButtonHovered);
+	DisabledButton->OnUnhovered.AddDynamic(this, &ThisClass::OnButtonUnhovered);
+
 	// Binds the button to the Resource Subsystem
 	mResourceSubsystem = GetWorld()->GetFirstLocalPlayerFromController()->GetSubsystem<UResourceSubsystem>();
 
@@ -36,6 +39,7 @@ void UBuyButton::Init()
 
 	// Set the Button Style
 	BuyButton->SetStyle(defaultStyle);
+	DisabledButton->SetStyle(defaultStyle);
 	
 	UpdateButton();		// Updates the button state
 }
@@ -69,9 +73,10 @@ void UBuyButton::UpdateButton_Implementation()
 {
 	if(mResourceSubsystem)
 	{
-		const bool ShouldEnable = (mResourceSubsystem->GetCurrentResources() >= mBuildingDetails.BuildingCost);
-		BuyButton->SetIsEnabled(ShouldEnable);
-		UpdateButtonState((ShouldEnable) ? BUTTON_ENABLED : BUTTON_DISABLED);
+		bIsBuyEnabled = (mResourceSubsystem->GetCurrentResources() >= mBuildingDetails.BuildingCost);
+		BuyButton->SetIsEnabled(bIsBuyEnabled);
+
+		UpdateButtonState((bIsBuyEnabled) ? BUTTON_ENABLED : BUTTON_DISABLED);
 	}
 }
 
