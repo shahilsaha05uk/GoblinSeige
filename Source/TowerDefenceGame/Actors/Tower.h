@@ -121,10 +121,11 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void OnProjectileJobComplete(class AProjectile* Projectile);
 	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void OnProjectileDealtDamage();
 
 	// Upgrades
 	virtual void Upgrade_Implementation(FUpgradeDetails Details) override;
 
 	virtual void DestructBuilding_Implementation() override;
-
 };

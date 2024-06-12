@@ -76,4 +76,13 @@ public:
 	void ToggleMaterial(bool Value);
 
 #pragma endregion
+
+#pragma region Phase
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void OnPhaseComplete(int Phase);
+
+#pragma endregion
+
+	
 };

@@ -59,6 +59,7 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetPercentageOfTheTotalSpentMoney(float Percent)
 	{
-		return FMath::RoundToInt(TotalSpentResources * Percent / 100.0f);
+		int ValueToAdd = FMath::RoundToInt((Percent/100) * TotalSpentResources);
+		return ValueToAdd;
 	}
 };
