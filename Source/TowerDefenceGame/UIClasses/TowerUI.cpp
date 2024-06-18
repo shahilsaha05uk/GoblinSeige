@@ -26,7 +26,6 @@ void UTowerUI::Init_Implementation(int Cost, class ATower* Tower)
 	if(Tower)
 	{
 		mTowerRef = Tower;
-		mTowerRef->mUpgradeComp;
 
 		if(mTowerRef->mUpgradeDetails.IsEmpty())
 		{
@@ -56,18 +55,8 @@ void UTowerUI::UpdateUI_Implementation()
 		return;
 	}
 
-	if(const auto LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController())
-	{
-		if(auto const ResourceSubs = LocalPlayer->GetSubsystem<UResourceSubsystem>())
-		{
-			auto const balance = ResourceSubs->GetCurrentResources();
-			btnUpgradeBuilding->SetIsEnabled(balance >= mTowerRef->mUpgradeComp->GetCurrentUpgrade().UpgradeCost);
-		}
-	}
-	else
-	{
-		btnUpgradeBuilding->SetIsEnabled(false);
-	}
+	bool isUpgradeAvailable = mTowerRef->mUpgradeComp->CheckIfUpgradeable();
+	btnUpgradeBuilding->SetIsEnabled(isUpgradeAvailable);
 }
 
 #pragma region Upgrade Methods

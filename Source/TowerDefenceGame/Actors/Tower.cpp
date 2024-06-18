@@ -188,6 +188,7 @@ void ATower::OnProjectileDealtDamage_Implementation()
 
 void ATower::OnEnemyEnteredTheRange_Implementation(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Other Actor Name: %s"), *OtherActor->GetName());
 	if(UKismetSystemLibrary::DoesImplementInterface(OtherActor, UEnemyInterface::StaticClass()) && TowerState != Firing)
 	{
 		UpdateTowerState(Firing);

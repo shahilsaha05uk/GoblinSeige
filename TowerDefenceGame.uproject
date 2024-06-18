@@ -54,6 +54,16 @@
 			"Name": "BetterHomingProjectiles",
 			"Enabled": true,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/3ae2009200f8416ca2b78741f33c97af"
+		},
+		{
+			"Name": "Audius",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/379d421d179148cca3a09dcd7a9049e0"
+		},
+		{
+			"Name": "BlueprintAssist",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/9e895371fa3a471c87337860d6f341ff"
 		}
 	]
 }

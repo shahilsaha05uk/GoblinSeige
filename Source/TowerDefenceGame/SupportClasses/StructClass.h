@@ -123,8 +123,12 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	FBuildingStats BuildingStats;
 
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bIsLastUpgrade;
+
 	FUpgradeDetails(): UpgradeID(-1), UpgradeCost(0), UpgradeProjectile(nullptr), HasProjectileStats(false),
-	                   ProjectileStats()
+	                   ProjectileStats(), bIsLastUpgrade(false)
 	{
 	}
 };

@@ -7,12 +7,6 @@
 #include "TowerDefenceGame/SubsystemClasses/ResourceSubsystem.h"
 
 
-// Sets default values for this component's properties
-UUpgradeComponent::UUpgradeComponent()
-{
-
-}
-
 void UUpgradeComponent::BeginPlay()
 {
 	Super::BeginPlay();
@@ -27,38 +21,48 @@ void UUpgradeComponent::Init(UDA_UpgradeAsset* UpgradeAsset)
 {
 	if(!UpgradeAsset) return;
 	mUpgradeDetails.Append(UpgradeAsset->GetUpgradeDetails());
+
+	// initialising upgrade Indexes
+	mTotalAvailableUpgrades = mUpgradeDetails.Num();
+	mCurrentUpgradeIndex = 0;
+
 	MoveToNextUpgrade();
 }
-
-bool UUpgradeComponent::IsValidUpgrade() const
-{
-	return mCurrentUpgrade.UpgradeID != -1;
-}
-
-bool UUpgradeComponent::HasNextUpgrade() const
-{
-	return (!mUpgradeDetails.IsEmpty());
-}
-
 void UUpgradeComponent::MoveToNextUpgrade()
 {
-	if(!mUpgradeDetails.IsEmpty())
+	// setting the next upgrade
+	if(mTotalAvailableUpgrades > 0 && mCurrentUpgradeIndex < mTotalAvailableUpgrades)
 	{
-		mCurrentUpgrade = mUpgradeDetails[0];
+		mCurrentUpgrade = mUpgradeDetails[mCurrentUpgradeIndex];
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Max Level Reached"));
 	}
 }
 
 void UUpgradeComponent::ApplyUpgrade()
 {
-	if(!IsValidUpgrade() || mUpgradeDetails.IsEmpty()) return;
+	// deduct the cost from the current balance
 	if(mResourceSubsystem)
 	{
 		mTotalMoneySpentOnUpgrades += mCurrentUpgrade.UpgradeCost;
 		mResourceSubsystem->Deduct(mCurrentUpgrade.UpgradeCost);
 	}
 
-	mUpgradeDetails.Pop();
-	MoveToNextUpgrade();
+	// apply the upgrades and move to next upgrades
 	OnUpgradeApplied.Broadcast(mCurrentUpgrade);
+
+	// increment the upgrade index
+	mCurrentUpgradeIndex++;
+
+	// Move to the next upgrade
+	MoveToNextUpgrade();
+}
+
+bool UUpgradeComponent::CheckIfUpgradeable()
+{
+	// if there is upgrade available AND enough bank balance
+	return mResourceSubsystem->GetCurrentResources() >= mCurrentUpgrade.UpgradeCost && mCurrentUpgradeIndex < mTotalAvailableUpgrades;
 }
 

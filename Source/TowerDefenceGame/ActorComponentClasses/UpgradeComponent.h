@@ -20,6 +20,11 @@ private:
 	FUpgradeDetails mCurrentUpgrade;
 
 	UPROPERTY()
+	int mTotalAvailableUpgrades = 0;
+	UPROPERTY()
+	int mCurrentUpgradeIndex = 0;
+
+	UPROPERTY()
 	int mTotalMoneySpentOnUpgrades;
 
 public:
@@ -32,8 +37,6 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	class UResourceSubsystem* mResourceSubsystem;
 
-	UUpgradeComponent();
-
 	virtual void BeginPlay() override;
 
 	UFUNCTION()
@@ -43,17 +46,14 @@ public:
 	int GetTotalMoneySpentOnUpgrades() { return mTotalMoneySpentOnUpgrades; }
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
-	bool IsValidUpgrade() const;
-
-	UFUNCTION(BlueprintCallable, BlueprintPure)
 	FUpgradeDetails GetCurrentUpgrade() {return mCurrentUpgrade;}
-
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	bool HasNextUpgrade() const;
 
 	UFUNCTION(BlueprintCallable)
 	void MoveToNextUpgrade();
 
 	UFUNCTION(BlueprintCallable)
 	void ApplyUpgrade();
+
+	UFUNCTION(BlueprintCallable)
+	bool CheckIfUpgradeable();
 };
