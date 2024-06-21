@@ -27,6 +27,9 @@ public:
 	class UTextBlock* txtCost;
 	
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
+	class UTextBlock* txtStatus;
+	
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
 	class UDescriptionEntry* entryDamage;
 	
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget), Category = "Widgets")
@@ -52,4 +55,9 @@ public:
 	void UpgradeNexts(FBuildingStats CurrentStats, FBuildingStats NextStats);
 	UFUNCTION(BlueprintCallable)
 	int CompareStats(float Current, float Next);
+
+	
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void OnMaxUpgradeReached();
+	
 };

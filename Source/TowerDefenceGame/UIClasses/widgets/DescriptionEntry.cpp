@@ -11,6 +11,11 @@ void UDescriptionEntry::ClearFields()
 	txtNext->SetText(FText::FromString(TEXT("")));
 }
 
+void UDescriptionEntry::ClearNextFields()
+{
+	txtNext->SetText(FText::FromString(TEXT("")));
+}
+
 void UDescriptionEntry::UpdateAllFields()
 {
 	txtLabel->SetText(mLabel);

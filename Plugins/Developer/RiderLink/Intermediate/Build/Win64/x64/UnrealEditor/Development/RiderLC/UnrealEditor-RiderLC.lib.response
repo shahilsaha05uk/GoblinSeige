@@ -6,6 +6,6 @@
 /NAME:"UnrealEditor-RiderLC.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"C:\Users\THUNDER_PC\Desktop\GoblinSeige\Plugins\Developer\RiderLink\Intermediate\Build\Win64\x64\UnrealEditor\Development\RiderLC\RiderLC.cpp.obj"
-"C:\Users\THUNDER_PC\Desktop\GoblinSeige\Plugins\Developer\RiderLink\Intermediate\Build\Win64\x64\UnrealEditor\Development\RiderLC\Default.rc2.res"
-/OUT:"C:\Users\THUNDER_PC\Desktop\GoblinSeige\Plugins\Developer\RiderLink\Intermediate\Build\Win64\x64\UnrealEditor\Development\RiderLC\UnrealEditor-RiderLC.lib"
+"E:\FINAL YEAR PROJECTS\GoblinSeige\Plugins\Developer\RiderLink\Intermediate\Build\Win64\x64\UnrealEditor\Development\RiderLC\RiderLC.cpp.obj"
+"E:\FINAL YEAR PROJECTS\GoblinSeige\Plugins\Developer\RiderLink\Intermediate\Build\Win64\x64\UnrealEditor\Development\RiderLC\Default.rc2.res"
+/OUT:"E:\FINAL YEAR PROJECTS\GoblinSeige\Plugins\Developer\RiderLink\Intermediate\Build\Win64\x64\UnrealEditor\Development\RiderLC\UnrealEditor-RiderLC.lib"

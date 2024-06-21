@@ -36,6 +36,9 @@ private:
 
 	UPROPERTY()
 	int tempPoolCount;
+	
+	UPROPERTY()
+	FProjectileDetails ProjectileDetails;
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Tower")
 	bool bIsInstanced;

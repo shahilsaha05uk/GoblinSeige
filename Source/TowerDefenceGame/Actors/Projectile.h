@@ -45,21 +45,10 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	class USoundBase* ProjectileSound;
-
-
-	AProjectile();
-
-	UFUNCTION()
-	void Init(FOnProjectileUpgradeSignature OnUpgradeSignature);
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void ActivateProjectile(AActor* Target, float MinSpeed = -1, float MaxSpeed = -1);
+	void ActivateProjectile(AActor* Target, FProjectileDetails Details);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void DeactivateProjectile();
-
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void OnUpgrade(FProjectileDetails ProjectileDetails);
-
 };
 
