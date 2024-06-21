@@ -52,6 +52,11 @@ void ATower::Init_Implementation(FBuildingBuyDetails BuildingDetails, APlacement
 	{
 		Super::Init_Implementation(BuildingDetails, PlacementActor);
 
+		if(mBuildingDetails.bIsTrajectoryTower)
+		{
+			ProjectileDetails = mBuildingDetails.ProjectileStats;
+		}
+
 		// Initialising the Tower UI
 		mTowerUI = Cast<UTowerUI>(mTowerWidgetComp->GetWidget());
 		if(mTowerUI)
@@ -159,8 +164,8 @@ void ATower::OnProjectilePool_Implementation()
 		{
 			projectile->OnProjectileJobComplete.AddDynamic(this, &ThisClass::OnProjectileJobComplete);
 			projectile->OnDamageDealt.AddDynamic(this, &ThisClass::OnProjectileDealtDamage);
-			projectile->Init(OnProjectileUpgrade);
-			if(mTarget) projectile->ActivateProjectile(mTarget);
+			if(mTarget) projectile->ActivateProjectile(mTarget, ProjectileDetails);
+
 			mPooledProjectiles.Add(projectile);
 			PoolCount++;
 		}
@@ -174,7 +179,7 @@ void ATower::CallPooledProjectile_Implementation()
 	else tempPoolCount = 0;
 	if(const auto proj = mPooledProjectiles[tempPoolCount])
 	{
-		if(mTarget) proj->ActivateProjectile(mTarget);
+		if(mTarget) proj->ActivateProjectile(mTarget, ProjectileDetails);
 	}
 }
 
@@ -246,7 +251,7 @@ void ATower::UpdateTowerState(ETowerState State)
 
 	switch (TowerState) {
 	case ETowerState::Firing:
-		GetWorld()->GetTimerManager().SetTimer(TowerStateTimeHandler, this, &ThisClass::Seek, BuildingStats.RateOfFire, true);
+		GetWorld()->GetTimerManager().SetTimer(TowerStateTimeHandler, this, &ThisClass::Seek, GetBuildingStats().RateOfFire, true);
 		Fire();
 		break;
 	case ETowerState::Seek:
@@ -282,15 +287,12 @@ bool ATower::FindTarget_Implementation()
 void ATower::Upgrade_Implementation(FUpgradeDetails Details)
 {
 	Super::Upgrade_Implementation(Details);
-	BuildingStats = Details.BuildingStats;
 	ProjectileClass = (Details.UpgradeProjectile == nullptr)? ProjectileClass : Details.UpgradeProjectile;
 
-	if(Details.HasProjectileStats)
+	if(mBuildingDetails.bIsTrajectoryTower && Details.bIsTrajectoryProjectile)
 	{
-		OnProjectileUpgrade.Broadcast(Details.ProjectileStats);
+		ProjectileDetails = Details.ProjectileStats;
 	}
-
-	mNiagaraUpgradeComp->Activate();
 }
 
 void ATower::DestructBuilding_Implementation()

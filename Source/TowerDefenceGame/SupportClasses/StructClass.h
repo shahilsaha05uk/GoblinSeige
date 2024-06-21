@@ -50,6 +50,29 @@ public:
 };
 
 USTRUCT(Blueprintable, BlueprintType)
+struct FProjectileDetails
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Radial")
+	float InitialLaunchSpeed;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Radial")
+	float MaxLaunchSpeed;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Radial")
+	float ProjectileAccelaration;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bIsRadialProjectile;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float mRadiusSize;
+	
+
+	FProjectileDetails(): InitialLaunchSpeed(-1), MaxLaunchSpeed(-1), ProjectileAccelaration(-1), mRadiusSize(-1)
+	{
+	}
+};
+
+USTRUCT(Blueprintable, BlueprintType)
 struct FBuildingBuyDetails
 {
 	GENERATED_BODY()
@@ -67,33 +90,22 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
 	FBuildingStats BuildingStats;
+
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
 	class UNiagaraSystem* mBuildingNiagara;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
-	class TSubclassOf<class AProjectile> mProjectileClass;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Building Details")
 	class UDA_UpgradeAsset* UpgradeAsset;
 
-	FBuildingBuyDetails(): BuildingCost(0), BuildingImage(nullptr), mBuildingNiagara(nullptr), UpgradeAsset(nullptr)
-	{
-	}
-};
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Trajectory Projectile")
+	bool bIsTrajectoryTower;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Trajectory Projectile")
+	FProjectileDetails ProjectileStats;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private | Trajectory Projectile")
+	class TSubclassOf<class AProjectile> mProjectileClass;
 
-USTRUCT(Blueprintable, BlueprintType)
-struct FProjectileDetails
-{
-	GENERATED_BODY()
 
-public:
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	bool bIsRadialProjectile;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Radial")
-	float InitialSpeed;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Radial")
-	float MaxSpeed;
-
-	FProjectileDetails(): bIsRadialProjectile(false), InitialSpeed(-1), MaxSpeed(-1)
+	FBuildingBuyDetails(): BuildingCost(0), BuildingImage(nullptr), mBuildingNiagara(nullptr), UpgradeAsset(nullptr),
+	                       bIsTrajectoryTower(false)
 	{
 	}
 };
@@ -114,11 +126,13 @@ public:
 	int UpgradeCost;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	TSubclassOf<AProjectile> UpgradeProjectile;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	bool HasProjectileStats;
+	bool bIsTrajectoryProjectile;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FProjectileDetails ProjectileStats;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TSubclassOf<AProjectile> UpgradeProjectile;
+
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Private")
 	FBuildingStats BuildingStats;
@@ -127,7 +141,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool bIsLastUpgrade;
 
-	FUpgradeDetails(): UpgradeID(-1), UpgradeCost(0), UpgradeProjectile(nullptr), HasProjectileStats(false),
+	FUpgradeDetails(): UpgradeID(-1), UpgradeCost(0), UpgradeProjectile(nullptr), bIsTrajectoryProjectile(false),
 	                   ProjectileStats(), bIsLastUpgrade(false)
 	{
 	}

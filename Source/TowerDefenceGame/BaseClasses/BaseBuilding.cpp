@@ -59,6 +59,8 @@ void ABaseBuilding::Disassociate_Implementation()
 
 void ABaseBuilding::Upgrade_Implementation(FUpgradeDetails Details)
 {
+	mBuildingDetails.BuildingStats = Details.BuildingStats;
+	mNiagaraUpgradeComp->Activate();
 	Execute_Disassociate(this);
 }
 
@@ -97,7 +99,6 @@ void ABaseBuilding::OnBuildingDecisionTaken_Implementation(bool HasConfirmed)
 	{
 		// initialises the building details
 		BuildingID = mBuildingDetails.ID;
-		BuildingStats = mBuildingDetails.BuildingStats;
 		ProjectileClass = mBuildingDetails.mProjectileClass;
 		UpgradeAsset = mBuildingDetails.UpgradeAsset;
 

@@ -28,7 +28,9 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void ClearFields();
-	
+	UFUNCTION(BlueprintCallable)
+	void ClearNextFields();
+
 	UFUNCTION(BlueprintCallable)
 	void UpdateAllFields();
 

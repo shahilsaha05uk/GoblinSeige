@@ -42,20 +42,36 @@ void UDescriptionBox::ModifyWhenUnHovered_Implementation()
 void UDescriptionBox::ModifyForUpgrade_Implementation(class ABaseBuilding* BuildingRef)
 {
 	const auto BuildingDetails = BuildingRef->mBuildingDetails;
-	const auto UpgradeDetails = BuildingRef->GetUpgradeComp()->GetCurrentUpgrade();
 
-	//constants
-	FText name = UHelperMethods::GetTextFromString(BuildingDetails.BuildingName);
-	txtBuildingName->SetText(name);
+	if(const auto UpgradeComp = BuildingRef->GetUpgradeComp())
+	{
+		const auto UpgradeDetails = UpgradeComp->GetCurrentUpgrade();
 
-	// upgrade cost
-	FText cost = UHelperMethods::GetTextFromString(FString::FromInt(UpgradeDetails.UpgradeCost));
-	txtCost->SetText(cost);
+		//constants
+		FText name = UHelperMethods::GetTextFromString(BuildingDetails.BuildingName);
+		txtBuildingName->SetText(name);
 
-	// updates the current stats as well as the next ones
-	UpgradeCurrents(BuildingDetails.BuildingStats);
-	UpgradeNexts(BuildingDetails.BuildingStats, UpgradeDetails.BuildingStats);
-	
+		if(UpgradeComp->HasReachedMaxUpgrade())
+		{
+			OnMaxUpgradeReached();
+			txtStatus->SetText(FText::FromString(TEXT("Max Upgraded!!")));
+			UpgradeCurrents(BuildingDetails.BuildingStats);
+
+			// Clear the next upgrades as there are no more upgrade available
+			entryDamage->ClearNextFields();
+			entryRange->ClearNextFields();
+			entryRateOfFire->ClearNextFields();
+			return;
+		}
+
+		// upgrade cost
+		FText cost = UHelperMethods::GetTextFromString(FString::FromInt(UpgradeDetails.UpgradeCost));
+		txtCost->SetText(cost);
+		
+		// updates the current stats as well as the next ones
+		UpgradeCurrents(BuildingDetails.BuildingStats);
+		UpgradeNexts(BuildingDetails.BuildingStats, UpgradeDetails.BuildingStats);
+	}
 }
 
 void UDescriptionBox::ModifyForBuy_Implementation(FBuildingBuyDetails BuildingDetails)

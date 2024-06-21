@@ -65,9 +65,6 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	class APlacementActor* mPlacement;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Private")
-	FBuildingStats BuildingStats;
-
 	UPROPERTY(BlueprintReadOnly)
 	FBuildingBuyDetails mBuildingDetails;
 
@@ -132,6 +129,8 @@ public:
 
 #pragma region Getters
 
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	FBuildingStats GetBuildingStats() {return mBuildingDetails.BuildingStats;}
 	UFUNCTION(BlueprintCallable)
 	class UUpgradeComponent* GetUpgradeComp() {return mUpgradeComp;}
 

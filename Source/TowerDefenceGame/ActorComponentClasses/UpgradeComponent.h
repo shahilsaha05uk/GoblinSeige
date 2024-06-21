@@ -56,4 +56,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool CheckIfUpgradeable();
+
+	UFUNCTION(BlueprintCallable)
+	bool HasReachedMaxUpgrade() const {return mCurrentUpgradeIndex >= mTotalAvailableUpgrades; }
 };
