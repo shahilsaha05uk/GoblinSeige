@@ -109,6 +109,7 @@ void APlacementActor::OnBuildingDecisionTaken_Implementation(bool HasConfirmed)
 	{
 		UpdateState(EmptyPlacement);
 		mOccupiedBuilding->Destroy();
+		bIsOccupied = false;
 	}
 }
 
